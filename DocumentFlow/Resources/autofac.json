@@ -1,0 +1,32 @@
+{
+"defaultAssembly": "DocumentFlow",
+  "components": [
+    { "type": "DocumentFlow.ViewModels.AppViewModel" },
+    { "type": "DocumentFlow.ViewModels.LogInPageViewModel" },
+
+    {
+      "type": "DocumentFlow.Models.AppDbContext",
+      "instanceScope": "single-instance"
+    },
+
+    {
+      "type": "DocumentFlow.Services.MessageService",
+      "services": [
+        {
+          "type": "DocumentFlow.Services.IMessageService"
+        }
+      ]
+    },
+    
+
+    {
+      "type": "DocumentFlow.Services.NavigationService",
+      "services": [
+        {
+          "type": "DocumentFlow.Services.INavigationService"
+        }
+      ],
+      "instanceScope": "single-instance"
+    }
+  ]
+}
