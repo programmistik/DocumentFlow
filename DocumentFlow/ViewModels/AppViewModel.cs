@@ -31,7 +31,7 @@ namespace DocumentFlow.ViewModels
                 CurrentPage = viewModel;
                 var str = viewModel.ToString();
                 if (viewModel is LogInPageViewModel)
-                    ApplicationTitle = "Log in";
+                    ApplicationTitle = Properties.Resources.LogIn;
                
             }
             );

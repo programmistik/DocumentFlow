@@ -1,6 +1,5 @@
 ﻿using DocumentFlow.Models;
 using DocumentFlow.Services;
-using DocumentFlow.Resources;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -27,14 +26,14 @@ namespace DocumentFlow.ViewModels
         private string loginCheck;
         public string LoginCheck { get => loginCheck; set => Set(ref loginCheck, value); }
 
-        private string lb_UserName;
-        public string lbUserName { get => lb_UserName; set => Set(ref lb_UserName, value); }
-        private string pwd;
-        public string lbPassword { get => pwd; set => Set(ref pwd, value); }
-        private string forgotPwd;
-        public string ForgotPwd { get => forgotPwd; set => Set(ref forgotPwd, value); }
-        private string btnLogin;
-        public string btnLogIn { get => btnLogin; set => Set(ref btnLogin, value); }
+        //private string lb_UserName;
+        //public string lbUserName { get => lb_UserName; set => Set(ref lb_UserName, value); }
+        //private string pwd;
+        //public string lbPassword { get => pwd; set => Set(ref pwd, value); }
+        //private string forgotPwd;
+        //public string ForgotPwd { get => forgotPwd; set => Set(ref forgotPwd, value); }
+        //private string btnLogin;
+        //public string btnLogIn { get => btnLogin; set => Set(ref btnLogin, value); }
 
         private string checkColor;
         public string CheckColor { get => checkColor; set => Set(ref checkColor, value); }
@@ -51,10 +50,10 @@ namespace DocumentFlow.ViewModels
             this.messageService = messageService;
             this.db = db;
             // Localization
-            lbUserName = Strings.UserName;
-            lbPassword = Strings.Password;
-            ForgotPwd = Strings.ForgetPassword;
-            btnLogIn = Strings.LogIn;
+            //lbUserName = Strings.UserName;
+            //lbPassword = Strings.Password;
+            //ForgotPwd = Strings.ForgetPassword;
+            //btnLogIn = Strings.LogIn;
         }
 
         

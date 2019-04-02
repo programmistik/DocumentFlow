@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
-             mc:Ignorable="d" 
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
+             mc:Ignorable="d"              
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
 
@@ -15,7 +16,7 @@
 
         <Label Margin="200,20,0,0" 
                FontSize="15"
-               Content="{Binding lbUserName}"/>
+               Content="{x:Static p:Resources.UserName}"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="233*" />
@@ -34,14 +35,14 @@
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </TextBox>
-            <Label Content="{Binding LoginCheck}"
+            <Label Content=""
                    Foreground="{Binding CheckColor}"
                    Margin="343.085,2,0,0" Grid.Column="2"/>
         </Grid>
         <Label Content="{Binding (Validation.Errors)[0].ErrorContent, ElementName=tbUserName}" Foreground="Red" FontSize="12"></Label>
 
         <Label Margin="200,2,0,0" 
-               Content="{Binding lbPassword}"
+               Content="{x:Static p:Resources.Password}"
                FontSize="15"/>
         <PasswordBox Name="pBox" 
                      Margin="200,2,200,0"
@@ -49,7 +50,7 @@
                      />
 
         <TextBlock Margin="200,2,200,0" 
-                   Text="{Binding ForgotPwd}">
+                   Text="{x:Static p:Resources.ForgetPassword}">
             <TextBlock.InputBindings>
                 <MouseBinding Command="{Binding ForgotPasswordCommand}" 
                               MouseAction="LeftClick" />
@@ -58,7 +59,7 @@
         <StackPanel HorizontalAlignment="Stretch"
                     Orientation="Horizontal">
 
-            <Button Content="{Binding btnLogIn}"
+            <Button Content="{x:Static p:Resources.LogIn}"
                     HorizontalAlignment="Center"
                     Margin="200,20,20,0"
                     Height="40"
