@@ -15,10 +15,18 @@ namespace DocumentFlow.Models
         }
 
         public DbSet<User> Users { get; set; }
-       
+
+        public static void Seed(AppDbContext context)
+        {
+            // добавляем пользователя по умолчанию
+            var defaultUser = new User { Login = "admin" };
+            context.Users.Add(defaultUser);
+            context.SaveChanges();
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
             //modelBuilder.Entity<CityList>()
             //   .HasOptional(j => j.Trip)
             //   .WithMany(x => x.CityList)
@@ -36,5 +44,7 @@ namespace DocumentFlow.Models
 
             base.OnModelCreating(modelBuilder);
         }
+
+        
     }
 }
