@@ -132,8 +132,10 @@
     <Compile Include="Models\ContactInfoTypes.cs" />
     <Compile Include="Models\Currencies.cs" />
     <Compile Include="Models\Departments.cs" />
+    <Compile Include="Models\Documents.cs" />
     <Compile Include="Models\DocumentStates.cs" />
     <Compile Include="Models\DocumentTypes.cs" />
+    <Compile Include="Models\MyFiles.cs" />
     <Compile Include="Models\Organizations.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\Resources.ru-RU.Designer.cs">
