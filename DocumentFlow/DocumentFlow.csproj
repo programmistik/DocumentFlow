@@ -59,6 +59,24 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis, Version=1.38.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.38.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.38.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.38.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.38.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.38.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Calendar.v3, Version=1.38.0.1543, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Calendar.v3.1.38.0.1543\lib\net45\Google.Apis.Calendar.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.38.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.38.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.38.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.38.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Configuration.3.0.0-preview3.19153.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
     </Reference>
@@ -137,6 +155,7 @@
     <Compile Include="Models\DocumentTypes.cs" />
     <Compile Include="Models\MyFiles.cs" />
     <Compile Include="Models\Organizations.cs" />
+    <Compile Include="Models\RoleTypes.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\Resources.ru-RU.Designer.cs">
       <DependentUpon>Resources.ru-RU.resx</DependentUpon>
@@ -151,11 +170,15 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\LogInPageViewModel.cs" />
+    <Compile Include="ViewModels\MainDesktopPageViewModel.cs" />
     <Compile Include="Views\AppWindow.xaml.cs">
       <DependentUpon>AppWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LogInPageView.xaml.cs">
       <DependentUpon>LogInPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainDesktopPageView.xaml.cs">
+      <DependentUpon>MainDesktopPageView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +209,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\credentials.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -204,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LogInPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainDesktopPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
