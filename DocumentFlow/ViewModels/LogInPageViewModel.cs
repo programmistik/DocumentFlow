@@ -1,5 +1,6 @@
 ﻿using DocumentFlow.Models;
 using DocumentFlow.Services;
+using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -63,42 +64,43 @@ namespace DocumentFlow.ViewModels
             get => logInCommand ?? (logInCommand = new RelayCommand<object>(
                 param =>
                 {
-                    if (CheckColor == "Red")
-                    {
-                        messageService.ShowInfo("There is no user with such Username.\nPlease, Sign up first");
-                    }
-                    else if (CheckColor == "Green")
-                    {
-                        var qwr = db.Users.Where(u => u.Login == LoginUserName);
-                        if (qwr.Any() == true)
-                        {
-                            var passwordContainer = param as IPasswordSupplier;
-                            if (passwordContainer != null)
-                            {
-                                var sPass = passwordContainer.GetPassword;
+                    navigationService.Navigate<MainDesktopPageView>();
+                    //if (CheckColor == "Red")
+                    //{
+                    //    messageService.ShowInfo("There is no user with such Username.\nPlease, Sign up first");
+                    //}
+                    //else if (CheckColor == "Green")
+                    //{
+                    //    var qwr = db.Users.Where(u => u.Login == LoginUserName);
+                    //    if (qwr.Any() == true)
+                    //    {
+                    //        var passwordContainer = param as IPasswordSupplier;
+                    //        if (passwordContainer != null)
+                    //        {
+                    //            var sPass = passwordContainer.GetPassword;
 
-                                string saltValueFromDB = qwr.Single().SaltValue;
-                                string hashValueFromDB = qwr.Single().HashValue;
+                    //            string saltValueFromDB = qwr.Single().SaltValue;
+                    //            string hashValueFromDB = qwr.Single().HashValue;
 
-                                byte[] saltedPassword = Encoding.UTF8.GetBytes(saltValueFromDB + new NetworkCredential(string.Empty, sPass).Password);
-                                SHA256Managed hashstring = new SHA256Managed();
-                                byte[] hash = hashstring.ComputeHash(saltedPassword);
-                                string hashToCompare = Convert.ToBase64String(hash);
-                                if (hashValueFromDB.Equals(hashToCompare))
-                                {
-                                    //var Usr = qwr.Single();
-                                    //Messenger.Default.Send(new NotificationMessage<User>(Usr, "SendCurrentUser"));
-                                    //navigationService.Navigate<MainPageView>();
-                                }
-                                else
-                                    messageService.ShowError("Login credentials incorrect. User not validated.");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        messageService.ShowInfo("Enter Username and password, please.");
-                    }
+                    //            byte[] saltedPassword = Encoding.UTF8.GetBytes(saltValueFromDB + new NetworkCredential(string.Empty, sPass).Password);
+                    //            SHA256Managed hashstring = new SHA256Managed();
+                    //            byte[] hash = hashstring.ComputeHash(saltedPassword);
+                    //            string hashToCompare = Convert.ToBase64String(hash);
+                    //            if (hashValueFromDB.Equals(hashToCompare))
+                    //            {
+                    //                //var Usr = qwr.Single();
+                    //                //Messenger.Default.Send(new NotificationMessage<User>(Usr, "SendCurrentUser"));
+                    //                //navigationService.Navigate<MainPageView>();
+                    //            }
+                    //            else
+                    //                messageService.ShowError("Login credentials incorrect. User not validated.");
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    messageService.ShowInfo("Enter Username and password, please.");
+                    //}
                 }
             ));
         }

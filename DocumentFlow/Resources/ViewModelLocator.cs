@@ -20,6 +20,8 @@ namespace DocumentFlow
         private AppViewModel appViewModel;
 
         private LogInPageViewModel LogInViewModel;
+        private MainDesktopPageViewModel MainDesktopPageViewModel;
+        private CalendarPageViewModel CalendarPageViewModel;
 
         private INavigationService navigationService;
 
@@ -40,8 +42,12 @@ namespace DocumentFlow
                 appViewModel = Container.Resolve<AppViewModel>();
                 //     
                 LogInViewModel = Container.Resolve<LogInPageViewModel>();
+                MainDesktopPageViewModel = Container.Resolve<MainDesktopPageViewModel>();
+                CalendarPageViewModel = Container.Resolve<CalendarPageViewModel>();
 
                 navigationService.Register<LogInPageView>(LogInViewModel);
+                navigationService.Register<MainDesktopPageView>(MainDesktopPageViewModel);
+                navigationService.Register<CalendarPageView>(CalendarPageViewModel);
 
                 navigationService.Navigate<LogInPageView>();
             }

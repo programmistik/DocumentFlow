@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="DocumentFlow.Views.CalendarPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:local="clr-namespace:DocumentFlow.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel>
+            <Calendar SelectedDate="{Binding CurrentDate}"
+                    
+          DisplayDate="{Binding Path=SelectedDate,
+                                RelativeSource={RelativeSource Self}, 
+                                Mode=OneWay}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedDatesChanged">
+                        <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=SelectedDatesChangedCommand}"
+                            PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                
+            </Calendar>
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <Label FontSize="20" Content="{Binding CalendarOwener}"/>
+            <Label FontSize="20" Content="{Binding SelectedDate}"/>
+            <Button Content="Add Event"
+                    Command="{Binding AddEvent}"/>
+            <Label FontSize="15" Content="{Binding ShowEvents}"/>
+        </StackPanel>
+
+    </StackPanel>
+</UserControl>
