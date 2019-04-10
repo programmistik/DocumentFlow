@@ -16,6 +16,7 @@ using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
 
 namespace DocumentFlow.ViewModels
 {
@@ -30,20 +31,24 @@ namespace DocumentFlow.ViewModels
         private DateTime currentDate;
         public DateTime CurrentDate { get => currentDate; set => Set(ref currentDate, value); }
 
-        private string showEvents;
-        public string ShowEvents { get => showEvents; set => Set(ref showEvents, value); }
+        private ObservableCollection<GoogleEvent> eventList;
+        public ObservableCollection<GoogleEvent> EventList { get => eventList; set => Set(ref eventList, value); }
+
         public CalendarPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
             CurrentDate = DateTime.Now;
+            EventList = new ObservableCollection<GoogleEvent>();
         }
 
         private RelayCommand<SelectionChangedEventArgs> selectedDatesChangedCommand;
         public RelayCommand<SelectionChangedEventArgs> SelectedDatesChangedCommand => selectedDatesChangedCommand ?? (selectedDatesChangedCommand = new RelayCommand<SelectionChangedEventArgs>(
                 param =>
                 {
+                    EventList.Clear();
+
                     SelectedDate = ((System.Windows.Controls.Calendar)param.Source).SelectedDate;
                     UserCredential credential;
                     string[] Scopes = { CalendarService.Scope.CalendarReadonly };
@@ -96,6 +101,18 @@ namespace DocumentFlow.ViewModels
                                 when = eventItem.Start.Date;
                             }
                             MessageBox.Show($"{eventItem.Summary} ({when})");
+                            var newEvent = new GoogleEvent
+                            {
+                                Craeded = eventItem.Created,
+                                CreatorEmail = eventItem.Creator.Email,
+                                Description = eventItem.Description,
+                                Location = eventItem.Location,
+                                EventSummary = eventItem.Summary,
+                                Updated = eventItem.Updated,
+                                Start = eventItem.Start.DateTime,
+                                End = eventItem.End.DateTime
+                            };
+                            EventList.Add(newEvent);
                         }
                     }
                     else
@@ -111,7 +128,10 @@ namespace DocumentFlow.ViewModels
                 () =>
                 {
                     UserCredential credential;
-                    string[] Scopes = { CalendarService.Scope.Calendar };
+                    string[] Scopes = {
+                                CalendarService.Scope.Calendar,
+                                CalendarService.Scope.CalendarReadonly
+                            };
 
                     using (var stream =
                         new FileStream(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\credentials.json", FileMode.Open, FileAccess.ReadWrite))
@@ -133,68 +153,42 @@ namespace DocumentFlow.ViewModels
                         ApplicationName = "Google Calendar API .NET Quickstart",
                     });
 
-  //                  Event myEvent = new Event
-  //                  {
-  //                      Summary = "Appointment",
-  //                      Location = "Somewhere",
-  //                      Start = new EventDateTime()
-  //                      {
-  //                          DateTime = new DateTime(2019, 4, 12, 10, 0, 0),
-  //                          TimeZone = "America/Los_Angeles"
-  //                      },
-  //                      End = new EventDateTime()
-  //                      {
-  //                          DateTime = new DateTime(2019, 4, 12, 10, 30, 0),
-  //                          TimeZone = "America/Los_Angeles"
-  //                      },
-  //                      Recurrence = new String[] {
-  //    "RRULE:FREQ=WEEKLY;BYDAY=MO"
-  //},
-  //                      Attendees = new List<EventAttendee>()
-  //    {
-  //      new EventAttendee() { Email = "3565733@gmail.com" }
-  //    }
-  //                  };
+                   
 
-                Event ev = new Event();
-                ev.Summary = "Google I/O 2015";
-                ev.Location = "Baku";
-                ev.Description = "A chance to hear more about Google's developer products.";
+                    Event newEvent = new Event()
+                    {
+                        Summary = "Google I/O 2015",
+                        Location = "800 Howard St., San Francisco, CA 94103",
+                        Description = "A chance to hear more about Google's developer products.",
+                        Start = new EventDateTime()
+                        {
+                            DateTime = DateTime.Parse("2019-04-10T09:00:00-07:00"),
+                            TimeZone = "America/Los_Angeles",
+                        },
+                        End = new EventDateTime()
+                        {
+                            DateTime = DateTime.Parse("2019-04-10T17:00:00-07:00"),
+                            TimeZone = "America/Los_Angeles",
+                        },
+                        Recurrence = new string[] { "RRULE:FREQ=DAILY;COUNT=2" },
+                        Attendees = new EventAttendee[] {
+                            new EventAttendee() { Email = "programmistik@gmail.com" },
+                            new EventAttendee() { Email = "programmistik@yahoo.com" },
+                        },
+                        Reminders = new Event.RemindersData()
+                        {
+                            UseDefault = false,
+                            Overrides = new EventReminder[] {
+                                new EventReminder() { Method = "email", Minutes = 24 * 60 },
+                                new EventReminder() { Method = "sms", Minutes = 10 },
+                            }
+                        }
+                    };
 
-            DateTime startDateTime = DateTime.Now;
-                EventDateTime start = new EventDateTime();
-            start.DateTime = startDateTime;
-            start.TimeZone = "America/Los_Angeles";
-        ev.Start = start;
-
-DateTime endDateTime = DateTime.Now;
-                EventDateTime end = new EventDateTime();
-            end.DateTime = endDateTime;
-            end.TimeZone = "America/Los_Angeles";
-        ev.End = end;
-
-String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" };
-        ev.Recurrence = recurrence.ToList();
-
-EventAttendee[] attendees = new EventAttendee[] {
-    new EventAttendee(){ Email = "3565733@gmail.com" },
-    new EventAttendee(){ Email = "programmistik@gmail.com" }
-};
-        ev.Attendees = attendees.ToList();
-
-//EventReminder[] reminderOverrides = new EventReminder[] {
-//    new EventReminder().setMethod("email").setMinutes(24 * 60),
-//    new EventReminder().setMethod("popup").setMinutes(10),
-//};
-//        Event.Reminders reminders = new Event.Reminders()
-//            .setUseDefault(false)
-//            .setOverrides(Arrays.asList(reminderOverrides));
-//        event.setReminders(reminders);
-
-//String calendarId = "primary";
-        //ev = service.events().insert(calendarId, event).execute();
-
-                   Event recurringEvent = service.Events.Insert(ev, "primary").Execute();
+                    string calendarId = "primary";
+                    EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
+                    Event createdEvent = request.Execute();
+                  
                 }
                  ));
     }

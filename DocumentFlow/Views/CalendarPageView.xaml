@@ -8,10 +8,49 @@
              xmlns:local="clr-namespace:DocumentFlow.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ListBoxEventItemTemplate">
+            <StackPanel>
+
+                <Grid  HorizontalAlignment="Stretch">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+
+                        <Label FontWeight="Bold"
+                               Content="{Binding EventSummary}" />
+                    </StackPanel>
+
+
+                    <Button  Grid.Column="1" 
+                            Margin="1"
+                            Command="{Binding DataContext.DeleteEventCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Delete
+                    </Button>
+
+                    <Button Grid.Column="2"  
+                            Margin="1" 
+                            Command="{Binding DataContext.ShowEventCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Show
+                    </Button>
+
+
+                </Grid>
+
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
         <StackPanel>
             <Calendar SelectedDate="{Binding CurrentDate}"
-                    
+             Margin="2"       
           DisplayDate="{Binding Path=SelectedDate,
                                 RelativeSource={RelativeSource Self}, 
                                 Mode=OneWay}" >
@@ -23,13 +62,32 @@
                 </i:Interaction.Triggers>
                 
             </Calendar>
+            <Button Content="Add New Event"
+                    Margin="5"
+                    Command="{Binding AddEvent}"/>
         </StackPanel>
         <StackPanel Orientation="Vertical">
+            
             <Label FontSize="20" Content="{Binding CalendarOwener}"/>
             <Label FontSize="20" Content="{Binding SelectedDate}"/>
-            <Button Content="Add Event"
-                    Command="{Binding AddEvent}"/>
-            <Label FontSize="15" Content="{Binding ShowEvents}"/>
+
+            <ListBox HorizontalContentAlignment="Stretch" 
+                            ItemsSource="{Binding EventList}"                   
+                            Margin="3"
+                            ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"
+                            Width="430"
+                            Height="280"         
+                            ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+            </ListBox>
+            
         </StackPanel>
 
     </StackPanel>
