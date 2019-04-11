@@ -13,5 +13,8 @@
     <DataTemplate DataType="{x:Type vm:CalendarPageViewModel}">
         <v:CalendarPageView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AddEditEventPageViewModel}">
+        <v:AddEditEventPageView/>
+    </DataTemplate>
 
 </ResourceDictionary>

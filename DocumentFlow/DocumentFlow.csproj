@@ -170,6 +170,7 @@
     <Compile Include="Services\IPasswordSupplier.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="ViewModels\AddEditEventPageViewModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\CalendarPageViewModel.cs" />
     <Compile Include="ViewModels\LogInPageViewModel.cs" />
