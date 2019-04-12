@@ -18,6 +18,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using DocumentFlow.Views;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace DocumentFlow.ViewModels
 {
@@ -193,5 +194,23 @@ namespace DocumentFlow.ViewModels
 
                 }
                  ));
+
+        private RelayCommand<GoogleEvent> deleteEventCommand;
+        public RelayCommand<GoogleEvent> DeleteEventCommand => deleteEventCommand ?? (deleteEventCommand = new RelayCommand<GoogleEvent>(
+                param =>
+                {
+                }
+                 ));
+
+        private RelayCommand<GoogleEvent> editEventCommand;
+        public RelayCommand<GoogleEvent> EditEventCommand => editEventCommand ?? (editEventCommand = new RelayCommand<GoogleEvent>(
+                param =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<GoogleEvent>(param, "EventToEdit"));
+                    navigationService.Navigate<AddEditEventPageView>();
+                }
+                 ));
     }
+
+
 }
