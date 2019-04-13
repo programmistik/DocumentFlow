@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DocumentFlow.ViewModels
 {
-    public class AddEditEventPageViewModel : ViewModelBase
+    public class AddEditEventPageViewModel : ViewModelBase 
     {
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
