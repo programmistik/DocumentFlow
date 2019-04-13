@@ -6,69 +6,86 @@
              xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
-             mc:Ignorable="d"              
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-        <Image Source="{Binding Image}"               
-               Height="180"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Resources/Images/Background.jpg"></ImageBrush>
+        </Grid.Background>
 
-        <Label Margin="200,20,0,0" 
-               FontSize="15"
-               Content="{x:Static p:Resources.UserName}"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="233*" />
-                <ColumnDefinition Width="24*"/>
-                <ColumnDefinition Width="543*"/>
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBox 
-                     Name="tbUserName" 
-                     Margin="200,2,200,0"
-                     FontSize="20"
-                Text="{Binding LoginUserName, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="3">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="LostFocus">
-                        <b:InvokeCommandAction  Command="{Binding LostFocusCommand}" CommandParameter="{Binding Text, ElementName=tbUserName}"/>
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
-            </TextBox>
-            <Label Content=""
+        
+        <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2" Source="../Resources/Images/TestLogo.png"/>
+        
+        <Label Grid.Row="3" Grid.Column="1"
+               FontSize="25"
+               Content="{x:Static p:Resources.UserName}" VerticalAlignment="Bottom"/>
+        
+        <TextBox    Grid.Column="1"
+                    Grid.Row="4"
+                    Name="tbUserName" 
+                    FontSize="35"
+                    VerticalContentAlignment="Center"
+                    Text="{Binding LoginUserName, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Background="White" BorderBrush="#89FFFFFF" >
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="LostFocus">
+                    <b:InvokeCommandAction  Command="{Binding LostFocusCommand}" CommandParameter="{Binding Text, ElementName=tbUserName}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </TextBox>
+
+        <Label Content=""
                    Foreground="{Binding CheckColor}"
-                   Margin="343.085,2,0,0" Grid.Column="2"/>
-        </Grid>
-        <Label Content="{Binding (Validation.Errors)[0].ErrorContent, ElementName=tbUserName}" Foreground="Red" FontSize="12"></Label>
+                   Grid.Column="3" Grid.Row="4"/>
 
-        <Label Margin="200,2,0,0" 
+        <Label Grid.Column="1"
+               Grid.Row="5"
                Content="{x:Static p:Resources.Password}"
-               FontSize="15"/>
-        <PasswordBox Name="pBox" 
-                     Margin="200,2,200,0"
-                     FontSize="20"
+               FontSize="25" VerticalAlignment="Bottom"/>
+        
+        <PasswordBox Grid.Column="1" Grid.ColumnSpan="2"
+                     VerticalContentAlignment="Center"
+                     Grid.Row="6"
+                     Name="pBox" 
+                     FontSize="35" Background="White"
                      />
 
-        <TextBlock Margin="200,2,200,0" 
-                   Text="{x:Static p:Resources.ForgetPassword}">
+        <TextBlock Grid.Column="2"
+                   Grid.Row="7"
+                   Text="{x:Static p:Resources.ForgetPassword}" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock.InputBindings>
                 <MouseBinding Command="{Binding ForgotPasswordCommand}" 
                               MouseAction="LeftClick" />
             </TextBlock.InputBindings>
         </TextBlock>
-        <StackPanel HorizontalAlignment="Stretch"
-                    Orientation="Horizontal">
-
-            <Button Content="{x:Static p:Resources.LogIn}"
-                    HorizontalAlignment="Center"
-                    Margin="200,20,20,0"
-                    Height="40"
-                    Width="180"
+        
+        <Button Content="{x:Static p:Resources.LogIn}"
+                    Margin="5"
+                    Grid.Column="1"
+                    Grid.Row="7"
                     FontSize="15"
                     Command="{Binding LogInCommand}"
-                    CommandParameter="{Binding ElementName=This}"></Button>
-        </StackPanel>
+                    CommandParameter="{Binding ElementName=This}" Height="Auto" Background="#FF047000"/>
 
-
-    </StackPanel>
+        <!--<Label
+            Content="{Binding (Validation.Errors)[0].ErrorContent, ElementName=tbUserName}" Foreground="Red" FontSize="12"></Label>-->
+    </Grid>
 </UserControl>

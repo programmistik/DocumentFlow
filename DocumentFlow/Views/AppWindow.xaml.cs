@@ -23,5 +23,10 @@ namespace DocumentFlow.Views
         {
             InitializeComponent();
         }
+
+        private void ImageBrush_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+
+        }
     }
 }

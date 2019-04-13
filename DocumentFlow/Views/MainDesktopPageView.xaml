@@ -4,15 +4,123 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <Button Command="{Binding GCalendar}" 
-                Margin="5"
+
+    <Grid Background="#FFE1E1E1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!--Верхнее меню-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Orientation="Horizontal" Background="#FF353436">
+            <Image Source="../Resources/Images/user.png" />
+            <Label FontSize="20" Content="Имя Фамилия Отчество" Foreground="White" VerticalContentAlignment="Center"></Label>
+        </StackPanel>
+
+        <Grid Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="0" Background="#FF353436">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Background="Transparent" Height="Auto">
+                <Image Source="/DocumentFlow;component/Resources/Images/Settings.png"/>
+            </Button>
+            <Button Grid.Column="1" Background="Transparent" Height="Auto">
+                <Image Source="/DocumentFlow;component/Resources/Images/Exit.png"/>
+            </Button>
+        </Grid>
+            
+        
+        <!--Боковая панель-->
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1" Grid.RowSpan="6"
+                    Background="White">
+            <Button Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Mail.png"></Image>
+            </Button>
+            <Button Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Calendar.png"></Image>
+            </Button>
+            <Button Height="50" Background="White" BorderBrush="Black" Padding="5">
+                <Image Source="/DocumentFlow;component/Resources/Images/Tasks.png"></Image>
+            </Button>
+            <Button Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/News.png"></Image>
+            </Button>
+            <Button Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Calendar.png"></Image>
+            </Button>
+            <Button Height="50" Background="White" BorderBrush="Black" Padding="5">
+                <Image Source="/DocumentFlow;component/Resources/Images/Documents.png"></Image>
+            </Button>
+
+        </StackPanel>
+        
+        <!--Контент-->
+        
+        <Button Grid.Column="1" Grid.ColumnSpan="2"
+                Grid.Row="1" Grid.RowSpan="2"
+                Command="{Binding GCalendar}" 
                 Content="Open Calendar"
-                Width="100"
-                Height="100"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"></Button>  
-    </StackPanel>
+                Height="Auto"
+                Margin="10"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"></Button>
+
+        <Button Grid.Column="3" Grid.ColumnSpan="2"
+                Grid.Row="1" Grid.RowSpan="2"
+                Command="" 
+                Content="Mail"
+                Height="Auto"
+                Margin="10"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"></Button>
+
+        <Button Grid.Column="5" Grid.ColumnSpan="3"
+                Grid.Row="1" Grid.RowSpan="2"
+                Command="" 
+                Content="Tasks"
+                Height="Auto"
+                Margin="10"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"></Button>
+
+        <Button Grid.Column="1" Grid.ColumnSpan="3"
+                Grid.Row="3" Grid.RowSpan="2"
+                Command="" 
+                Content="Documents"
+                Height="Auto"
+                Margin="10"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"></Button>
+        
+        <Button Grid.Column="4" Grid.ColumnSpan="4"
+                Grid.Row="3" Grid.RowSpan="2"
+                Command="" 
+                Content="News"
+                Height="Auto"
+                Margin="10"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"></Button>
+
+    </Grid>
+
 </UserControl>

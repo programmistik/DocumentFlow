@@ -45,6 +45,7 @@ namespace DocumentFlow.ViewModels
         private SecureString pass;
         public SecureString Pass { get => pass; set => Set(ref pass, value); }
 
+
         public LogInPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
             this.navigationService = navigationService;
