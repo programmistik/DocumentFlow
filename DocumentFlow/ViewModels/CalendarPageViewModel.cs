@@ -129,6 +129,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand AddEvent => addEvent ?? (addEvent = new RelayCommand(
                 () =>
                 {
+                    Messenger.Default.Send(new NotificationMessage<GoogleEvent>(new GoogleEvent(), "EventToAdd"));
                     navigationService.Navigate<AddEditEventPageView>();
                     //UserCredential credential;
                     //string[] Scopes = {

@@ -8,6 +8,13 @@
              xmlns:tp="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ComboBoxtItemTemplate">
+            <Label Content="{Binding Path=ColorName}"
+                       FontSize="15"
+                       />
+        </DataTemplate>
+    </UserControl.Resources>
     <StackPanel>
         <Label FontSize="15" 
                Margin="2"
@@ -23,9 +30,16 @@
                  Text="{Binding Location}"/>
         <Label FontSize="15" 
                Margin="2"
+               Content="Description"/>
+        <TextBox FontSize="15" 
+                 Margin="2"
+                 Text="{Binding Description}"/>
+        <StackPanel Orientation="Vertical">
+            <Label FontSize="15" 
+               Margin="2"
                Content="Start date:"/>
-        <DockPanel>
-        <DatePicker
+            <DockPanel>
+                <DatePicker
     HorizontalAlignment="Left"
     SelectedDate="{Binding Path=StartDate,
         Mode=TwoWay,
@@ -33,19 +47,19 @@
     
     VerticalAlignment="Top" 
     Width="120" />
-        <tp:TimePicker Height="25" 
+                <tp:TimePicker Height="25" 
                         Width="100" 
                        Margin="10 0"
                        HorizontalAlignment="Left"
                         TimeInterval="00:30:00.000"
                         ShowButtonSpinner="False"
                         Value="{Binding StartDate}"/>
-        </DockPanel>
-        <Label FontSize="15" 
+            </DockPanel>
+            <Label FontSize="15" 
                Margin="2"
                Content="End date:"/>
-        <DockPanel>
-        <DatePicker
+            <DockPanel>
+                <DatePicker
     HorizontalAlignment="Left"
     SelectedDate="{Binding Path=EndDate,
         Mode=TwoWay,
@@ -53,14 +67,67 @@
     
     VerticalAlignment="Top" 
     Width="120" />
-        <tp:TimePicker Height="25" 
+                <tp:TimePicker Height="25" 
                         Width="100" 
                        Margin="10 0"
                        HorizontalAlignment="Left"
                         TimeInterval="00:30:00.000"
                         ShowButtonSpinner="False"
                         Value="{Binding StartTime}"/>
-        </DockPanel>
+            </DockPanel>
+
+        </StackPanel>
+        <ComboBox Width="50" Height="25" HorizontalAlignment="Left" Margin="2"
+                 ItemsSource="{Binding Colors}" 
+                 SelectedItem="{Binding SelectedColor}"
+                 ItemTemplate="{StaticResource ComboBoxtItemTemplate}">
+
+
+            <!--<ComboBoxItem FontSize="15" 
+                         Content="Lavender"
+                         Background="#7986cb"
+                         Foreground="#7986cb"/>
+            <ComboBoxItem FontSize="15" 
+                         Content="Sage" 
+                         Background="#33b679"
+                         Foreground="#33b679"/>
+            <ComboBoxItem FontSize="15" 
+                         Content="3" 
+                         Background="#8e24aa"
+                         Foreground="#8e24aa"/>
+            <ComboBoxItem FontSize="15" 
+                         Content="4" 
+                         Background="#e67c73"
+                         Foreground="#e67c73"/>
+            <ComboBoxItem FontSize="15" 
+                         Content="5" 
+                         Background="#f6c026"
+                         Foreground="#f6c026"/>
+            <ComboBoxItem FontSize="15" 
+                         Content="6" 
+                         Background="#f5511d"
+                         Foreground="#f5511d"/>
+            <ComboBoxItem FontSize="15" 
+                         Content="7" 
+                         Background="#039be5"
+                         Foreground="#039be5"/>
+            <ComboBoxItem FontSize="15" 
+                         Content="8" 
+                         Background="#616161"
+                         Foreground="#616161"/>
+            <ComboBoxItem FontSize="15" 
+                         Content="9" 
+                         Background="#3f51b5"
+                         Foreground="#3f51b5"/>
+            <ComboBoxItem FontSize="15" 
+                         Content="10" 
+                         Background="#0b8043"
+                         Foreground="#0b8043"/>
+            <ComboBoxItem FontSize="15" 
+                         Content="11" 
+                         Background="#d60000"
+                         Foreground="#d60000"/>-->
+        </ComboBox>
         <DockPanel>
             <Button Content="Save"
                     Margin="5"
@@ -68,9 +135,9 @@
                     Command="{Binding SaveEvent}"/>
             <Button Content="Back"
                     Margin="5"
-                    Command="{Binding Back}"/>
+                    Command="{Binding BackCommand}"/>
         </DockPanel>
     </StackPanel>
-    
-    
+
+
 </UserControl>

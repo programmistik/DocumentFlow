@@ -16,6 +16,7 @@ namespace DocumentFlow.Models
         public string PrimaryEmail { get; set; }
         public string SaltValue { get; set; }
         public string HashValue { get; set; }
+        public string GoogleAccount { get; set; }
 
         //public User()
         //{
