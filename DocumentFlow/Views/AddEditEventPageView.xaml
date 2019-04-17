@@ -8,34 +8,37 @@
              xmlns:tp="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <DataTemplate x:Key="ComboBoxtItemTemplate">
-            <Label Content="{Binding Path=ColorName}"
-                       FontSize="15"
-                       />
-        </DataTemplate>
-    </UserControl.Resources>
+
     <StackPanel>
-        <Label FontSize="15" 
+    <TabControl x:Name="GeleralInfo">
+        <TabItem x:Name="generalTab">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="3">General Information</TextBlock>
+                </StackPanel>
+            </TabItem.Header>
+            <TabItem.Content>
+                <StackPanel>
+        <Label FontSize="12" 
                Margin="2"
                Content="Name"/>
         <TextBox FontSize="15" 
                  Margin="2"
                  Text="{Binding EventSummary}"/>
-        <Label FontSize="15" 
+        <Label FontSize="12" 
                Margin="2"
                Content="Location"/>
         <TextBox FontSize="15" 
                  Margin="2"
                  Text="{Binding Location}"/>
-        <Label FontSize="15" 
+        <Label FontSize="12" 
                Margin="2"
                Content="Description"/>
         <TextBox FontSize="15" 
                  Margin="2"
                  Text="{Binding Description}"/>
         <StackPanel Orientation="Vertical">
-            <Label FontSize="15" 
+            <Label FontSize="12" 
                Margin="2"
                Content="Start date:"/>
             <DockPanel>
@@ -55,7 +58,7 @@
                         ShowButtonSpinner="False"
                         Value="{Binding StartDate}"/>
             </DockPanel>
-            <Label FontSize="15" 
+            <Label FontSize="12" 
                Margin="2"
                Content="End date:"/>
             <DockPanel>
@@ -78,12 +81,10 @@
 
         </StackPanel>
         <ComboBox Width="50" Height="25" HorizontalAlignment="Left" Margin="2"
-                 ItemsSource="{Binding Colors}" 
-                 SelectedItem="{Binding SelectedColor}"
-                 ItemTemplate="{StaticResource ComboBoxtItemTemplate}">
+                 
+                  SelectedIndex="{Binding ColorIndex}">
 
-
-            <!--<ComboBoxItem FontSize="15" 
+            <ComboBoxItem FontSize="15" 
                          Content="Lavender"
                          Background="#7986cb"
                          Foreground="#7986cb"/>
@@ -126,18 +127,84 @@
             <ComboBoxItem FontSize="15" 
                          Content="11" 
                          Background="#d60000"
-                         Foreground="#d60000"/>-->
+                         Foreground="#d60000"/>
         </ComboBox>
-        <DockPanel>
-            <Button Content="Save"
+        
+    </StackPanel>
+            </TabItem.Content>
+        </TabItem>
+        <TabItem x:Name="AttendeesTab">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="3">Attendees</TextBlock>
+                </StackPanel>
+            </TabItem.Header>
+            <TabItem.Content>
+                <StackPanel>
+                        <DataGrid AutoGenerateColumns="False" 
+                      EnableRowVirtualization="True" Height="280" 
+                      ItemsSource="{Binding AttendeesList}" Margin="10,0" 
+                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Header="Name" Width="350"/>
+                                <DataGridTextColumn Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Header="Email" Width="350"/>
+
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                    </StackPanel>
+            </TabItem.Content>
+        </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">Recurrence and Reminders</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel>
+                        <Label FontSize="12" 
+                                Margin="2"
+                                Content="Frequency (DAILY or WEEKLY)"/>
+                        <TextBox FontSize="15" 
+                                Margin="2"
+                                Text="{Binding Freq}"/>
+                        <Label FontSize="12" 
+                                Margin="2"
+                                Content="Interval (integer from 1)"/>
+                        <TextBox FontSize="15" 
+                 Margin="2"
+                 Text="{Binding Interval}"/>
+                        <Label FontSize="12" 
+               Margin="2"
+               Content="Count"/>
+                        <TextBox FontSize="15" 
+                 Margin="2"
+                 Text="{Binding Count}"/>
+
+                        <Label FontSize="12" 
+                                Margin="2"
+                                Content="Remainder"/>
+                        <CheckBox
+                            IsChecked="{Binding HasRemaider}"></CheckBox>
+                        <Label FontSize="12" 
+                                Margin="2"
+                                Content="Time in minutes"/>
+                        <TextBox FontSize="15" 
+                                Margin="2"
+                                Text="{Binding Minutes}"/>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    <DockPanel>
+        <Button Content="Save"
                     Margin="5"
                     Width="300"
                     Command="{Binding SaveEvent}"/>
-            <Button Content="Back"
+        <Button Content="Back"
                     Margin="5"
                     Command="{Binding BackCommand}"/>
-        </DockPanel>
+    </DockPanel>
     </StackPanel>
-
-
 </UserControl>

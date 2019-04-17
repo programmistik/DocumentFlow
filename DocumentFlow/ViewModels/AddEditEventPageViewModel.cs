@@ -12,6 +12,7 @@ using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,13 +23,10 @@ namespace DocumentFlow.ViewModels
 {
     public class AddEditEventPageViewModel : ViewModelBase
     {
-
-        private ObservableCollection<GoogleColors> colors;
-        public ObservableCollection<GoogleColors> Colors { get => colors; set => Set(ref colors, value); }
-
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
+        private readonly IGoogleService googleService;
 
         private string eventSummary;
         public string EventSummary { get => eventSummary; set => Set(ref eventSummary, value); }
@@ -40,51 +38,71 @@ namespace DocumentFlow.ViewModels
         public DateTime? StartDate { get => startDate; set => Set(ref startDate, value); }
         private DateTime? endDate;
         public DateTime? EndDate { get => endDate; set => Set(ref endDate, value); }
-        private GoogleColors selectedColor;
-        public GoogleColors SelectedColor { get => selectedColor; set => Set(ref selectedColor, value); }
+        private int colorIndex;
+        public int ColorIndex { get => colorIndex; set => Set(ref colorIndex, value); }
 
+        private ObservableCollection<EventAttendee> attendeesList;
+        public ObservableCollection<EventAttendee> AttendeesList { get => attendeesList; set => Set(ref attendeesList, value); }
+        private string freq;
+        public string Freq { get => freq; set => Set(ref freq, value); }
+        private int interval;
+        public int Interval { get => interval; set => Set(ref interval, value); }
+        private int count;
+        public int Count { get => count; set => Set(ref count, value); }
+        private bool hasRemainder;
+        public bool HasRemainder { get => hasRemainder; set => Set(ref hasRemainder, value); }
+        private int minutes;
+        public int Minutes { get => minutes; set => Set(ref minutes, value); }
         private bool AddNew { get; set; }
-        private GoogleEvent SelectedEvent { get; set; }
+        private Event SelectedEvent { get; set; }
+        private CalendarService GoogleCalendarService;
 
-        public AddEditEventPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
+        public AddEditEventPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db, IGoogleService googleService)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
-            Colors = CreateColorCollection();
+            this.googleService = googleService;
 
-            Messenger.Default.Register<NotificationMessage<GoogleEvent>>(this, OnHitIt);
+            colorIndex = 1;
+
+            Messenger.Default.Register<NotificationMessage<Event>>(this, OnHitIt);
+
+            Messenger.Default.Register<CalendarService>(this, goo =>
+            {
+                GoogleCalendarService = goo;
+            });
         }
 
-        private ObservableCollection<GoogleColors> CreateColorCollection()
-        {
-            var col = new ObservableCollection<GoogleColors>();
-            col.Add(new GoogleColors("1", "Lavender", "#7986cb"));
-            col.Add(new GoogleColors("2", "Sage", "#33b679"));
-            col.Add(new GoogleColors("3", "Grape", "#8e24aa"));
+        
 
-            return col;
-        }
-
-        private void OnHitIt(NotificationMessage<GoogleEvent> edev)
+        private void OnHitIt(NotificationMessage<Event> edev)
         {
             if (edev.Notification == "EventToEdit")
             {
                 AddNew = false;
                 var ev = edev.Content;
-                EventSummary = ev.EventSummary;
+                SelectedEvent = edev.Content;
+                EventSummary = ev.Summary;
                 Location = ev.Location;
-                StartDate = ev.Start;
-                EndDate = ev.End;
+                if(ev.Start.DateTime == null)
+                {
+                    StartDate = DateTime.Parse(ev.Start.Date, new CultureInfo("en-US", true));
+                }
+                else
+                    StartDate = ev.Start.DateTime;
+                EndDate = ev.End.DateTime;
+                AttendeesList = new ObservableCollection<EventAttendee>(ev.Attendees);
             }
             else if (edev.Notification == "EventToAdd")
             {
                 AddNew = true;
                 SelectedEvent = edev.Content;
-                EventSummary = SelectedEvent.EventSummary;
+                EventSummary = SelectedEvent.Summary;
                 Location = SelectedEvent.Location;
                 StartDate = DateTime.Now;
                 EndDate = DateTime.Now;
+                AttendeesList = new ObservableCollection<EventAttendee>();
             }
 
         }
@@ -93,72 +111,117 @@ namespace DocumentFlow.ViewModels
         public RelayCommand SaveEvent => saveEvent ?? (saveEvent = new RelayCommand(
                 () =>
                 {
-                    if (AddNew)
+                    var CurrentUserEmail = "3565733@gmail.com";
+
+                    SelectedEvent.Summary = EventSummary;
+                    SelectedEvent.Location = Location;
+                    SelectedEvent.Description = Description;
+                    SelectedEvent.ColorId = (ColorIndex+1).ToString();
+                    SelectedEvent.Start = new EventDateTime()
                     {
-                        UserCredential credential;
-                        string[] Scopes = {
-                                    CalendarService.Scope.Calendar,
-                                    CalendarService.Scope.CalendarReadonly
-                                };
+                        DateTime = StartDate,
+                        TimeZone = "Asia/Baku",
+                    };
+                    SelectedEvent.End = new EventDateTime()
+                    {
+                        DateTime = EndDate,
+                        TimeZone = "Asia/Baku",
+                    };
+                    SelectedEvent.Recurrence = new string[] { $"RRULE:FREQ={Freq};INTERVAL={Interval};COUNT={Count}" };
+                    SelectedEvent.Attendees = AttendeesList;
+                    
 
-                        using (var stream =
-                            new FileStream(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\credentials.json", FileMode.Open, FileAccess.ReadWrite))
+                    if (HasRemainder)
+                    {
+                        SelectedEvent.Reminders = new Event.RemindersData()
                         {
-                            // The file token.json stores the user's access and refresh tokens, and is created
-                            // automatically when the authorization flow completes for the first time.
-                            string credPath = "token.json";
-                            credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                                GoogleClientSecrets.Load(stream).Secrets,
-                                Scopes,
-                                "user",
-                                CancellationToken.None,
-                                new FileDataStore(credPath, true)).Result;
-                            // MessageBox.Show("Credential file saved to: " + credPath);
-                        }
-                        var service = new CalendarService(new BaseClientService.Initializer()
-                        {
-                            HttpClientInitializer = credential,
-                            ApplicationName = "Google Calendar API .NET Quickstart",
-                        });
-
-
-
-                        Event newEvent = new Event()
-                        {
-                            Summary = EventSummary,
-                            Location = Location,
-                            Description = Description,
-                            ColorId = "2",
-                            Start = new EventDateTime()
-                            {
-                                DateTime = StartDate,
-                                TimeZone = "America/Los_Angeles",
-                            },
-                            End = new EventDateTime()
-                            {
-                                DateTime = EndDate,
-                                TimeZone = "America/Los_Angeles",
-                            },
-                            Recurrence = new string[] { "RRULE:FREQ=DAILY;COUNT=2" },
-                            Attendees = new EventAttendee[] {
-                                new EventAttendee() { Email = "programmistik@gmail.com" },
-                                new EventAttendee() { Email = "programmistik@yahoo.com" },
-                            },
-                            Reminders = new Event.RemindersData()
-                            {
-                                UseDefault = false,
-                                Overrides = new EventReminder[] {
-                                    new EventReminder() { Method = "email", Minutes = 24 * 60 },
-                                    new EventReminder() { Method = "sms", Minutes = 10 },
-                                }
+                            UseDefault = false,
+                            Overrides = new EventReminder[] {
+                                new EventReminder() { Method = "email", Minutes = Minutes },
                             }
                         };
-
-                        string calendarId = "primary";
-                        EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
-                        Event createdEvent = request.Execute();
-                        navigationService.Navigate<CalendarPageView>();
                     }
+
+                    if (AddNew)
+                    {
+                        SelectedEvent.Attendees.Add(new EventAttendee
+                        {
+                            Email = CurrentUserEmail,
+                            DisplayName = "me",
+                            ResponseStatus = "accepted",
+                            Self = true
+                        });
+                        SelectedEvent.Kind = "calendar#event";
+                        googleService.addNewEvent(GoogleCalendarService, SelectedEvent);
+                    }
+                    else
+                    {
+                        googleService.updateEvent(GoogleCalendarService, SelectedEvent);
+                        //UserCredential credential;
+                        //string[] Scopes = {
+                        //            CalendarService.Scope.Calendar,
+                        //            CalendarService.Scope.CalendarReadonly
+                        //        };
+
+                        //using (var stream =
+                        //    new FileStream(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\credentials.json", FileMode.Open, FileAccess.ReadWrite))
+                        //{
+                        //    // The file token.json stores the user's access and refresh tokens, and is created
+                        //    // automatically when the authorization flow completes for the first time.
+                        //    string credPath = "token.json";
+                        //    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        //        GoogleClientSecrets.Load(stream).Secrets,
+                        //        Scopes,
+                        //        "user",
+                        //        CancellationToken.None,
+                        //        new FileDataStore(credPath, true)).Result;
+                        //    // MessageBox.Show("Credential file saved to: " + credPath);
+                        //}
+                        //var service = new CalendarService(new BaseClientService.Initializer()
+                        //{
+                        //    HttpClientInitializer = credential,
+                        //    ApplicationName = "Google Calendar API .NET Quickstart",
+                        //});
+
+
+
+                        //Event newEvent = new Event()
+                        //{
+                        //    Summary = EventSummary,
+                        //    Location = Location,
+                        //    Description = Description,
+                        //    ColorId = "2",
+                        //    Start = new EventDateTime()
+                        //    {
+                        //        DateTime = StartDate,
+                        //        TimeZone = "Asia/Baku",
+                        //    },
+                        //    End = new EventDateTime()
+                        //    {
+                        //        DateTime = EndDate,
+                        //        TimeZone = "America/Los_Angeles",
+                        //    },
+                        //    Recurrence = new string[] { "RRULE:FREQ=DAILY;COUNT=2" },
+                        //    Attendees = new EventAttendee[] {
+                        //        new EventAttendee() { Email = "programmistik@gmail.com" },
+                        //        new EventAttendee() { Email = "programmistik@yahoo.com" },
+                        //    },
+                        //    Reminders = new Event.RemindersData()
+                        //    {
+                        //        UseDefault = false,
+                        //        Overrides = new EventReminder[] {
+                        //            new EventReminder() { Method = "email", Minutes = 24 * 60 },
+                        //            new EventReminder() { Method = "sms", Minutes = 10 },
+                        //        }
+                        //    }
+                        //};
+
+                        //string calendarId = "primary";
+                        //EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
+                        //Event createdEvent = request.Execute();
+
+                    }
+                    navigationService.Navigate<CalendarPageView>();
                 }
                  ));
         private RelayCommand backCommand;

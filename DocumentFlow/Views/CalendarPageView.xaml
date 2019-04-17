@@ -24,7 +24,7 @@
                     <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
 
                         <Label FontWeight="Bold"
-                               Content="{Binding EventSummary}" />
+                               Content="{Binding Summary}" />
                     </StackPanel>
 
 

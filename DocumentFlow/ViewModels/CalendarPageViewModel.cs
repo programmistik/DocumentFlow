@@ -27,22 +27,28 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
+        private readonly IGoogleService googleService;
 
         private DateTime? selectedDate;
         public DateTime? SelectedDate { get => selectedDate; set => Set(ref selectedDate, value); }
         private DateTime currentDate;
         public DateTime CurrentDate { get => currentDate; set => Set(ref currentDate, value); }
 
-        private ObservableCollection<GoogleEvent> eventList;
-        public ObservableCollection<GoogleEvent> EventList { get => eventList; set => Set(ref eventList, value); }
+        private ObservableCollection<Event> eventList;
+        public ObservableCollection<Event> EventList { get => eventList; set => Set(ref eventList, value); }
 
-        public CalendarPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
+        private CalendarService GoogleCalendarService;
+        public CalendarPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db, IGoogleService googleService)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
+            this.googleService = googleService;
+            GoogleCalendarService = googleService.GetQuickstartService();
             CurrentDate = DateTime.Now;
-            EventList = new ObservableCollection<GoogleEvent>();
+            SelectedDate = (DateTime?)CurrentDate;
+            var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+            EventList = new ObservableCollection<Event>(events.Items);
         }
 
         private RelayCommand<SelectionChangedEventArgs> selectedDatesChangedCommand;
@@ -50,86 +56,20 @@ namespace DocumentFlow.ViewModels
                 param =>
                 {
                     EventList.Clear();
-
                     SelectedDate = ((System.Windows.Controls.Calendar)param.Source).SelectedDate;
-                    UserCredential credential;
-                    string[] Scopes = { CalendarService.Scope.CalendarReadonly };
-
-                    using (var stream =
-                        new FileStream(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\credentials.json", FileMode.Open, FileAccess.Read))
-                    {
-                        // The file token.json stores the user's access and refresh tokens, and is created
-                        // automatically when the authorization flow completes for the first time.
-                        string credPath = "token.json";
-                        credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                            GoogleClientSecrets.Load(stream).Secrets,
-                            Scopes,
-                            "user",
-                            CancellationToken.None,
-                            new FileDataStore(credPath, true)).Result;
-                        // MessageBox.Show("Credential file saved to: " + credPath);
-                    }
-
-                    // Create Google Calendar API service.
-                    var service = new CalendarService(new BaseClientService.Initializer()
-                    {
-                        HttpClientInitializer = credential,
-                        ApplicationName = "Google Calendar API .NET Quickstart",
-                    });
-
-                    // Define parameters of request.
-                    EventsResource.ListRequest request = service.Events.List("primary");
-                    request.TimeMin = SelectedDate;
                     if (SelectedDate != null)
                     {
-                        var sd = (DateTime)SelectedDate;
-                        request.TimeMax = sd.AddDays(1).AddTicks(-1);
+                        var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+                        EventList = new ObservableCollection<Event>(events.Items);
                     }
-                    request.ShowDeleted = false;
-                    request.SingleEvents = true;
-                    request.MaxResults = 10;
-                    request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
-
-                    // List events.
-                    Events events = request.Execute();
-                 //   MessageBox.Show("Upcoming events:");
-                    if (events.Items != null && events.Items.Count > 0)
-                    {
-                        foreach (var eventItem in events.Items)
-                        {
-                            string when = eventItem.Start.DateTime.ToString();
-                            if (String.IsNullOrEmpty(when))
-                            {
-                                when = eventItem.Start.Date;
-                            }
-                         //   MessageBox.Show($"{eventItem.Summary} ({when})");
-                            var newEvent = new GoogleEvent
-                            {
-                                Craeded = eventItem.Created,
-                                CreatorEmail = eventItem.Creator.Email,
-                                Description = eventItem.Description,
-                                Location = eventItem.Location,
-                                EventSummary = eventItem.Summary,
-                                Updated = eventItem.Updated,
-                                Start = eventItem.Start.DateTime,
-                                End = eventItem.End.DateTime
-                            };
-                            EventList.Add(newEvent);
-                        }
-                    }
-                    else
-                    {
-                      //  MessageBox.Show("No upcoming events found.");
-                    }
-                    //Console.Read();
-
                 }
             ));
         private RelayCommand addEvent;
         public RelayCommand AddEvent => addEvent ?? (addEvent = new RelayCommand(
                 () =>
                 {
-                    Messenger.Default.Send(new NotificationMessage<GoogleEvent>(new GoogleEvent(), "EventToAdd"));
+                    Messenger.Default.Send(new NotificationMessage<Event>(new Event(), "EventToAdd"));
+                    Messenger.Default.Send(new NotificationMessage<CalendarService>(GoogleCalendarService, "CurrentGoogleService"));
                     navigationService.Navigate<AddEditEventPageView>();
                     //UserCredential credential;
                     //string[] Scopes = {
@@ -196,18 +136,23 @@ namespace DocumentFlow.ViewModels
                 }
                  ));
 
-        private RelayCommand<GoogleEvent> deleteEventCommand;
-        public RelayCommand<GoogleEvent> DeleteEventCommand => deleteEventCommand ?? (deleteEventCommand = new RelayCommand<GoogleEvent>(
+        private RelayCommand<Event> deleteEventCommand;
+        public RelayCommand<Event> DeleteEventCommand => deleteEventCommand ?? (deleteEventCommand = new RelayCommand<Event>(
                 param =>
                 {
+                    if (messageService.ShowYesNo("Are you sure?"))
+                    {
+                        googleService.deleteEvent(GoogleCalendarService, param);
+                    }
                 }
                  ));
 
-        private RelayCommand<GoogleEvent> editEventCommand;
-        public RelayCommand<GoogleEvent> EditEventCommand => editEventCommand ?? (editEventCommand = new RelayCommand<GoogleEvent>(
+        private RelayCommand<Event> editEventCommand;
+        public RelayCommand<Event> EditEventCommand => editEventCommand ?? (editEventCommand = new RelayCommand<Event>(
                 param =>
                 {
-                    Messenger.Default.Send(new NotificationMessage<GoogleEvent>(param, "EventToEdit"));
+                    Messenger.Default.Send(new NotificationMessage<Event>(param, "EventToEdit"));
+                    Messenger.Default.Send(new NotificationMessage<CalendarService>(GoogleCalendarService, "CurrentGoogleService"));
                     navigationService.Navigate<AddEditEventPageView>();
                 }
                  ));

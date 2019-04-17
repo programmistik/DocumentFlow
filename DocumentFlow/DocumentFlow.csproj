@@ -174,7 +174,7 @@
     <Compile Include="Models\Documents.cs" />
     <Compile Include="Models\DocumentStates.cs" />
     <Compile Include="Models\DocumentTypes.cs" />
-    <Compile Include="Models\GoogleEvent.cs" />
+    <Compile Include="Models\CalendarQuickstart.cs" />
     <Compile Include="Models\MyFiles.cs" />
     <Compile Include="Models\Organizations.cs" />
     <Compile Include="Models\RoleTypes.cs" />
@@ -185,7 +185,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Resources\ViewModelLocator.cs" />
-    <Compile Include="Services\GoogleCalendar.cs" />
+    <Compile Include="Services\GoogleServices.cs" />
+    <Compile Include="Services\IGoogleService.cs" />
     <Compile Include="Services\IMessageService.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\IPasswordSupplier.cs" />

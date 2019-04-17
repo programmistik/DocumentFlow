@@ -20,6 +20,14 @@
       ]
     },
 
+    {
+      "type": "DocumentFlow.Services.GoogleServices",
+      "services": [
+        {
+          "type": "DocumentFlow.Services.IGoogleService"
+        }
+      ]
+    },
 
     {
       "type": "DocumentFlow.Services.NavigationService",
