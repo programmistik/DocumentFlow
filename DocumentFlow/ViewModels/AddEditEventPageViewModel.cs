@@ -171,69 +171,6 @@ namespace DocumentFlow.ViewModels
                     else
                     {
                         googleService.updateEvent(GoogleCalendarService, SelectedEvent);
-                        //UserCredential credential;
-                        //string[] Scopes = {
-                        //            CalendarService.Scope.Calendar,
-                        //            CalendarService.Scope.CalendarReadonly
-                        //        };
-
-                        //using (var stream =
-                        //    new FileStream(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\credentials.json", FileMode.Open, FileAccess.ReadWrite))
-                        //{
-                        //    // The file token.json stores the user's access and refresh tokens, and is created
-                        //    // automatically when the authorization flow completes for the first time.
-                        //    string credPath = "token.json";
-                        //    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                        //        GoogleClientSecrets.Load(stream).Secrets,
-                        //        Scopes,
-                        //        "user",
-                        //        CancellationToken.None,
-                        //        new FileDataStore(credPath, true)).Result;
-                        //    // MessageBox.Show("Credential file saved to: " + credPath);
-                        //}
-                        //var service = new CalendarService(new BaseClientService.Initializer()
-                        //{
-                        //    HttpClientInitializer = credential,
-                        //    ApplicationName = "Google Calendar API .NET Quickstart",
-                        //});
-
-
-
-                        //Event newEvent = new Event()
-                        //{
-                        //    Summary = EventSummary,
-                        //    Location = Location,
-                        //    Description = Description,
-                        //    ColorId = "2",
-                        //    Start = new EventDateTime()
-                        //    {
-                        //        DateTime = StartDate,
-                        //        TimeZone = "Asia/Baku",
-                        //    },
-                        //    End = new EventDateTime()
-                        //    {
-                        //        DateTime = EndDate,
-                        //        TimeZone = "America/Los_Angeles",
-                        //    },
-                        //    Recurrence = new string[] { "RRULE:FREQ=DAILY;COUNT=2" },
-                        //    Attendees = new EventAttendee[] {
-                        //        new EventAttendee() { Email = "programmistik@gmail.com" },
-                        //        new EventAttendee() { Email = "programmistik@yahoo.com" },
-                        //    },
-                        //    Reminders = new Event.RemindersData()
-                        //    {
-                        //        UseDefault = false,
-                        //        Overrides = new EventReminder[] {
-                        //            new EventReminder() { Method = "email", Minutes = 24 * 60 },
-                        //            new EventReminder() { Method = "sms", Minutes = 10 },
-                        //        }
-                        //    }
-                        //};
-
-                        //string calendarId = "primary";
-                        //EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
-                        //Event createdEvent = request.Execute();
-
                     }
                     navigationService.Navigate<CalendarPageView>();
                 }

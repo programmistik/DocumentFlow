@@ -6,6 +6,7 @@
     { "type": "DocumentFlow.ViewModels.MainDesktopPageViewModel" },
     { "type": "DocumentFlow.ViewModels.CalendarPageViewModel" },
     { "type": "DocumentFlow.ViewModels.AddEditEventPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.GMailPageViewModel" },
     {
       "type": "DocumentFlow.Models.AppDbContext",
       "instanceScope": "single-instance"

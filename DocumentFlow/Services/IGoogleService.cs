@@ -1,5 +1,6 @@
 ﻿using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Gmail.v1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace DocumentFlow.Services
         void addNewEvent(CalendarService service, Event NewEvent, string calendarId = "primary");
         void updateEvent(CalendarService service, Event eventToUpdate, string calendarId = "primary");
         void deleteEvent(CalendarService service, Event eventToDelete, string calendarId = "primary");
+        GmailService getGMailService();
 
     }
 }

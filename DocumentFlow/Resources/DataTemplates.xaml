@@ -17,4 +17,8 @@
         <v:AddEditEventPageView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:GMailPageViewModel}">
+        <v:GMailPageView/>
+    </DataTemplate>
+
 </ResourceDictionary>
