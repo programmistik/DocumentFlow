@@ -58,7 +58,7 @@ namespace DocumentFlow.Services
             }
             request.ShowDeleted = false;
             request.SingleEvents = true;
-            request.MaxResults = 10;
+            request.MaxResults = 30;
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
             // List events.
@@ -92,6 +92,12 @@ namespace DocumentFlow.Services
         public void deleteEvent(CalendarService service, Event eventToDelete, string calendarId = "primary")
         {
             service.Events.Delete(calendarId, eventToDelete.Id).Execute();
+        }
+
+        public int getEventCountForToday()
+        {
+            var evs = GetEventsByDate(DateTime.Today, GetQuickstartService());
+            return evs.Items.Count();
         }
     }
 }

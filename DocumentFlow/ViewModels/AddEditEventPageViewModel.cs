@@ -68,9 +68,9 @@ namespace DocumentFlow.ViewModels
 
             Messenger.Default.Register<NotificationMessage<Event>>(this, OnHitIt);
 
-            Messenger.Default.Register<CalendarService>(this, goo =>
+            Messenger.Default.Register<NotificationMessage<CalendarService>>(this, goo =>
             {
-                GoogleCalendarService = goo;
+                GoogleCalendarService = goo.Content;
             });
         }
 
@@ -85,13 +85,25 @@ namespace DocumentFlow.ViewModels
                 SelectedEvent = edev.Content;
                 EventSummary = ev.Summary;
                 Location = ev.Location;
-                if(ev.Start.DateTime == null)
+                Description = ev.Description;
+
+                if (SelectedEvent.ColorId != null)
+                    ColorIndex = int.Parse(SelectedEvent.ColorId) - 1;
+
+                if (ev.Start.DateTime == null)
                 {
                     StartDate = DateTime.Parse(ev.Start.Date, new CultureInfo("en-US", true));
                 }
                 else
                     StartDate = ev.Start.DateTime;
-                EndDate = ev.End.DateTime;
+
+                if (ev.End.DateTime == null)
+                {
+                    EndDate = DateTime.Parse(ev.End.Date, new CultureInfo("en-US", true));
+                }
+                else
+                    EndDate = ev.End.DateTime;
+                
                 AttendeesList = new ObservableCollection<EventAttendee>(ev.Attendees);
             }
             else if (edev.Notification == "EventToAdd")
@@ -100,6 +112,8 @@ namespace DocumentFlow.ViewModels
                 SelectedEvent = edev.Content;
                 EventSummary = SelectedEvent.Summary;
                 Location = SelectedEvent.Location;
+                Description = SelectedEvent.Description;
+                //ColorIndex = int.Parse(SelectedEvent.ColorId) - 1;
                 StartDate = DateTime.Now;
                 EndDate = DateTime.Now;
                 AttendeesList = new ObservableCollection<EventAttendee>();

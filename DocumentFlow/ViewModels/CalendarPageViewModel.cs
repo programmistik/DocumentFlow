@@ -71,67 +71,6 @@ namespace DocumentFlow.ViewModels
                     Messenger.Default.Send(new NotificationMessage<Event>(new Event(), "EventToAdd"));
                     Messenger.Default.Send(new NotificationMessage<CalendarService>(GoogleCalendarService, "CurrentGoogleService"));
                     navigationService.Navigate<AddEditEventPageView>();
-                    //UserCredential credential;
-                    //string[] Scopes = {
-                    //            CalendarService.Scope.Calendar,
-                    //            CalendarService.Scope.CalendarReadonly
-                    //        };
-
-                    //using (var stream =
-                    //    new FileStream(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\credentials.json", FileMode.Open, FileAccess.ReadWrite))
-                    //{
-                    //    // The file token.json stores the user's access and refresh tokens, and is created
-                    //    // automatically when the authorization flow completes for the first time.
-                    //    string credPath = "token.json";
-                    //    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    //        GoogleClientSecrets.Load(stream).Secrets,
-                    //        Scopes,
-                    //        "user",
-                    //        CancellationToken.None,
-                    //        new FileDataStore(credPath, true)).Result;
-                    //    // MessageBox.Show("Credential file saved to: " + credPath);
-                    //}
-                    //var service = new CalendarService(new BaseClientService.Initializer()
-                    //{
-                    //    HttpClientInitializer = credential,
-                    //    ApplicationName = "Google Calendar API .NET Quickstart",
-                    //});
-
-
-
-                    //Event newEvent = new Event()
-                    //{
-                    //    Summary = "Google I/O 2015",
-                    //    Location = "800 Howard St., San Francisco, CA 94103",
-                    //    Description = "A chance to hear more about Google's developer products.",
-                    //    Start = new EventDateTime()
-                    //    {
-                    //        DateTime = DateTime.Parse("2019-04-10T09:00:00-07:00"),
-                    //        TimeZone = "America/Los_Angeles",
-                    //    },
-                    //    End = new EventDateTime()
-                    //    {
-                    //        DateTime = DateTime.Parse("2019-04-10T17:00:00-07:00"),
-                    //        TimeZone = "America/Los_Angeles",
-                    //    },
-                    //    Recurrence = new string[] { "RRULE:FREQ=DAILY;COUNT=2" },
-                    //    Attendees = new EventAttendee[] {
-                    //        new EventAttendee() { Email = "programmistik@gmail.com" },
-                    //        new EventAttendee() { Email = "programmistik@yahoo.com" },
-                    //    },
-                    //    Reminders = new Event.RemindersData()
-                    //    {
-                    //        UseDefault = false,
-                    //        Overrides = new EventReminder[] {
-                    //            new EventReminder() { Method = "email", Minutes = 24 * 60 },
-                    //            new EventReminder() { Method = "sms", Minutes = 10 },
-                    //        }
-                    //    }
-                    //};
-
-                    //string calendarId = "primary";
-                    //EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
-                    //Event createdEvent = request.Execute();
 
                 }
                  ));
@@ -143,6 +82,9 @@ namespace DocumentFlow.ViewModels
                     if (messageService.ShowYesNo("Are you sure?"))
                     {
                         googleService.deleteEvent(GoogleCalendarService, param);
+
+                        var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+                        EventList = new ObservableCollection<Event>(events.Items);
                     }
                 }
                  ));

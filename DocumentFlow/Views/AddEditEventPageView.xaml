@@ -76,7 +76,7 @@
                        HorizontalAlignment="Left"
                         TimeInterval="00:30:00.000"
                         ShowButtonSpinner="False"
-                        Value="{Binding StartTime}"/>
+                        Value="{Binding EndDate}"/>
             </DockPanel>
 
         </StackPanel>
