@@ -20,5 +20,8 @@
     <DataTemplate DataType="{x:Type vm:GMailPageViewModel}">
         <v:GMailPageView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ReadMailPageViewModel}">
+        <v:ReadMailPageView/>
+    </DataTemplate>
 
 </ResourceDictionary>

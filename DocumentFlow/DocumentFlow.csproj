@@ -187,6 +187,7 @@
     <Compile Include="Models\DocumentStates.cs" />
     <Compile Include="Models\DocumentTypes.cs" />
     <Compile Include="Models\CalendarQuickstart.cs" />
+    <Compile Include="Models\GoogleMessage.cs" />
     <Compile Include="Models\MyFiles.cs" />
     <Compile Include="Models\Organizations.cs" />
     <Compile Include="Models\RoleTypes.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="ViewModels\GMailPageViewModel.cs" />
     <Compile Include="ViewModels\LogInPageViewModel.cs" />
     <Compile Include="ViewModels\MainDesktopPageViewModel.cs" />
+    <Compile Include="ViewModels\ReadMailPageViewModel.cs" />
     <Compile Include="Views\AddEditEventPageView.xaml.cs">
       <DependentUpon>AddEditEventPageView.xaml</DependentUpon>
     </Compile>
@@ -227,6 +229,9 @@
     </Compile>
     <Compile Include="Views\MainDesktopPageView.xaml.cs">
       <DependentUpon>MainDesktopPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReadMailPageView.xaml.cs">
+      <DependentUpon>ReadMailPageView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +297,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainDesktopPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReadMailPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

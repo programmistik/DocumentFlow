@@ -24,6 +24,7 @@ namespace DocumentFlow
         private CalendarPageViewModel CalendarPageViewModel;
         private AddEditEventPageViewModel AddEditEventPageViewModel;
         private GMailPageViewModel GMailPageViewModel;
+        private ReadMailPageViewModel ReadMailPageViewModel;
 
         private INavigationService navigationService;
 
@@ -48,12 +49,14 @@ namespace DocumentFlow
                 CalendarPageViewModel = Container.Resolve<CalendarPageViewModel>();
                 AddEditEventPageViewModel = Container.Resolve<AddEditEventPageViewModel>();
                 GMailPageViewModel = Container.Resolve<GMailPageViewModel>();
+                ReadMailPageViewModel = Container.Resolve<ReadMailPageViewModel>();
 
                 navigationService.Register<LogInPageView>(LogInViewModel);
                 navigationService.Register<MainDesktopPageView>(MainDesktopPageViewModel);
                 navigationService.Register<CalendarPageView>(CalendarPageViewModel);
                 navigationService.Register<AddEditEventPageView>(AddEditEventPageViewModel);
                 navigationService.Register<GMailPageView>(GMailPageViewModel);
+                navigationService.Register<ReadMailPageView>(ReadMailPageViewModel);
 
                 navigationService.Navigate<LogInPageView>();
             }

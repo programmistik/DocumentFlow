@@ -5,9 +5,59 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
              mc:Ignorable="d" 
+             Name="This"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <UserControl.Resources>
+        <DataTemplate x:Key="IndoxListBoxItemTemplate">
+            <StackPanel>
+
+                <Grid  HorizontalAlignment="Stretch">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+
+                        <Label FontWeight="Bold"
+                               Content="{Binding Subject}" />
+                        <Label 
+                               Content="{Binding Date}" />
+                    </StackPanel>
+
+
+                    <Button  Grid.Column="1" 
+                            Margin="1"
+                            Command="{Binding DataContext.ReadMailCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Read
+                    </Button>                  
+
+
+                </Grid>
+
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel>
         <Button Content="Receive mail"
                  Command="{Binding ReceiveMailCommand}"/>
-    </Grid>
+        <ListBox HorizontalContentAlignment="Stretch" 
+                            ItemsSource="{Binding InboxList}"                   
+                            Margin="3"
+                            ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"
+                            Width="430"
+                            Height="420"         
+                            ItemTemplate="{StaticResource IndoxListBoxItemTemplate}">
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+        </ListBox>
+    </StackPanel>
 </UserControl>
