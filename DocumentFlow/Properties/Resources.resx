@@ -117,14 +117,65 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddNewEvent" xml:space="preserve">
+    <value>Add New Event</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChangePicture" xml:space="preserve">
+    <value>Change Picture</value>
+  </data>
+  <data name="CoEmail" xml:space="preserve">
+    <value>Co-Email</value>
+  </data>
+  <data name="ColorScheme" xml:space="preserve">
+    <value>Choose Color Scheme</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
   <data name="ForgetPassword" xml:space="preserve">
     <value>Forget password?</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Choose Language</value>
   </data>
   <data name="LogIn" xml:space="preserve">
     <value>Log in</value>
   </data>
+  <data name="Mail" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobile Phone</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="OpenCalendar" xml:space="preserve">
+    <value>Open Calendar</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password:</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="ReceiveMail" xml:space="preserve">
+    <value>Receive Mail</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Tasks</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User name:</value>

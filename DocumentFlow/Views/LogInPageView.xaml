@@ -11,20 +11,21 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -33,14 +34,14 @@
         </Grid.Background>
 
         
-        <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2" Source="../Resources/Images/TestLogo.png"/>
+        <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="../Resources/Images/TestLogo.png"/>
         
-        <Label Grid.Row="3" Grid.Column="1"
+        <Label Grid.Row="4" Grid.Column="1"
                FontSize="25"
                Content="{x:Static p:Resources.UserName}" VerticalAlignment="Bottom"/>
         
         <TextBox    Grid.Column="1"
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Name="tbUserName" 
                     FontSize="35"
                     VerticalContentAlignment="Center"
@@ -54,22 +55,22 @@
 
         <Label Content=""
                    Foreground="{Binding CheckColor}"
-                   Grid.Column="3" Grid.Row="4"/>
+                   Grid.Column="3" Grid.Row="5"/>
 
         <Label Grid.Column="1"
-               Grid.Row="5"
+               Grid.Row="6"
                Content="{x:Static p:Resources.Password}"
                FontSize="25" VerticalAlignment="Bottom"/>
         
         <PasswordBox Grid.Column="1" Grid.ColumnSpan="2"
                      VerticalContentAlignment="Center"
-                     Grid.Row="6"
+                     Grid.Row="7"
                      Name="pBox" 
                      FontSize="35" Background="White"
                      />
 
         <TextBlock Grid.Column="2"
-                   Grid.Row="7"
+                   Grid.Row="8"
                    Text="{x:Static p:Resources.ForgetPassword}" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock.InputBindings>
                 <MouseBinding Command="{Binding ForgotPasswordCommand}" 
@@ -80,7 +81,7 @@
         <Button Content="{x:Static p:Resources.LogIn}"
                     Margin="5"
                     Grid.Column="1"
-                    Grid.Row="7"
+                    Grid.Row="8"
                     FontSize="15"
                     Command="{Binding LogInCommand}"
                     CommandParameter="{Binding ElementName=This}" Height="Auto" Background="#FF047000"/>

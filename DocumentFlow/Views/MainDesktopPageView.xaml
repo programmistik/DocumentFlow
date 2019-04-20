@@ -95,20 +95,20 @@
         </StackPanel>
 
         <!--Content-->
-
         <Button Grid.Column="1" Grid.ColumnSpan="2"
                 Grid.Row="1" Grid.RowSpan="2"
                 Command="{Binding GCalendar}" 
-                Content="Open Calendar"
+                Content="{x:Static p:Resources.OpenCalendar}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"></Button>
+                HorizontalAlignment="Stretch">
+        </Button>
 
         <Button Grid.Column="3" Grid.ColumnSpan="2"
                 Grid.Row="1" Grid.RowSpan="2"
                 Command="{Binding GMail}" 
-                Content="Mail"
+                Content="{x:Static p:Resources.Mail}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
@@ -117,7 +117,7 @@
         <Button Grid.Column="5" Grid.ColumnSpan="3"
                 Grid.Row="1" Grid.RowSpan="2"
                 Command="{Binding GSchedule}" 
-                Content="Tasks"
+                Content="{x:Static p:Resources.Tasks}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
@@ -126,7 +126,7 @@
         <Button Grid.Column="1" Grid.ColumnSpan="3"
                 Grid.Row="3" Grid.RowSpan="2"
                 Command="{Binding GDocuments}" 
-                Content="Documents"
+                Content="{x:Static p:Resources.Documents}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
@@ -135,7 +135,7 @@
         <Button Grid.Column="4" Grid.ColumnSpan="4"
                 Grid.Row="3" Grid.RowSpan="2"
                 Command="{Binding GNews}" 
-                Content="News"
+                Content="{x:Static p:Resources.News}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
