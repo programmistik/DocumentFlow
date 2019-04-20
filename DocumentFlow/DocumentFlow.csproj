@@ -208,8 +208,13 @@
     <Compile Include="ViewModels\AddEditEventPageViewModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\CalendarPageViewModel.cs" />
+    <Compile Include="ViewModels\ContactsPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\NewsPageViewModel.cs" />
     <Compile Include="ViewModels\GMailPageViewModel.cs" />
     <Compile Include="ViewModels\LogInPageViewModel.cs" />
+    <Compile Include="ViewModels\DocumentsPageViewModel.cs" />
+    <Compile Include="ViewModels\SchedulePageViewModel.cs" />
     <Compile Include="ViewModels\MainDesktopPageViewModel.cs" />
     <Compile Include="ViewModels\ReadMailPageViewModel.cs" />
     <Compile Include="Views\AddEditEventPageView.xaml.cs">
@@ -221,6 +226,12 @@
     <Compile Include="Views\CalendarPageView.xaml.cs">
       <DependentUpon>CalendarPageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ContactsPageView.xaml.cs">
+      <DependentUpon>ContactsPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DocumentsPageView.xaml.cs">
+      <DependentUpon>DocumentsPageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GMailPageView.xaml.cs">
       <DependentUpon>GMailPageView.xaml</DependentUpon>
     </Compile>
@@ -230,8 +241,17 @@
     <Compile Include="Views\MainDesktopPageView.xaml.cs">
       <DependentUpon>MainDesktopPageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewsPageView.xaml.cs">
+      <DependentUpon>NewsPageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ReadMailPageView.xaml.cs">
       <DependentUpon>ReadMailPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SchedulePageView.xaml.cs">
+      <DependentUpon>SchedulePageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsPageView.xaml.cs">
+      <DependentUpon>SettingsPageView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -288,6 +308,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ContactsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DocumentsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GMailPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -300,7 +328,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ReadMailPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SchedulePageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

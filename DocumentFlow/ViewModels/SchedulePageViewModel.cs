@@ -19,20 +19,18 @@ using System.Windows;
 
 namespace DocumentFlow.ViewModels
 {
-    public class MainDesktopPageViewModel : ViewModelBase
+    public class SchedulePageViewModel : ViewModelBase
     {
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
-        public MainDesktopPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
+        public SchedulePageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
 
         }
-
-
 
         //Navigation
         //Upper Menu
@@ -102,7 +100,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GMail => gMail ?? (gMail = new RelayCommand(
                 () =>
                 {
-                   
+
                     navigationService.Navigate<GMailPageView>();
                 }
             ));

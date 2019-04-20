@@ -8,6 +8,12 @@
     { "type": "DocumentFlow.ViewModels.AddEditEventPageViewModel" },
     { "type": "DocumentFlow.ViewModels.GMailPageViewModel" },
     { "type": "DocumentFlow.ViewModels.ReadMailPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.SchedulePageViewModel" },
+    { "type": "DocumentFlow.ViewModels.DocumentsPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.NewsPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.SettingsPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.ContactsPageViewModel" },
+
     {
       "type": "DocumentFlow.Models.AppDbContext",
       "instanceScope": "single-instance"
