@@ -1,6 +1,8 @@
 ﻿using DocumentFlow.Models;
 using DocumentFlow.Services;
+using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,14 @@ namespace DocumentFlow.ViewModels
                 MyMail = goo.Content;
             });
         }
+
+        private RelayCommand OkCommand;
+        public RelayCommand OKCommand => OkCommand ?? (OkCommand = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<GMailPageView>();
+                }
+                 ));
     }
 
 }

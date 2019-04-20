@@ -47,28 +47,72 @@ namespace DocumentFlow.ViewModels
             return Convert.FromBase64String(result.ToString());
         }
 
+        private Task<GoogleMessage> getMessageAsync(Message email)
+        {
+            return Task.Run(() =>
+            {
+                var newMail = new GoogleMessage();
+                var emailInfoRequest = GMailService.Users.Messages.Get("me", email.Id);
+                emailInfoRequest.Format = UsersResource.MessagesResource.GetRequest.FormatEnum.Full;
+                var emailInfoResponse = emailInfoRequest.Execute();
+
+                if (emailInfoResponse != null)
+                {
+                    //InboxList.Add(emailInfoResponse);
+
+                    newMail.FullMessage = emailInfoResponse;
+
+                    var from = "";
+                    var date = "";
+                    var subject = "";
+
+                    //loop through the headers to get from,date,subject, body 
+                    foreach (var mParts in emailInfoResponse.Payload.Headers)
+                    {
+                        if (mParts.Name == "Date")
+                        {
+                            date = mParts.Value;
+                            newMail.Date = date;
+                        }
+                        else if (mParts.Name == "From")
+                        {
+                            from = mParts.Value;
+                            newMail.From = from;
+                        }
+                        else if (mParts.Name == "Subject")
+                        {
+                            subject = mParts.Value;
+                            newMail.Subject = subject;
+                        }
+
+                        if (date != "" && from != "")
+                        {
+                            if (emailInfoResponse.Payload.Parts != null)
+                            {
+                                foreach (MessagePart p in emailInfoResponse.Payload.Parts)
+                                {
+                                    if (p.MimeType == "text/html")
+                                    {
+                                        byte[] data = FromBase64ForUrlString(p.Body.Data);
+                                        string decodedString = Encoding.UTF8.GetString(data);
+                                        newMail.Html = decodedString;
+                                        // InboxList.Add(newMail);
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+                return newMail;
+            });
+        }
+
         private RelayCommand receiveMailCommand;
         public RelayCommand ReceiveMailCommand => receiveMailCommand ?? (receiveMailCommand = new RelayCommand(
-                () =>
+                async () =>
                 {
-                    // Define parameters of request.
-                    //var request = GMailService.Users.Labels.List("me");
-
-                    //// List labels.
-                    //IList<Label> labels = request.Execute().Labels;
-
-                    //if (labels != null && labels.Count > 0)
-                    //{
-                    //    foreach (var labelItem in labels)
-                    //    {
-                    //        Console.WriteLine("{0}", labelItem.Name);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    Console.WriteLine("No labels found.");
-                    //}
-                    //Console.Read();
 
                     var inboxlistRequest = GMailService.Users.Messages.List("me");
                     inboxlistRequest.LabelIds = "INBOX";
@@ -81,65 +125,66 @@ namespace DocumentFlow.ViewModels
                         //loop through each email and get what fields you want...
                         foreach (var email in emailListResponse.Messages)
                         {
+                            var newMail = await getMessageAsync(email);
+                            InboxList.Add(newMail);
 
-                            var emailInfoRequest = GMailService.Users.Messages.Get("me", email.Id);
-                            emailInfoRequest.Format = UsersResource.MessagesResource.GetRequest.FormatEnum.Full;
-                            var emailInfoResponse = emailInfoRequest.Execute();
+                            //var emailInfoRequest = GMailService.Users.Messages.Get("me", email.Id);
+                            //emailInfoRequest.Format = UsersResource.MessagesResource.GetRequest.FormatEnum.Full;
+                            //var emailInfoResponse = emailInfoRequest.Execute();
 
-                            if (emailInfoResponse != null)
-                            {
-                                //InboxList.Add(emailInfoResponse);
-                                var newMail = new GoogleMessage();
-                                newMail.FullMessage = emailInfoResponse;
+                            //if (emailInfoResponse != null)
+                            //{
+                            //    //InboxList.Add(emailInfoResponse);
+                            //    var newMail = new GoogleMessage();
+                            //    newMail.FullMessage = emailInfoResponse;
 
-                                var from = "";
-                                var date = "";
-                                var subject = "";
+                            //    var from = "";
+                            //    var date = "";
+                            //    var subject = "";
 
-                                //loop through the headers to get from,date,subject, body 
-                                foreach (var mParts in emailInfoResponse.Payload.Headers)
-                                {
-                                    if (mParts.Name == "Date")
-                                    {
-                                        date = mParts.Value;
-                                        newMail.Date = date;
-                                    }
-                                    else if (mParts.Name == "From")
-                                    {
-                                        from = mParts.Value;
-                                        newMail.From = from;
-                                    }
-                                    else if (mParts.Name == "Subject")
-                                    {
-                                        subject = mParts.Value;
-                                        newMail.Subject = subject;
-                                    }
+                            //    //loop through the headers to get from,date,subject, body 
+                            //    foreach (var mParts in emailInfoResponse.Payload.Headers)
+                            //    {
+                            //        if (mParts.Name == "Date")
+                            //        {
+                            //            date = mParts.Value;
+                            //            newMail.Date = date;
+                            //        }
+                            //        else if (mParts.Name == "From")
+                            //        {
+                            //            from = mParts.Value;
+                            //            newMail.From = from;
+                            //        }
+                            //        else if (mParts.Name == "Subject")
+                            //        {
+                            //            subject = mParts.Value;
+                            //            newMail.Subject = subject;
+                            //        }
 
-                                    if (date != "" && from != "")
-                                    {
-                                        if (emailInfoResponse.Payload.Parts != null)
-                                        {
-                                            foreach (MessagePart p in emailInfoResponse.Payload.Parts)
-                                            {
-                                                if (p.MimeType == "text/html")
-                                                {
-                                                    byte[] data = FromBase64ForUrlString(p.Body.Data);
-                                                    string decodedString = Encoding.UTF8.GetString(data);
-                                                    newMail.Html = decodedString;
-                                                    InboxList.Add(newMail);
-                                                }
-                                            }
-                                        }
-                                    }
+                            //        if (date != "" && from != "")
+                            //        {
+                            //            if (emailInfoResponse.Payload.Parts != null)
+                            //            {
+                            //                foreach (MessagePart p in emailInfoResponse.Payload.Parts)
+                            //                {
+                            //                    if (p.MimeType == "text/html")
+                            //                    {
+                            //                        byte[] data = FromBase64ForUrlString(p.Body.Data);
+                            //                        string decodedString = Encoding.UTF8.GetString(data);
+                            //                        newMail.Html = decodedString;
+                            //                        InboxList.Add(newMail);
+                            //                    }
+                            //                }
+                            //            }
+                            //        }
 
-                                }
-                            }
+                            //    }
+                            //}
                         }
 
                     }
                 }
                  ));
-
         private RelayCommand<GoogleMessage> readMailCommand;
         public RelayCommand<GoogleMessage> ReadMailCommand => readMailCommand ?? (readMailCommand = new RelayCommand<GoogleMessage>(
                 param =>
