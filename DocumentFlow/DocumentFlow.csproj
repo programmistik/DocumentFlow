@@ -179,19 +179,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\AppDbContext.cs" />
-    <Compile Include="Models\Companies.cs" />
-    <Compile Include="Models\ContactInfoTypes.cs" />
-    <Compile Include="Models\Currencies.cs" />
-    <Compile Include="Models\Departments.cs" />
-    <Compile Include="Models\Documents.cs" />
-    <Compile Include="Models\DocumentStates.cs" />
-    <Compile Include="Models\DocumentTypes.cs" />
     <Compile Include="Models\CalendarQuickstart.cs" />
     <Compile Include="Models\GoogleMessage.cs" />
-    <Compile Include="Models\MyFiles.cs" />
-    <Compile Include="Models\Organizations.cs" />
-    <Compile Include="Models\RoleTypes.cs" />
-    <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\Resources.ru-RU.Designer.cs">
       <DependentUpon>Resources.ru-RU.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -325,6 +314,12 @@
     <Resource Include="Resources\Images\Mail.png" />
     <Resource Include="Resources\Images\News.png" />
     <Resource Include="Resources\Images\Tasks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DocumentFlowCore\DocumentFlowCore.csproj">
+      <Project>{292965d6-e983-4a6d-9c9b-c51e75aaf517}</Project>
+      <Name>DocumentFlowCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
