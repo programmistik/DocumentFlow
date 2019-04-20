@@ -113,9 +113,14 @@ namespace DocumentFlow.ViewModels
         public RelayCommand ReceiveMailCommand => receiveMailCommand ?? (receiveMailCommand = new RelayCommand(
                 async () =>
                 {
+                    UsersResource.LabelsResource.ListRequest request = GMailService.Users.Labels.List("me");
+
+                    // List labels.
+                    IList<Label> labels = request.Execute().Labels;
 
                     var inboxlistRequest = GMailService.Users.Messages.List("me");
                     inboxlistRequest.LabelIds = "INBOX";
+                    inboxlistRequest.LabelIds = "CATEGORY_PERSONAL";
                     inboxlistRequest.IncludeSpamTrash = false;
                     //get our emails
                     var emailListResponse = inboxlistRequest.Execute();
@@ -128,58 +133,6 @@ namespace DocumentFlow.ViewModels
                             var newMail = await getMessageAsync(email);
                             InboxList.Add(newMail);
 
-                            //var emailInfoRequest = GMailService.Users.Messages.Get("me", email.Id);
-                            //emailInfoRequest.Format = UsersResource.MessagesResource.GetRequest.FormatEnum.Full;
-                            //var emailInfoResponse = emailInfoRequest.Execute();
-
-                            //if (emailInfoResponse != null)
-                            //{
-                            //    //InboxList.Add(emailInfoResponse);
-                            //    var newMail = new GoogleMessage();
-                            //    newMail.FullMessage = emailInfoResponse;
-
-                            //    var from = "";
-                            //    var date = "";
-                            //    var subject = "";
-
-                            //    //loop through the headers to get from,date,subject, body 
-                            //    foreach (var mParts in emailInfoResponse.Payload.Headers)
-                            //    {
-                            //        if (mParts.Name == "Date")
-                            //        {
-                            //            date = mParts.Value;
-                            //            newMail.Date = date;
-                            //        }
-                            //        else if (mParts.Name == "From")
-                            //        {
-                            //            from = mParts.Value;
-                            //            newMail.From = from;
-                            //        }
-                            //        else if (mParts.Name == "Subject")
-                            //        {
-                            //            subject = mParts.Value;
-                            //            newMail.Subject = subject;
-                            //        }
-
-                            //        if (date != "" && from != "")
-                            //        {
-                            //            if (emailInfoResponse.Payload.Parts != null)
-                            //            {
-                            //                foreach (MessagePart p in emailInfoResponse.Payload.Parts)
-                            //                {
-                            //                    if (p.MimeType == "text/html")
-                            //                    {
-                            //                        byte[] data = FromBase64ForUrlString(p.Body.Data);
-                            //                        string decodedString = Encoding.UTF8.GetString(data);
-                            //                        newMail.Html = decodedString;
-                            //                        InboxList.Add(newMail);
-                            //                    }
-                            //                }
-                            //            }
-                            //        }
-
-                            //    }
-                            //}
                         }
 
                     }
@@ -194,7 +147,7 @@ namespace DocumentFlow.ViewModels
                 }
                  ));
 
-
+        #region
         //Navigation
         //Upper Menu
         private RelayCommand gMain;
@@ -276,5 +229,6 @@ namespace DocumentFlow.ViewModels
                     navigationService.Navigate<ContactsPageView>();
                 }
             ));
+        #endregion
     }
 }
