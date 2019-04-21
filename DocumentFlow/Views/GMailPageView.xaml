@@ -131,9 +131,15 @@
         <DockPanel
             Grid.Column="1" Grid.ColumnSpan="7"
                     Grid.Row="1" Grid.RowSpan="6">
-            <Button DockPanel.Dock="Top" Content="{x:Static p:Resources.ReceiveMail}"
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <Button  Content="{x:Static p:Resources.ReceiveMail}"
+                     Margin="5,5,0,5"
                  Command="{Binding ReceiveMailCommand}"/>
-                <ListBox
+            <Button  Content="  Compose  "
+                     Margin="5"
+                 Command="{Binding ComposeCommand}"/>
+            </StackPanel>
+            <ListBox
                     DockPanel.Dock="Top"
                     HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
                             ItemsSource="{Binding InboxList}"                   

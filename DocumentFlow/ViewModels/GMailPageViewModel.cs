@@ -96,7 +96,6 @@ namespace DocumentFlow.ViewModels
                                         byte[] data = FromBase64ForUrlString(p.Body.Data);
                                         string decodedString = Encoding.UTF8.GetString(data);
                                         newMail.Html = decodedString;
-                                        // InboxList.Add(newMail);
                                     }
                                 }
                             }
@@ -144,6 +143,13 @@ namespace DocumentFlow.ViewModels
                 {
                     Messenger.Default.Send(new NotificationMessage<GoogleMessage>(param, "MailToRead"));
                     navigationService.Navigate<ReadMailPageView>();
+                }
+                 ));
+        private RelayCommand composeCommand;
+        public RelayCommand ComposeCommand => composeCommand ?? (composeCommand = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<ComposeNewMailPageView>();
                 }
                  ));
 

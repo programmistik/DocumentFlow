@@ -38,5 +38,8 @@
     <DataTemplate DataType="{x:Type vm:ReadMailPageViewModel}">
         <v:ReadMailPageView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ComposeNewMailPageViewModel}">
+        <v:ComposeNewMailPageView/>
+    </DataTemplate>
 
 </ResourceDictionary>

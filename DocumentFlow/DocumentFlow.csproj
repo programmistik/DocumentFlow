@@ -138,6 +138,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0-preview3.19128.7\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -208,6 +209,7 @@
     <Compile Include="ViewModels\AddEditEventPageViewModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\CalendarPageViewModel.cs" />
+    <Compile Include="ViewModels\ComposeNewMailPageViewModel.cs" />
     <Compile Include="ViewModels\ContactsPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\NewsPageViewModel.cs" />
@@ -225,6 +227,9 @@
     </Compile>
     <Compile Include="Views\CalendarPageView.xaml.cs">
       <DependentUpon>CalendarPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComposeNewMailPageView.xaml.cs">
+      <DependentUpon>ComposeNewMailPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ContactsPageView.xaml.cs">
       <DependentUpon>ContactsPageView.xaml</DependentUpon>
@@ -308,6 +313,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ComposeNewMailPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ContactsPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -365,6 +374,30 @@
     <Resource Include="Resources\Images\Mail.png" />
     <Resource Include="Resources\Images\News.png" />
     <Resource Include="Resources\Images\Tasks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\RibonImages\backcolor.png" />
+    <Resource Include="Resources\RibonImages\bold.png" />
+    <Resource Include="Resources\RibonImages\bullets.png" />
+    <Resource Include="Resources\RibonImages\center.png" />
+    <Resource Include="Resources\RibonImages\center2.png" />
+    <Resource Include="Resources\RibonImages\Color.png" />
+    <Resource Include="Resources\RibonImages\Editor.png" />
+    <Resource Include="Resources\RibonImages\folder.png" />
+    <Resource Include="Resources\RibonImages\html.png" />
+    <Resource Include="Resources\RibonImages\ident.png" />
+    <Resource Include="Resources\RibonImages\image.png" />
+    <Resource Include="Resources\RibonImages\italic.png" />
+    <Resource Include="Resources\RibonImages\LeftAlign.png" />
+    <Resource Include="Resources\RibonImages\link.png" />
+    <Resource Include="Resources\RibonImages\new.png" />
+    <Resource Include="Resources\RibonImages\Numbered.png" />
+    <Resource Include="Resources\RibonImages\open.png" />
+    <Resource Include="Resources\RibonImages\OutIdent.png" />
+    <Resource Include="Resources\RibonImages\RightAlign.png" />
+    <Resource Include="Resources\RibonImages\save.png" />
+    <Resource Include="Resources\RibonImages\UnderLine.png" />
+    <Resource Include="Resources\RibonImages\view.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

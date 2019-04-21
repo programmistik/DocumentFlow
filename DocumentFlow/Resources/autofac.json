@@ -13,6 +13,7 @@
     { "type": "DocumentFlow.ViewModels.NewsPageViewModel" },
     { "type": "DocumentFlow.ViewModels.SettingsPageViewModel" },
     { "type": "DocumentFlow.ViewModels.ContactsPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.ComposeNewMailPageViewModel" },
 
     {
       "type": "DocumentFlow.Models.AppDbContext",
