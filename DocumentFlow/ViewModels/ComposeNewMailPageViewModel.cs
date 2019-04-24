@@ -1,6 +1,9 @@
 ﻿using DocumentFlow.Models;
 using DocumentFlow.Services;
+using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
+using Google.Apis.Gmail.v1.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +24,15 @@ namespace DocumentFlow.ViewModels
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
-            
+
+          //  Messenger.Default.Register<NotificationMessage<Message>>(this, OnHitIt);
 
         }
+
+        //
+
+        }
+
+        
     }
-}
+//}

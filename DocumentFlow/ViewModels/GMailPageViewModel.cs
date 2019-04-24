@@ -149,6 +149,8 @@ namespace DocumentFlow.ViewModels
         public RelayCommand ComposeCommand => composeCommand ?? (composeCommand = new RelayCommand(
                 () =>
                 {
+                    var mess = new Message();
+                    Messenger.Default.Send(new NotificationMessage<Message>(mess, "NewMail"));
                     navigationService.Navigate<ComposeNewMailPageView>();
                 }
                  ));

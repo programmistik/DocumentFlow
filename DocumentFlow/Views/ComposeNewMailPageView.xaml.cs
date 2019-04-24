@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFlow.Services.WebBrowserServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,23 @@ namespace DocumentFlow.Views
         public ComposeNewMailPageView()
         {
             InitializeComponent();
+
+            
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            Gui.webBrowser = webBrowserEditor;
+
+            Gui.htmlEditor = HtmlEditor1;
+            Initialisation.webeditor = this;
+            Gui.newdocument();
+          //  Gui.webBrowser.newWb(CollItem.HTMLtext);
+
+
+            Initialisation.RibbonComboboxFontsInitialisation();
+            Initialisation.RibbonComboboxFontSizeInitialisation();
+          //  Initialisation.RibbonComboboxFormatInitionalisation();
         }
     }
 }

@@ -4,115 +4,149 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
+             xmlns:cuc="clr-namespace:DocumentFlow.CustomUserControls"
              mc:Ignorable="d" 
              Name="This"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="UserControl_Loaded">
     <Grid>
-        <Ribbon  Foreground="#ccccff" 
-                 Background="#ccccff"
-                
-                 Margin="0,-22,0,0">
-            <RibbonTab Header="Editor">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="781*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <RibbonGroup Header="Editor" Width="350">
-                <StackPanel>
-                        <ComboBox x:Name="RibbonComboboxFormat" 
-                                  Width="160" 
-                                  Margin="0,0,0,4" 
-                                  HorizontalAlignment="Left">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Value}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <StackPanel Orientation="Horizontal">
-                        <ComboBox  x:Name="RibbonComboboxFonts" 
-                                       Width="160" 
-                                       />
-                        <ComboBox x:Name="RibbonComboboxFontHeight" 
-                                      Width="50"
-                                      />
+        <Ribbon  Foreground="DarkViolet" 
+                 Background="#ccccff"                
+                 Margin="0,-22,0,0" Grid.ColumnSpan="2" >
+            <Ribbon.HelpPaneContent>
+                <RibbonButton SmallImageSource="/DocumentFlow;component/Resources/RibonImages/UnderLine.png" />
+            </Ribbon.HelpPaneContent>
+            
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu>
+                    <RibbonApplicationMenuItem Header="Send Message"
+                                                      x:Name="MenuSend"
+                                                      ImageSource="/DocumentFlow;component/Resources/RibonImages/UnderLine.png"/>
+                    <RibbonApplicationMenuItem Header="Exit and do not send"
+                                                      x:Name="Exit"
+                                                      ImageSource="/DocumentFlow;component/Resources/RibonImages/UnderLine.png"/>
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+
+            <RibbonTab Header="Main">
+                <RibbonGroup  Width="350">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="To:" Width="55"/>
+                        <TextBox Width="300"
+                             Text="{Binding TextTo}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <RibbonButton x:Name="SettingsBold" 
+                        <Label Content="Subject:"
+                                Width="55"/>
+                        <TextBox Width="300"
+                             Text="{Binding TextSubject}"/>
+                    </StackPanel>
+                </RibbonGroup>
+            </RibbonTab>
+            <RibbonTab Header="Edition">
+
+                <RibbonGroup Header="Editor" Width="350">
+                    <StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox  x:Name="RibbonComboboxFonts" 
+                                       Width="150" 
+                                   Margin="0,0,5,10" />
+                            <ComboBox x:Name="RibbonComboboxFontHeight" 
+                                      Width="50"
+                                       Margin="0,0,5,10" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RibbonButton x:Name="SettingsBold" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/bold.png" 
                                           Command="{Binding BoldCommand}"/>
-                        <RibbonButton x:Name="SettingsItalic" 
+                            <RibbonButton x:Name="SettingsItalic" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/italic.png" 
                                           Command="{Binding ItalicCommand}"/>
-                        <RibbonButton x:Name="SettingsUnderLine" 
+                            <RibbonButton x:Name="SettingsUnderLine" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/UnderLine.png" 
                                           Command="{Binding UnderLineCommand}"/>
-                        <RibbonButton x:Name="SettingsFontColor" 
+                            <RibbonButton x:Name="SettingsFontColor" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/Color.png" 
                                           Command="{Binding FontColorCommand}"/>
-                        <RibbonButton x:Name="SettingsAddLink" 
+                            <RibbonButton x:Name="SettingsAddLink" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/link.png" 
                                           Command="{Binding AddLinkCommand}"/>
-                        <RibbonButton x:Name="SettingsAddImage" 
+                            <RibbonButton x:Name="SettingsAddImage" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/image.png" 
                                           Command="{Binding AddImageCommand}"/>
-                        <RibbonButton x:Name="SettingsLeftAlign" 
+                            <RibbonButton x:Name="SettingsLeftAlign" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/LeftAlign.png" 
                                           Command="{Binding LeftAlignCommand}"/>
-                        <RibbonButton x:Name="SettingsCenter2" 
+                            <RibbonButton x:Name="SettingsCenter2" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/center2.png" 
                                           Command="{Binding Center2Command}"/>
-                        <RibbonButton x:Name="SettingsRightAlign" 
+                            <RibbonButton x:Name="SettingsRightAlign" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/RightAlign.png" 
                                           Command="{Binding RightAlignCommand}"/>
-                        <RibbonButton x:Name="SettingsCenter" 
+                            <RibbonButton x:Name="SettingsCenter" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/center.png" 
                                           Command="{Binding CenterCommand}"/>
-                        <RibbonButton x:Name="SettingsNumbered" 
+                            <RibbonButton x:Name="SettingsNumbered" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/Numbered.png" 
                                           Command="{Binding NumberedCommand}"/>
-                        <RibbonButton x:Name="SettingsBullets" 
+                            <RibbonButton x:Name="SettingsBullets" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/bullets.png" 
                                           Command="{Binding BulletsCommand}"/>
-                        <RibbonButton x:Name="SettingsOutIdent" 
+                            <RibbonButton x:Name="SettingsOutIdent" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/OutIdent.png" 
                                           Command="{Binding OutIdentCommand}"/>
-                        <RibbonButton x:Name="SettingsIdent" 
+                            <RibbonButton x:Name="SettingsIdent" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/ident.png" 
                                           Command="{Binding IdentCommand}"/>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </RibbonGroup>
-            <RibbonGroup Header="Custom" Width="120">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <RibbonButton x:Name="EditWeb1"  
+                </RibbonGroup>
+                <RibbonGroup Header="Custom" Width="120">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <RibbonButton x:Name="EditWeb1"  
                                           LargeImageSource="/DocumentFlow;component/Resources/RibonImages/Editor.png" 
                                           Height="42" HorizontalAlignment="Left" 
                                           Command="{Binding EditWeb1Command}"/>
-                        <RibbonButton x:Name="ViewHTML"  
+                            <RibbonButton x:Name="ViewHTML"  
                                           LargeImageSource="/DocumentFlow;component/Resources/RibonImages/html.png" 
                                           Height="42" 
                                           HorizontalAlignment="Left" 
                                           Command="{Binding ViewHTMLCommand}"/>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </RibbonGroup>
-            <RibbonGroup Header="Save" Width="120">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
+                </RibbonGroup>
+                <RibbonGroup Header="Save" Width="120">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
 
-                        <RibbonButton x:Name="btnSave"  
+                            <RibbonButton x:Name="btnSave"  
                                           LargeImageSource="/DocumentFlow;component/Resources/RibonImages/save.png" 
                                           Height="42" 
                                           HorizontalAlignment="Left" 
                                           Command="{Binding SaveCommand}"
                                           CommandParameter="{Binding ElementName=This}"/>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </RibbonGroup>
-        </RibbonTab>
-        
+                </RibbonGroup>
+            </RibbonTab>
+
         </Ribbon>
-        
-        
+
+        <cuc:WPFWebBrowser x:Name="webBrowserEditor"  Grid.Row="1" Grid.ColumnSpan="2" />
+        <cuc:HtmlEditor x:Name="HtmlEditor1"  Grid.Row="1" 
+                          Visibility="Hidden" Grid.ColumnSpan="2"
+                          />
 
     </Grid>
 </UserControl>

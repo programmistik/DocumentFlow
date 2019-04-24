@@ -178,6 +178,34 @@ namespace DocumentFlow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///
+        ///&lt;html lang=&quot;en&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;New&lt;/title&gt;
+        ///    &lt;style type=&quot;text/css&quot;&gt;
+        ///
+        ///        p {
+        ///            margin-bottom: 0;
+        ///            margin-top: 0;
+        ///        }
+        ///    &lt;/style&gt;
+        ///
+        ///&lt;/head&gt;
+        ///
+        ///&lt;body&gt;
+        ///
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
+        /// </summary>
+        public static string New {
+            get {
+                return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to News.
         /// </summary>
         public static string News {
