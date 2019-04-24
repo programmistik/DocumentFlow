@@ -425,6 +425,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\New.html" />
+    <Resource Include="Resources\RibonImages\closeLarge.png" />
+    <Resource Include="Resources\RibonImages\close.png" />
+    <Resource Include="Resources\RibonImages\SendMail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

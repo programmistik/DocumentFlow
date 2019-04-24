@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:cuc="clr-namespace:DocumentFlow.CustomUserControls"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              mc:Ignorable="d" 
              Name="This"
              d:DesignHeight="450" d:DesignWidth="800"
@@ -23,17 +25,21 @@
                  Background="#ccccff"                
                  Margin="0,-22,0,0" Grid.ColumnSpan="2" >
             <Ribbon.HelpPaneContent>
-                <RibbonButton SmallImageSource="/DocumentFlow;component/Resources/RibonImages/UnderLine.png" />
+                <RibbonButton SmallImageSource="/DocumentFlow;component/Resources/RibonImages/close.png" 
+                              Command="{Binding CloseCommand}"/>
             </Ribbon.HelpPaneContent>
             
             <Ribbon.ApplicationMenu>
                 <RibbonApplicationMenu>
                     <RibbonApplicationMenuItem Header="Send Message"
-                                                      x:Name="MenuSend"
-                                                      ImageSource="/DocumentFlow;component/Resources/RibonImages/UnderLine.png"/>
+                                               x:Name="MenuSend"
+                                               ImageSource="/DocumentFlow;component/Resources/RibonImages/SendMail.png"
+                                               Command="{Binding SendMailCommand}"/>
                     <RibbonApplicationMenuItem Header="Exit and do not send"
-                                                      x:Name="Exit"
-                                                      ImageSource="/DocumentFlow;component/Resources/RibonImages/UnderLine.png"/>
+                                               x:Name="Exit"
+                                               ImageSource="/DocumentFlow;component/Resources/RibonImages/closeLarge.png"
+                                               Command="{Binding CloseCommand}"
+                                               CommandParameter="{Binding ElementName=This}"/>
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
 
@@ -51,6 +57,19 @@
                              Text="{Binding TextSubject}"/>
                     </StackPanel>
                 </RibbonGroup>
+                <RibbonGroup Header="Send" Width="120">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+
+                            <RibbonButton x:Name="btnSend"  
+                                          LargeImageSource="/DocumentFlow;component/Resources/RibonImages/SendMail.png" 
+                                          Height="42" 
+                                          HorizontalAlignment="Left" 
+                                          Command="{Binding SendMailCommand}"
+                                          CommandParameter="{Binding ElementName=This}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="Edition">
 
@@ -60,10 +79,26 @@
                         <StackPanel Orientation="Horizontal">
                             <ComboBox  x:Name="RibbonComboboxFonts" 
                                        Width="150" 
-                                   Margin="0,0,5,10" />
+                                       Margin="0,0,5,10" 
+                                       >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=FontsChangedCommand}"
+                                                            PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
                             <ComboBox x:Name="RibbonComboboxFontHeight" 
                                       Width="50"
-                                       Margin="0,0,5,10" />
+                                       Margin="0,0,5,10" 
+                                      >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=FontHeightChangedCommand}"
+                                                            PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <RibbonButton x:Name="SettingsBold" 
