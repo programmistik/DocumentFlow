@@ -49,7 +49,52 @@ namespace DocumentFlow.ViewModels
         public RelayCommand SendMailCommand => sendMailCommand ?? (sendMailCommand = new RelayCommand(
                 () =>
                 {
+                    dynamic doc = Gui.webBrowser.doc;
+                    var htmlText = doc.documentElement.InnerHtml;
+
+                    //var win = param as ComposeNewMailPageView;
+                    //var be = win.tbPostHeader.GetBindingExpression(TextBox.TextProperty);
+                    //be.UpdateSource();
+                    //win.CollItem.HTMLtext = htmlText;
+                    //bool exsist = NewsList.Where(itm => itm == win.CollItem).Any();
+                    //if (!exsist)
+                    //    NewsList.Add(win.CollItem);
+
+                    //win.Close();
+                    //InputHeader = "Type header here";
+                    //SaveToDB();
+
                     var msg = new Message();
+                    msg.Payload = new MessagePart();
+
+                    msg.Payload.Headers = new List<MessagePartHeader>();
+                    
+                    msg.Payload.Headers.Add(new MessagePartHeader
+                    {
+                        Name = "Date",
+                        Value = DateTime.Now.ToString()
+                    });
+                    msg.Payload.Headers.Add(new MessagePartHeader {
+                        Name = "From",
+                        Value = "3565733@gmail.com"
+                    });
+                    msg.Payload.Headers.Add(new MessagePartHeader
+                    {
+                        Name = "To",
+                        Value = TextTo
+                    });
+                    msg.Payload.Headers.Add(new MessagePartHeader
+                    {
+                        Name = "Subject",
+                        Value = TextSubject
+                    });
+                    var msgPart = new MessagePart();
+                    msgPart.MimeType = "text/html";
+                    msgPart.Body = new MessagePartBody();
+                    msgPart.Body.Data = htmlText;
+
+                    msg.Payload.Parts = new List<MessagePart>();
+                    msg.Payload.Parts.Add(msgPart);
                     // send message
                     navigationService.Navigate<GMailPageView>();
                 }
