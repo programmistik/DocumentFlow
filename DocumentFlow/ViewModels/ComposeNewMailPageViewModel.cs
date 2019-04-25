@@ -5,12 +5,14 @@ using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
+using Google.Apis.Gmail.v1;
 using Google.Apis.Gmail.v1.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DocumentFlow.ViewModels
@@ -20,6 +22,8 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
+        private readonly IGoogleService googleService;
+        private GmailService GMailService;
 
         private string textTo;
         public string TextTo { get => textTo; set => Set(ref textTo, value); }
@@ -27,13 +31,20 @@ namespace DocumentFlow.ViewModels
         public string TextSubject { get => textSubject; set => Set(ref textSubject, value); }
 
 
-        public ComposeNewMailPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
+        public ComposeNewMailPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db, IGoogleService googleService)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
+            this.googleService = googleService;
 
-          //  Messenger.Default.Register<NotificationMessage<Message>>(this, OnHitIt);
+            TextTo = "programmistik@yahoo.com";
+            TextSubject = "Test";
+
+            Messenger.Default.Register<NotificationMessage<GmailService>>(this, goo =>
+            {
+                GMailService = goo.Content;
+            });
 
         }
 
@@ -52,17 +63,6 @@ namespace DocumentFlow.ViewModels
                     dynamic doc = Gui.webBrowser.doc;
                     var htmlText = doc.documentElement.InnerHtml;
 
-                    //var win = param as ComposeNewMailPageView;
-                    //var be = win.tbPostHeader.GetBindingExpression(TextBox.TextProperty);
-                    //be.UpdateSource();
-                    //win.CollItem.HTMLtext = htmlText;
-                    //bool exsist = NewsList.Where(itm => itm == win.CollItem).Any();
-                    //if (!exsist)
-                    //    NewsList.Add(win.CollItem);
-
-                    //win.Close();
-                    //InputHeader = "Type header here";
-                    //SaveToDB();
 
                     var msg = new Message();
                     msg.Payload = new MessagePart();
@@ -74,7 +74,8 @@ namespace DocumentFlow.ViewModels
                         Name = "Date",
                         Value = DateTime.Now.ToString()
                     });
-                    msg.Payload.Headers.Add(new MessagePartHeader {
+                    msg.Payload.Headers.Add(new MessagePartHeader
+                    {
                         Name = "From",
                         Value = "3565733@gmail.com"
                     });
@@ -91,11 +92,24 @@ namespace DocumentFlow.ViewModels
                     var msgPart = new MessagePart();
                     msgPart.MimeType = "text/html";
                     msgPart.Body = new MessagePartBody();
-                    msgPart.Body.Data = htmlText;
+
+                    msgPart.Body.Data = googleService.Base64UrlEncode(Encoding.ASCII.GetBytes(htmlText));
 
                     msg.Payload.Parts = new List<MessagePart>();
                     msg.Payload.Parts.Add(msgPart);
+
+                    msg.Raw = googleService.CreateRawForNewMessage(TextTo,TextSubject,htmlText);
+
                     // send message
+                    try
+                    {
+                        GMailService.Users.Messages.Send(msg, "me").Execute();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("An error occurred: " + e.Message);
+                    }
+
                     navigationService.Navigate<GMailPageView>();
                 }
                  ));
@@ -233,6 +247,14 @@ namespace DocumentFlow.ViewModels
                 }
                  ));
 
+        //private RelayCommand<SelectionChangedEventArgs> fontsChangedCommand;
+        //public RelayCommand<SelectionChangedEventArgs> FontsChangedCommand => fontsChangedCommand ?? (fontsChangedCommand = new RelayCommand<SelectionChangedEventArgs>(
+        //        async param =>
+        //        {
+        //            //Gui.RibbonComboboxFonts((ComboBox)param.Source);
+        //            var ok = await Gui.RibbonComboboxFontsAsync((ComboBox)param.Source);
+        //        }
+        //    ));
         private RelayCommand<SelectionChangedEventArgs> fontsChangedCommand;
         public RelayCommand<SelectionChangedEventArgs> FontsChangedCommand => fontsChangedCommand ?? (fontsChangedCommand = new RelayCommand<SelectionChangedEventArgs>(
                 param =>

@@ -1,7 +1,9 @@
-﻿using Google.Apis.Auth.OAuth2;
+﻿using DocumentFlow.Models;
+using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Gmail.v1;
+using Google.Apis.Gmail.v1.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System;
@@ -103,7 +105,10 @@ namespace DocumentFlow.Services
 
         public GmailService getGMailService()
         {
-            string[] Scopes = { GmailService.Scope.GmailReadonly };
+            string[] Scopes = {
+                GmailService.Scope.GmailReadonly,
+                GmailService.Scope.GmailSend
+            };
             string ApplicationName = "Gmail API .NET Quickstart";
 
             UserCredential credential;
@@ -130,6 +135,94 @@ namespace DocumentFlow.Services
             });
 
             return service;
+        }
+
+        public Task<GoogleMessage> getMessageAsync(Message email, GmailService GMailService)
+        {
+            return Task.Run(() =>
+            {
+                var newMail = new GoogleMessage();
+                var emailInfoRequest = GMailService.Users.Messages.Get("me", email.Id);
+                emailInfoRequest.Format = UsersResource.MessagesResource.GetRequest.FormatEnum.Full;
+                var emailInfoResponse = emailInfoRequest.Execute();
+
+                if (emailInfoResponse != null)
+                {
+
+                    newMail.FullMessage = emailInfoResponse;
+
+                    var from = "";
+                    var date = "";
+                    var subject = "";
+
+                    foreach (var mParts in emailInfoResponse.Payload.Headers)
+                    {
+                        if (mParts.Name == "Date")
+                        {
+                            date = mParts.Value;
+                            newMail.Date = date;
+                        }
+                        else if (mParts.Name == "From")
+                        {
+                            from = mParts.Value;
+                            newMail.From = from;
+                        }
+                        else if (mParts.Name == "Subject")
+                        {
+                            subject = mParts.Value;
+                            newMail.Subject = subject;
+                        }
+
+                        if (date != "" && from != "")
+                        {
+                            if (emailInfoResponse.Payload.Parts != null)
+                            {
+                                foreach (MessagePart p in emailInfoResponse.Payload.Parts)
+                                {
+                                    if (p.MimeType == "text/html")
+                                    {
+                                        byte[] data = FromBase64ForUrlString(p.Body.Data);
+                                        string decodedString = Encoding.UTF8.GetString(data);
+                                        newMail.Html = decodedString;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+                return newMail;
+            });
+        }
+
+        public byte[] FromBase64ForUrlString(string base64ForUrlInput)
+        {
+            int padChars = (base64ForUrlInput.Length % 4) == 0 ? 0 : (4 - (base64ForUrlInput.Length % 4));
+            StringBuilder result = new StringBuilder(base64ForUrlInput, base64ForUrlInput.Length + padChars);
+            result.Append(string.Empty.PadRight(padChars, '='));
+            result.Replace('-', '+');
+            result.Replace('_', '/');
+            return Convert.FromBase64String(result.ToString());
+        }
+
+        public string Base64UrlEncode(byte[] input)
+        {
+            return Convert.ToBase64String(input)
+              .Replace('+', '-')
+              .Replace('/', '_')
+              .Replace("=", "");
+        }
+
+        public string CreateRawForNewMessage(string To, string Subject, string Text)
+        {
+            string plainText = $"To: {To}\r\n" +
+                       $"Subject: {Subject}\r\n" +
+                       "Content-Type: text/html; charset=utf-8\r\n\r\n" +
+                       Text;
+
+            return Base64UrlEncode(Encoding.UTF8.GetBytes(plainText));
+            
         }
     }
 }

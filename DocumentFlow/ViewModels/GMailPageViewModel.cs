@@ -37,76 +37,6 @@ namespace DocumentFlow.ViewModels
            
         }
 
-        private byte[] FromBase64ForUrlString(string base64ForUrlInput)
-        {
-            int padChars = (base64ForUrlInput.Length % 4) == 0 ? 0 : (4 - (base64ForUrlInput.Length % 4));
-            StringBuilder result = new StringBuilder(base64ForUrlInput, base64ForUrlInput.Length + padChars);
-            result.Append(string.Empty.PadRight(padChars, '='));
-            result.Replace('-', '+');
-            result.Replace('_', '/');
-            return Convert.FromBase64String(result.ToString());
-        }
-
-        private Task<GoogleMessage> getMessageAsync(Message email)
-        {
-            return Task.Run(() =>
-            {
-                var newMail = new GoogleMessage();
-                var emailInfoRequest = GMailService.Users.Messages.Get("me", email.Id);
-                emailInfoRequest.Format = UsersResource.MessagesResource.GetRequest.FormatEnum.Full;
-                var emailInfoResponse = emailInfoRequest.Execute();
-
-                if (emailInfoResponse != null)
-                {
-                    //InboxList.Add(emailInfoResponse);
-
-                    newMail.FullMessage = emailInfoResponse;
-
-                    var from = "";
-                    var date = "";
-                    var subject = "";
-
-                    //loop through the headers to get from,date,subject, body 
-                    foreach (var mParts in emailInfoResponse.Payload.Headers)
-                    {
-                        if (mParts.Name == "Date")
-                        {
-                            date = mParts.Value;
-                            newMail.Date = date;
-                        }
-                        else if (mParts.Name == "From")
-                        {
-                            from = mParts.Value;
-                            newMail.From = from;
-                        }
-                        else if (mParts.Name == "Subject")
-                        {
-                            subject = mParts.Value;
-                            newMail.Subject = subject;
-                        }
-
-                        if (date != "" && from != "")
-                        {
-                            if (emailInfoResponse.Payload.Parts != null)
-                            {
-                                foreach (MessagePart p in emailInfoResponse.Payload.Parts)
-                                {
-                                    if (p.MimeType == "text/html")
-                                    {
-                                        byte[] data = FromBase64ForUrlString(p.Body.Data);
-                                        string decodedString = Encoding.UTF8.GetString(data);
-                                        newMail.Html = decodedString;
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-
-                }
-                return newMail;
-            });
-        }
 
         private RelayCommand receiveMailCommand;
         public RelayCommand ReceiveMailCommand => receiveMailCommand ?? (receiveMailCommand = new RelayCommand(
@@ -129,7 +59,7 @@ namespace DocumentFlow.ViewModels
                         //loop through each email and get what fields you want...
                         foreach (var email in emailListResponse.Messages)
                         {
-                            var newMail = await getMessageAsync(email);
+                            var newMail = await googleService.getMessageAsync(email, GMailService);
                             InboxList.Add(newMail);
 
                         }
@@ -137,6 +67,7 @@ namespace DocumentFlow.ViewModels
                     }
                 }
                  ));
+
         private RelayCommand<GoogleMessage> readMailCommand;
         public RelayCommand<GoogleMessage> ReadMailCommand => readMailCommand ?? (readMailCommand = new RelayCommand<GoogleMessage>(
                 param =>
@@ -149,8 +80,8 @@ namespace DocumentFlow.ViewModels
         public RelayCommand ComposeCommand => composeCommand ?? (composeCommand = new RelayCommand(
                 () =>
                 {
-                    var mess = new Message();
-                    Messenger.Default.Send(new NotificationMessage<Message>(mess, "NewMail"));
+                    //var mess = new Message();
+                    Messenger.Default.Send(new NotificationMessage<GmailService>(GMailService, "GService"));
                     navigationService.Navigate<ComposeNewMailPageView>();
                 }
                  ));

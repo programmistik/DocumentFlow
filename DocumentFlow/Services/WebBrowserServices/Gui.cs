@@ -99,6 +99,19 @@ namespace DocumentFlow.Services.WebBrowserServices
             }
         }
 
+        //public static Task<bool> RibbonComboboxFontsAsync(ComboBox RibbonComboboxFonts)
+        //{
+        //    return Task.Run(() =>
+        //    {
+        //        var doc = webBrowser.webBrowser.Document as HTMLDocument;
+        //        if (doc != null)
+        //        {
+        //            return doc.execCommand("FontName", false, RibbonComboboxFonts.SelectedItem.ToString());
+        //        }
+        //        return false;
+        //    });
+        //}
+
         public static void RibbonComboboxFontHeight(ComboBox RibbonComboboxFontHeight)
         {
             IHTMLDocument2 doc = webBrowser.webBrowser.Document as IHTMLDocument2;
