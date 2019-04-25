@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
+             xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="UserControl_Loaded">
     <Grid Background="#FFE1E1E1">
         <Grid.RowDefinitions>
             <RowDefinition Height="64"></RowDefinition>
@@ -119,108 +121,146 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
             <Viewbox Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left">
-                <Label
-               FontSize="25"
-               Content="{x:Static p:Resources.ChangePicture}" HorizontalAlignment="Left"/>
+                <ComboBox Margin="10,5,0,0"  
+                      FontSize="15"
+                    Width="281"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding VideoDevices}"
+                    SelectedItem="{Binding CurrentDevice}"/>
             </Viewbox>
-            <Viewbox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">
-                <TextBox 
-                    FontSize="25"
-                    VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch"
-                    Background="White" BorderBrush="#89FFFFFF" Width="450" Height="50">
-                </TextBox>
-            </Viewbox>
-
-            <Viewbox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
-                <Button Content="{x:Static p:Resources.File}"></Button>
-            </Viewbox>
-
-            <Viewbox Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left">
-                <Label
-               FontSize="25"
-               Content="{x:Static p:Resources.Mobile}" HorizontalAlignment="Left"/>
-            </Viewbox>
-            <Viewbox Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left">
-                <TextBox 
-                    FontSize="25"
-                    VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch"
-                    Background="White" BorderBrush="#89FFFFFF" Width="450" Height="50">
-                </TextBox>
-            </Viewbox>
-
-            <Viewbox Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left">
-                <Label
-               FontSize="25"
-               Content="{x:Static p:Resources.Phone}" HorizontalAlignment="Left"/>
-            </Viewbox>
-            <Viewbox Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left">
-                <TextBox 
-                    FontSize="25"
-                    VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch"
-                    Background="White" BorderBrush="#89FFFFFF" Width="450" Height="50">
-                </TextBox>
-            </Viewbox>
-
-            <Viewbox Grid.Column="0" Grid.Row="6" HorizontalAlignment="Left">
-                <Label
-               FontSize="25"
-               Content="{x:Static p:Resources.Email}" HorizontalAlignment="Left"/>
-            </Viewbox>
+            <Border 
+                Margin="22,5,47,0"
+                BorderBrush="Black"
+                BorderThickness="3" Grid.Row="1" Grid.RowSpan="6">
+                <Image Source="{Binding Image}" Margin="7"/>
+            </Border>
             <Viewbox Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left">
-                <TextBox 
-                    FontSize="25"
-                    VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch"
-                    Background="White" BorderBrush="#89FFFFFF" Width="450" Height="50">
-                </TextBox>
-            </Viewbox>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Snap image"
+                    Margin="10,5,0,0"
+                    FontSize="15"
+                    Command="{Binding SnapCommand}"/>
 
+                    <Button Content="or upload from file"
+                    Margin="10,5,0,0"
+                    FontSize="15"
+                    Command="{Binding UploadFileCommand}"/>
+                </StackPanel>
+            </Viewbox>
             <Viewbox Grid.Column="0" Grid.Row="8" HorizontalAlignment="Left">
                 <Label
-               FontSize="25"
-               Content="{x:Static p:Resources.CoEmail}" HorizontalAlignment="Left"/>
+               FontSize="15"
+               Content="Google account:" HorizontalAlignment="Left"/>
             </Viewbox>
             <Viewbox Grid.Column="0" Grid.Row="9" HorizontalAlignment="Left">
                 <TextBox 
+                    Text="{Binding GoogleAccount}"
+                    IsReadOnly="True"
                     FontSize="25"
                     VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch"
-                    Background="White" BorderBrush="#89FFFFFF" Width="450" Height="50">
+                    Background="#FFFAFA" BorderBrush="#89FFFFFF" Width="450" Height="50">
                 </TextBox>
             </Viewbox>
 
-            <Viewbox Grid.Column="0" Grid.Row="10" HorizontalAlignment="Left">
-                <Label
-               FontSize="25"
+
+
+            <Viewbox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Label
+               FontSize="25" 
                Content="{x:Static p:Resources.Language}" HorizontalAlignment="Left"/>
-            </Viewbox>
-            <Viewbox Grid.Column="0" Grid.Row="11" HorizontalAlignment="Left">
-                <ComboBox Width="450" Height="50" HorizontalAlignment="Left" Margin="2" Background="white">
-                    
-                </ComboBox>
+
+                    <ComboBox Width="250" 
+                              Height="50" 
+                              HorizontalAlignment="Right" 
+                              Margin="2,5" 
+                              Background="white">
+
+                    </ComboBox>
+                </StackPanel>
             </Viewbox>
 
-            <Viewbox Grid.Column="0" Grid.Row="12" HorizontalAlignment="Left">
-                <Label
+            <Viewbox Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Label
                FontSize="25"
                Content="{x:Static p:Resources.ColorScheme}" HorizontalAlignment="Left"/>
-            </Viewbox>
-            <Viewbox Grid.Column="0" Grid.Row="13" HorizontalAlignment="Left">
-                <ComboBox Width="450" Height="50" HorizontalAlignment="Left" Margin="2" Background="White">
 
-                </ComboBox>
+                    <ComboBox Width="250" Height="50" HorizontalAlignment="Right" 
+                          Margin="2,5" Background="White">
+
+                    </ComboBox>
+                </StackPanel>
             </Viewbox>
+
+            <Viewbox  Grid.Column="0" Grid.Row="10"  HorizontalAlignment="Left">
+                <Label Margin="0" 
+               Content="Password:"
+               FontSize="15"/>
+            </Viewbox>
+            <Viewbox  Grid.Column="0" Grid.Row="11"  HorizontalAlignment="Left">
+                <PasswordBox Name="pBox" 
+                         Margin="2,2,0,0"
+                          Width="450" Height="50"
+                             Background="White"
+                         FontSize="20">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="LostFocus">
+                            <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}" CommandParameter="{Binding ElementName=This}"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </PasswordBox>
+            </Viewbox>
+            <Viewbox  Grid.Column="0" Grid.Row="12"  HorizontalAlignment="Left">
+                <Label Margin="0" 
+               Content="Confirm password:"
+               FontSize="15"/>
+            </Viewbox>
+            <Viewbox  Grid.Column="0" Grid.Row="13"  HorizontalAlignment="Left">
+                <PasswordBox Name="pBox2"
+                         Margin="2,2,0,0"
+                          Width="450" Height="50"
+                             Background="White"
+                         FontSize="20">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="LostFocus">
+                            <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}" CommandParameter="{Binding ElementName=This}"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </PasswordBox>
+            </Viewbox>
+            <Viewbox  Grid.Column="0" Grid.Row="14"  HorizontalAlignment="Left">
+                <Label x:Name="PassCheckError"                       
+                       Grid.Row="3" 
+                       Margin="0"                       
+                       Foreground="Red"
+                       Content="{Binding PassCheckError}">
+
+                </Label>
+            </Viewbox>
+
+
+
 
 
             <Viewbox  Grid.Column="1" Grid.Row="14"  HorizontalAlignment="Right">
                 <Button
-                Content="{x:Static p:Resources.Save}" Height="Auto" Margin="0,0,0,5"></Button>
+                Content="{x:Static p:Resources.Save}" 
+                    Height="Auto" 
+                    Margin="0,0,0,5"
+                    Command="{Binding OkCommand}"></Button>
             </Viewbox>
 
 
             <Viewbox  Grid.Column="2" Grid.Row="14"  HorizontalAlignment="Center">
                 <Button
-                Content="{x:Static p:Resources.Cancel}" Height="Auto" Margin="0,0,0,5"></Button>
+                Content="{x:Static p:Resources.Cancel}" 
+                    Height="Auto" 
+                    Margin="0,0,0,5"
+                    Command="{Binding CancelCommand}"></Button>
             </Viewbox>
         </Grid>
 
