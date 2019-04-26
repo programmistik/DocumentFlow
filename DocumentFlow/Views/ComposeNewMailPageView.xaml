@@ -116,9 +116,9 @@
                             <RibbonButton x:Name="SettingsAddLink" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/link.png" 
                                           Command="{Binding AddLinkCommand}"/>
-                            <RibbonButton x:Name="SettingsAddImage" 
+                            <!--<RibbonButton x:Name="SettingsAddImage" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/image.png" 
-                                          Command="{Binding AddImageCommand}"/>
+                                          Command="{Binding AddImageCommand}"/>-->
                             <RibbonButton x:Name="SettingsLeftAlign" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/LeftAlign.png" 
                                           Command="{Binding LeftAlignCommand}"/>
@@ -161,7 +161,7 @@
                         </StackPanel>
                     </StackPanel>
                 </RibbonGroup>
-                <RibbonGroup Header="Save" Width="120">
+                <!--<RibbonGroup Header="Save" Width="120">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
 
@@ -173,7 +173,7 @@
                                           CommandParameter="{Binding ElementName=This}"/>
                         </StackPanel>
                     </StackPanel>
-                </RibbonGroup>
+                </RibbonGroup>-->
             </RibbonTab>
 
         </Ribbon>

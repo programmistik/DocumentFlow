@@ -7,6 +7,7 @@
              xmlns:p="clr-namespace:DocumentFlow.Properties"
              xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              mc:Ignorable="d" 
+             x:Name="This"
              d:DesignHeight="450" d:DesignWidth="800"
              Loaded="UserControl_Loaded">
     <Grid Background="#FFE1E1E1">
@@ -251,7 +252,9 @@
                 Content="{x:Static p:Resources.Save}" 
                     Height="Auto" 
                     Margin="0,0,0,5"
-                    Command="{Binding OkCommand}"></Button>
+                    Command="{Binding OkCommand}"
+                    CommandParameter="{Binding ElementName=This}">                    
+                </Button>
             </Viewbox>
 
 

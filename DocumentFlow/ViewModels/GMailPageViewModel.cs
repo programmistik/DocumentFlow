@@ -9,9 +9,11 @@ using Google.Apis.Gmail.v1.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace DocumentFlow.ViewModels
 {
@@ -26,6 +28,29 @@ namespace DocumentFlow.ViewModels
         private ObservableCollection<GoogleMessage> inboxList;
         public ObservableCollection<GoogleMessage> InboxList { get => inboxList; set => Set(ref inboxList, value); }
 
+       
+        private string filter;
+        public string MailFilter
+        {
+            get { return filter; }
+            set
+            {
+                filter = value;
+                RaisePropertyChanged("FilteredInboxItems");
+            }
+        }
+        public ObservableCollection<GoogleMessage> FilteredInboxItems
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(MailFilter))
+                    return InboxList;
+                var col = InboxList.Where(msg => msg.Subject.ToLower().Contains(MailFilter.ToLower())).ToList();
+                return new ObservableCollection<GoogleMessage>(col);
+            }
+        }
+
+
         public GMailPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db, IGoogleService googleService)
         {
             this.navigationService = navigationService;
@@ -34,9 +59,10 @@ namespace DocumentFlow.ViewModels
             this.googleService = googleService;
             GMailService = googleService.getGMailService();
             InboxList = new ObservableCollection<GoogleMessage>();
+
            
         }
-
+       
 
         private RelayCommand receiveMailCommand;
         public RelayCommand ReceiveMailCommand => receiveMailCommand ?? (receiveMailCommand = new RelayCommand(

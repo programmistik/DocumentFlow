@@ -1,4 +1,5 @@
 ﻿using DocumentFlow.CustomUserControls;
+using DocumentFlow.ModalWindows;
 using mshtml;
 using System;
 using System.Collections.Generic;
@@ -66,10 +67,10 @@ namespace DocumentFlow.Services.WebBrowserServices
 
         public static void SettingsAddLink()
         {
-            //using (LinkWin link = new LinkWin(webBrowser.doc))
-            //{
-            //    link.ShowDialog();
-            //}
+            using (LinkWin link = new LinkWin(webBrowser.doc))
+            {
+                link.ShowDialog();
+            }
         }
 
         public static void SettingsAddImage()

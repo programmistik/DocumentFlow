@@ -77,7 +77,7 @@ namespace DocumentFlow.ViewModels
                     msg.Payload.Headers.Add(new MessagePartHeader
                     {
                         Name = "From",
-                        Value = "3565733@gmail.com"
+                        Value = "me"
                     });
                     msg.Payload.Headers.Add(new MessagePartHeader
                     {
@@ -152,7 +152,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand AddLinkCommand => addLinkCommand ?? (addLinkCommand = new RelayCommand(
                 () =>
                 {
-                    //Gui.SettingsAddLink();
+                    Gui.SettingsAddLink();
                 }
                  ));
 
