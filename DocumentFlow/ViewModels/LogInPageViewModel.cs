@@ -65,6 +65,11 @@ namespace DocumentFlow.ViewModels
             get => logInCommand ?? (logInCommand = new RelayCommand<object>(
                 param =>
                 {
+                    if (LoginUserName != null && LoginUserName.ToLower().Contains("admin"))
+                    {
+                        navigationService.Navigate<AdminPanelPageView>();
+                    }
+                    else
                     navigationService.Navigate<MainDesktopPageView>();
                     //if (CheckColor == "Red")
                     //{

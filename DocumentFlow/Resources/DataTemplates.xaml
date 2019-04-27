@@ -41,5 +41,8 @@
     <DataTemplate DataType="{x:Type vm:ComposeNewMailPageViewModel}">
         <v:ComposeNewMailPageView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AdminPanelPageViewModel}">
+        <v:AdminPanelPageView/>
+    </DataTemplate>
 
 </ResourceDictionary>

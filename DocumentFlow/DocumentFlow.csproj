@@ -224,6 +224,7 @@
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\AddEditEventPageViewModel.cs" />
+    <Compile Include="ViewModels\AdminPanelPageViewModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\CalendarPageViewModel.cs" />
     <Compile Include="ViewModels\ComposeNewMailPageViewModel.cs" />
@@ -238,6 +239,9 @@
     <Compile Include="ViewModels\ReadMailPageViewModel.cs" />
     <Compile Include="Views\AddEditEventPageView.xaml.cs">
       <DependentUpon>AddEditEventPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminPanelPageView.xaml.cs">
+      <DependentUpon>AdminPanelPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AppWindow.xaml.cs">
       <DependentUpon>AppWindow.xaml</DependentUpon>
@@ -334,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddEditEventPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminPanelPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

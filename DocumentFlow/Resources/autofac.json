@@ -14,6 +14,7 @@
     { "type": "DocumentFlow.ViewModels.SettingsPageViewModel" },
     { "type": "DocumentFlow.ViewModels.ContactsPageViewModel" },
     { "type": "DocumentFlow.ViewModels.ComposeNewMailPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.AdminPanelPageViewModel" },
 
     {
       "type": "DocumentFlow.Models.AppDbContext",

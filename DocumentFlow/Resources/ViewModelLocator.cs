@@ -31,6 +31,7 @@ namespace DocumentFlow
         private SettingsPageViewModel SettingsPageViewModel;
         private ContactsPageViewModel ContactsPageViewModel;
         private ComposeNewMailPageViewModel ComposeNewMailPageViewModel;
+        private AdminPanelPageViewModel AdminPanelPageViewModel;
 
 
         private INavigationService navigationService;
@@ -63,6 +64,7 @@ namespace DocumentFlow
                 SettingsPageViewModel = Container.Resolve<SettingsPageViewModel>();
                 ContactsPageViewModel = Container.Resolve<ContactsPageViewModel>();
                 ComposeNewMailPageViewModel = Container.Resolve<ComposeNewMailPageViewModel>();
+                AdminPanelPageViewModel = Container.Resolve<AdminPanelPageViewModel>();
 
                 navigationService.Register<LogInPageView>(LogInViewModel);
                 navigationService.Register<MainDesktopPageView>(MainDesktopPageViewModel);
@@ -76,6 +78,7 @@ namespace DocumentFlow
                 navigationService.Register<SettingsPageView>(SettingsPageViewModel);
                 navigationService.Register<ContactsPageView>(ContactsPageViewModel);
                 navigationService.Register<ComposeNewMailPageView>(ComposeNewMailPageViewModel);
+                navigationService.Register<AdminPanelPageView>(AdminPanelPageViewModel);
 
 
                 navigationService.Navigate<LogInPageView>();
