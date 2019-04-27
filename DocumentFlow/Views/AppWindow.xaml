@@ -9,7 +9,7 @@
         Title="{Binding ApplicationTitle, UpdateSourceTrigger=PropertyChanged}"
         Height="450" Width="800"
         MinWidth="750" MinHeight="450"
-        MaxWidth="1500" MaxHeight="900">
+        >
 
     <Window.Resources>
         <ResourceDictionary Source="../Resources/DataTemplates.xaml"/>

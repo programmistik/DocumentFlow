@@ -28,7 +28,7 @@
             <ColumnDefinition Width="65"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <!--Top Menu-->
+        <!--#region TopMenu-->
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Orientation="Horizontal" Background="#FF353436">
             <Button
                 Command="{Binding GMain}" 
@@ -54,9 +54,9 @@
                 <Image Source="/DocumentFlow;component/Resources/Images/Exit.png"/>
             </Button>
         </Grid>
+        <!--#endregion-->
 
-
-        <!--Aside panel-->
+        <!--#region Aside Panel-->
         <StackPanel Grid.Column="0"
                     Grid.Row="1" Grid.RowSpan="6"
                     Background="White">
@@ -64,36 +64,88 @@
                 Command="{Binding GMail}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Mail.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button 
                 Command="{Binding GCalendar}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Calendar.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button 
                 Command="{Binding GSchedule}"
                 Height="50" Background="White" BorderBrush="Black" Padding="5">
                 <Image Source="/DocumentFlow;component/Resources/Images/Tasks.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button 
                 Command="{Binding GNews}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/News.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button
                 Command="{Binding GContacts}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button 
                 Command="{Binding GDocuments}"
                 Height="50" Background="White" BorderBrush="Black" Padding="5">
                 <Image Source="/DocumentFlow;component/Resources/Images/Documents.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
 
-
         </StackPanel>
-            <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Schedule page">  </Button>
+        <!--#endregion-->
+
+        <!--#region Content-->
+        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Schedule page">  </Button>
+
+        <!--#endregion-->
     </Grid>
 </UserControl>
     
