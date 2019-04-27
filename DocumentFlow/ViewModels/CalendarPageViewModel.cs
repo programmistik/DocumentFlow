@@ -19,6 +19,7 @@ using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using DocumentFlow.Views;
 using GalaSoft.MvvmLight.Messaging;
+using System.Windows.Input;
 
 namespace DocumentFlow.ViewModels
 {
@@ -45,7 +46,18 @@ namespace DocumentFlow.ViewModels
             this.db = db;
             this.googleService = googleService;
             GoogleCalendarService = googleService.GetQuickstartService();
-            CurrentDate = DateTime.Now;
+            CurrentDate = DateTime.Today;
+            SelectedDate = (DateTime?)CurrentDate;
+            var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+            EventList = new ObservableCollection<Event>(events.Items);
+        }
+
+        private RelayCommand loadedCommand;
+        public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(UserControlOpened));
+        private void UserControlOpened()
+        {
+            GoogleCalendarService = googleService.GetQuickstartService();
+            CurrentDate = DateTime.Today;
             SelectedDate = (DateTime?)CurrentDate;
             var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
             EventList = new ObservableCollection<Event>(events.Items);

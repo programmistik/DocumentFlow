@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DocumentFlow.Services;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.CommandWpf;
+using System.Windows;
 
 namespace DocumentFlow.ViewModels
 {
@@ -47,7 +48,5 @@ namespace DocumentFlow.ViewModels
                 }
             ));
         }
-
-
     }
 }

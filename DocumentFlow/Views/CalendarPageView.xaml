@@ -10,6 +10,13 @@
              mc:Ignorable="d" 
              Name="This"
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <UserControl.Resources>
         <DataTemplate x:Key="ListBoxEventItemTemplate">
             <StackPanel>
