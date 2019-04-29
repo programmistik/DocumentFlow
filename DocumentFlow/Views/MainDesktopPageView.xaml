@@ -20,18 +20,22 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="105*"></ColumnDefinition>
+            <ColumnDefinition Width="65"></ColumnDefinition>
+            <ColumnDefinition Width="65"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <!--Верхнее меню-->
+        <!--#region TopMenu-->
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Orientation="Horizontal" Background="#FF353436">
-            <Image Source="../Resources/Images/user.png" />
+            <Button
+                Command="{Binding GMain}" 
+                Background="Transparent" BorderThickness="0" Height="64" Width="64" Padding="0">
+                <Image Margin="0" Source="../Resources/Images/user.png" />
+            </Button>
             <Label FontSize="20" Content="Имя Фамилия Отчество" Foreground="White" VerticalContentAlignment="Center"></Label>
         </StackPanel>
 
@@ -40,87 +44,153 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Background="Transparent" Height="Auto">
+            <Button
+                Command="{Binding GSettings}"
+                Grid.Column="0" Background="Transparent" Height="Auto" BorderThickness="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Settings.png"/>
             </Button>
-            <Button Grid.Column="1" Background="Transparent" Height="Auto">
+            <Button
+                Command="{Binding GExit}"
+                Grid.Column="1" Background="Transparent" Height="Auto" BorderThickness="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Exit.png"/>
             </Button>
         </Grid>
-            
+        <!--#endregion-->
         
-        <!--Боковая панель-->
+        <!--#region Aside Panel-->
         <StackPanel Grid.Column="0"
                     Grid.Row="1" Grid.RowSpan="6"
                     Background="White">
-            <Button Height="50" Background="White" BorderBrush="Black" Padding="0">
+            <Button
+                Command="{Binding GMail}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Mail.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
-            <Button Height="50" Background="White" BorderBrush="Black" Padding="0">
+            <Button 
+                Command="{Binding GCalendar}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Calendar.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
-            <Button Height="50" Background="White" BorderBrush="Black" Padding="5">
+            <Button 
+                Command="{Binding GSchedule}"
+                Height="50" Background="White" BorderBrush="Black" Padding="5">
                 <Image Source="/DocumentFlow;component/Resources/Images/Tasks.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
-            <Button Height="50" Background="White" BorderBrush="Black" Padding="0">
+            <Button 
+                Command="{Binding GNews}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/News.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
-            <Button Height="50" Background="White" BorderBrush="Black" Padding="0">
-                <Image Source="/DocumentFlow;component/Resources/Images/Calendar.png"></Image>
+            <Button
+                Command="{Binding GContacts}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
-            <Button Height="50" Background="White" BorderBrush="Black" Padding="5">
+            <Button 
+                Command="{Binding GDocuments}"
+                Height="50" Background="White" BorderBrush="Black" Padding="5">
                 <Image Source="/DocumentFlow;component/Resources/Images/Documents.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
 
         </StackPanel>
+        <!--#endregion-->
         
-        <!--Контент-->
-        
+        <!--#region Content-->
         <Button Grid.Column="1" Grid.ColumnSpan="2"
                 Grid.Row="1" Grid.RowSpan="2"
                 Command="{Binding GCalendar}" 
-                Content="Open Calendar"
+                Content="{x:Static p:Resources.OpenCalendar}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"></Button>
+                HorizontalAlignment="Stretch" Background="#FF673AB7">
+        </Button>
 
         <Button Grid.Column="3" Grid.ColumnSpan="2"
                 Grid.Row="1" Grid.RowSpan="2"
                 Command="{Binding GMail}" 
-                Content="Mail"
+                Content="{x:Static p:Resources.Mail}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"></Button>
+                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
 
         <Button Grid.Column="5" Grid.ColumnSpan="3"
                 Grid.Row="1" Grid.RowSpan="2"
-                Command="" 
-                Content="Tasks"
+                Command="{Binding GSchedule}" 
+                Content="{x:Static p:Resources.Tasks}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"></Button>
+                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
 
         <Button Grid.Column="1" Grid.ColumnSpan="3"
                 Grid.Row="3" Grid.RowSpan="2"
-                Command="" 
-                Content="Documents"
+                Command="{Binding GDocuments}" 
+                Content="{x:Static p:Resources.Documents}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"></Button>
-        
+                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
+
         <Button Grid.Column="4" Grid.ColumnSpan="4"
                 Grid.Row="3" Grid.RowSpan="2"
-                Command="" 
-                Content="News"
+                Command="{Binding GNews}" 
+                Content="{x:Static p:Resources.News}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"></Button>
-
+                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
+        <!--#endregion-->
+    
     </Grid>
 
 </UserControl>

@@ -21,7 +21,12 @@ namespace DocumentFlow.ViewModels
         private GoogleMessage myMail;
         public GoogleMessage MyMail { get => myMail; set => Set(ref myMail, value); }
 
-       
+        private string title;
+        public string Title { get => title; set => Set(ref title, value); }
+        private string from;
+        public string From { get => from; set => Set(ref from, value); }
+        private string mailDate;
+        public string MailDate { get => mailDate; set => Set(ref mailDate, value); }
 
         public ReadMailPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
@@ -32,6 +37,9 @@ namespace DocumentFlow.ViewModels
             Messenger.Default.Register<NotificationMessage<GoogleMessage>>(this, goo =>
             {
                 MyMail = goo.Content;
+                Title = "Subject: " + MyMail.Subject;
+                From = "From: " + MyMail.From;
+                MailDate = "Date: " + MyMail.Date;
             });
         }
 

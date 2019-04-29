@@ -4,11 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <Button Content="OK"
                 Command="{Binding OKCommand}"/>
+        <Label Content="{Binding Title}"
+               FontWeight="Bold"
+               FontSize="12"/>
+        <Label Content="{Binding From}"
+               FontSize="12"/>
+        <Label Content="{Binding MailDate}"
+               FontSize="12"/>
+        
         <WebBrowser Height="400" 
                     Name="myWebBrowser"
                     local:BrowserBehavior.Html="{Binding MyMail.Html}">

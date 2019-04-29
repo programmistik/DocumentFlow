@@ -19,6 +19,7 @@ using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using DocumentFlow.Views;
 using GalaSoft.MvvmLight.Messaging;
+using System.Windows.Input;
 
 namespace DocumentFlow.ViewModels
 {
@@ -45,7 +46,18 @@ namespace DocumentFlow.ViewModels
             this.db = db;
             this.googleService = googleService;
             GoogleCalendarService = googleService.GetQuickstartService();
-            CurrentDate = DateTime.Now;
+            CurrentDate = DateTime.Today;
+            SelectedDate = (DateTime?)CurrentDate;
+            var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+            EventList = new ObservableCollection<Event>(events.Items);
+        }
+
+        private RelayCommand loadedCommand;
+        public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(UserControlOpened));
+        private void UserControlOpened()
+        {
+            GoogleCalendarService = googleService.GetQuickstartService();
+            CurrentDate = DateTime.Today;
             SelectedDate = (DateTime?)CurrentDate;
             var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
             EventList = new ObservableCollection<Event>(events.Items);
@@ -98,6 +110,89 @@ namespace DocumentFlow.ViewModels
                     navigationService.Navigate<AddEditEventPageView>();
                 }
                  ));
+
+
+        //Navigation
+        //Upper Menu
+        private RelayCommand gMain;
+        public RelayCommand GMain => gMain ?? (gMain = new RelayCommand(
+                () =>
+                {
+
+                    navigationService.Navigate<MainDesktopPageView>();
+                }
+            ));
+
+        private RelayCommand gSettings;
+        public RelayCommand GSettings => gSettings ?? (gSettings = new RelayCommand(
+                () =>
+                {
+
+                    navigationService.Navigate<SettingsPageView>();
+                }
+            ));
+
+        private RelayCommand gExit;
+        public RelayCommand GExit => gExit ?? (gExit = new RelayCommand(
+                () =>
+                {
+
+                    navigationService.Navigate<LogInPageView>();
+                }
+            ));
+
+
+        //Aside
+
+        private RelayCommand gSchedule;
+        public RelayCommand GSchedule => gSchedule ?? (gSchedule = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<SchedulePageView>();
+                }
+            ));
+
+        private RelayCommand gDocuments;
+        public RelayCommand GDocuments => gDocuments ?? (gDocuments = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<DocumentsPageView>();
+                }
+            ));
+
+        private RelayCommand gNews;
+        public RelayCommand GNews => gNews ?? (gNews = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<NewsPageView>();
+                }
+            ));
+
+        private RelayCommand gCalendar;
+        public RelayCommand GCalendar => gCalendar ?? (gCalendar = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<CalendarPageView>();
+                }
+            ));
+
+        private RelayCommand gMail;
+        public RelayCommand GMail => gMail ?? (gMail = new RelayCommand(
+                () =>
+                {
+
+                    navigationService.Navigate<GMailPageView>();
+                }
+            ));
+
+        private RelayCommand gContacts;
+        public RelayCommand GContacts => gContacts ?? (gContacts = new RelayCommand(
+                () =>
+                {
+
+                    navigationService.Navigate<ContactsPageView>();
+                }
+            ));
     }
 
 

@@ -13,6 +13,21 @@
     <DataTemplate DataType="{x:Type vm:CalendarPageViewModel}">
         <v:CalendarPageView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SchedulePageViewModel}">
+        <v:SchedulePageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DocumentsPageViewModel}">
+        <v:DocumentsPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewsPageViewModel}">
+        <v:NewsPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SettingsPageViewModel}">
+        <v:SettingsPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ContactsPageViewModel}">
+        <v:ContactsPageView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:AddEditEventPageViewModel}">
         <v:AddEditEventPageView/>
     </DataTemplate>
@@ -22,6 +37,12 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:ReadMailPageViewModel}">
         <v:ReadMailPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ComposeNewMailPageViewModel}">
+        <v:ComposeNewMailPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AdminPanelPageViewModel}">
+        <v:AdminPanelPageView/>
     </DataTemplate>
 
 </ResourceDictionary>

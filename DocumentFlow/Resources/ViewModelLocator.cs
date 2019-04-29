@@ -25,6 +25,14 @@ namespace DocumentFlow
         private AddEditEventPageViewModel AddEditEventPageViewModel;
         private GMailPageViewModel GMailPageViewModel;
         private ReadMailPageViewModel ReadMailPageViewModel;
+        private SchedulePageViewModel SchedulePageViewModel;
+        private DocumentsPageViewModel DocumentsPageViewModel;
+        private NewsPageViewModel NewsPageViewModel;
+        private SettingsPageViewModel SettingsPageViewModel;
+        private ContactsPageViewModel ContactsPageViewModel;
+        private ComposeNewMailPageViewModel ComposeNewMailPageViewModel;
+        private AdminPanelPageViewModel AdminPanelPageViewModel;
+
 
         private INavigationService navigationService;
 
@@ -50,6 +58,13 @@ namespace DocumentFlow
                 AddEditEventPageViewModel = Container.Resolve<AddEditEventPageViewModel>();
                 GMailPageViewModel = Container.Resolve<GMailPageViewModel>();
                 ReadMailPageViewModel = Container.Resolve<ReadMailPageViewModel>();
+                SchedulePageViewModel = Container.Resolve<SchedulePageViewModel>();
+                DocumentsPageViewModel = Container.Resolve<DocumentsPageViewModel>();
+                NewsPageViewModel = Container.Resolve<NewsPageViewModel>();
+                SettingsPageViewModel = Container.Resolve<SettingsPageViewModel>();
+                ContactsPageViewModel = Container.Resolve<ContactsPageViewModel>();
+                ComposeNewMailPageViewModel = Container.Resolve<ComposeNewMailPageViewModel>();
+                AdminPanelPageViewModel = Container.Resolve<AdminPanelPageViewModel>();
 
                 navigationService.Register<LogInPageView>(LogInViewModel);
                 navigationService.Register<MainDesktopPageView>(MainDesktopPageViewModel);
@@ -57,6 +72,14 @@ namespace DocumentFlow
                 navigationService.Register<AddEditEventPageView>(AddEditEventPageViewModel);
                 navigationService.Register<GMailPageView>(GMailPageViewModel);
                 navigationService.Register<ReadMailPageView>(ReadMailPageViewModel);
+                navigationService.Register<SchedulePageView>(SchedulePageViewModel);
+                navigationService.Register<DocumentsPageView>(DocumentsPageViewModel);
+                navigationService.Register<NewsPageView>(NewsPageViewModel);
+                navigationService.Register<SettingsPageView>(SettingsPageViewModel);
+                navigationService.Register<ContactsPageView>(ContactsPageViewModel);
+                navigationService.Register<ComposeNewMailPageView>(ComposeNewMailPageViewModel);
+                navigationService.Register<AdminPanelPageView>(AdminPanelPageViewModel);
+
 
                 navigationService.Navigate<LogInPageView>();
             }

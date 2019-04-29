@@ -35,6 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
     <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
     </Reference>
@@ -113,6 +122,9 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.3.0.0-preview3.19153.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -128,6 +140,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.2\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -138,6 +151,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0-preview3.19128.7\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Controls.Ribbon" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -178,6 +193,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ModalWindows\LinkWin.xaml.cs">
+      <DependentUpon>LinkWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\CalendarQuickstart.cs" />
     <Compile Include="Models\GoogleMessage.cs" />
@@ -195,14 +213,24 @@
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\AddEditEventPageViewModel.cs" />
+    <Compile Include="ViewModels\AdminPanelPageViewModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\CalendarPageViewModel.cs" />
+    <Compile Include="ViewModels\ComposeNewMailPageViewModel.cs" />
+    <Compile Include="ViewModels\ContactsPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\NewsPageViewModel.cs" />
     <Compile Include="ViewModels\GMailPageViewModel.cs" />
     <Compile Include="ViewModels\LogInPageViewModel.cs" />
+    <Compile Include="ViewModels\DocumentsPageViewModel.cs" />
+    <Compile Include="ViewModels\SchedulePageViewModel.cs" />
     <Compile Include="ViewModels\MainDesktopPageViewModel.cs" />
     <Compile Include="ViewModels\ReadMailPageViewModel.cs" />
     <Compile Include="Views\AddEditEventPageView.xaml.cs">
       <DependentUpon>AddEditEventPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminPanelPageView.xaml.cs">
+      <DependentUpon>AdminPanelPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AppWindow.xaml.cs">
       <DependentUpon>AppWindow.xaml</DependentUpon>
@@ -210,17 +238,46 @@
     <Compile Include="Views\CalendarPageView.xaml.cs">
       <DependentUpon>CalendarPageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ComposeNewMailPageView.xaml.cs">
+      <DependentUpon>ComposeNewMailPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContactsPageView.xaml.cs">
+      <DependentUpon>ContactsPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\WebBrowserServices\DialogBox.cs" />
+    <Compile Include="Views\DocumentsPageView.xaml.cs">
+      <DependentUpon>DocumentsPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\WebBrowserServices\Format.cs" />
     <Compile Include="Views\GMailPageView.xaml.cs">
       <DependentUpon>GMailPageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\WebBrowserServices\Gui.cs" />
+    <Compile Include="Services\WebBrowserServices\Initialisation.cs" />
     <Compile Include="Views\LogInPageView.xaml.cs">
       <DependentUpon>LogInPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainDesktopPageView.xaml.cs">
       <DependentUpon>MainDesktopPageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewsPageView.xaml.cs">
+      <DependentUpon>NewsPageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ReadMailPageView.xaml.cs">
       <DependentUpon>ReadMailPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SchedulePageView.xaml.cs">
+      <DependentUpon>SchedulePageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\WebBrowserServices\Script.cs" />
+    <Compile Include="Views\SettingsPageView.xaml.cs">
+      <DependentUpon>SettingsPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControls\_HtmlEditor.xaml.cs">
+      <DependentUpon>_HtmlEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomUserControls\_WPFWebBrowser.xaml.cs">
+      <DependentUpon>_WPFWebBrowser.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -261,6 +318,10 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ModalWindows\LinkWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\DataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -269,11 +330,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AdminPanelPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AppWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CalendarPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComposeNewMailPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContactsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DocumentsPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -289,7 +366,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ReadMailPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SchedulePageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControls\_HtmlEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomUserControls\_WPFWebBrowser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -320,6 +417,37 @@
       <Project>{292965d6-e983-4a6d-9c9b-c51e75aaf517}</Project>
       <Name>DocumentFlowCore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\RibonImages\backcolor.png" />
+    <Resource Include="Resources\RibonImages\bold.png" />
+    <Resource Include="Resources\RibonImages\bullets.png" />
+    <Resource Include="Resources\RibonImages\center.png" />
+    <Resource Include="Resources\RibonImages\center2.png" />
+    <Resource Include="Resources\RibonImages\Color.png" />
+    <Resource Include="Resources\RibonImages\Editor.png" />
+    <Resource Include="Resources\RibonImages\folder.png" />
+    <Resource Include="Resources\RibonImages\html.png" />
+    <Resource Include="Resources\RibonImages\ident.png" />
+    <Resource Include="Resources\RibonImages\image.png" />
+    <Resource Include="Resources\RibonImages\italic.png" />
+    <Resource Include="Resources\RibonImages\LeftAlign.png" />
+    <Resource Include="Resources\RibonImages\link.png" />
+    <Resource Include="Resources\RibonImages\new.png" />
+    <Resource Include="Resources\RibonImages\Numbered.png" />
+    <Resource Include="Resources\RibonImages\open.png" />
+    <Resource Include="Resources\RibonImages\OutIdent.png" />
+    <Resource Include="Resources\RibonImages\RightAlign.png" />
+    <Resource Include="Resources\RibonImages\save.png" />
+    <Resource Include="Resources\RibonImages\UnderLine.png" />
+    <Resource Include="Resources\RibonImages\view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\New.html" />
+    <Resource Include="Resources\RibonImages\folder-icon.png" />
+    <Resource Include="Resources\RibonImages\closeLarge.png" />
+    <Resource Include="Resources\RibonImages\close.png" />
+    <Resource Include="Resources\RibonImages\SendMail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
