@@ -118,7 +118,7 @@
             <Button
                 Command="{Binding GContacts}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
-                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
+                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png" Height="40"></Image>
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
@@ -294,26 +294,29 @@
 
 
 
-
-
-            <Viewbox  Grid.Column="2" Grid.Row="14"  HorizontalAlignment="Center">
-                <Button
+            <StackPanel Grid.Column="2" Grid.Row="14" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Viewbox    HorizontalAlignment="Left">
+                    <Button
                 Content="{x:Static p:Resources.Save}" 
                     Height="Auto" 
-                    Margin="0,0,0,5"
+                    Margin="0,0,10,5"
                     Command="{Binding OkCommand}"
-                    CommandParameter="{Binding ElementName=This}">                    
-                </Button>
-            </Viewbox>
+                    CommandParameter="{Binding ElementName=This}">
+                    </Button>
+                </Viewbox>
 
 
-            <Viewbox  Grid.Column="2" Grid.Row="14"  HorizontalAlignment="Right">
-                <Button
+                <Viewbox HorizontalAlignment="Right">
+                    <Button
                 Content="{x:Static p:Resources.Cancel}" 
                     Height="Auto" 
                     Margin="0,0,10,5"
                     Command="{Binding CancelCommand}"></Button>
-            </Viewbox>
+                </Viewbox>
+
+            </StackPanel>
+
+
         </Grid>
         <!--#endregion-->
 

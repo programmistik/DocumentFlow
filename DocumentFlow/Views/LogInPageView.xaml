@@ -30,7 +30,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="../Resources/Images/Background.jpg"></ImageBrush>
+            <ImageBrush ImageSource="../Resources/Images/Background.jpg"/>
         </Grid.Background>
 
         
@@ -38,7 +38,7 @@
         
         <Label Grid.Row="4" Grid.Column="1"
                FontSize="25"
-               Content="{x:Static p:Resources.UserName}" VerticalAlignment="Bottom"/>
+               Content="{x:Static p:Resources.UserName}" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
         
         <TextBox    Grid.Column="1"
                     Grid.Row="5"
@@ -60,7 +60,7 @@
         <Label Grid.Column="1"
                Grid.Row="6"
                Content="{x:Static p:Resources.Password}"
-               FontSize="25" VerticalAlignment="Bottom"/>
+               FontSize="25" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
         
         <PasswordBox Grid.Column="1" Grid.ColumnSpan="2"
                      VerticalContentAlignment="Center"
