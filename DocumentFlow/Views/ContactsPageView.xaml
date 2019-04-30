@@ -143,8 +143,25 @@
         <!--#endregion-->
 
         <!--#region Content-->
-        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Contacts page"></Button>
-
+        <DataGrid x:Name="ContactsGrid" 
+                  IsReadOnly="True"
+                  HorizontalGridLinesBrush="DarkGray" 
+                  AutoGenerateColumns="False"
+                  RowBackground="LightGray" 
+                  AlternatingRowBackground="White" 
+                  Grid.Column="1" Grid.ColumnSpan="7" 
+                  Grid.Row="1" Grid.RowSpan="6" 
+                  SelectionChanged="ContactsGrid_SelectionChanged" 
+                  Loaded="ContactsGrid_Loaded" MouseUp="ContactsGrid_MouseUp">
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Binding="{Binding Path=Id}" Width="50" />
+                <DataGridTextColumn Header="Имя Фамилия" Binding="{Binding Path=Name}" Width="*" />
+                <DataGridHyperlinkColumn Header="Компания" Binding="{Binding Path=Company}" Width="*" />
+                <DataGridTextColumn Header="Мобильный телефон" Binding="{Binding Path=Phone}" Width="*" />
+                <DataGridTextColumn Header="Телефон компании" Binding="{Binding Path=Company_Phone}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
         <!--#endregion-->
     </Grid>
 </UserControl>

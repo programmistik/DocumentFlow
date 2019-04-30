@@ -24,6 +24,8 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
+
+
         public ContactsPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
             this.navigationService = navigationService;
