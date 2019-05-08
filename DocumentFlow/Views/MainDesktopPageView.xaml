@@ -116,15 +116,7 @@
             <Button
                 Command="{Binding GContacts}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
-                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png" Height="40"></Image>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
             </Button>
             <Button 
                 Command="{Binding GDocuments}"

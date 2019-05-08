@@ -30,7 +30,7 @@ namespace DocumentFlow.Models
             // добавляем пользователя по умолчанию
             var defaultUser = new User { Login = "admin" };
             context.Users.Add(defaultUser);
-
+            
             // Document states
             context.DocumentStates.Add(new DocumentState { DocStateName = "New" });
             // ContactInfoTypes

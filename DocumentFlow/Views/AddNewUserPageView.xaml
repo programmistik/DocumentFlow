@@ -13,7 +13,7 @@
             <b:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-
+    
     <StackPanel>
         <CheckBox Content="Is active"
                   IsChecked="{Binding IsActive}"/>

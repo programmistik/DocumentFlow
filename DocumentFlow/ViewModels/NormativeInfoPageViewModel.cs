@@ -28,8 +28,8 @@ namespace DocumentFlow.ViewModels
         public ObservableCollection<Position> PositionCollection { get => positionCollection; set => Set(ref positionCollection, value); }
 
 
-        public NormativeInfoPageViewModel(INavigationService navigationService,
-                                             IMessageService messageService,
+        public NormativeInfoPageViewModel(INavigationService navigationService, 
+                                             IMessageService messageService, 
                                                 AppDbContext db)
         {
             this.navigationService = navigationService;

@@ -10,5 +10,9 @@ namespace DocumentFlow.Models
     {
         public int Id { get; set; }
         public string DepartmentName { get; set; }
+
+        //public int HeadOdDepartmentId { get; set; }
+        //public virtual User HeadOdDepartment { get; set; }
+
     }
 }

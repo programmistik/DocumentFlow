@@ -14,9 +14,9 @@ namespace DocumentFlow.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Photo { get; set; }
-        //  public string PrimaryEmail { get; set; }
+      //  public string PrimaryEmail { get; set; }
         public string SaltValue { get; set; }
-        public string HashValue { get; set; }
+        public string HashValue { get; set; }        
         public bool IsActive { get; set; }
         public virtual Company Company { get; set; }
         public int CompanyId { get; set; }

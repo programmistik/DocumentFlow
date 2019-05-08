@@ -55,8 +55,8 @@ namespace DocumentFlow.ViewModels
         public bool PasswordConfirmation { get => passwordConfirmation; set => Set(ref passwordConfirmation, value); }
 
 
-        public AddNewUserPageViewModel(INavigationService navigationService,
-                                          IMessageService messageService,
+        public AddNewUserPageViewModel(INavigationService navigationService, 
+                                          IMessageService messageService, 
                                              AppDbContext db)
         {
             this.navigationService = navigationService;
@@ -184,7 +184,7 @@ namespace DocumentFlow.ViewModels
                             saltValue = Convert.ToBase64String(salt);
                             var hashValue = Convert.ToBase64String(hash);
 
-                            var login = GoogleAccount.Substring(GoogleAccount.IndexOf('@') + 1);
+                            var login = GoogleAccount.Substring(GoogleAccount.IndexOf('@') + 1); 
 
                             var NewUser = new User
                             {
@@ -200,14 +200,14 @@ namespace DocumentFlow.ViewModels
                                 SaltValue = saltValue,
                                 HashValue = hashValue
                             };
-
+                            
                             db.Users.Add(NewUser);
                             db.SaveChanges();
                         }
-
+                        
                         navigationService.Navigate<AdminPanelPageView>();
                     }
-
+                     
 
 
                 }
