@@ -41,6 +41,9 @@ namespace DocumentFlow.Models
             context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Skype" });
             context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Facebook" });
 
+            //Positions
+            context.Positions.Add(new Position { PositionName = "Head of department" });
+
             context.SaveChanges();
         }
 
