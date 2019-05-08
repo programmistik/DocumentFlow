@@ -1,0 +1,321 @@
+﻿<UserControl x:Class="DocumentFlow.Views.SettingsPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DocumentFlow.Views"
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
+             xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+             mc:Ignorable="d" 
+             x:Name="This"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="UserControl_Loaded">
+    <Grid Background="#FFE1E1E1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="105*"></ColumnDefinition>
+            <ColumnDefinition Width="65"></ColumnDefinition>
+            <ColumnDefinition Width="65"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!--#region TopMenu-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Orientation="Horizontal" Background="#FF353436">
+            <Button
+                Command="{Binding GMain}" 
+                Background="Transparent" BorderThickness="0" Height="64" Width="64" Padding="0">
+                <Image Margin="0" Source="../Resources/Images/user.png" />
+            </Button>
+            <Label FontSize="20" Content="Имя Фамилия Отчество" Foreground="White" VerticalContentAlignment="Center"></Label>
+        </StackPanel>
+
+        <Grid Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="0" Background="#FF353436">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button
+                Command="{Binding GSettings}"
+                Grid.Column="0" Background="Transparent" Height="Auto" BorderThickness="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Settings.png"/>
+            </Button>
+            <Button
+                Command="{Binding GExit}"
+                Grid.Column="1" Background="Transparent" Height="Auto" BorderThickness="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Exit.png"/>
+            </Button>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Aside Panel-->
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1" Grid.RowSpan="6"
+                    Background="White">
+            <Button
+                Command="{Binding GMail}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Mail.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GCalendar}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Calendar.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GSchedule}"
+                Height="50" Background="White" BorderBrush="Black" Padding="5">
+                <Image Source="/DocumentFlow;component/Resources/Images/Tasks.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GNews}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/News.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button
+                Command="{Binding GContacts}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GDocuments}"
+                Height="50" Background="White" BorderBrush="Black" Padding="5">
+                <Image Source="/DocumentFlow;component/Resources/Images/Documents.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </StackPanel>
+        <!--#endregion-->
+        
+        <!--#region Content-->
+        <Grid
+            Grid.Column="1" Grid.ColumnSpan="7"
+              Grid.Row="1" Grid.RowSpan="6">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left">
+                <ComboBox Margin="10,5,0,0"  
+                      FontSize="15"
+                    Width="281"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding VideoDevices}"
+                    SelectedItem="{Binding CurrentDevice}"/>
+            </Viewbox>
+            <Border 
+                Margin="22,5,47,0"
+                BorderBrush="Black"
+                BorderThickness="3" Grid.Row="1" Grid.RowSpan="6">
+                <Image Source="{Binding Image}" Margin="7"/>
+            </Border>
+            <Viewbox Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Snap image"
+                    Margin="10,5,0,0"
+                    FontSize="15"
+                    Command="{Binding SnapCommand}"/>
+
+                    <Button Content="or upload from file"
+                    Margin="10,5,0,0"
+                    FontSize="15"
+                    Command="{Binding UploadFileCommand}"/>
+                </StackPanel>
+            </Viewbox>
+            <Viewbox Grid.Column="0" Grid.Row="8" HorizontalAlignment="Left">
+                <Label
+               FontSize="15"
+               Content="Google account:" HorizontalAlignment="Left"/>
+            </Viewbox>
+            <Viewbox Grid.Column="0" Grid.Row="9" HorizontalAlignment="Left">
+                <TextBox 
+                    Text="{Binding GoogleAccount}"
+                    IsReadOnly="True"
+                    FontSize="25"
+                    VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+                    Background="#FFFAFA" BorderBrush="#89FFFFFF" Width="450" Height="50">
+                </TextBox>
+            </Viewbox>
+
+
+
+            <Viewbox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Label
+               FontSize="25" 
+               Content="{x:Static p:Resources.Language}" HorizontalAlignment="Left"/>
+
+                    <ComboBox Width="250" 
+                              Height="50" 
+                              HorizontalAlignment="Right" 
+                              Margin="2,5" 
+                              Background="white">
+
+                    </ComboBox>
+                </StackPanel>
+            </Viewbox>
+
+            <Viewbox Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Label
+               FontSize="25"
+               Content="{x:Static p:Resources.ColorScheme}" HorizontalAlignment="Left"/>
+
+                    <ComboBox Width="250" Height="50" HorizontalAlignment="Right" 
+                          Margin="2,5" Background="White">
+
+                    </ComboBox>
+                </StackPanel>
+            </Viewbox>
+
+            <Viewbox  Grid.Column="0" Grid.Row="10"  HorizontalAlignment="Left">
+                <Label Margin="0" 
+               Content="Password:"
+               FontSize="15"/>
+            </Viewbox>
+            <Viewbox  Grid.Column="0" Grid.Row="11"  HorizontalAlignment="Left">
+                <PasswordBox Name="pBox" 
+                         Margin="2,2,0,0"
+                          Width="450" Height="50"
+                             Background="White"
+                         FontSize="20">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="LostFocus">
+                            <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}" CommandParameter="{Binding ElementName=This}"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </PasswordBox>
+            </Viewbox>
+            <Viewbox  Grid.Column="0" Grid.Row="12"  HorizontalAlignment="Left">
+                <Label Margin="0" 
+               Content="Confirm password:"
+               FontSize="15"/>
+            </Viewbox>
+            <Viewbox  Grid.Column="0" Grid.Row="13"  HorizontalAlignment="Left">
+                <PasswordBox Name="pBox2"
+                         Margin="2,2,0,0"
+                          Width="450" Height="50"
+                             Background="White"
+                         FontSize="20">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="LostFocus">
+                            <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}" CommandParameter="{Binding ElementName=This}"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </PasswordBox>
+            </Viewbox>
+            <Viewbox  Grid.Column="0" Grid.Row="14"  HorizontalAlignment="Left">
+                <Label x:Name="PassCheckError"                       
+                       Grid.Row="3" 
+                       Margin="0"                       
+                       Foreground="Red"
+                       Content="{Binding PassCheckError}">
+
+                </Label>
+            </Viewbox>
+
+
+
+
+
+            <Viewbox  Grid.Column="2" Grid.Row="14"  HorizontalAlignment="Center">
+                <Button
+                Content="{x:Static p:Resources.Save}" 
+                    Height="Auto" 
+                    Margin="0,0,0,5"
+                    Command="{Binding OkCommand}"
+                    CommandParameter="{Binding ElementName=This}">                    
+                </Button>
+            </Viewbox>
+
+
+            <Viewbox  Grid.Column="2" Grid.Row="14"  HorizontalAlignment="Right">
+                <Button
+                Content="{x:Static p:Resources.Cancel}" 
+                    Height="Auto" 
+                    Margin="0,0,10,5"
+                    Command="{Binding CancelCommand}"></Button>
+            </Viewbox>
+        </Grid>
+        <!--#endregion-->
+
+    </Grid>
+</UserControl>

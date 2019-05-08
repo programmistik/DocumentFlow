@@ -1,0 +1,74 @@
+﻿<Window x:Class="DocumentFlow.ModalWindows.LinkWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DocumentFlow.ModalWindows"
+        mc:Ignorable="d"
+        Title="Insert link" Height="230" Width="600" 
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        Initialized="addLink_Initialized">
+        
+    <Grid>
+        <TextBox x:Name="description" 
+                 HorizontalAlignment="Left" 
+                 Height="24" Margin="19,35,0,0" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top" 
+                 Width="550" />
+        <Label Content="Enter text to display for the link :" 
+               HorizontalAlignment="Left" 
+               Height="25" 
+               Margin="14,10,0,0" 
+               VerticalAlignment="Top" 
+               Width="243" />
+        <TextBox x:Name="link" 
+                 HorizontalAlignment="Left" 
+                 Height="24" 
+                 Margin="19,97,0,0" 
+                 TextWrapping="Wrap"  
+                 VerticalAlignment="Top" 
+                 Width="550" />
+        <Label Content="Enter a web page location:" 
+               HorizontalAlignment="Left" 
+               Height="28" 
+               Margin="14,69,0,0" 
+               VerticalAlignment="Top" 
+               Width="243" />
+        <!--<Button HorizontalAlignment="Left" 
+                Height="25" 
+                Margin="535,97,0,0" 
+                VerticalAlignment="Top" 
+                Width="25" 
+                Click="Button_Click"
+                >
+            <Button.Background>
+                <ImageBrush ImageSource="/DocumentFlow;component/Resources/RibonImages/folder-icon.png"/>
+            </Button.Background>
+                  
+        </Button>-->
+        <Button x:Name="ButtonOK" 
+                HorizontalAlignment="Left" 
+                Height="30" 
+                Margin="190,147,0,0" 
+                VerticalAlignment="Top" 
+                Width="92" 
+                Click="ButtonOK_Click" 
+                Content="OK">
+            
+        </Button>
+        <Button x:Name="ButtonCancel" 
+                HorizontalAlignment="Left" 
+                Height="30" 
+                Margin="297,147,0,0" 
+                VerticalAlignment="Top" 
+                Width="92" 
+                Click="ButtonCancel_Click" 
+                Content="Cancel">
+            
+        </Button>
+       
+
+    </Grid>
+</Window>

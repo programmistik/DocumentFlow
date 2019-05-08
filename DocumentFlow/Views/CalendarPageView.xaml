@@ -1,0 +1,248 @@
+﻿<UserControl x:Class="DocumentFlow.Views.CalendarPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:local="clr-namespace:DocumentFlow.Views"
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
+             mc:Ignorable="d" 
+             Name="This"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <UserControl.Resources>
+        <DataTemplate x:Key="ListBoxEventItemTemplate">
+            <StackPanel>
+
+                <Grid  HorizontalAlignment="Stretch">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+
+                        <Label FontWeight="Bold"
+                               Content="{Binding Summary}" />
+                    </StackPanel>
+
+
+                    <Button  Grid.Column="1" 
+                            Margin="1"
+                            Command="{Binding DataContext.DeleteEventCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Delete
+                    </Button>
+
+                    <Button Grid.Column="2"  
+                            Margin="1" 
+                            Command="{Binding DataContext.EditEventCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Edit
+                    </Button>
+
+
+                </Grid>
+
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="90"></ColumnDefinition>
+            <ColumnDefinition Width="91"></ColumnDefinition>
+            <ColumnDefinition Width="103"></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="65"/>
+            <ColumnDefinition Width="65"/>
+        </Grid.ColumnDefinitions>
+
+        <!--#region TopMenu-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Orientation="Horizontal" Background="#FF353436">
+            <Button
+                Command="{Binding GMain}" 
+                Background="Transparent" BorderThickness="0" Height="64" Width="64" Padding="0">
+                <Image Margin="0" Source="../Resources/Images/user.png" />
+            </Button>
+            <Label FontSize="20" Content="Имя Фамилия Отчество" Foreground="White" VerticalContentAlignment="Center"></Label>
+        </StackPanel>
+
+        <Grid Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="0" Background="#FF353436">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button
+                Command="{Binding GSettings}"
+                Grid.Column="0" Background="Transparent" Height="Auto" BorderThickness="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Settings.png"/>
+            </Button>
+            <Button
+                Command="{Binding GExit}"
+                Grid.Column="1" Background="Transparent" Height="Auto" BorderThickness="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Exit.png"/>
+            </Button>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Aside Panel-->
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1" Grid.RowSpan="6"
+                    Background="White">
+            <Button
+                Command="{Binding GMail}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Mail.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GCalendar}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Calendar.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GSchedule}"
+                Height="50" Background="White" BorderBrush="Black" Padding="5">
+                <Image Source="/DocumentFlow;component/Resources/Images/Tasks.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GNews}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/News.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button
+                Command="{Binding GContacts}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GDocuments}"
+                Height="50" Background="White" BorderBrush="Black" Padding="5">
+                <Image Source="/DocumentFlow;component/Resources/Images/Documents.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Content-->
+        <Calendar
+            Grid.Column="1" Grid.ColumnSpan="3"
+            Grid.Row="1" Grid.RowSpan="5"
+            SelectedDate="{Binding CurrentDate}"
+            Margin="2"       
+            DisplayDate="{Binding Path=SelectedDate,
+                                RelativeSource={RelativeSource Self}, 
+                                Mode=OneWay}" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedDatesChanged">
+                    <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=SelectedDatesChangedCommand}"
+                            PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Calendar>
+
+        <Button 
+            Grid.Row="6"
+            Grid.Column="1" Grid.ColumnSpan="3"
+            Content="{x:Static p:Resources.AddNewEvent}"
+            Margin="5"
+            Command="{Binding AddEvent}"/>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="4" Grid.ColumnSpan="4"
+            FontSize="20" Content="{Binding CalendarOwener}"/>
+
+        <Label
+            Grid.Row="2"
+            Grid.Column="4" Grid.ColumnSpan="4"
+            FontSize="20" Content="{Binding SelectedDate}"/>
+
+        <ListBox 
+            Grid.Row="3" Grid.RowSpan="4"
+            Grid.Column="4" Grid.ColumnSpan="4"
+            HorizontalContentAlignment="Stretch" 
+                            ItemsSource="{Binding EventList}"                   
+                            Margin="3"
+                            ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"         
+                            ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+        </ListBox>
+        <!--#endregion-->
+    </Grid>
+</UserControl>

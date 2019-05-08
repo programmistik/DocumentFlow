@@ -1,0 +1,227 @@
+﻿<UserControl x:Class="DocumentFlow.Views.GMailPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DocumentFlow.Views"
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             mc:Ignorable="d" 
+             Name="This"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <DataTemplate x:Key="IndoxListBoxItemTemplate">
+            <DockPanel>
+
+                <Grid  HorizontalAlignment="Stretch">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+
+                        <Label FontWeight="Bold"
+                               Content="{Binding Subject}" />
+                        <Label 
+                               Content="{Binding Date}" />
+                    </StackPanel>
+
+
+                    <Button  Grid.Column="1" 
+                            Margin="1"
+                            Command="{Binding DataContext.ReadMailCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Read
+                    </Button>                  
+
+
+                </Grid>
+
+            </DockPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Background="#FFE1E1E1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+            <RowDefinition Height="65*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="106*"></ColumnDefinition>
+            <ColumnDefinition Width="105*"></ColumnDefinition>
+            <ColumnDefinition Width="65"></ColumnDefinition>
+            <ColumnDefinition Width="65"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!--#region TopMenu-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Orientation="Horizontal" Background="#FF353436">
+            <Button
+                Command="{Binding GMain}" 
+                Background="Transparent" BorderThickness="0" Height="64" Width="64" Padding="0">
+                <Image Margin="0" Source="../Resources/Images/user.png" />
+            </Button>
+            <Label FontSize="20" Content="Имя Фамилия Отчество" Foreground="White" VerticalContentAlignment="Center"></Label>
+        </StackPanel>
+
+        <Grid Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="0" Background="#FF353436">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button
+                Command="{Binding GSettings}"
+                Grid.Column="0" Background="Transparent" Height="Auto" BorderThickness="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Settings.png"/>
+            </Button>
+            <Button
+                Command="{Binding GExit}"
+                Grid.Column="1" Background="Transparent" Height="Auto" BorderThickness="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Exit.png"/>
+            </Button>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Aside Panel-->
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1" Grid.RowSpan="6"
+                    Background="White">
+            <Button
+                Command="{Binding GMail}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Mail.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GCalendar}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Calendar.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GSchedule}"
+                Height="50" Background="White" BorderBrush="Black" Padding="5">
+                <Image Source="/DocumentFlow;component/Resources/Images/Tasks.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GNews}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/News.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button
+                Command="{Binding GContacts}"
+                Height="50" Background="White" BorderBrush="Black" Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Command="{Binding GDocuments}"
+                Height="50" Background="White" BorderBrush="Black" Padding="5">
+                <Image Source="/DocumentFlow;component/Resources/Images/Documents.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Content-->
+        <DockPanel
+            Grid.Column="1" Grid.ColumnSpan="7"
+                    Grid.Row="1" Grid.RowSpan="6">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <Button  Content="{x:Static p:Resources.ReceiveMail}"
+                     Margin="5,5,0,5"
+                 Command="{Binding ReceiveMailCommand}"/>
+            <Button  Content="  Compose  "
+                     Margin="5"
+                 Command="{Binding ComposeCommand}"/>
+                <Label Content="🔎" FontSize="25"/> 
+            <TextBox Margin="5" 
+                     Background="White"
+                Text="{Binding Path=MailFilter, UpdateSourceTrigger=PropertyChanged}"
+                     
+                        Width="380" />
+            </StackPanel>
+            <ListBox
+                    DockPanel.Dock="Top"
+                    HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
+                                            
+                            Margin="3"
+                ItemsSource="{Binding Path=FilteredInboxItems, Mode=OneWay}" 
+                 IsSynchronizedWithCurrentItem="True" 
+                
+                 Name="lbMailList"
+                
+                            ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"       
+                            ItemTemplate="{StaticResource IndoxListBoxItemTemplate}">
+
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                </ListBox>
+        </DockPanel>
+        <!--#endregion-->
+    </Grid>
+    
+    
+</UserControl>

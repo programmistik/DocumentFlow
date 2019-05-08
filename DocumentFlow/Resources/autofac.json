@@ -1,0 +1,63 @@
+{
+"defaultAssembly": "DocumentFlow",
+  "components": [
+    { "type": "DocumentFlow.ViewModels.AppViewModel" },
+    { "type": "DocumentFlow.ViewModels.LogInPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.MainDesktopPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.CalendarPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.AddEditEventPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.GMailPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.ReadMailPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.SchedulePageViewModel" },
+    { "type": "DocumentFlow.ViewModels.DocumentsPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.NewsPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.SettingsPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.ContactsPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.ComposeNewMailPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.AdminPanelPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.AddNewUserPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.NormativeInfoPageViewModel" },
+
+    {
+      "type": "DocumentFlow.Models.AppDbContext",
+      "instanceScope": "single-instance"
+    },
+
+    {
+      "type": "DocumentFlow.Services.MessageService",
+      "services": [
+        {
+          "type": "DocumentFlow.Services.IMessageService"
+        }
+      ]
+    },
+
+    {
+      "type": "DocumentFlow.Services.GoogleServices",
+      "services": [
+        {
+          "type": "DocumentFlow.Services.IGoogleService"
+        }
+      ]
+    },
+    {
+      "type": "DocumentFlow.Views.SettingsPageView",
+      "services": [
+        {
+          "type": "DocumentFlow.Services.IPasswordSupplier"
+        }
+      ],
+      "instanceScope": "single-instance"
+    },
+
+    {
+      "type": "DocumentFlow.Services.NavigationService",
+      "services": [
+        {
+          "type": "DocumentFlow.Services.INavigationService"
+        }
+      ],
+      "instanceScope": "single-instance"
+    }
+  ]
+}

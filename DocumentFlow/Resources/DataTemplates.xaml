@@ -1,0 +1,56 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:DocumentFlow"
+                    xmlns:v="clr-namespace:DocumentFlow.Views"
+                    xmlns:vm="clr-namespace:DocumentFlow.ViewModels">
+
+    <DataTemplate DataType="{x:Type vm:LogInPageViewModel}">
+        <v:LogInPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MainDesktopPageViewModel}">
+        <v:MainDesktopPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CalendarPageViewModel}">
+        <v:CalendarPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SchedulePageViewModel}">
+        <v:SchedulePageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DocumentsPageViewModel}">
+        <v:DocumentsPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewsPageViewModel}">
+        <v:NewsPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SettingsPageViewModel}">
+        <v:SettingsPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ContactsPageViewModel}">
+        <v:ContactsPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AddEditEventPageViewModel}">
+        <v:AddEditEventPageView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:GMailPageViewModel}">
+        <v:GMailPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ReadMailPageViewModel}">
+        <v:ReadMailPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ComposeNewMailPageViewModel}">
+        <v:ComposeNewMailPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AdminPanelPageViewModel}">
+        <v:AdminPanelPageView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:AddNewUserPageViewModel}">
+        <v:AddNewUserPageView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NormativeInfoPageViewModel}">
+        <v:NormativeInfoPageView/>
+    </DataTemplate>
+
+</ResourceDictionary>
