@@ -49,8 +49,11 @@
             <Button Content="Normative information"
                     Command="{Binding NormInfoCommand}"
                 Margin="5"/>
+            <Button Content="Add news"
+                    Command="{Binding AddNewsCommand}"
+                Margin="5"/>
             <Button Content="Change my password"                    
-                Margin="200,5,5,5"
+                Margin="100,5,5,5"
                     Command="{Binding ChangeMyPassword}"/>
         </StackPanel>
         <ListBox

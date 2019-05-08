@@ -17,6 +17,7 @@
     { "type": "DocumentFlow.ViewModels.AdminPanelPageViewModel" },
     { "type": "DocumentFlow.ViewModels.AddNewUserPageViewModel" },
     { "type": "DocumentFlow.ViewModels.NormativeInfoPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.AddNewsPageViewModel" },
 
     {
       "type": "DocumentFlow.Models.AppDbContext",

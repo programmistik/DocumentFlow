@@ -60,6 +60,14 @@ namespace DocumentFlow.ViewModels
                 }
                  ));
 
+        private RelayCommand addNewsCommand;
+        public RelayCommand AddNewsCommand => addNewsCommand ?? (addNewsCommand = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<AddNewsPageView>();
+                }
+                 ));
+
 
     }
 }

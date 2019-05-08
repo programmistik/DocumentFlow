@@ -17,7 +17,7 @@
                 <TabItem.Content>
                     <StackPanel DataContext="{Binding CompanyCollection}" >
                         <DataGrid AutoGenerateColumns="False" 
-                      EnableRowVirtualization="True" Height="350" 
+                      EnableRowVirtualization="True" Height="340" 
                       ItemsSource="{Binding}" Margin="10,0" 
                       RowDetailsVisibilityMode="VisibleWhenSelected">
                             <DataGrid.Columns>
@@ -25,7 +25,7 @@
                                 <DataGridTextColumn  
                                                     Binding="{Binding CompanyName, UpdateSourceTrigger=PropertyChanged}" 
                                                     Header="Company name" 
-                                                    />
+                                                    Width="500"/>
 
 
                             </DataGrid.Columns>
@@ -43,7 +43,7 @@
                     <TabItem.Content>
                         <StackPanel DataContext="{Binding DepartmentCollection}" >
                             <DataGrid AutoGenerateColumns="False" 
-                      EnableRowVirtualization="True" Height="370" 
+                      EnableRowVirtualization="True" Height="340" 
                       ItemsSource="{Binding}" Margin="10,0" 
                       RowDetailsVisibilityMode="VisibleWhenSelected">
                                 <DataGrid.Columns>
@@ -51,7 +51,7 @@
                                 <DataGridTextColumn  
                                                     Binding="{Binding DepartmentName, UpdateSourceTrigger=PropertyChanged}" 
                                                     Header="Department name" 
-                                                    />
+                                                    Width="500"/>
 
 
                                 </DataGrid.Columns>
@@ -69,7 +69,7 @@
                 <TabItem.Content>
                     <StackPanel DataContext="{Binding PositionCollection}" >
                         <DataGrid AutoGenerateColumns="False" 
-                      EnableRowVirtualization="True" Height="380" 
+                      EnableRowVirtualization="True" Height="340" 
                       ItemsSource="{Binding}" Margin="10,0" 
                       RowDetailsVisibilityMode="VisibleWhenSelected">
                             <DataGrid.Columns>

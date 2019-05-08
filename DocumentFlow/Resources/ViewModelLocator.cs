@@ -34,6 +34,7 @@ namespace DocumentFlow
         private AdminPanelPageViewModel AdminPanelPageViewModel;
         private AddNewUserPageViewModel AddNewUserPageViewModel;
         private NormativeInfoPageViewModel NormativeInfoPageViewModel;
+        private AddNewsPageViewModel AddNewsPageViewModel;
 
 
         private INavigationService navigationService;
@@ -69,6 +70,7 @@ namespace DocumentFlow
                 AdminPanelPageViewModel = Container.Resolve<AdminPanelPageViewModel>();
                 AddNewUserPageViewModel = Container.Resolve<AddNewUserPageViewModel>();
                 NormativeInfoPageViewModel = Container.Resolve<NormativeInfoPageViewModel>();
+                AddNewsPageViewModel = Container.Resolve<AddNewsPageViewModel>();
 
                 navigationService.Register<LogInPageView>(LogInViewModel);
                 navigationService.Register<MainDesktopPageView>(MainDesktopPageViewModel);
@@ -85,6 +87,7 @@ namespace DocumentFlow
                 navigationService.Register<AdminPanelPageView>(AdminPanelPageViewModel);
                 navigationService.Register<AddNewUserPageView>(AddNewUserPageViewModel);
                 navigationService.Register<NormativeInfoPageView>(NormativeInfoPageViewModel);
+                navigationService.Register<AddNewsPageView>(AddNewsPageViewModel);
 
 
                 navigationService.Navigate<LogInPageView>();

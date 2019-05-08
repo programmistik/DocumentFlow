@@ -207,6 +207,7 @@
     <Compile Include="Models\DocumentTypes.cs" />
     <Compile Include="Models\GoogleMessage.cs" />
     <Compile Include="Models\MyFiles.cs" />
+    <Compile Include="Models\NewsPosts.cs" />
     <Compile Include="Models\Organizations.cs" />
     <Compile Include="Models\Positions.cs" />
     <Compile Include="Models\Users.cs" />
@@ -223,7 +224,9 @@
     <Compile Include="Services\IPasswordSupplier.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\WebBrowserServices\NewPostInitialisation.cs" />
     <Compile Include="ViewModels\AddEditEventPageViewModel.cs" />
+    <Compile Include="ViewModels\AddNewsPageViewModel.cs" />
     <Compile Include="ViewModels\AddNewUserPageViewModel.cs" />
     <Compile Include="ViewModels\AdminPanelPageViewModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
@@ -241,6 +244,9 @@
     <Compile Include="ViewModels\ReadMailPageViewModel.cs" />
     <Compile Include="Views\AddEditEventPageView.xaml.cs">
       <DependentUpon>AddEditEventPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddNewsPageView.xaml.cs">
+      <DependentUpon>AddNewsPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddNewUserPageView.xaml.cs">
       <DependentUpon>AddNewUserPageView.xaml</DependentUpon>
@@ -346,6 +352,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddEditEventPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddNewsPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -464,6 +474,7 @@
     <Resource Include="Resources\RibonImages\view.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\Newspaper-Feed-add-icon.png" />
     <Content Include="Resources\New.html" />
     <Resource Include="Resources\RibonImages\folder-icon.png" />
     <Resource Include="Resources\RibonImages\closeLarge.png" />

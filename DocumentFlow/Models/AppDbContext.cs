@@ -24,13 +24,16 @@ namespace DocumentFlow.Models
         public DbSet<Company> Companies { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<NewsPost> NewsPosts { get; set; }
+
+
 
         public static void Seed(AppDbContext context)
         {
             // добавляем пользователя по умолчанию
             var defaultUser = new User { Login = "admin" };
             context.Users.Add(defaultUser);
-            
+
             // Document states
             context.DocumentStates.Add(new DocumentState { DocStateName = "New" });
             // ContactInfoTypes
@@ -43,6 +46,7 @@ namespace DocumentFlow.Models
 
             //Positions
             context.Positions.Add(new Position { PositionName = "Head of department" });
+
 
             context.SaveChanges();
         }

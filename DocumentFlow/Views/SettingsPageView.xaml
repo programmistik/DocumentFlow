@@ -295,8 +295,8 @@
                     Margin="0,0,10,5"
                     Command="{Binding OkCommand}"
                     CommandParameter="{Binding ElementName=This}">
-                    </Button>
-                </Viewbox>
+                </Button>
+            </Viewbox>
 
 
             <Viewbox  Grid.Column="2" Grid.Row="14"  HorizontalAlignment="Center">
@@ -305,13 +305,12 @@
                     Height="Auto" 
                     Margin="0,0,10,5"
                     Command="{Binding CancelCommand}"></Button>
-                </Viewbox>
-
-            </StackPanel>
-
+            </Viewbox>
 
         </Grid>
-        <!--#endregion-->
+
 
     </Grid>
-</UserControl>
+        <!--#endregion-->
+
+    </UserControl>

@@ -53,4 +53,8 @@
         <v:NormativeInfoPageView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:AddNewsPageViewModel}">
+        <v:AddNewsPageView/>
+    </DataTemplate>
+
 </ResourceDictionary>
