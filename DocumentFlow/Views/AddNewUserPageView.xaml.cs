@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DocumentFlow.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,15 +18,20 @@ using System.Windows.Shapes;
 namespace DocumentFlow.Views
 {
     /// <summary>
-    /// Interaction logic for AdminPanelPageView.xaml
+    /// Interaction logic for AddNewUserPageView.xaml
     /// </summary>
-    public partial class AdminPanelPageView : UserControl
+    public partial class AddNewUserPageView : UserControl, IPasswordSupplier
     {
-        public AdminPanelPageView()
+        public AddNewUserPageView()
         {
             InitializeComponent();
         }
 
-       
+        public SecureString GetPassword { get => pBox.SecurePassword; }
+
+        public bool ConfirmPassword()
+        {
+            return pBox.Password == pBox2.Password;
+        }
     }
 }

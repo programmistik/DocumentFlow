@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace DocumentFlow.Views
 {
     /// <summary>
-    /// Interaction logic for AdminPanelPageView.xaml
+    /// Interaction logic for NormativeInfoPageView.xaml
     /// </summary>
-    public partial class AdminPanelPageView : UserControl
+    public partial class NormativeInfoPageView : UserControl
     {
-        public AdminPanelPageView()
+        public NormativeInfoPageView()
         {
             InitializeComponent();
         }
-
-       
     }
 }

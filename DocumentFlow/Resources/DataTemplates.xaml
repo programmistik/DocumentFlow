@@ -45,4 +45,12 @@
         <v:AdminPanelPageView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:AddNewUserPageViewModel}">
+        <v:AddNewUserPageView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NormativeInfoPageViewModel}">
+        <v:NormativeInfoPageView/>
+    </DataTemplate>
+
 </ResourceDictionary>

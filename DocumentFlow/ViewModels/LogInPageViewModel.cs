@@ -131,23 +131,9 @@ namespace DocumentFlow.ViewModels
             get => lostFocusCommand ?? (lostFocusCommand = new RelayCommand<string>(
                 param =>
                 {
-                    if (!string.IsNullOrEmpty(param))
+                    if (param == "admin")
                     {
-                        var qwr = db.Users.Where(u => u.Login == param);
-                        if (qwr.Any() == true)
-                        {
-                            CheckColor = "Green";
-                            LoginCheck = "✔";
-                            var imgLink = qwr.Single().Photo;
-                            if (imgLink != null)
-                                Image = new BitmapImage(new Uri(imgLink));
-                        }
-                        else
-                        {
-                            CheckColor = "Red";
-                            LoginCheck = "❌";
-                            Image = null;
-                        }
+                        navigationService.Navigate<AdminPanelPageView>();
                     }
                 }
             ));

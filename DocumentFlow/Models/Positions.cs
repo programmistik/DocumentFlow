@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DocumentFlow.Models
 {
-    public class RoleType
+    public class Position
     {
         public int Id { get; set; }
-        public string RoleTypeName { get; set; }
+        public string PositionName { get; set; }
     }
 }

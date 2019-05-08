@@ -29,7 +29,7 @@
             <ColumnDefinition Width="65"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <!--Top Menu-->
+        <!--#region TopMenu-->
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Orientation="Horizontal" Background="#FF353436">
             <Button
                 Command="{Binding GMain}" 
@@ -55,9 +55,9 @@
                 <Image Source="/DocumentFlow;component/Resources/Images/Exit.png"/>
             </Button>
         </Grid>
-
-
-        <!--Aside panel-->
+        <!--#endregion-->
+        
+        <!--#region Aside Panel-->
         <StackPanel Grid.Column="0"
                     Grid.Row="1" Grid.RowSpan="6"
                     Background="White">
@@ -65,36 +65,85 @@
                 Command="{Binding GMail}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Mail.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button 
                 Command="{Binding GCalendar}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Calendar.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button 
                 Command="{Binding GSchedule}"
                 Height="50" Background="White" BorderBrush="Black" Padding="5">
                 <Image Source="/DocumentFlow;component/Resources/Images/Tasks.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button 
                 Command="{Binding GNews}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/News.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button
                 Command="{Binding GContacts}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <Button 
                 Command="{Binding GDocuments}"
                 Height="50" Background="White" BorderBrush="Black" Padding="5">
                 <Image Source="/DocumentFlow;component/Resources/Images/Documents.png"></Image>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
 
         </StackPanel>
-
-        <!--Content-->
+        <!--#endregion-->
+        
+        <!--#region Content-->
         <Button Grid.Column="1" Grid.ColumnSpan="2"
                 Grid.Row="1" Grid.RowSpan="2"
                 Command="{Binding GCalendar}" 
@@ -102,7 +151,7 @@
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch">
+                HorizontalAlignment="Stretch" Background="#FF673AB7">
         </Button>
 
         <Button Grid.Column="3" Grid.ColumnSpan="2"
@@ -112,7 +161,7 @@
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"></Button>
+                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
 
         <Button Grid.Column="5" Grid.ColumnSpan="3"
                 Grid.Row="1" Grid.RowSpan="2"
@@ -121,7 +170,7 @@
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"></Button>
+                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
 
         <Button Grid.Column="1" Grid.ColumnSpan="3"
                 Grid.Row="3" Grid.RowSpan="2"
@@ -130,7 +179,7 @@
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"></Button>
+                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
 
         <Button Grid.Column="4" Grid.ColumnSpan="4"
                 Grid.Row="3" Grid.RowSpan="2"
@@ -139,8 +188,9 @@
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"></Button>
-
+                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
+        <!--#endregion-->
+    
     </Grid>
 
 </UserControl>

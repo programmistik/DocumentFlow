@@ -43,11 +43,14 @@
     <StackPanel Orientation="Horizontal">
         <Button Content="Add new user"
                 Margin="5"
-                Command="{Binding AddNewUserCommand}"/>
+                Command="{Binding AddNewUserCommand}" />
         <Button Content="Edit user"
                 Margin="5"/>
+            <Button Content="Normative information"
+                    Command="{Binding NormInfoCommand}"
+                Margin="5"/>
             <Button Content="Change my password"                    
-                Margin="400,5,5,5"
+                Margin="200,5,5,5"
                     Command="{Binding ChangeMyPassword}"/>
         </StackPanel>
         <ListBox
