@@ -116,14 +116,6 @@
                 Command="{Binding GContacts}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
             </Button>
             <Button 
                 Command="{Binding GDocuments}"
@@ -139,12 +131,8 @@
                 </Button.Style>
             </Button>
 
+
         </StackPanel>
-        <!--#endregion-->
-
-        <!--#region Content-->
         <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Contacts page"></Button>
-
-        <!--#endregion-->
     </Grid>
 </UserControl>

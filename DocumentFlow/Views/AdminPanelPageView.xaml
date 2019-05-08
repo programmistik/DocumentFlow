@@ -21,7 +21,7 @@
                     <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
 
                         <Label FontWeight="Bold"
-                               Content="{Binding UserName}" />                        
+                               Content="{Binding UserName}" />
                     </StackPanel>
 
 
@@ -43,34 +43,28 @@
     <StackPanel Orientation="Horizontal">
         <Button Content="Add new user"
                 Margin="5"
-                Command="{Binding AddNewUserCommand}" />
+                Command="{Binding AddNewUserCommand}"/>
         <Button Content="Edit user"
                 Margin="5"/>
-            <Button Content="Normative information"
-                    Command="{Binding NormInfoCommand}"
-                Margin="5"/>
             <Button Content="Change my password"                    
-                Margin="200,5,5,5"
+                Margin="400,5,5,5"
                     Command="{Binding ChangeMyPassword}"/>
         </StackPanel>
         <ListBox
-                   
-                    HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
-                                            
-                            Margin="3"
-                ItemsSource="{Binding UserList}" 
-                
-                
-                            ScrollViewer.CanContentScroll="True"
-                            ScrollViewer.VerticalScrollBarVisibility="Visible"       
-                            ItemTemplate="{StaticResource UserListItemTemplate}">
+            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
+            HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
+            Margin="3"
+            ItemsSource="{Binding UserList}" 
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"       
+            ItemTemplate="{StaticResource UserListItemTemplate}">
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </ListBox.ItemContainerStyle>
-
         </ListBox>
-    </StackPanel>
+
+    </Grid>
 </UserControl>

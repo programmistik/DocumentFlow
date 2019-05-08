@@ -81,54 +81,54 @@
             </DockPanel>
 
         </StackPanel>
-        <ComboBox Width="50" Height="25" HorizontalAlignment="Left" Margin="2"
-                 
+            <ComboBox Width="50" Height="25" Margin="2"
+                  HorizontalAlignment="Left" 
                   SelectedIndex="{Binding ColorIndex}">
 
             <ComboBoxItem FontSize="15" 
                          Content="Lavender"
                          Background="#7986cb"
-                         Foreground="#7986cb"/>
+                         Foreground="Black"/>
             <ComboBoxItem FontSize="15" 
                          Content="Sage" 
                          Background="#33b679"
-                         Foreground="#33b679"/>
+                         Foreground="Black"/>
             <ComboBoxItem FontSize="15" 
-                         Content="3" 
+                         Content="Grape" 
                          Background="#8e24aa"
-                         Foreground="#8e24aa"/>
+                         Foreground="Black"/>
             <ComboBoxItem FontSize="15" 
-                         Content="4" 
+                         Content="Flamingo" 
                          Background="#e67c73"
-                         Foreground="#e67c73"/>
+                         Foreground="Black"/>
             <ComboBoxItem FontSize="15" 
-                         Content="5" 
+                         Content="Banana" 
                          Background="#f6c026"
-                         Foreground="#f6c026"/>
+                         Foreground="Black"/>
             <ComboBoxItem FontSize="15" 
-                         Content="6" 
+                         Content="Tangerine" 
                          Background="#f5511d"
-                         Foreground="#f5511d"/>
+                         Foreground="Black"/>
             <ComboBoxItem FontSize="15" 
-                         Content="7" 
+                         Content="Peacock" 
                          Background="#039be5"
-                         Foreground="#039be5"/>
+                         Foreground="Black"/>
             <ComboBoxItem FontSize="15" 
-                         Content="8" 
+                         Content="Graphite" 
                          Background="#616161"
-                         Foreground="#616161"/>
+                         Foreground="Black"/>
             <ComboBoxItem FontSize="15" 
-                         Content="9" 
+                         Content="Blueberry"
                          Background="#3f51b5"
-                         Foreground="#3f51b5"/>
+                         Foreground="Black"/>
             <ComboBoxItem FontSize="15" 
-                         Content="10" 
+                         Content="Basil" 
                          Background="#0b8043"
-                         Foreground="#0b8043"/>
+                         Foreground="Black"/>
             <ComboBoxItem FontSize="15" 
-                         Content="11" 
+                         Content="Tomato" 
                          Background="#d60000"
-                         Foreground="#d60000"/>
+                         Foreground="Black"/>
         </ComboBox>
         
     </StackPanel>
