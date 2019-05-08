@@ -104,7 +104,8 @@ namespace DocumentFlow.ViewModels
                 else
                     EndDate = ev.End.DateTime;
                 
-                AttendeesList = new ObservableCollection<EventAttendee>(ev.Attendees);
+                if (ev.Attendees != null)
+                    AttendeesList = new ObservableCollection<EventAttendee>(ev.Attendees);
             }
             else if (edev.Notification == "EventToAdd")
             {

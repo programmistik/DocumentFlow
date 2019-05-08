@@ -1,5 +1,6 @@
 ﻿using DocumentFlow.Models;
 using DocumentFlow.Services;
+using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -31,7 +32,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand<User> ChangeUserPasswordCommand => changeUserPasswordCommand ?? (changeUserPasswordCommand = new RelayCommand<User>(
                 param =>
                 {
-                    
+
                 }
                  ));
 
@@ -39,6 +40,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand AddNewUserCommand => addNewUserCommand ?? (addNewUserCommand = new RelayCommand(
                 () =>
                 {
+                    navigationService.Navigate<AddNewUserPageView>();
 
                 }
                  ));
@@ -50,7 +52,14 @@ namespace DocumentFlow.ViewModels
 
                 }
                  ));
+        private RelayCommand normInfoCommand;
+        public RelayCommand NormInfoCommand => normInfoCommand ?? (normInfoCommand = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<NormativeInfoPageView>();
+                }
+                 ));
 
-       
+
     }
 }

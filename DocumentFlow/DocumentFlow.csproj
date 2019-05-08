@@ -198,17 +198,17 @@
     </Compile>
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\Companies.cs" />
+    <Compile Include="Models\ContactInformation.cs" />
     <Compile Include="Models\ContactInfoTypes.cs" />
     <Compile Include="Models\Currencies.cs" />
     <Compile Include="Models\Departments.cs" />
     <Compile Include="Models\Documents.cs" />
     <Compile Include="Models\DocumentStates.cs" />
     <Compile Include="Models\DocumentTypes.cs" />
-    <Compile Include="Models\CalendarQuickstart.cs" />
     <Compile Include="Models\GoogleMessage.cs" />
     <Compile Include="Models\MyFiles.cs" />
     <Compile Include="Models\Organizations.cs" />
-    <Compile Include="Models\RoleTypes.cs" />
+    <Compile Include="Models\Positions.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\Resources.ru-RU.Designer.cs">
       <DependentUpon>Resources.ru-RU.resx</DependentUpon>
@@ -224,11 +224,13 @@
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\AddEditEventPageViewModel.cs" />
+    <Compile Include="ViewModels\AddNewUserPageViewModel.cs" />
     <Compile Include="ViewModels\AdminPanelPageViewModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\CalendarPageViewModel.cs" />
     <Compile Include="ViewModels\ComposeNewMailPageViewModel.cs" />
     <Compile Include="ViewModels\ContactsPageViewModel.cs" />
+    <Compile Include="ViewModels\NormativeInfoPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\NewsPageViewModel.cs" />
     <Compile Include="ViewModels\GMailPageViewModel.cs" />
@@ -239,6 +241,9 @@
     <Compile Include="ViewModels\ReadMailPageViewModel.cs" />
     <Compile Include="Views\AddEditEventPageView.xaml.cs">
       <DependentUpon>AddEditEventPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddNewUserPageView.xaml.cs">
+      <DependentUpon>AddNewUserPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AdminPanelPageView.xaml.cs">
       <DependentUpon>AdminPanelPageView.xaml</DependentUpon>
@@ -273,6 +278,9 @@
     </Compile>
     <Compile Include="Views\NewsPageView.xaml.cs">
       <DependentUpon>NewsPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NormativeInfoPageView.xaml.cs">
+      <DependentUpon>NormativeInfoPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReadMailPageView.xaml.cs">
       <DependentUpon>ReadMailPageView.xaml</DependentUpon>
@@ -341,6 +349,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddNewUserPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminPanelPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -378,6 +390,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NormativeInfoPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
