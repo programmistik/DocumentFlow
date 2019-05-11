@@ -133,7 +133,7 @@ namespace DocumentFlow.ViewModels
                     navigationService.Navigate<ContactsPageView>();
                 }
             ));
-        #region NavigationCommands
+        #endregion NavigationCommands
 
     }
 }
