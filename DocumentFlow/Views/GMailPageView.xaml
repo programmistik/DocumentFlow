@@ -175,34 +175,30 @@
         <!--#region Content-->
         <DockPanel
             Grid.Column="1" Grid.ColumnSpan="7"
-                    Grid.Row="1" Grid.RowSpan="6">
+            Grid.Row="1" Grid.RowSpan="6">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <Button  Content="{x:Static p:Resources.ReceiveMail}"
                      Margin="5,5,0,5"
-                 Command="{Binding ReceiveMailCommand}"/>
+                     Command="{Binding ReceiveMailCommand}"/>
             <Button  Content="  Compose  "
                      Margin="5"
-                 Command="{Binding ComposeCommand}"/>
-                <Label Content="🔎" FontSize="25"/> 
+                     Command="{Binding ComposeCommand}"/>
+            <Label Content="🔎" FontSize="25"/> 
             <TextBox Margin="5" 
                      Background="White"
-                Text="{Binding Path=MailFilter, UpdateSourceTrigger=PropertyChanged}"
-                     
-                        Width="380" />
+                     Text="{Binding Path=MailFilter, UpdateSourceTrigger=PropertyChanged}"
+                     Width="380" />
             </StackPanel>
             <ListBox
                     DockPanel.Dock="Top"
                     HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
-                                            
-                            Margin="3"
-                ItemsSource="{Binding Path=FilteredInboxItems, Mode=OneWay}" 
-                 IsSynchronizedWithCurrentItem="True" 
-                
-                 Name="lbMailList"
-                
-                            ScrollViewer.CanContentScroll="True"
-                            ScrollViewer.VerticalScrollBarVisibility="Visible"       
-                            ItemTemplate="{StaticResource IndoxListBoxItemTemplate}">
+                    Margin="3"
+                    ItemsSource="{Binding Path=FilteredInboxItems, Mode=OneWay}" 
+                    IsSynchronizedWithCurrentItem="True" 
+                    Name="lbMailList"
+                    ScrollViewer.CanContentScroll="True"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"       
+                    ItemTemplate="{StaticResource IndoxListBoxItemTemplate}">
 
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">

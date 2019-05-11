@@ -43,17 +43,14 @@
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
 
-            
-            <RibbonTab Header="New Post Editor">
 
+            <RibbonTab Header="New Post Editor">
                 <RibbonGroup Header="Editor" Width="350">
                     <StackPanel>
-
                         <StackPanel Orientation="Horizontal">
                             <ComboBox  x:Name="RibbonComboboxFonts" 
                                        Width="150" 
-                                       Margin="0,0,5,10" 
-                                       >
+                                       Margin="0,0,5,10">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
                                         <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=FontsChangedCommand}"
@@ -63,8 +60,7 @@
                             </ComboBox>
                             <ComboBox x:Name="RibbonComboboxFontHeight" 
                                       Width="50"
-                                       Margin="0,0,5,10" 
-                                      >
+                                       Margin="0,0,5,10">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
                                         <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=FontHeightChangedCommand}"
@@ -137,11 +133,9 @@
                 <RibbonGroup Header="Apply" Width="120">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            
                             <RibbonButton  
                                           LargeImageSource="/DocumentFlow;component/Resources/Images/Newspaper-Feed-add-icon.png"  
                                           Height="42" 
-                                          
                                           HorizontalAlignment="Left" 
                                           Command="{Binding OkCommand}"/>
                         </StackPanel>
@@ -166,8 +160,7 @@
 
         <cuc:WPFWebBrowser x:Name="webBrowserEditor"  Grid.Row="1" Grid.ColumnSpan="2" />
         <cuc:HtmlEditor x:Name="HtmlEditor1"  Grid.Row="1" 
-                          Visibility="Hidden" Grid.ColumnSpan="2"
-                          />
+                          Visibility="Hidden" Grid.ColumnSpan="2"/>
         <!--<Label Content="Input post content:"/>
         <TextBox Height="300"
                  Text="{Binding PostContent}"

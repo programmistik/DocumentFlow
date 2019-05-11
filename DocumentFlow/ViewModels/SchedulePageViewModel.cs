@@ -32,7 +32,7 @@ namespace DocumentFlow.ViewModels
 
         }
 
-        //Navigation
+        #region NavigationCommands
         //Upper Menu
         private RelayCommand gMain;
         public RelayCommand GMain => gMain ?? (gMain = new RelayCommand(
@@ -113,5 +113,6 @@ namespace DocumentFlow.ViewModels
                     navigationService.Navigate<ContactsPageView>();
                 }
             ));
+        #endregion
     }
 }

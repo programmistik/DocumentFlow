@@ -180,8 +180,7 @@
 
         <cuc:WPFWebBrowser x:Name="webBrowserEditor"  Grid.Row="1" Grid.ColumnSpan="2" />
         <cuc:HtmlEditor x:Name="HtmlEditor1"  Grid.Row="1" 
-                          Visibility="Hidden" Grid.ColumnSpan="2"
-                          />
+                          Visibility="Hidden" Grid.ColumnSpan="2"/>
 
     </Grid>
 </UserControl>

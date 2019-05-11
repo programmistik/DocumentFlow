@@ -33,6 +33,8 @@ namespace DocumentFlow.ViewModels
             this.db = db;
         }
 
+        #region NavigationCommands
+
         private RelayCommand backCommand;
         public RelayCommand BackCommand => backCommand ?? (backCommand = new RelayCommand(
                 () =>
@@ -60,6 +62,8 @@ namespace DocumentFlow.ViewModels
 
                 }
                  ));
+
+        #endregion
 
         #region RibbonButtonsCommands
 

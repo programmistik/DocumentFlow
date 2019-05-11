@@ -112,8 +112,7 @@ namespace DocumentFlow.ViewModels
                 }
                  ));
 
-        #region
-        //Navigation
+        #region NavigationCommands
         //Upper Menu
         private RelayCommand gMain;
         public RelayCommand GMain => gMain ?? (gMain = new RelayCommand(

@@ -122,6 +122,8 @@ namespace DocumentFlow.ViewModels
 
         }
 
+        #region NavigationCommands
+
         private RelayCommand saveEvent;
         public RelayCommand SaveEvent => saveEvent ?? (saveEvent = new RelayCommand(
                 () =>
@@ -183,5 +185,6 @@ namespace DocumentFlow.ViewModels
                     navigationService.Navigate<CalendarPageView>();
                 }
                  ));
+        #endregion
     }
 }
