@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
+             xmlns:m="clr-namespace:DocumentFlow.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
+    
     <StackPanel>
         <TabControl>
             <TabItem>
@@ -17,8 +20,10 @@
                 <TabItem.Content>
                     <StackPanel DataContext="{Binding CompanyCollection}" >
                         <DataGrid AutoGenerateColumns="False" 
-                      EnableRowVirtualization="True" Height="340" 
-                      ItemsSource="{Binding}" Margin="10,0" 
+                                  EnableRowVirtualization="True" Height="340" 
+                                  ItemsSource="{Binding}" 
+                                  Margin="10,0" 
+                                  
                       RowDetailsVisibilityMode="VisibleWhenSelected">
                             <DataGrid.Columns>
 

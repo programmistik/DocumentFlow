@@ -14,6 +14,11 @@ namespace DocumentFlow.Models
 
         }
 
+        static AppDbContext()
+        {
+            Database.SetInitializer<AppDbContext>(new MyContextInitializer());
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<MyFile> MyFiles { get; set; }
@@ -25,31 +30,33 @@ namespace DocumentFlow.Models
         public DbSet<Department> Departments { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<NewsPost> NewsPosts { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
 
 
-        public static void Seed(AppDbContext context)
-        {
-            // добавляем пользователя по умолчанию
-            var defaultUser = new User { Login = "admin" };
-            context.Users.Add(defaultUser);
+        //protected override void Seed(AppDbContext context)
+        //{
+        //    // добавляем пользователя по умолчанию
+        //    var defaultUser = new User { Login = "admin" };
+        //    context.Users.Add(defaultUser);
 
-            // Document states
-            context.DocumentStates.Add(new DocumentState { DocStateName = "New" });
-            // ContactInfoTypes
-            context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Phone" });
-            context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Mobile" });
-            context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Address" });
-            context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "e-mail" });
-            context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Skype" });
-            context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Facebook" });
+        //    // Document states
+        //    context.DocumentStates.Add(new DocumentState { DocStateName = "New" });
+        //    // ContactInfoTypes
+        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Phone" });
+        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Mobile" });
+        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Address" });
+        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "e-mail" });
+        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Skype" });
+        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Facebook" });
 
-            //Positions
-            context.Positions.Add(new Position { PositionName = "Head of department" });
+        //    //Positions
+        //    context.Positions.Add(new Position { PositionName = "Head of department" });
 
 
-            context.SaveChanges();
-        }
+        //    context.SaveChanges();
+        //}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -70,8 +77,41 @@ namespace DocumentFlow.Models
             //   .WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
+
+            
         }
 
 
+    }
+
+    class MyContextInitializer : CreateDatabaseIfNotExists<AppDbContext>
+    {
+        protected override void Seed(AppDbContext db)
+        {
+            // добавляем пользователя по умолчанию
+            var defaultUser = new User { Login = "admin", IsActive = true };
+            db.Users.Add(defaultUser);
+
+            // Document states
+            db.DocumentStates.Add(new DocumentState { DocStateName = "New" });
+            //db.DocumentStates.Add(new DocumentState { DocStateName = "Prepared" });
+            db.DocumentStates.Add(new DocumentState { DocStateName = "In progress" });
+            db.DocumentStates.Add(new DocumentState { DocStateName = "Done" });
+            db.DocumentStates.Add(new DocumentState { DocStateName = "Rejected" });
+            // ContactInfoTypes
+            db.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Phone" });
+            db.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Mobile" });
+            db.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Address" });
+            db.ContactInfoTypes.Add(new ContactInfoType { InfoType = "e-mail" });
+            db.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Skype" });
+            db.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Facebook" });
+
+            //Positions
+            db.Positions.Add(new Position { PositionName = "Head of department" });
+
+
+            db.SaveChanges();
+
+        }
     }
 }

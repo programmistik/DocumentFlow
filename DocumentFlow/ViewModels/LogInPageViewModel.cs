@@ -70,44 +70,48 @@ namespace DocumentFlow.ViewModels
                         navigationService.Navigate<AdminPanelPageView>();
                     }
                     else
-                    navigationService.Navigate<MainDesktopPageView>();
-                    //if (CheckColor == "Red")
-                    //{
-                    //    messageService.ShowInfo("There is no user with such Username.\nPlease, Sign up first");
-                    //}
-                    //else if (CheckColor == "Green")
-                    //{
-                    //    var qwr = db.Users.Where(u => u.Login == LoginUserName);
-                    //    if (qwr.Any() == true)
-                    //    {
-                    //        var passwordContainer = param as IPasswordSupplier;
-                    //        if (passwordContainer != null)
-                    //        {
-                    //            var sPass = passwordContainer.GetPassword;
+                    {
+                        var qwr = db.Users.Where(u => u.Login == LoginUserName);
 
-                    //            string saltValueFromDB = qwr.Single().SaltValue;
-                    //            string hashValueFromDB = qwr.Single().HashValue;
 
-                    //            byte[] saltedPassword = Encoding.UTF8.GetBytes(saltValueFromDB + new NetworkCredential(string.Empty, sPass).Password);
-                    //            SHA256Managed hashstring = new SHA256Managed();
-                    //            byte[] hash = hashstring.ComputeHash(saltedPassword);
-                    //            string hashToCompare = Convert.ToBase64String(hash);
-                    //            if (hashValueFromDB.Equals(hashToCompare))
-                    //            {
-                    //                //var Usr = qwr.Single();
-                    //                //Messenger.Default.Send(new NotificationMessage<User>(Usr, "SendCurrentUser"));
-                    //                //navigationService.Navigate<MainPageView>();
-                    //            }
-                    //            else
-                    //                messageService.ShowError("Login credentials incorrect. User not validated.");
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    messageService.ShowInfo("Enter Username and password, please.");
-                    //}
+                        if (qwr.Any() == false)
+                        {
+
+                            qwr = db.Users.Where(u => u.GoogleAccount == LoginUserName);
+                            if (qwr.Any() == false)
+                            {
+                                messageService.ShowError("Username not found.");
+                                return;
+                            }
+
+                        }
+                        var passwordContainer = param as IPasswordSupplier;
+                        if (passwordContainer != null)
+                        {
+                            var sPass = passwordContainer.GetPassword;
+
+                            string saltValueFromDB = qwr.Single().SaltValue;
+                            string hashValueFromDB = qwr.Single().HashValue;
+
+                            byte[] saltedPassword = Encoding.UTF8.GetBytes(saltValueFromDB + new NetworkCredential(string.Empty, sPass).Password);
+                            SHA256Managed hashstring = new SHA256Managed();
+                            byte[] hash = hashstring.ComputeHash(saltedPassword);
+                            string hashToCompare = Convert.ToBase64String(hash);
+                            if (hashValueFromDB.Equals(hashToCompare))
+                            {
+                                var Usr = qwr.Single();
+                                Messenger.Default.Send(new NotificationMessage<User>(Usr, "SendCurrentUser"));
+                                //navigationService.Navigate<MainPageView>();
+                                navigationService.Navigate<MainDesktopPageView>();
+                            }
+                            else
+                                messageService.ShowError("Login credentials incorrect. User not validated.");
+                        }
+
+                        //navigationService.Navigate<MainDesktopPageView>();
+                    }
                 }
+
             ));
         }
 
@@ -131,10 +135,6 @@ namespace DocumentFlow.ViewModels
             get => lostFocusCommand ?? (lostFocusCommand = new RelayCommand<string>(
                 param =>
                 {
-                    if (param == "admin")
-                    {
-                        navigationService.Navigate<AdminPanelPageView>();
-                    }
                 }
             ));
         }

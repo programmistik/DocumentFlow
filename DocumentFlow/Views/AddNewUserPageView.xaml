@@ -15,9 +15,19 @@
     </b:Interaction.Triggers>
     
     <StackPanel>
-        <CheckBox Content="Is active"
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Content="Is active"
+                      Margin="2"
                   IsChecked="{Binding IsActive}"/>
-        <Label Content="Google account:" />
+            <CheckBox Content="(Sub) Head of department"
+                      Margin="2"
+                  IsChecked="{Binding HeadOfDep}"/>
+            <CheckBox Content="Can add/edit contacts"
+                      Margin="2"
+                  IsChecked="{Binding CanEditContacts}"/>
+
+        </StackPanel>
+    <Label Content="Google account:" />
         <TextBox Text="{Binding GoogleAccount}">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="LostFocus">
@@ -73,6 +83,7 @@
         </DockPanel>
         <StackPanel Orientation="Horizontal">
             <Button Content="Create" 
+                    Margin="10"
                     Command="{Binding CreateNewUserCommand}"
                     CommandParameter="{Binding ElementName=This}"/>
             <Button Content="Back"
