@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFlow.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
@@ -19,7 +20,7 @@ namespace DocumentFlow.Views
     /// <summary>
     /// Interaction logic for LogInPageView.xaml
     /// </summary>
-    public partial class LogInPageView : UserControl
+    public partial class LogInPageView : UserControl, IPasswordSupplier
     {
         public LogInPageView()
         {

@@ -23,6 +23,13 @@ namespace DocumentFlow.ViewModels
 
         private bool isActive;
         public bool IsActive { get => isActive; set => Set(ref isActive, value); }
+
+        private bool headOfDep;
+        public bool HeadOfDep { get => headOfDep; set => Set(ref headOfDep, value); }
+
+        private bool canEditContacts;
+        public bool CanEditContacts { get => canEditContacts; set => Set(ref canEditContacts, value); }
+
         private string googleAccount;
         public string GoogleAccount { get => googleAccount; set => Set(ref googleAccount, value); }
         private string name;
@@ -127,7 +134,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand<object> CreateNewUserCommand
         {
             get => createNewUserCommand ?? (createNewUserCommand = new RelayCommand<object>(
-                param =>
+                async param =>
                 {
                     var chkOk = true;
                     var errorStr = new StringBuilder("Following fiends cannot be empty:\n");
@@ -161,7 +168,7 @@ namespace DocumentFlow.ViewModels
                         errorStr.Append("Position\n");
                         chkOk = false;
                     }
-                    if (PasswordConfirmation)
+                    if (!PasswordConfirmation)
                     {
                         errorStr.Append("(!) Passwords doesn't match!\n");
                         chkOk = false;
@@ -184,25 +191,41 @@ namespace DocumentFlow.ViewModels
                             saltValue = Convert.ToBase64String(salt);
                             var hashValue = Convert.ToBase64String(hash);
 
-                            var login = GoogleAccount.Substring(GoogleAccount.IndexOf('@') + 1); 
+                            // var login = GoogleAccount.Substring(GoogleAccount.IndexOf('@') + 1); 
+                            var login = GoogleAccount.Substring(0, GoogleAccount.IndexOf('@'));
 
                             var NewUser = new User
                             {
                                 IsActive = IsActive,
                                 GoogleAccount = GoogleAccount,
-                                Name = Name,
-                                Surname = Surname,
-                                Company = Company,
-                                Department = Department,
-                                Position = Position,
-                                Photo = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png",
+                                //Name = Name,
+                                //Surname = Surname,
+                                //Company = Company,
+                                //Department = Department,
+                                //Position = Position,
+                                //Photo = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png",
                                 Login = login,
                                 SaltValue = saltValue,
                                 HashValue = hashValue
                             };
                             
                             db.Users.Add(NewUser);
-                            db.SaveChanges();
+
+                            var emp = new Employee
+                            {
+                                CanEditContacts = CanEditContacts,
+                                Company = Company,
+                                Department = Department,
+                                HeadOfDep = HeadOfDep,
+                                Name = Name,
+                                Surname = Surname,
+                                Photo = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png",
+                                Position = Position,
+                                User = NewUser
+
+                            };
+                            db.Contacts.Add(emp);
+                            await db.SaveChangesAsync();
                         }
                         
                         navigationService.Navigate<AdminPanelPageView>();

@@ -10,6 +10,48 @@
              x:Name="This"
              d:DesignHeight="450" d:DesignWidth="800"
              Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ListBoxItemTemplate">
+            <StackPanel>
+
+                <Grid  HorizontalAlignment="Stretch">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+
+                        <Label FontWeight="Bold"
+                               Content="{Binding InfoType}" />
+                        <Label 
+                               Content="{Binding InfoValue}" />
+                    </StackPanel>
+
+
+                    <Button  Grid.Column="1" 
+                            Margin="1"
+                            Command="{Binding DataContext.DeleteEventCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Delete
+                    </Button>
+
+                    <Button Grid.Column="2"  
+                            Margin="1" 
+                            Command="{Binding DataContext.EditEventCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Edit
+                    </Button>
+
+
+                </Grid>
+
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
     <Grid Background="#FFE1E1E1">
         <Grid.RowDefinitions>
             <RowDefinition Height="64"></RowDefinition>
@@ -136,7 +178,7 @@
 
         </StackPanel>
         <!--#endregion-->
-        
+
         <!--#region Content-->
         <Grid
             Grid.Column="1" Grid.ColumnSpan="7"
@@ -285,7 +327,33 @@
             </Viewbox>
 
 
+            <Viewbox  Grid.Column="1" Grid.Row="2"  HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Add"
+                            Margin="2"
+                            Command="{Binding AddCommand}"/>
 
+                </StackPanel>
+
+            </Viewbox>
+            <Viewbox  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="11" HorizontalAlignment="Left" Margin="0,0,0,25.8" Width="422">
+                <ListBox 
+            
+            HorizontalContentAlignment="Stretch" 
+                            ItemsSource="{Binding InfoList}"                   
+                            Margin="3"
+                            ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"         
+                            ItemTemplate="{StaticResource ListBoxItemTemplate}" Width="61">
+
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                </ListBox>
+            </Viewbox>
 
 
             <Viewbox  Grid.Column="1" Grid.Row="14"  HorizontalAlignment="Right">
@@ -311,6 +379,6 @@
 
 
     </Grid>
-        <!--#endregion-->
+    <!--#endregion-->
 
-    </UserControl>
+</UserControl>

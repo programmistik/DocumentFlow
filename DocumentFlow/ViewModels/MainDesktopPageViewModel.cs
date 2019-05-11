@@ -3,6 +3,7 @@ using DocumentFlow.Services;
 using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
@@ -24,14 +25,31 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
+
+        private User CurrentUser { get; set; }
+
+        private string fio;
+        public string Fio { get => fio; set => Set(ref fio, value); }
+
         public MainDesktopPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
 
-        }
+            Messenger.Default.Register<NotificationMessage<User>>(this, OnHitIt);
+           
 
+        }
+        private void OnHitIt(NotificationMessage<User> usr)
+        {
+            if (usr.Notification == "SendCurrentUser")
+            {
+                CurrentUser = usr.Content;
+                var emp = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+                Fio = emp.Name + " " + emp.Surname;
+            }
+        }
 
 
         #region NavigationCommands
