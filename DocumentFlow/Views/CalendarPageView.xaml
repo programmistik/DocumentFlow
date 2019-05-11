@@ -16,7 +16,7 @@
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
+
     <UserControl.Resources>
         <DataTemplate x:Key="ListBoxEventItemTemplate">
             <StackPanel>
@@ -61,11 +61,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="64"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition/>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition/>
+            <RowDefinition Height="14*"/>
+            <RowDefinition Height="28*"></RowDefinition>
+            <RowDefinition Height="28*"></RowDefinition>
+            <RowDefinition Height="27*"></RowDefinition>
+            <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"></ColumnDefinition>
@@ -165,7 +165,7 @@
             <Button
                 Command="{Binding GContacts}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
-                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
+                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png" Height="40" Width="45"></Image>
             </Button>
             <Button 
                 Command="{Binding GDocuments}"
@@ -205,8 +205,8 @@
             Grid.Row="6"
             Grid.Column="1" Grid.ColumnSpan="3"
             Content="{x:Static p:Resources.AddNewEvent}"
-            Margin="5"
-            Command="{Binding AddEvent}"/>
+            Margin="5,6"
+            Command="{Binding AddEvent}" Height="Auto"/>
 
         <Label
             Grid.Row="1"

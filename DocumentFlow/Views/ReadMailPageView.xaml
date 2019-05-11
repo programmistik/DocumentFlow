@@ -17,11 +17,10 @@
                FontSize="12"/>
         <Label Content="{Binding MailDate}"
                FontSize="12"/>
-        
+
         <WebBrowser Height="400" 
                     Name="myWebBrowser"
                     local:BrowserBehavior.Html="{Binding MyMail.Html}">
-
         </WebBrowser>
     </StackPanel>
 </UserControl>
