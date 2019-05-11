@@ -38,7 +38,7 @@
             </DockPanel>
         </DataTemplate>
     </UserControl.Resources>
-
+    
     <StackPanel>
         <StackPanel Orientation="Horizontal">
             <Button Content="Add new user"

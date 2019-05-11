@@ -153,7 +153,7 @@
             <Button
                 Command="{Binding GContacts}"
                 Height="50" Background="White" BorderBrush="Black" Padding="0">
-                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"></Image>
+                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png" Height="40" Width="45"></Image>
             </Button>
             <Button 
                 Command="{Binding GDocuments}"
