@@ -11,7 +11,7 @@ namespace DocumentFlow.Models
     {
         public AppDbContext() : base("DefaultConnection")
         {
-
+            this.Configuration.AutoDetectChangesEnabled = true;
         }
 
         static AppDbContext()
@@ -32,49 +32,17 @@ namespace DocumentFlow.Models
         public DbSet<NewsPost> NewsPosts { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<ColorScheme> ColorSchemes { get; set; }
 
 
 
-        //protected override void Seed(AppDbContext context)
-        //{
-        //    // добавляем пользователя по умолчанию
-        //    var defaultUser = new User { Login = "admin" };
-        //    context.Users.Add(defaultUser);
-
-        //    // Document states
-        //    context.DocumentStates.Add(new DocumentState { DocStateName = "New" });
-        //    // ContactInfoTypes
-        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Phone" });
-        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Mobile" });
-        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Address" });
-        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "e-mail" });
-        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Skype" });
-        //    context.ContactInfoTypes.Add(new ContactInfoType { InfoType = "Facebook" });
-
-        //    //Positions
-        //    context.Positions.Add(new Position { PositionName = "Head of department" });
-
-
-        //    context.SaveChanges();
-        //}
+      
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
-            //modelBuilder.Entity<CityList>()
-            //   .HasOptional(j => j.Trip)
-            //   .WithMany(x => x.CityList)
-            //   .WillCascadeOnDelete(true);
-
-            //modelBuilder.Entity<Ticket>()
-            //   .HasOptional(j => j.Trip)
-            //   .WithMany(x => x.Tickets)
-            //   .WillCascadeOnDelete(true);
-
-            //modelBuilder.Entity<CheckItem>()
-            //   .HasOptional(j => j.Trip)
-            //   .WithMany(x => x.CheckItems)
-            //   .WillCascadeOnDelete(true);
+ 
 
             base.OnModelCreating(modelBuilder);
 
@@ -108,6 +76,10 @@ namespace DocumentFlow.Models
 
             //Positions
             db.Positions.Add(new Position { PositionName = "Head of department" });
+
+            db.Languages.Add(new Language { LangCode = "EN", LangCultureCode = "en-US", LangName = "English" });
+
+            db.ColorSchemes.Add(new ColorScheme { Name = "Violet"});
 
 
             db.SaveChanges();

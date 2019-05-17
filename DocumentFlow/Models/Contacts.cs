@@ -30,14 +30,23 @@ namespace DocumentFlow.Models
         public int DepartmentId { get; set; }
         public virtual Position Position { get; set; }
         public int PositionId { get; set; }
+        public virtual Language Language { get; set; }
+        public int LanguageId { get; set; }
+        public virtual ColorScheme ColorScheme { get; set; }
+        public int ColorSchemeId { get; set; }
 
         public bool HeadOfDep { get; set; }
         public bool CanEditContacts { get; set; }
 
     }
 
-    //public class ExternalContact : Contact
-    //{
+    public class ExternalContact : Contact
+    {
+        public virtual Organization Organization { get; set; }
+        public int OrganizationId { get; set; }
 
-    //}
+        public string Account { get; set; }
+
+        public string Comment { get; set; }
+    }
 }

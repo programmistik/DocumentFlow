@@ -5,7 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
              mc:Ignorable="d" 
+             x:Name="This"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              d:DesignHeight="450" d:DesignWidth="800">
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <UserControl.Resources>
 
         <DataTemplate x:Key="UserListItemTemplate">
@@ -27,9 +35,9 @@
 
                     <Button  Grid.Column="1" 
                             Margin="1"
-                            Command="{Binding DataContext.ChangeUserPasswordCommand, ElementName=This}"
+                            Command="{Binding DataContext.EditUserCommand, ElementName=This}"
                             CommandParameter="{Binding}">
-                        Change password
+                        Edit 
                     </Button>
 
 
@@ -44,8 +52,8 @@
             <Button Content="Add new user"
                 Margin="5"
                 Command="{Binding AddNewUserCommand}" />
-            <Button Content="Edit user"
-                Margin="5"/>
+            <!--<Button Content="Edit user"
+                Margin="5"/>-->
             <Button Content="Normative information"
                     Command="{Binding NormInfoCommand}"
                 Margin="5"/>
@@ -58,10 +66,12 @@
         </StackPanel>
         <ListBox HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
                  Margin="3"
+                 BorderThickness="2"
+                 BorderBrush="DarkViolet"
                  ItemsSource="{Binding UserList}" 
                  ScrollViewer.CanContentScroll="True"
                  ScrollViewer.VerticalScrollBarVisibility="Visible"       
-                 ItemTemplate="{StaticResource UserListItemTemplate}">
+                 ItemTemplate="{StaticResource UserListItemTemplate}" Height="388">
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">

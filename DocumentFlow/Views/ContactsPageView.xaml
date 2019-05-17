@@ -6,7 +6,56 @@
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
              mc:Ignorable="d" 
+             x:Name="This"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ListBoxItemTemplate">
+            <StackPanel>
+
+                <Grid  HorizontalAlignment="Stretch">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+
+                        <Label FontWeight="Bold"
+                               Content="{Binding ContactInfoType.ContactName}" />
+                        <Label 
+                               Content="{Binding PrimaryPhone}" />
+                        <Label 
+                               Content="{Binding PrimaryMail}" />
+                    </StackPanel>
+
+
+                    <Button  Grid.Column="1" 
+                            Margin="1"
+                            Command="{Binding DataContext.DeleteContactCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Delete
+                    </Button>
+
+                    <Button Grid.Column="2"  
+                            Margin="1" 
+                            Command="{Binding DataContext.EditContactCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Edit
+                    </Button>
+                    <Button Grid.Column="2"  
+                            Margin="1" 
+                            Command="{Binding DataContext.ShowContactCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Show
+                    </Button>
+
+                </Grid>
+
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid Background="#FFE1E1E1">
         <Grid.RowDefinitions>
             <RowDefinition Height="64"></RowDefinition>
@@ -156,6 +205,42 @@
             </DataGrid.Columns>
         </DataGrid>-->
         <!--#endregion-->
+        <StackPanel
+            Grid.Column="1" Grid.ColumnSpan="7" 
+            Grid.Row="1" Grid.RowSpan="6">
+            <Button Content="Add new contact"
+                    Margin="5"
+                    IsEnabled="{Binding AddIsEnabled}"
+                    Command="{Binding AddContactCommand}"/>
+            <DockPanel>
+            <Label Content="🔎" FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="DarkViolet"/>
+            <TextBox BorderBrush="DarkViolet"
+                     BorderThickness="2"
+                     Background="White"
+                     Text="{Binding Path=MailFilter, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            </DockPanel>
+            <ListBox 
+                     BorderBrush="DarkViolet"
+                     BorderThickness="1"
+            
+            HorizontalContentAlignment="Stretch" 
+                            ItemsSource="{Binding ContactList}"                   
+                            Margin="5"
+                            ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"         
+                            ItemTemplate="{StaticResource ListBoxItemTemplate}" Height="293">
+
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+            </ListBox>
+        </StackPanel>
 
     </Grid>
 </UserControl>

@@ -194,10 +194,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ModalWindows\AddContactInfoWindow.xaml.cs">
+      <DependentUpon>AddContactInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModalWindows\LinkWin.xaml.cs">
       <DependentUpon>LinkWin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AppDbContext.cs" />
+    <Compile Include="Models\ColorScheme.cs" />
     <Compile Include="Models\Companies.cs" />
     <Compile Include="Models\ContactInformation.cs" />
     <Compile Include="Models\ContactInfoTypes.cs" />
@@ -209,6 +213,7 @@
     <Compile Include="Models\DocumentTypes.cs" />
     <Compile Include="Models\GoogleMessage.cs" />
     <Compile Include="Models\History.cs" />
+    <Compile Include="Models\Languages.cs" />
     <Compile Include="Models\MyFiles.cs" />
     <Compile Include="Models\NewsPosts.cs" />
     <Compile Include="Models\Organizations.cs" />
@@ -346,6 +351,10 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ModalWindows\AddContactInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ModalWindows\LinkWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

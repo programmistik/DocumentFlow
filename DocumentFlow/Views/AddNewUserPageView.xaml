@@ -28,7 +28,8 @@
 
         </StackPanel>
     <Label Content="Google account:" />
-        <TextBox Text="{Binding GoogleAccount}">
+        <TextBox Text="{Binding GoogleAccount}" 
+                 IsReadOnly="{Binding GAccountIsReadOnly}">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="LostFocus">
                     <b:InvokeCommandAction  Command="{Binding LostFocusCommand_GoogleAccount}" CommandParameter="{Binding ElementName=This}"/>
@@ -89,7 +90,7 @@
         </DockPanel>
         
         <StackPanel Orientation="Horizontal">
-            <Button Content="Create" 
+            <Button Content="{Binding ButtonOkContent}" 
                     Margin="10"
                     Command="{Binding CreateNewUserCommand}"
                     CommandParameter="{Binding ElementName=This}"/>

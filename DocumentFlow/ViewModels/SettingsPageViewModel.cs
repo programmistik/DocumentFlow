@@ -1,10 +1,12 @@
 ﻿using AForge.Video;
 using AForge.Video.DirectShow;
+using DocumentFlow.ModalWindows;
 using DocumentFlow.Models;
 using DocumentFlow.Services;
 using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -49,6 +51,27 @@ namespace DocumentFlow.ViewModels
         private bool passwordConfirmation;
         public bool PasswordConfirmation { get => passwordConfirmation; set => Set(ref passwordConfirmation, value); }
 
+        private User CurrentUser { get; set; }
+        private Employee CurrentEmployee { get; set; }
+
+        private string googleAccount;
+        public string GoogleAccount { get => googleAccount; set => Set(ref googleAccount, value); }
+
+        private Language selectedLanguage;
+        public Language SelectedLanguage { get => selectedLanguage; set => Set(ref selectedLanguage, value); }
+
+        private ObservableCollection<Language> languageCollection;
+        public ObservableCollection<Language> LanguageCollection { get => languageCollection; set => Set(ref languageCollection, value); }
+
+        private ColorScheme selectedColor;
+        public ColorScheme SelectedColor { get => selectedColor; set => Set(ref selectedColor, value); }
+
+        private ObservableCollection<ColorScheme> colorCollection;
+        public ObservableCollection<ColorScheme> ColorCollection { get => colorCollection; set => Set(ref colorCollection, value); }
+
+        private ObservableCollection<ContactInformation> infoList;
+        public ObservableCollection<ContactInformation> InfoList { get => infoList; set => Set(ref infoList, value); }
+
 
         public SettingsPageViewModel(INavigationService navigationService, 
                                     IMessageService messageService, 
@@ -60,10 +83,36 @@ namespace DocumentFlow.ViewModels
             this.db = db;
             this.passwordService = passwordService;
 
+            Messenger.Default.Register<NotificationMessage<User>>(this, OnHitIt);
+
             VideoDevices = new ObservableCollection<FilterInfo>();
             GetVideoDevices();
 
         }
+
+        private void OnHitIt(NotificationMessage<User> usr)
+        {
+            if (usr.Notification == "SendCurrentUser")
+            {
+                CurrentUser = usr.Content;
+                
+                CurrentEmployee = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+                LanguageCollection = new ObservableCollection<Language>(db.Languages);
+                SelectedLanguage = CurrentEmployee.Language;
+                ColorCollection = new ObservableCollection<ColorScheme>(db.ColorSchemes);
+                SelectedColor = CurrentEmployee.ColorScheme;
+                GoogleAccount = CurrentUser.GoogleAccount;
+                InfoList = new ObservableCollection<ContactInformation>(CurrentEmployee.ContactInfos);
+
+            }
+            else
+            {
+                InfoList = new ObservableCollection<ContactInformation>();
+                GoogleAccount = "";
+            }
+        }
+
+        #region Functions for camera
         public void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             try
@@ -115,6 +164,7 @@ namespace DocumentFlow.ViewModels
 
 
         }
+        #endregion
 
         private RelayCommand snapCommand;
         public RelayCommand SnapCommand
@@ -156,6 +206,8 @@ namespace DocumentFlow.ViewModels
                 }
             ));
         }
+
+        #region PasswordCommands
 
         private RelayCommand<string> lostFocusCommand_tbUN;
         public RelayCommand<string> LostFocusCommand_tbUN
@@ -205,6 +257,7 @@ namespace DocumentFlow.ViewModels
                 }
             ));
         }
+        #endregion
 
         private RelayCommand cancelCommand;
         public RelayCommand CancelCommand
@@ -216,7 +269,22 @@ namespace DocumentFlow.ViewModels
                     MsgColor = Msg = PassCheckError = "";
                     //User = new User();
                     StopCamera();
-                    navigationService.Navigate<LogInPageView>();
+                    navigationService.Navigate<MainDesktopPageView>();
+                }
+            ));
+        }
+
+        private RelayCommand okCommand;
+        public RelayCommand OkCommand
+        {
+            get => okCommand ?? (okCommand = new RelayCommand(
+                async() =>
+                {
+                    //CurrentEmployee.ContactInfos = new ObservableCollection<ContactInformation>(InfoList);
+                    await db.SaveChangesAsync();
+
+                    StopCamera();
+                    navigationService.Navigate<MainDesktopPageView>();
                 }
             ));
         }
@@ -227,7 +295,8 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GMain => gMain ?? (gMain = new RelayCommand(
                 () =>
                 {
-
+                    StopCamera();
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<MainDesktopPageView>();
                 }
             ));
@@ -236,8 +305,8 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GSettings => gSettings ?? (gSettings = new RelayCommand(
                 () =>
                 {
-
-                    navigationService.Navigate<SettingsPageView>();
+                    // do nothing
+                    //navigationService.Navigate<SettingsPageView>();
                 }
             ));
 
@@ -245,7 +314,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GExit => gExit ?? (gExit = new RelayCommand(
                 () =>
                 {
-
+                    StopCamera();
                     navigationService.Navigate<LogInPageView>();
                 }
             ));
@@ -257,6 +326,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GSchedule => gSchedule ?? (gSchedule = new RelayCommand(
                 () =>
                 {
+                    StopCamera();
                     navigationService.Navigate<SchedulePageView>();
                 }
             ));
@@ -265,6 +335,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GDocuments => gDocuments ?? (gDocuments = new RelayCommand(
                 () =>
                 {
+                    StopCamera();
                     navigationService.Navigate<DocumentsPageView>();
                 }
             ));
@@ -273,6 +344,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GNews => gNews ?? (gNews = new RelayCommand(
                 () =>
                 {
+                    StopCamera();
                     navigationService.Navigate<NewsPageView>();
                 }
             ));
@@ -281,6 +353,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GCalendar => gCalendar ?? (gCalendar = new RelayCommand(
                 () =>
                 {
+                    StopCamera();
                     navigationService.Navigate<CalendarPageView>();
                 }
             ));
@@ -289,7 +362,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GMail => gMail ?? (gMail = new RelayCommand(
                 () =>
                 {
-
+                    StopCamera();
                     navigationService.Navigate<GMailPageView>();
                 }
             ));
@@ -298,10 +371,35 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GContacts => gContacts ?? (gContacts = new RelayCommand(
                 () =>
                 {
-
+                    StopCamera();
                     navigationService.Navigate<ContactsPageView>();
                 }
             ));
         #endregion
+
+        private RelayCommand addCommand;
+        public RelayCommand AddCommand => addCommand ?? (addCommand = new RelayCommand(
+                () =>
+                {
+                    var lst = db.ContactInfoTypes.ToList();
+
+                    var win = new AddContactInfoWindow(lst);
+
+                    win.ShowDialog();
+                    if (!string.IsNullOrEmpty(win.InputValue.Text))
+                    {
+                        var newInfo = new ContactInformation
+                        {
+                            Contact = CurrentEmployee,
+                            ContactInfoType = win.InfoCollection.SelectedItem as ContactInfoType,
+                            Value = win.InputValue.Text
+                        };
+                        InfoList.Add(newInfo);
+                        //db.Employees.Where(e => e == CurrentEmployee).Single().ContactInfos.Add(newInfo);
+                        CurrentEmployee.ContactInfos.Add(newInfo);
+                    }
+
+                }
+            ));
     }
 }

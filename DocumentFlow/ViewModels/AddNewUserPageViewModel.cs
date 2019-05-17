@@ -3,6 +3,7 @@ using DocumentFlow.Services;
 using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -61,6 +62,13 @@ namespace DocumentFlow.ViewModels
         private bool passwordConfirmation;
         public bool PasswordConfirmation { get => passwordConfirmation; set => Set(ref passwordConfirmation, value); }
 
+        private string buttonOkContent;
+        public string ButtonOkContent { get => buttonOkContent; set => Set(ref buttonOkContent, value); }
+
+        private bool gAccountIsReadOnly;
+        public bool GAccountIsReadOnly { get => gAccountIsReadOnly; set => Set(ref gAccountIsReadOnly, value); }
+
+        private User CurrentUser { get; set; }
 
         public AddNewUserPageViewModel(INavigationService navigationService, 
                                           IMessageService messageService, 
@@ -69,6 +77,34 @@ namespace DocumentFlow.ViewModels
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
+
+            Messenger.Default.Register<NotificationMessage<User>>(this, OnHitIt);
+        }
+
+        private void OnHitIt(NotificationMessage<User> usr)
+        {
+            if (usr.Notification == "OpenToAdd")
+            {
+                GAccountIsReadOnly = false;
+                ButtonOkContent = "Create";
+                
+            }
+            else if (usr.Notification == "OpenToEdit")
+            {
+                GAccountIsReadOnly = true;
+                ButtonOkContent = "Save";
+                CurrentUser = usr.Content;
+                IsActive = CurrentUser.IsActive;
+                GoogleAccount = CurrentUser.GoogleAccount;
+                var CurrentEmployee = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+                HeadOfDep = CurrentEmployee.HeadOfDep;
+                CanEditContacts = CurrentEmployee.CanEditContacts;
+                Name = CurrentEmployee.Name;
+                Surname = CurrentEmployee.Surname;
+                Department = CurrentEmployee.Department;
+                Position = CurrentEmployee.Position;
+                Company = CurrentEmployee.Company;
+            }
         }
 
         private RelayCommand loadedCommand;
@@ -80,8 +116,11 @@ namespace DocumentFlow.ViewModels
             PositionCollection = new ObservableCollection<Position>(db.Positions);
             PasswordConfirmation = false;
             PassCheckError = "";
-            IsActive = true;
-            GoogleAccount = Name = Surname = "";
+            if (!GAccountIsReadOnly)
+            {
+                IsActive = true;
+                GoogleAccount = Name = Surname = "";
+            }
         }
 
         private RelayCommand lostFocusCommand_GoogleAccount;
@@ -136,101 +175,133 @@ namespace DocumentFlow.ViewModels
             get => createNewUserCommand ?? (createNewUserCommand = new RelayCommand<object>(
                 async param =>
                 {
-                    var chkOk = true;
-                    var errorStr = new StringBuilder("Following fiends cannot be empty:\n");
-                    if (string.IsNullOrEmpty(GoogleAccount))
+                    if (ButtonOkContent == "Create")
                     {
-                        errorStr.Append("Google accont\n");
-                        chkOk = false;
-                    }
-                    if (string.IsNullOrEmpty(Name))
-                    {
-                        errorStr.Append("Name\n");
-                        chkOk = false;
-                    }
-                    if (string.IsNullOrEmpty(Surname))
-                    {
-                        errorStr.Append("Surname\n");
-                        chkOk = false;
-                    }
-                    if (Company == null)
-                    {
-                        errorStr.Append("Company\n");
-                        chkOk = false;
-                    }
-                    if (Department == null)
-                    {
-                        errorStr.Append("Department\n");
-                        chkOk = false;
-                    }
-                    if (Position == null)
-                    {
-                        errorStr.Append("Position\n");
-                        chkOk = false;
-                    }
-                    if (!PasswordConfirmation)
-                    {
-                        errorStr.Append("(!) Passwords doesn't match!\n");
-                        chkOk = false;
-                    }
-
-                    if (chkOk)
-                    {
-                        var passwordContainer = param as IPasswordSupplier;
-                        if (passwordContainer != null)
+                        var chkOk = true;
+                        var errorStr = new StringBuilder("Following fiends cannot be empty:\n");
+                        if (string.IsNullOrEmpty(GoogleAccount))
                         {
-                            var sPass = passwordContainer.GetPassword;
-                            RNGCryptoServiceProvider csprng = new RNGCryptoServiceProvider();
-                            byte[] salt = new byte[32];
-                            csprng.GetBytes(salt);
-                            var saltValue = Convert.ToBase64String(salt);
-
-                            byte[] saltedPassword = Encoding.UTF8.GetBytes(saltValue + new NetworkCredential(string.Empty, sPass).Password);
-                            SHA256Managed hashstring = new SHA256Managed();
-                            byte[] hash = hashstring.ComputeHash(saltedPassword);
-                            saltValue = Convert.ToBase64String(salt);
-                            var hashValue = Convert.ToBase64String(hash);
-
-                            // var login = GoogleAccount.Substring(GoogleAccount.IndexOf('@') + 1); 
-                            var login = GoogleAccount.Substring(0, GoogleAccount.IndexOf('@'));
-
-                            var NewUser = new User
-                            {
-                                IsActive = IsActive,
-                                GoogleAccount = GoogleAccount,
-                                //Name = Name,
-                                //Surname = Surname,
-                                //Company = Company,
-                                //Department = Department,
-                                //Position = Position,
-                                //Photo = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png",
-                                Login = login,
-                                SaltValue = saltValue,
-                                HashValue = hashValue
-                            };
-                            
-                            db.Users.Add(NewUser);
-
-                            var emp = new Employee
-                            {
-                                CanEditContacts = CanEditContacts,
-                                Company = Company,
-                                Department = Department,
-                                HeadOfDep = HeadOfDep,
-                                Name = Name,
-                                Surname = Surname,
-                                Photo = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png",
-                                Position = Position,
-                                User = NewUser
-
-                            };
-                            db.Contacts.Add(emp);
-                            await db.SaveChangesAsync();
+                            errorStr.Append("Google accont\n");
+                            chkOk = false;
                         }
-                        
+                        if (string.IsNullOrEmpty(Name))
+                        {
+                            errorStr.Append("Name\n");
+                            chkOk = false;
+                        }
+                        if (string.IsNullOrEmpty(Surname))
+                        {
+                            errorStr.Append("Surname\n");
+                            chkOk = false;
+                        }
+                        if (Company == null)
+                        {
+                            errorStr.Append("Company\n");
+                            chkOk = false;
+                        }
+                        if (Department == null)
+                        {
+                            errorStr.Append("Department\n");
+                            chkOk = false;
+                        }
+                        if (Position == null)
+                        {
+                            errorStr.Append("Position\n");
+                            chkOk = false;
+                        }
+                        if (!PasswordConfirmation)
+                        {
+                            errorStr.Append("(!) Passwords doesn't match!\n");
+                            chkOk = false;
+                        }
+
+                        if (chkOk)
+                        {
+                            var passwordContainer = param as IPasswordSupplier;
+                            if (passwordContainer != null)
+                            {
+                                var sPass = passwordContainer.GetPassword;
+                                RNGCryptoServiceProvider csprng = new RNGCryptoServiceProvider();
+                                byte[] salt = new byte[32];
+                                csprng.GetBytes(salt);
+                                var saltValue = Convert.ToBase64String(salt);
+
+                                byte[] saltedPassword = Encoding.UTF8.GetBytes(saltValue + new NetworkCredential(string.Empty, sPass).Password);
+                                SHA256Managed hashstring = new SHA256Managed();
+                                byte[] hash = hashstring.ComputeHash(saltedPassword);
+                                saltValue = Convert.ToBase64String(salt);
+                                var hashValue = Convert.ToBase64String(hash);
+
+                                // var login = GoogleAccount.Substring(GoogleAccount.IndexOf('@') + 1); 
+                                var login = GoogleAccount.Substring(0, GoogleAccount.IndexOf('@'));
+
+                                var NewUser = new User
+                                {
+                                    IsActive = IsActive,
+                                    GoogleAccount = GoogleAccount,
+                                    Login = login,
+                                    SaltValue = saltValue,
+                                    HashValue = hashValue
+                                };
+
+                                db.Users.Add(NewUser);
+
+                                var emp = new Employee
+                                {
+                                    CanEditContacts = CanEditContacts,
+                                    Company = Company,
+                                    Department = Department,
+                                    HeadOfDep = HeadOfDep,
+                                    Name = Name,
+                                    Surname = Surname,
+                                    Photo = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png",
+                                    Position = Position,
+                                    User = NewUser,
+                                    Language = db.Languages.Where(l => l.Id == 1).Single(),
+                                    ColorScheme = db.ColorSchemes.Where(l => l.Id == 1).Single()
+                                };
+                                db.Contacts.Add(emp);
+                                await db.SaveChangesAsync();
+                            }
+
+                            navigationService.Navigate<AdminPanelPageView>();
+                        }
+                    }
+                    else
+                    {
+                        CurrentUser.IsActive = IsActive;
+                        if (!PasswordConfirmation)
+                        {
+                            var passwordContainer = param as IPasswordSupplier;
+                            if (passwordContainer != null)
+                            {
+                                var sPass = passwordContainer.GetPassword;
+                                RNGCryptoServiceProvider csprng = new RNGCryptoServiceProvider();
+                                byte[] salt = new byte[32];
+                                csprng.GetBytes(salt);
+                                var saltValue = Convert.ToBase64String(salt);
+
+                                byte[] saltedPassword = Encoding.UTF8.GetBytes(saltValue + new NetworkCredential(string.Empty, sPass).Password);
+                                SHA256Managed hashstring = new SHA256Managed();
+                                byte[] hash = hashstring.ComputeHash(saltedPassword);
+                                saltValue = Convert.ToBase64String(salt);
+                                var hashValue = Convert.ToBase64String(hash);
+                                CurrentUser.SaltValue = saltValue;
+                                CurrentUser.HashValue = hashValue;
+                            }
+                        }
+                        var CurrentEmployee = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+                        CurrentEmployee.CanEditContacts = CanEditContacts;
+                        CurrentEmployee.Company = Company;
+                        CurrentEmployee.Department = Department;
+                        CurrentEmployee.HeadOfDep = HeadOfDep;
+                        CurrentEmployee.Name = Name;
+                        CurrentEmployee.Position = Position;
+                        CurrentEmployee.Surname = Surname;
+
+                        await db.SaveChangesAsync();
                         navigationService.Navigate<AdminPanelPageView>();
                     }
-                     
 
 
                 }

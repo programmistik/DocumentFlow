@@ -58,7 +58,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GMain => gMain ?? (gMain = new RelayCommand(
                 () =>
                 {
-
+                    // стоит ли делать навигацию на страницу, на которой ты уже находишься?
                     navigationService.Navigate<MainDesktopPageView>();
                 }
             ));
@@ -67,7 +67,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GSettings => gSettings ?? (gSettings = new RelayCommand(
                 () =>
                 {
-
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<SettingsPageView>();
                 }
             ));
@@ -133,7 +133,9 @@ namespace DocumentFlow.ViewModels
                     navigationService.Navigate<ContactsPageView>();
                 }
             ));
-        #endregion NavigationCommands
+
+
+        #endregion
 
     }
 }
