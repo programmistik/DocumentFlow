@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DocumentFlow.Models
 {
@@ -31,5 +32,15 @@ namespace DocumentFlow.Models
         //{
         //    this.Contacts = new HashSet<ContactInformation>();
         //}
+
+        public override string ToString()
+        {
+            var entity = new AppDbContext();
+            entity.Employees.Load();
+            var coll = entity.Employees.Local;
+            var emp = coll.Where(e => e.User.GoogleAccount == this.GoogleAccount).Single();
+            return $"{GoogleAccount} \n{emp.Name} {emp.Surname} (Dep:{emp.Department.DepartmentName}, Pos:{emp.Position.PositionName})";
+
+        }
     }
 }

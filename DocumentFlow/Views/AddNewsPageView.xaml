@@ -7,16 +7,26 @@
              xmlns:cuc="clr-namespace:DocumentFlow.CustomUserControls"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              Name="This"
              d:DesignHeight="450" d:DesignWidth="800"
-             Loaded="UserControl_Loaded">
+             >
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" 
+                                   CommandParameter="{Binding ElementName=This}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="19*"/>
             <ColumnDefinition Width="781*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -31,8 +41,8 @@
 
             <Ribbon.ApplicationMenu>
                 <RibbonApplicationMenu Background="DarkViolet">
-                    <RibbonApplicationMenuItem Header="Create new post"
-                                               x:Name="MenuSend"
+                    <RibbonApplicationMenuItem Header="Save changes / Create new post"
+                                               
                                                ImageSource="/DocumentFlow;component/Resources/Images/Newspaper-Feed-add-icon.png"
                                                Command="{Binding OkCommand}"/>
                     <RibbonApplicationMenuItem Header="Exit"
@@ -44,7 +54,7 @@
             </Ribbon.ApplicationMenu>
 
 
-            <RibbonTab Header="New Post Editor">
+            <RibbonTab Header="Post Editor">
                 <RibbonGroup Header="Editor" Width="350">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -141,6 +151,23 @@
                         </StackPanel>
                     </StackPanel>
                 </RibbonGroup>
+                <RibbonGroup Header="Date" Width="170">
+                    <StackPanel>
+                        <StackPanel >
+                            <Label Content="Actual by date:"
+                                   Foreground="DarkViolet"
+                                   FontWeight="Bold"
+                                   FontSize="15"
+                                    />
+                            <DatePicker    
+                        SelectedDate="{Binding
+                        Path=UntilDate,
+                        Mode=TwoWay,
+                        TargetNullValue={x:Static System:DateTime.Now}}"
+                        />      
+                        </StackPanel>
+                    </StackPanel>
+                </RibbonGroup>
                 <!--<RibbonGroup Header="Save" Width="120">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -157,9 +184,16 @@
             </RibbonTab>
 
         </Ribbon>
-
-        <cuc:WPFWebBrowser x:Name="webBrowserEditor"  Grid.Row="1" Grid.ColumnSpan="2" />
-        <cuc:HtmlEditor x:Name="HtmlEditor1"  Grid.Row="1" 
+        <TextBox 
+            Grid.Row="1" Grid.ColumnSpan="2"
+            Text="{Binding MyPostHeader}"
+                 Margin="4"
+                 BorderThickness="1" BorderBrush="DarkViolet"
+                 FontWeight="Bold"
+                 FontSize="15"
+                 />  
+        <cuc:WPFWebBrowser x:Name="webBrowserEditor"  Grid.Row="2" Grid.ColumnSpan="2" />
+        <cuc:HtmlEditor x:Name="HtmlEditor1"  Grid.Row="2" 
                           Visibility="Hidden" Grid.ColumnSpan="2"/>
         <!--<Label Content="Input post content:"/>
         <TextBox Height="300"

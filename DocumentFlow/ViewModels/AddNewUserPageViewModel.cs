@@ -87,7 +87,9 @@ namespace DocumentFlow.ViewModels
             {
                 GAccountIsReadOnly = false;
                 ButtonOkContent = "Create";
-                
+                Department = null;
+                Position = null;
+                Company = null;
             }
             else if (usr.Notification == "OpenToEdit")
             {
@@ -267,27 +269,31 @@ namespace DocumentFlow.ViewModels
                             navigationService.Navigate<AdminPanelPageView>();
                         }
                     }
-                    else
+                    else // Save changes
                     {
                         CurrentUser.IsActive = IsActive;
+
                         if (!PasswordConfirmation)
                         {
                             var passwordContainer = param as IPasswordSupplier;
                             if (passwordContainer != null)
                             {
-                                var sPass = passwordContainer.GetPassword;
-                                RNGCryptoServiceProvider csprng = new RNGCryptoServiceProvider();
-                                byte[] salt = new byte[32];
-                                csprng.GetBytes(salt);
-                                var saltValue = Convert.ToBase64String(salt);
+                                if (!passwordContainer.IsEmpty())
+                                {
+                                    var sPass = passwordContainer.GetPassword;
+                                    RNGCryptoServiceProvider csprng = new RNGCryptoServiceProvider();
+                                    byte[] salt = new byte[32];
+                                    csprng.GetBytes(salt);
+                                    var saltValue = Convert.ToBase64String(salt);
 
-                                byte[] saltedPassword = Encoding.UTF8.GetBytes(saltValue + new NetworkCredential(string.Empty, sPass).Password);
-                                SHA256Managed hashstring = new SHA256Managed();
-                                byte[] hash = hashstring.ComputeHash(saltedPassword);
-                                saltValue = Convert.ToBase64String(salt);
-                                var hashValue = Convert.ToBase64String(hash);
-                                CurrentUser.SaltValue = saltValue;
-                                CurrentUser.HashValue = hashValue;
+                                    byte[] saltedPassword = Encoding.UTF8.GetBytes(saltValue + new NetworkCredential(string.Empty, sPass).Password);
+                                    SHA256Managed hashstring = new SHA256Managed();
+                                    byte[] hash = hashstring.ComputeHash(saltedPassword);
+                                    saltValue = Convert.ToBase64String(salt);
+                                    var hashValue = Convert.ToBase64String(hash);
+                                    CurrentUser.SaltValue = saltValue;
+                                    CurrentUser.HashValue = hashValue;
+                                }
                             }
                         }
                         var CurrentEmployee = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();

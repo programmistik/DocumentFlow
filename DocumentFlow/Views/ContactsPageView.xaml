@@ -222,7 +222,34 @@
                      Text="{Binding Path=MailFilter, UpdateSourceTrigger=PropertyChanged}"
                      Margin="5,0,5,0" />
             </DockPanel>
-            <ListBox 
+            <DataGrid x:Name="ContactsGrid" 
+                 
+                  HorizontalGridLinesBrush="DarkGray" 
+                  AutoGenerateColumns="False"
+                  RowBackground="LightGray" 
+                  AlternatingRowBackground="White" 
+                  Grid.Column="1" Grid.ColumnSpan="7" 
+                  Grid.Row="1" Grid.RowSpan="6" 
+                  ItemsSource="{Binding ContactsList}" >
+
+            <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name">
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="TextBox">
+                                <Setter Property="IsReadOnly" Value="true" />
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Surname}" Header="Surname">
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="TextBox">
+                                <Setter Property="IsReadOnly" Value="true" />
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+            <!--<ListBox 
                      BorderBrush="DarkViolet"
                      BorderThickness="1"
             
@@ -239,7 +266,7 @@
                     </Style>
                 </ListBox.ItemContainerStyle>
 
-            </ListBox>
+            </ListBox>-->
         </StackPanel>
 
     </Grid>

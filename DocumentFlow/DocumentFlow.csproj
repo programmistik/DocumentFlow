@@ -241,6 +241,7 @@
     <Compile Include="ViewModels\CalendarPageViewModel.cs" />
     <Compile Include="ViewModels\ComposeNewMailPageViewModel.cs" />
     <Compile Include="ViewModels\ContactsPageViewModel.cs" />
+    <Compile Include="ViewModels\NewsListPageViewModel.cs" />
     <Compile Include="ViewModels\NormativeInfoPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\NewsPageViewModel.cs" />
@@ -289,6 +290,9 @@
     </Compile>
     <Compile Include="Views\MainDesktopPageView.xaml.cs">
       <DependentUpon>MainDesktopPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewsListPageView.xaml.cs">
+      <DependentUpon>NewsListPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewsPageView.xaml.cs">
       <DependentUpon>NewsPageView.xaml</DependentUpon>
@@ -408,6 +412,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainDesktopPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewsListPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

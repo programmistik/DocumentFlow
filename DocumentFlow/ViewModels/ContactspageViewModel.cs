@@ -10,6 +10,7 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,12 +26,16 @@ namespace DocumentFlow.ViewModels
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
 
+        private ObservableCollection<Contact> contactsList;
+        public ObservableCollection<Contact> ContactsList { get => contactsList; set => Set(ref contactsList, value); }
 
         public ContactsPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
+
+            ContactsList = new ObservableCollection<Contact>(db.Contacts);
 
         }
 

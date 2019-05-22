@@ -27,4 +27,23 @@ namespace DocumentFlow.Views
 
        
     }
+
+    public class IsActiveToColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value != null)
+            {
+                if (value.ToString() == "True")
+                    return "Black";
+            }
+            return "DarkRed";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            // never used
+            return null;
+        }
+    }
 }

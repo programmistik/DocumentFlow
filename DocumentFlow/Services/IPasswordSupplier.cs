@@ -11,5 +11,6 @@ namespace DocumentFlow.Services
     {
         SecureString GetPassword { get; }
         bool ConfirmPassword();
+        bool IsEmpty();
     }
 }

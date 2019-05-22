@@ -10,7 +10,7 @@ namespace DocumentFlow.Models
     {
         public int Id { get; set; }
         public string PostContent { get; set; }
-        public int PostNumber { get; set; }
-        public string PostLang { get; set; }
+        public string PostHeader { get; set; }
+        public DateTime PostEndDate { get; set; }
     }
 }

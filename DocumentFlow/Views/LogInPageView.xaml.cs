@@ -32,5 +32,10 @@ namespace DocumentFlow.Views
         {
             throw new NotImplementedException();
         }
+
+        public bool IsEmpty()
+        {
+            return string.IsNullOrEmpty(pBox.Password);
+        }
     }
 }

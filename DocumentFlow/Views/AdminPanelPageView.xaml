@@ -15,11 +15,12 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <UserControl.Resources>
-
+        <local:IsActiveToColorConverter x:Key="IsActiveToColorConverter" />
         <DataTemplate x:Key="UserListItemTemplate">
-            <DockPanel>
-
-                <Grid  HorizontalAlignment="Stretch">
+            <StackPanel>
+                
+                    
+                    <Grid  HorizontalAlignment="Stretch">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -29,7 +30,8 @@
                     <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
 
                         <Label FontWeight="Bold"
-                               Content="{Binding UserName}" />
+                               Content="{Binding}"
+                               Foreground="{Binding IsActive, Converter={StaticResource IsActiveToColorConverter}}"/>
                     </StackPanel>
 
 
@@ -42,8 +44,18 @@
 
 
                 </Grid>
-
-            </DockPanel>
+                <Separator>
+                    <Separator.Style>
+                        <Style TargetType="Separator">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Separator.Style>
+                </Separator>
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
     
@@ -57,18 +69,38 @@
             <Button Content="Normative information"
                     Command="{Binding NormInfoCommand}"
                 Margin="5"/>
-            <Button Content="Add news"
-                    Command="{Binding AddNewsCommand}"
+            <Button Content="News"
+                    Command="{Binding NewsCommand}"
                 Margin="5"/>
             <Button Content="Change my password"                    
                 Margin="100,5,5,5"
                     Command="{Binding ChangeMyPassword}"/>
+            <Button Content="Log off"                    
+                Margin="10,5,5,5"
+                    Background="DarkRed"
+                    Command="{Binding LogOffCommand}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+        <CheckBox IsChecked="{Binding ShowActiveOnly}" 
+                  Command="{Binding ShowUsersCommand}"
+                  Margin="5"
+                      Foreground="DarkViolet"
+                      FontWeight="Bold"
+                      FontSize="15"
+                      Content="Show only active users" />
+        <Label Content="🔎" FontSize="15"
+               Foreground="DarkViolet"
+               Margin="80,0,0,0"/>
+        <TextBox Margin="5" 
+                     Background="White"
+                     Text="{Binding Path=UserFilter, UpdateSourceTrigger=PropertyChanged}"
+                     Width="380" />
         </StackPanel>
         <ListBox HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
                  Margin="3"
                  BorderThickness="2"
                  BorderBrush="DarkViolet"
-                 ItemsSource="{Binding UserList}" 
+                 ItemsSource="{Binding FilteredUsers}" 
                  ScrollViewer.CanContentScroll="True"
                  ScrollViewer.VerticalScrollBarVisibility="Visible"       
                  ItemTemplate="{StaticResource UserListItemTemplate}" Height="388">

@@ -37,6 +37,11 @@ namespace DocumentFlow.Views
             return pBox.Password == pBox2.Password;
         }
 
+        public bool IsEmpty()
+        {
+            return string.IsNullOrEmpty(pBox.Password);
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             var data = DataContext as SettingsPageViewModel;

@@ -4,6 +4,7 @@ using DocumentFlow.Services.WebBrowserServices;
 using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,15 @@ namespace DocumentFlow.ViewModels
         private string postContent;
         public string PostContent { get => postContent; set => Set(ref postContent, value); }
 
-        
+        private DateTime untilDate;
+        public DateTime UntilDate { get => untilDate; set => Set(ref untilDate, value); }
+
+        private string header;
+        public string MyPostHeader { get => header; set => Set(ref header, value); }
+
+        private NewsPost currentPost;
+        public NewsPost CurrentPost { get => currentPost; set => Set(ref currentPost, value); }
+
 
         public AddNewsPageViewModel(INavigationService navigationService,
                                             IMessageService messageService,
@@ -31,7 +40,38 @@ namespace DocumentFlow.ViewModels
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
+            UntilDate = DateTime.Today;
+            MyPostHeader = "Header...";
+
+            Messenger.Default.Register<NotificationMessage<NewsPost>>(this, OnHitIt);
         }
+
+        private void OnHitIt(NotificationMessage<NewsPost> pst)
+        {
+            if (pst.Notification == "EditPost")
+            {
+                CurrentPost = pst.Content;
+                PostContent = CurrentPost.PostContent;
+                MyPostHeader = CurrentPost.PostHeader;
+                UntilDate = CurrentPost.PostEndDate;
+            }
+            
+        }
+
+        private RelayCommand<AddNewsPageView> loadedCommand;
+        public RelayCommand<AddNewsPageView> LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand<AddNewsPageView>(
+        param =>
+        {
+            Gui.webBrowser = param.webBrowserEditor;
+
+            Gui.htmlEditor = param.HtmlEditor1;
+            NewPostInitialisation.webeditor = param;
+            Gui.webBrowser.newWb(CurrentPost.PostContent);
+
+            NewPostInitialisation.RibbonComboboxFontsInitialisation();
+            NewPostInitialisation.RibbonComboboxFontSizeInitialisation();
+
+        }));
 
         #region NavigationCommands
 
@@ -39,26 +79,55 @@ namespace DocumentFlow.ViewModels
         public RelayCommand BackCommand => backCommand ?? (backCommand = new RelayCommand(
                 () =>
                 {
-                    navigationService.Navigate<AdminPanelPageView>();
+                    CurrentPost = null;
+                    PostContent = MyPostHeader = "";
+                    UntilDate = DateTime.Today;
+
+                    navigationService.Navigate<NewsListPageView>();
 
                 }
                  ));
 
         private RelayCommand okCommand;
         public RelayCommand OkCommand => okCommand ?? (okCommand = new RelayCommand(
-                () =>
+                async () =>
                 {
-                    dynamic doc = Gui.webBrowser.doc;
-                    var htmlText = doc.documentElement.InnerHtml;
-
-                    var newPost = new NewsPost
+                    if (string.IsNullOrEmpty(MyPostHeader) || untilDate == null)
+                        messageService.ShowError("Please, fill header and date.");
+                    else
                     {
-                        PostContent = htmlText
-                    };
+                        if (CurrentPost == null) // add new
+                        {
+                            dynamic doc = Gui.webBrowser.doc;
+                            var htmlText = doc.documentElement.InnerHtml;
 
-                    db.NewsPosts.Add(newPost);
-                    db.SaveChanges();
-                    navigationService.Navigate<AdminPanelPageView>();
+                            var newPost = new NewsPost
+                            {
+                                PostContent = htmlText,
+                                PostEndDate = UntilDate,
+                                PostHeader = MyPostHeader
+                            };
+
+                            db.NewsPosts.Add(newPost);
+                            
+                        }
+                        else // edit current
+                        {
+                            dynamic doc = Gui.webBrowser.doc;
+                            var htmlText = doc.documentElement.InnerHtml;
+
+                            CurrentPost.PostContent = htmlText;
+                            CurrentPost.PostEndDate = UntilDate;
+                            CurrentPost.PostHeader = MyPostHeader;
+                        }
+                        await db.SaveChangesAsync();
+                        navigationService.Navigate<NewsListPageView>();
+
+                        CurrentPost = null;
+                        PostContent = "";
+                        MyPostHeader = "Header...";
+                        UntilDate = DateTime.Today;
+                    }
 
                 }
                  ));

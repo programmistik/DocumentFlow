@@ -1,5 +1,4 @@
-﻿using DocumentFlow.Services.WebBrowserServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,13 @@ using System.Windows.Shapes;
 namespace DocumentFlow.Views
 {
     /// <summary>
-    /// Interaction logic for AddNewsPageView.xaml
+    /// Interaction logic for NewsListPageView.xaml
     /// </summary>
-    public partial class AddNewsPageView : UserControl
+    public partial class NewsListPageView : UserControl
     {
-        public AddNewsPageView()
+        public NewsListPageView()
         {
             InitializeComponent();
         }
-
     }
 }

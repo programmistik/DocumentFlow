@@ -18,6 +18,7 @@
     { "type": "DocumentFlow.ViewModels.AddNewUserPageViewModel" },
     { "type": "DocumentFlow.ViewModels.NormativeInfoPageViewModel" },
     { "type": "DocumentFlow.ViewModels.AddNewsPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.NewsListPageViewModel" },
 
     {
       "type": "DocumentFlow.Models.AppDbContext",
