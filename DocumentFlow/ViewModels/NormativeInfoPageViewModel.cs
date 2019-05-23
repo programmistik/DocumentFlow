@@ -31,6 +31,9 @@ namespace DocumentFlow.ViewModels
         private ObservableCollection<Position> positionCollection;
         public ObservableCollection<Position> PositionCollection { get => positionCollection; set => Set(ref positionCollection, value); }
 
+        private ObservableCollection<ContactInfoType> infoTypesCollection;
+        public ObservableCollection<ContactInfoType> InfoTypesCollection { get => infoTypesCollection; set => Set(ref infoTypesCollection, value); }
+
 
         public NormativeInfoPageViewModel(INavigationService navigationService, 
                                              IMessageService messageService, 
@@ -42,23 +45,18 @@ namespace DocumentFlow.ViewModels
 
             LoadTablesAsync();
 
-            
-
-            //CompanyCollection = db.Companies.Local;  //new ObservableCollection<Company>(db.Companies);
-            //DepartmentCollection = db.Departments.Local;  //new ObservableCollection<Department>(db.Departments);
-            //PositionCollection = db.Positions.Local;  //new ObservableCollection<Position>(db.Positions);
         }
 
         private async void LoadTablesAsync()
         {
-            
-           // CollectionViewSource CompanyCollection = new CollectionViewSource(); //((CollectionViewSource)(FindResource("CompanyCollection")));
             await db.Companies.LoadAsync();
             CompanyCollection = db.Companies.Local;
             await db.Departments.LoadAsync();
             DepartmentCollection = db.Departments.Local;
             await db.Positions.LoadAsync();
             PositionCollection = db.Positions.Local;
+            await db.ContactInfoTypes.LoadAsync();
+            InfoTypesCollection = db.ContactInfoTypes.Local;
         }
 
         private RelayCommand backCommand;

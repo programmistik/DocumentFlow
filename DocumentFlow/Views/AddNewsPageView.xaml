@@ -95,9 +95,9 @@
                             <RibbonButton x:Name="SettingsAddLink" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/link.png" 
                                           Command="{Binding AddLinkCommand}"/>
-                            <!--<RibbonButton x:Name="SettingsAddImage" 
+                            <RibbonButton x:Name="SettingsAddImage" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/image.png" 
-                                          Command="{Binding AddImageCommand}"/>-->
+                                          Command="{Binding AddImageCommand}"/>
                             <RibbonButton x:Name="SettingsLeftAlign" 
                                           SmallImageSource="/DocumentFlow;component/Resources/RibonImages/LeftAlign.png" 
                                           Command="{Binding LeftAlignCommand}"/>
@@ -168,19 +168,6 @@
                         </StackPanel>
                     </StackPanel>
                 </RibbonGroup>
-                <!--<RibbonGroup Header="Save" Width="120">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-
-                            <RibbonButton x:Name="btnSave"  
-                                          LargeImageSource="/DocumentFlow;component/Resources/RibonImages/save.png" 
-                                          Height="42" 
-                                          HorizontalAlignment="Left" 
-                                          Command="{Binding SaveCommand}"
-                                          CommandParameter="{Binding ElementName=This}"/>
-                        </StackPanel>
-                    </StackPanel>
-                </RibbonGroup>-->
             </RibbonTab>
 
         </Ribbon>
@@ -195,19 +182,6 @@
         <cuc:WPFWebBrowser x:Name="webBrowserEditor"  Grid.Row="2" Grid.ColumnSpan="2" />
         <cuc:HtmlEditor x:Name="HtmlEditor1"  Grid.Row="2" 
                           Visibility="Hidden" Grid.ColumnSpan="2"/>
-        <!--<Label Content="Input post content:"/>
-        <TextBox Height="300"
-                 Text="{Binding PostContent}"
-                 BorderThickness="2"
-                 BorderBrush="DarkViolet"/>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Ok"
-                    Margin="5"
-                    Command="{Binding OkCommand}"/>
-            <Button Content="Back"
-                    Margin="5"
-                    Command="{Binding BackCommand}"/>
-        </StackPanel>-->
 
     </Grid>
 </UserControl>

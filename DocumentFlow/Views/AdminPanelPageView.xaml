@@ -69,22 +69,28 @@
             <Button Content="Normative information"
                     Command="{Binding NormInfoCommand}"
                 Margin="5"/>
+            <Button Content="Constants"
+                    Command="{Binding ConstCommand}"
+                Margin="5"/>
             <Button Content="News"
                     Command="{Binding NewsCommand}"
                 Margin="5"/>
             <Button Content="Change my password"                    
-                Margin="100,5,5,5"
+                Margin="30,5,5,5"
+                    BorderBrush="SlateBlue"
+                    Background="DarkSlateBlue"
                     Command="{Binding ChangeMyPassword}"/>
             <Button Content="Log off"                    
                 Margin="10,5,5,5"
                     Background="DarkRed"
+                     BorderBrush="PaleVioletRed"
                     Command="{Binding LogOffCommand}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
         <CheckBox IsChecked="{Binding ShowActiveOnly}" 
                   Command="{Binding ShowUsersCommand}"
                   Margin="5"
-                      Foreground="DarkViolet"
+                      Foreground="BlueViolet"
                       FontWeight="Bold"
                       FontSize="15"
                       Content="Show only active users" />
@@ -92,9 +98,11 @@
                Foreground="DarkViolet"
                Margin="80,0,0,0"/>
         <TextBox Margin="5" 
-                     Background="White"
-                     Text="{Binding Path=UserFilter, UpdateSourceTrigger=PropertyChanged}"
-                     Width="380" />
+                 Background="White"
+                 BorderBrush="DarkViolet"
+                 BorderThickness="1"
+                 Text="{Binding Path=UserFilter, UpdateSourceTrigger=PropertyChanged}"
+                 Width="478" />
         </StackPanel>
         <ListBox HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
                  Margin="3"

@@ -1,5 +1,6 @@
 ﻿using DocumentFlow.CustomUserControls;
 using DocumentFlow.ModalWindows;
+using DocumentFlow.Models;
 using mshtml;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+//using System.Windows.Forms;
 
 namespace DocumentFlow.Services.WebBrowserServices
 {
@@ -17,20 +19,6 @@ namespace DocumentFlow.Services.WebBrowserServices
         public static WPFWebBrowser webBrowser;
         public static HtmlEditor htmlEditor;
 
-        //public static List<Items> RibbonComboboxFormatInitionalisation()
-        //{
-        //    List<Items> list = new List<Items>();
-        //    list.Add(new Items("<p>", "Paragraph"));
-        //    list.Add(new Items("<h1>", "Heading 1"));
-        //    list.Add(new Items("<h2>", "Heading 2"));
-        //    list.Add(new Items("<h3>", "Heading 3"));
-        //    list.Add(new Items("<h4>", "Heading 4"));
-        //    list.Add(new Items("<h5>", "Heading 5"));
-        //    list.Add(new Items("<h6>", "Heading 6"));
-        //    list.Add(new Items("<address>", "Address"));
-        //    list.Add(new Items("<pre>", "Preformat"));
-        //    return list;
-        //}
 
         public static List<string> RibbonComboboxFontSizeInitialisation()
         {
@@ -79,6 +67,36 @@ namespace DocumentFlow.Services.WebBrowserServices
             //{
             //    image.ShowDialog();
             //}
+            string selectedPath;
+            var entity = new AppDbContext();            
+            var constants = entity.Constants.FirstOrDefault();
+            var imgDir = constants.FilePath;
+
+            using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = @"C:\";
+                openFileDialog.Filter = "jpg files (*.jpg)|*.jpg|All files (*.png.*)|*.png|All files (*.gif)|*.gif|All files (*.*)|*.*";
+                openFileDialog.RestoreDirectory = true;
+
+                System.Windows.Forms.DialogResult result = openFileDialog.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    selectedPath = openFileDialog.FileName;
+                }
+                else
+                    return;
+            }
+            // copy file to FilePath directory
+            var newPath = imgDir + "//" +System.IO.Path.GetFileName(selectedPath);
+            var ext = Path.GetExtension(newPath);
+            while (File.Exists(newPath))
+            {
+                newPath = imgDir + "//" + Path.GetFileNameWithoutExtension(newPath) + "1" + ext;
+            }
+            File.Copy(selectedPath, newPath);
+
+            dynamic r = webBrowser.doc.selection.createRange();
+            r.pasteHTML(string.Format(@"<img alt=""{1}"" src=""{0}"">", newPath, "image is here"));
 
         }
 

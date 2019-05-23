@@ -33,7 +33,23 @@ namespace DocumentFlow.ViewModels
                 var str = viewModel.ToString();
                 if (viewModel is LogInPageViewModel)
                     ApplicationTitle = Properties.Resources.LogIn;
-               
+                else if (viewModel is AdminPanelPageViewModel)
+                    ApplicationTitle = "Administrator's panel";
+                else if (viewModel is AddNewUserPageViewModel)
+                    ApplicationTitle = "Add / Edit user";
+                else if (viewModel is NormativeInfoPageViewModel)
+                    ApplicationTitle = "Normative information";
+                else if (viewModel is ConstantsPageViewModel)
+                    ApplicationTitle = "Application's constants";
+                else if (viewModel is NewsListPageViewModel)
+                    ApplicationTitle = "News";
+                else if (viewModel is NewsPageViewModel)
+                    ApplicationTitle = "Add / Edit news post";
+                else if (viewModel is ChangeMyPassPageViewModel)
+                {
+                    var vm = viewModel as ChangeMyPassPageViewModel;
+                    ApplicationTitle = "Change password for " + vm.CurrentUser.Login;
+                }
             }
             );
         }

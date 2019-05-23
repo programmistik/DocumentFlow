@@ -203,6 +203,7 @@
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\ColorScheme.cs" />
     <Compile Include="Models\Companies.cs" />
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\ContactInformation.cs" />
     <Compile Include="Models\ContactInfoTypes.cs" />
     <Compile Include="Models\Contacts.cs" />
@@ -239,7 +240,9 @@
     <Compile Include="ViewModels\AdminPanelPageViewModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\CalendarPageViewModel.cs" />
+    <Compile Include="ViewModels\ChangeMyPassPageViewModel.cs" />
     <Compile Include="ViewModels\ComposeNewMailPageViewModel.cs" />
+    <Compile Include="ViewModels\ConstantsPageViewModel.cs" />
     <Compile Include="ViewModels\ContactsPageViewModel.cs" />
     <Compile Include="ViewModels\NewsListPageViewModel.cs" />
     <Compile Include="ViewModels\NormativeInfoPageViewModel.cs" />
@@ -269,8 +272,14 @@
     <Compile Include="Views\CalendarPageView.xaml.cs">
       <DependentUpon>CalendarPageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ChangeMyPassPageView.xaml.cs">
+      <DependentUpon>ChangeMyPassPageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ComposeNewMailPageView.xaml.cs">
       <DependentUpon>ComposeNewMailPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConstantsPageView.xaml.cs">
+      <DependentUpon>ConstantsPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ContactsPageView.xaml.cs">
       <DependentUpon>ContactsPageView.xaml</DependentUpon>
@@ -391,7 +400,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ChangeMyPassPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ComposeNewMailPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConstantsPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

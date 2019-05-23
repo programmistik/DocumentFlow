@@ -108,7 +108,9 @@ namespace DocumentFlow.ViewModels
         public RelayCommand ChangeMyPassword => changeMyPassword ?? (changeMyPassword = new RelayCommand(
                 () =>
                 {
-
+                    var admin = db.Users.Where(usr => usr.Login == "admin").Single();
+                    Messenger.Default.Send(new NotificationMessage<User>(admin, "change"));
+                    navigationService.Navigate<ChangeMyPassPageView>();
                 }
                  ));
         private RelayCommand normInfoCommand;
@@ -127,6 +129,14 @@ namespace DocumentFlow.ViewModels
                 }
                  ));
 
+        private RelayCommand constCommand;
+        public RelayCommand ConstCommand => constCommand ?? (constCommand = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<ConstantsPageView>();
+                }
+                 ));
 
+      
     }
 }

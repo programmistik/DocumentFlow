@@ -268,6 +268,10 @@ namespace DocumentFlow.ViewModels
 
                             navigationService.Navigate<AdminPanelPageView>();
                         }
+                        else
+                        {
+                            messageService.ShowError(errorStr.ToString(), "Anable to create new user");
+                        }
                     }
                     else // Save changes
                     {

@@ -24,7 +24,7 @@ using System.Windows.Threading;
 
 namespace DocumentFlow.ViewModels
 {
-    public class SettingsPageViewModel : ViewModelBase//, IDisposable
+    public class SettingsPageViewModel : ViewModelBase, IDisposable
     {
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;

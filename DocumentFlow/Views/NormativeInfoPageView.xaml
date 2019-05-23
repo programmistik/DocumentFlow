@@ -81,7 +81,7 @@
 
                                 <DataGridTextColumn  
                                                     Binding="{Binding PositionName, UpdateSourceTrigger=PropertyChanged}" 
-                                                    Header="Position name" 
+                                                    Header="Position name" Width="500"
                                                    />
 
 
@@ -91,6 +91,31 @@
                     </StackPanel>
                 </TabItem.Content>
             </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">Info types</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel DataContext="{Binding InfoTypesCollection}" >
+                        <DataGrid AutoGenerateColumns="False" 
+                      EnableRowVirtualization="True" Height="340" 
+                      ItemsSource="{Binding}" Margin="10,0" 
+                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                            <DataGrid.Columns>
+
+                                <DataGridTextColumn  
+                                                    Binding="{Binding InfoType, UpdateSourceTrigger=PropertyChanged}" 
+                                                    Header="Contact info type" Width="500"/>
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+
+            
         </TabControl>
         <Button Command="{Binding BackCommand}" Content="Back"
                 Margin="5"/>

@@ -19,6 +19,8 @@
     { "type": "DocumentFlow.ViewModels.NormativeInfoPageViewModel" },
     { "type": "DocumentFlow.ViewModels.AddNewsPageViewModel" },
     { "type": "DocumentFlow.ViewModels.NewsListPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.ConstantsPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.ChangeMyPassPageViewModel" },
 
     {
       "type": "DocumentFlow.Models.AppDbContext",

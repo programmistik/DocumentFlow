@@ -61,4 +61,11 @@
         <v:NewsListPageView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:ConstantsPageViewModel}">
+        <v:ConstantsPageView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ChangeMyPassPageViewModel}">
+        <v:ChangeMyPassPageView/>
+    </DataTemplate>
+
 </ResourceDictionary>

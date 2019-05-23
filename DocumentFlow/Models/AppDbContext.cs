@@ -34,21 +34,13 @@ namespace DocumentFlow.Models
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<ColorScheme> ColorSchemes { get; set; }
+        public DbSet<Constant> Constants { get; set; }
 
-
-
-      
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
- 
-
             base.OnModelCreating(modelBuilder);
-
-            
         }
-
 
     }
 
@@ -78,9 +70,11 @@ namespace DocumentFlow.Models
             db.Positions.Add(new Position { PositionName = "Head of department" });
 
             db.Languages.Add(new Language { LangCode = "EN", LangCultureCode = "en-US", LangName = "English" });
+            db.Languages.Add(new Language { LangCode = "RU", LangCultureCode = "ru-RU", LangName = "Русский" });
 
             db.ColorSchemes.Add(new ColorScheme { Name = "Violet"});
 
+            db.Constants.Add(new Constant {DocPath = Environment.CurrentDirectory, FilePath = Environment.CurrentDirectory });
 
             db.SaveChanges();
 

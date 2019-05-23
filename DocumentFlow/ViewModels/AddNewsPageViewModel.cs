@@ -26,8 +26,8 @@ namespace DocumentFlow.ViewModels
         private DateTime untilDate;
         public DateTime UntilDate { get => untilDate; set => Set(ref untilDate, value); }
 
-        private string header;
-        public string MyPostHeader { get => header; set => Set(ref header, value); }
+        private string myPostHeader;
+        public string MyPostHeader { get => myPostHeader; set => Set(ref myPostHeader, value); }
 
         private NewsPost currentPost;
         public NewsPost CurrentPost { get => currentPost; set => Set(ref currentPost, value); }
@@ -66,7 +66,10 @@ namespace DocumentFlow.ViewModels
 
             Gui.htmlEditor = param.HtmlEditor1;
             NewPostInitialisation.webeditor = param;
-            Gui.webBrowser.newWb(CurrentPost.PostContent);
+            if (CurrentPost != null)
+                Gui.webBrowser.newWb(CurrentPost.PostContent);
+            else
+                Gui.newdocument();
 
             NewPostInitialisation.RibbonComboboxFontsInitialisation();
             NewPostInitialisation.RibbonComboboxFontSizeInitialisation();
@@ -80,7 +83,6 @@ namespace DocumentFlow.ViewModels
                 () =>
                 {
                     CurrentPost = null;
-                    PostContent = MyPostHeader = "";
                     UntilDate = DateTime.Today;
 
                     navigationService.Navigate<NewsListPageView>();
@@ -124,8 +126,6 @@ namespace DocumentFlow.ViewModels
                         navigationService.Navigate<NewsListPageView>();
 
                         CurrentPost = null;
-                        PostContent = "";
-                        MyPostHeader = "Header...";
                         UntilDate = DateTime.Today;
                     }
 
@@ -180,7 +180,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand AddImageCommand => addImageCommand ?? (addImageCommand = new RelayCommand(
                 () =>
                 {
-                    //Gui.SettingsAddImage();
+                    Gui.SettingsAddImage();
                 }
                  ));
 
