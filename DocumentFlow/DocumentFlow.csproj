@@ -285,6 +285,9 @@
       <DependentUpon>ContactsPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\WebBrowserServices\DialogBox.cs" />
+    <Compile Include="Views\CreateNewContactPageView.xaml.cs">
+      <DependentUpon>CreateNewContactPageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DocumentsPageView.xaml.cs">
       <DependentUpon>DocumentsPageView.xaml</DependentUpon>
     </Compile>
@@ -413,6 +416,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContactsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateNewContactPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

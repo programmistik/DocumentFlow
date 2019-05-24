@@ -22,12 +22,14 @@
 
                     <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
 
-                        <Label FontWeight="Bold"
-                               Content="{Binding ContactInfoType.ContactName}" />
+                        <!--<Label FontWeight="Bold"
+                               Content="{Binding ContactInfoType.ContactName}" />-->
                         <Label 
-                               Content="{Binding PrimaryPhone}" />
+                               Content="{Binding Name}" />
                         <Label 
-                               Content="{Binding PrimaryMail}" />
+                               Content="{Binding Surname}" />
+                        <Label 
+                               Content="{Binding Company.CompanyName}" />
                     </StackPanel>
 
 
@@ -222,7 +224,7 @@
                      Text="{Binding Path=MailFilter, UpdateSourceTrigger=PropertyChanged}"
                      Margin="5,0,5,0" />
             </DockPanel>
-            <DataGrid x:Name="ContactsGrid" 
+            <!--<DataGrid x:Name="ContactsGrid" 
                  
                   HorizontalGridLinesBrush="DarkGray" 
                   AutoGenerateColumns="False"
@@ -248,13 +250,13 @@
                         </DataGridTextColumn.EditingElementStyle>
                     </DataGridTextColumn>
             </DataGrid.Columns>
-        </DataGrid>
-            <!--<ListBox 
+        </DataGrid>-->
+            <ListBox 
                      BorderBrush="DarkViolet"
                      BorderThickness="1"
             
             HorizontalContentAlignment="Stretch" 
-                            ItemsSource="{Binding ContactList}"                   
+                            ItemsSource="{Binding ContactsList}"                   
                             Margin="5"
                             ScrollViewer.CanContentScroll="True"
                             ScrollViewer.VerticalScrollBarVisibility="Visible"         
@@ -266,7 +268,7 @@
                     </Style>
                 </ListBox.ItemContainerStyle>
 
-            </ListBox>-->
+            </ListBox>
         </StackPanel>
 
     </Grid>
