@@ -44,15 +44,15 @@
         }
       ]
     },
-    {
-      "type": "DocumentFlow.Views.SettingsPageView",
-      "services": [
-        {
-          "type": "DocumentFlow.Services.IPasswordSupplier"
-        }
-      ],
-      "instanceScope": "single-instance"
-    },
+    //{
+    //  //"type": "DocumentFlow.Views.SettingsPageView",
+    //  //"services": [
+    //  //  {
+    //  //    "type": "DocumentFlow.Services.IPasswordSupplier"
+    //  //  }
+    //  //],
+    //  //"instanceScope": "single-instance"
+    //},
 
     {
       "type": "DocumentFlow.Services.NavigationService",

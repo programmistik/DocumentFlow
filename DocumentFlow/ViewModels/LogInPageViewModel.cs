@@ -51,11 +51,6 @@ namespace DocumentFlow.ViewModels
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
-            // Localization
-            //lbUserName = Strings.UserName;
-            //lbPassword = Strings.Password;
-            //ForgotPwd = Strings.ForgetPassword;
-            //btnLogIn = Strings.LogIn;
         }
 
         
@@ -67,7 +62,29 @@ namespace DocumentFlow.ViewModels
                 {
                     if (LoginUserName != null && LoginUserName.ToLower().Contains("admin"))
                     {
-                        navigationService.Navigate<AdminPanelPageView>();
+                        var admin = db.Users.Where(usr => usr.Login == "admin").Single();
+                        if (admin.HashValue == null)
+                            navigationService.Navigate<AdminPanelPageView>();
+                        else
+                        {
+                            var passwordContainer = param as IPasswordSupplier;
+                            if (passwordContainer != null)
+                            {
+                                var sPass = passwordContainer.GetPassword;
+
+                                string saltValueFromDB = admin.SaltValue;
+                                string hashValueFromDB = admin.HashValue;
+
+                                byte[] saltedPassword = Encoding.UTF8.GetBytes(saltValueFromDB + new NetworkCredential(string.Empty, sPass).Password);
+                                SHA256Managed hashstring = new SHA256Managed();
+                                byte[] hash = hashstring.ComputeHash(saltedPassword);
+                                string hashToCompare = Convert.ToBase64String(hash);
+                                if (hashValueFromDB.Equals(hashToCompare))
+                                    navigationService.Navigate<AdminPanelPageView>();
+                                else
+                                    messageService.ShowError("Login credentials incorrect. User not validated.");
+                            }
+                        }
                     }
                     else
                     {

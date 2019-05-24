@@ -31,6 +31,9 @@ namespace DocumentFlow.ViewModels
         private string fio;
         public string Fio { get => fio; set => Set(ref fio, value); }
 
+        private string avatara;
+        public string Avatara { get => avatara; set => Set(ref avatara, value); }
+
         public MainDesktopPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
             this.navigationService = navigationService;
@@ -48,8 +51,25 @@ namespace DocumentFlow.ViewModels
                 CurrentUser = usr.Content;
                 var emp = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
                 Fio = emp.Name + " " + emp.Surname;
+
+                if (string.IsNullOrEmpty(emp.Photo))
+                    Avatara = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png";
+                else
+                    Avatara = emp.Photo;
             }
         }
+
+        private RelayCommand loadedCommand;
+        public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(
+        () =>
+        {
+            var emp = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+            if (string.IsNullOrEmpty(emp.Photo))
+                Avatara = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png";
+            else
+                Avatara = emp.Photo;
+
+        }));
 
 
         #region NavigationCommands

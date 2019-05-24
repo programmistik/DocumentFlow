@@ -28,6 +28,8 @@ namespace DocumentFlow.Views
         }
         public SecureString GetPassword { get => pBox.SecurePassword; }
 
+        public SecureString GetCurrentPassword => throw new NotImplementedException();
+
         public bool ConfirmPassword()
         {
             throw new NotImplementedException();

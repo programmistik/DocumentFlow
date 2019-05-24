@@ -5,11 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
-             xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              mc:Ignorable="d" 
              x:Name="This"
-             d:DesignHeight="450" d:DesignWidth="800"
-             Loaded="UserControl_Loaded">
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <UserControl.Resources>
         <DataTemplate x:Key="ListBoxItemTemplate">
             <StackPanel>
@@ -79,9 +85,9 @@
             <Button
                 Command="{Binding GMain}" 
                 Background="Transparent" BorderThickness="0" Height="64" Width="64" Padding="0">
-                <Image Margin="0" Source="../Resources/Images/user.png" />
+                <Image Margin="0" Source="{Binding Avatara}" />
             </Button>
-            <Label FontSize="20" Content="Имя Фамилия Отчество" Foreground="White" VerticalContentAlignment="Center"></Label>
+            <Label FontSize="20" Content="{Binding Fio}" Foreground="White" VerticalContentAlignment="Center"></Label>
         </StackPanel>
 
         <Grid Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="0" Background="#FF353436">
@@ -235,19 +241,25 @@
                     Command="{Binding UploadFileCommand}"/>
                 </StackPanel>
             </Viewbox>
-            <Viewbox Grid.Column="0" Grid.Row="8" HorizontalAlignment="Left">
+            <Viewbox Grid.Column="0" Grid.Row="9" HorizontalAlignment="Left">
                 <Label
                FontSize="15"
                Content="Google account:" HorizontalAlignment="Left"/>
             </Viewbox>
-            <Viewbox Grid.Column="0" Grid.Row="9" HorizontalAlignment="Left">
+            <Viewbox Grid.Column="0" Grid.Row="10" HorizontalAlignment="Left">
                 <TextBox 
                     Text="{Binding GoogleAccount}"
                     IsReadOnly="True"
                     FontSize="25"
+                    Margin="10,2,2,2"
                     VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch"
-                    Background="#FFFAFA" BorderBrush="#89FFFFFF" Width="435" Height="50">
+                    Background="#FFFAFA" BorderBrush="#89FFFFFF" Width="445" Height="50">
                 </TextBox>
+            </Viewbox>
+            <Viewbox Grid.Column="0" Grid.Row="12" HorizontalAlignment="Left">
+                <Button Content="Change my password"
+                        Margin="10,0,0,0"
+                        Command="{Binding ChangeMyPassword}" Width="257"/>
             </Viewbox>
 
 
@@ -280,61 +292,16 @@
                Content="{x:Static p:Resources.ColorScheme}" HorizontalAlignment="Left"/>
 
                     <ComboBox Width="250" Height="50" HorizontalAlignment="Right" 
-                          Margin="2,5" Background="White"
-                              FontSize="15"
+                          Margin="5" Background="White"
+                              FontSize="35"
                               ItemsSource="{Binding Path = ColorCollection}"    
                               SelectedItem="{Binding Path = SelectedColor}"  
                               DisplayMemberPath = "Name">
 
                     </ComboBox>
                 </StackPanel>
-            </Viewbox>
-
-            <Viewbox  Grid.Column="0" Grid.Row="10"  HorizontalAlignment="Left">
-                <Label Margin="0" 
-               Content="Password:"
-               FontSize="15"/>
-            </Viewbox>
-            <Viewbox  Grid.Column="0" Grid.Row="11"  HorizontalAlignment="Left">
-                <PasswordBox Name="pBox" 
-                         Margin="2,2,0,0"
-                          Width="450" Height="50"
-                             Background="White"
-                         FontSize="20">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="LostFocus">
-                            <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}" CommandParameter="{Binding ElementName=This}"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </PasswordBox>
-            </Viewbox>
-            <Viewbox  Grid.Column="0" Grid.Row="12"  HorizontalAlignment="Left">
-                <Label Margin="0" 
-               Content="Confirm password:"
-               FontSize="15"/>
-            </Viewbox>
-            <Viewbox  Grid.Column="0" Grid.Row="13"  HorizontalAlignment="Left">
-                <PasswordBox Name="pBox2"
-                         Margin="2,2,0,0"
-                          Width="450" Height="50"
-                             Background="White"
-                         FontSize="20">
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="LostFocus">
-                            <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}" CommandParameter="{Binding ElementName=This}"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </PasswordBox>
-            </Viewbox>
-            <Viewbox  Grid.Column="0" Grid.Row="14"  HorizontalAlignment="Left">
-                <Label x:Name="PassCheckError"                       
-                       Grid.Row="3" 
-                       Margin="0"                       
-                       Foreground="Red"
-                       Content="{Binding PassCheckError}">
-
-                </Label>
-            </Viewbox>
+            </Viewbox>          
+            
 
 
             <Viewbox  Grid.Column="1" Grid.Row="2"  HorizontalAlignment="Left">

@@ -29,7 +29,7 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
-        private readonly IPasswordSupplier passwordService;
+        
 
         private string ImageLink { get; set; }
         private BitmapImage image;
@@ -39,20 +39,23 @@ namespace DocumentFlow.ViewModels
         public FilterInfo CurrentDevice { get => currentDevice; set => Set(ref currentDevice, value); }
         public IVideoSource videoSource;
 
-        private string msg;
-        public string Msg { get => msg; set => Set(ref msg, value); }
+        private string fio;
+        public string Fio { get => fio; set => Set(ref fio, value); }
 
-        private string msgColor;
-        public string MsgColor { get => msgColor; set => Set(ref msgColor, value); }
+        //private string msgColor;
+        //public string MsgColor { get => msgColor; set => Set(ref msgColor, value); }
 
-        private string passCheckError;
-        public string PassCheckError { get => passCheckError; set => Set(ref passCheckError, value); }
+        //private string passCheckError;
+        //public string PassCheckError { get => passCheckError; set => Set(ref passCheckError, value); }
 
-        private bool passwordConfirmation;
-        public bool PasswordConfirmation { get => passwordConfirmation; set => Set(ref passwordConfirmation, value); }
+        //private bool passwordConfirmation;
+        //public bool PasswordConfirmation { get => passwordConfirmation; set => Set(ref passwordConfirmation, value); }
 
         private User CurrentUser { get; set; }
         private Employee CurrentEmployee { get; set; }
+
+        private string avatara;
+        public string Avatara { get => avatara; set => Set(ref avatara, value); }
 
         private string googleAccount;
         public string GoogleAccount { get => googleAccount; set => Set(ref googleAccount, value); }
@@ -75,13 +78,11 @@ namespace DocumentFlow.ViewModels
 
         public SettingsPageViewModel(INavigationService navigationService, 
                                     IMessageService messageService, 
-                                    AppDbContext db, 
-                                    IPasswordSupplier passwordService)
+                                    AppDbContext db)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
-            this.db = db;
-            this.passwordService = passwordService;
+            this.db = db;            
 
             Messenger.Default.Register<NotificationMessage<User>>(this, OnHitIt);
 
@@ -103,7 +104,12 @@ namespace DocumentFlow.ViewModels
                 SelectedColor = CurrentEmployee.ColorScheme;
                 GoogleAccount = CurrentUser.GoogleAccount;
                 InfoList = new ObservableCollection<ContactInformation>(CurrentEmployee.ContactInfos);
+                Fio = CurrentEmployee.Name + " " + CurrentEmployee.Surname;
 
+                if (string.IsNullOrEmpty(CurrentEmployee.Photo))
+                    Avatara = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png";
+                else
+                    Avatara = CurrentEmployee.Photo;
             }
             else
             {
@@ -111,6 +117,21 @@ namespace DocumentFlow.ViewModels
                 GoogleAccount = "";
             }
         }
+
+        private RelayCommand loadedCommand;
+        public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(
+        () =>
+        {            
+            VideoDevices = new ObservableCollection<FilterInfo>();
+            GetVideoDevices();
+            if (CurrentDevice != null)
+            {
+                videoSource = new VideoCaptureDevice(CurrentDevice.MonikerString);
+                videoSource.NewFrame += video_NewFrame;
+                videoSource.Start();
+            }
+
+        }));
 
         #region Functions for camera
         public void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -207,57 +228,7 @@ namespace DocumentFlow.ViewModels
             ));
         }
 
-        #region PasswordCommands
-
-        private RelayCommand<string> lostFocusCommand_tbUN;
-        public RelayCommand<string> LostFocusCommand_tbUN
-        {
-            get => lostFocusCommand_tbUN ?? (lostFocusCommand_tbUN = new RelayCommand<string>(
-                param =>
-                {
-                    if (!string.IsNullOrEmpty(param))
-                    {
-                        //var qwr = db.Users.Where(u => u.Login == param);
-                        //if (qwr.Any() == true)
-                        //{
-                        //    MsgColor = "Red";
-                        //    Msg = "This username is already taken";
-                        //}
-                        //else
-                        //{
-                        //    MsgColor = "Green";
-                        //    Msg = "You can use this username";
-                        //}
-                    }
-                }
-            ));
-        }
-
-        private RelayCommand<object> lostFocusCommand_pBox;
-        public RelayCommand<object> LostFocusCommand_pBox
-        {
-            get => lostFocusCommand_pBox ?? (lostFocusCommand_pBox = new RelayCommand<object>(
-                param =>
-                {
-                    var passwordContainer = param as IPasswordSupplier;
-                    if (passwordContainer != null)
-                    {
-                        var chk = passwordContainer.ConfirmPassword();
-                        if (chk)
-                        {
-                            PassCheckError = "";
-                            PasswordConfirmation = true;
-                        }
-                        else
-                        {
-                            PassCheckError = "Passwords don't match";
-                            PasswordConfirmation = false;
-                        }
-                    }
-                }
-            ));
-        }
-        #endregion
+       
 
         private RelayCommand cancelCommand;
         public RelayCommand CancelCommand
@@ -266,7 +237,7 @@ namespace DocumentFlow.ViewModels
                 () =>
                 {
                     // do nothing
-                    MsgColor = Msg = PassCheckError = "";
+                   
                     //User = new User();
                     StopCamera();
                     navigationService.Navigate<MainDesktopPageView>();
@@ -280,6 +251,17 @@ namespace DocumentFlow.ViewModels
             get => okCommand ?? (okCommand = new RelayCommand(
                 async() =>
                 {
+                    if (Image != null)
+                    {
+                        var oldPath = Image.UriSource.OriginalString;
+                        var imgDir = db.Constants.FirstOrDefault().FilePath;
+
+                        var newPath = imgDir + "\\" + CurrentUser.Login + Path.GetExtension(oldPath);
+
+                        File.Copy(oldPath, newPath, true);
+
+                        CurrentEmployee.Photo = newPath;
+                    }
                     //CurrentEmployee.ContactInfos = new ObservableCollection<ContactInformation>(InfoList);
                     await db.SaveChangesAsync();
 
@@ -398,6 +380,16 @@ namespace DocumentFlow.ViewModels
                         //db.Employees.Where(e => e == CurrentEmployee).Single().ContactInfos.Add(newInfo);
                         CurrentEmployee.ContactInfos.Add(newInfo);
                     }
+
+                }
+            ));
+
+        private RelayCommand changeMyPassword;
+        public RelayCommand ChangeMyPassword => changeMyPassword ?? (changeMyPassword = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "change"));
+                    navigationService.Navigate<ChangeMyPassPageView>();
 
                 }
             ));

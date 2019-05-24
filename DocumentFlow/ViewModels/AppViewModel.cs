@@ -36,7 +36,13 @@ namespace DocumentFlow.ViewModels
                 else if (viewModel is AdminPanelPageViewModel)
                     ApplicationTitle = "Administrator's panel";
                 else if (viewModel is AddNewUserPageViewModel)
-                    ApplicationTitle = "Add / Edit user";
+                {
+                    var vm = viewModel as AddNewUserPageViewModel;
+                    if(vm.ButtonOkContent == "Create")
+                        ApplicationTitle = "Add new user";
+                    else
+                        ApplicationTitle = "Edit user";
+                }
                 else if (viewModel is NormativeInfoPageViewModel)
                     ApplicationTitle = "Normative information";
                 else if (viewModel is ConstantsPageViewModel)

@@ -137,6 +137,12 @@ namespace DocumentFlow.ViewModels
                 }
                  ));
 
-      
+        private RelayCommand logOffCommand;
+        public RelayCommand LogOffCommand => logOffCommand ?? (logOffCommand = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<LogInPageView>();
+                }
+                 ));
     }
 }

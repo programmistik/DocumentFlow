@@ -5,8 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Grid Background="#FFE1E1E1">
         <Grid.RowDefinitions>
@@ -34,7 +40,7 @@
             <Button
                 Command="{Binding GMain}" 
                 Background="Transparent" BorderThickness="0" Height="64" Width="64" Padding="0">
-                <Image Margin="0" Source="../Resources/Images/user.png" />
+                <Image Margin="0" Source="{Binding Avatara}" />
             </Button>
             <Label FontSize="20" Content="{Binding Fio}" Foreground="White" VerticalContentAlignment="Center"></Label>
         </StackPanel>

@@ -63,10 +63,6 @@ namespace DocumentFlow.Services.WebBrowserServices
 
         public static void SettingsAddImage()
         {
-            //using (ImageWin image = new ImageWin(webBrowser.doc))
-            //{
-            //    image.ShowDialog();
-            //}
             string selectedPath;
             var entity = new AppDbContext();            
             var constants = entity.Constants.FirstOrDefault();

@@ -4,36 +4,52 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
+             xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              mc:Ignorable="d" 
+             x:Name="This"
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <Label Content="Current password:"
                Margin="5"
                FontSize="20"/>
-            <PasswordBox 
+        <PasswordBox Name="pBoxCurr"
                  HorizontalContentAlignment="Stretch"    
                  Margin="5"
                  FontSize="20"
                  BorderBrush="BlueViolet"
-                 BorderThickness="1" />
+                 BorderThickness="1">
+            
+        </PasswordBox>
         <Label Content="New password:"
                Margin="5"
                FontSize="20"/>
-        <PasswordBox 
+        <PasswordBox Name="pBox"
                  HorizontalContentAlignment="Stretch"    
                  Margin="5"
                  FontSize="20"
                  BorderBrush="BlueViolet"
-                 BorderThickness="1" />
+                 BorderThickness="1">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="LostFocus">
+                    <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}" CommandParameter="{Binding ElementName=This}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </PasswordBox>
         <Label Content="Confirm password:"
                Margin="5"
                FontSize="20"/>
-        <PasswordBox 
+        <PasswordBox Name="pBox2"
                  HorizontalContentAlignment="Stretch"    
                  Margin="5"
                  FontSize="20"
                  BorderBrush="BlueViolet"
-                 BorderThickness="1" />
+                 BorderThickness="1">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="LostFocus">
+                    <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}" CommandParameter="{Binding ElementName=This}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </PasswordBox>
         <Label Content="{Binding PasswordConfirmation}"
                Margin="5"
                Foreground="Red"
@@ -50,7 +66,8 @@
                     Width="150"
                     Background="Green"
                     BorderBrush="DarkGreen"
-                    Command="{Binding OkCommand}"/>
+                    Command="{Binding OkCommand}"
+                    CommandParameter="{Binding ElementName=This}"/>
         </StackPanel>
 
     </StackPanel>
