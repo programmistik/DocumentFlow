@@ -172,7 +172,7 @@
         </Ribbon>
         <TextBox 
             Grid.Row="1" Grid.ColumnSpan="2"
-            Text="{Binding MyPostHeader}"
+            Text="{Binding MyPostHeader, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                  Margin="4"
                  BorderThickness="1" BorderBrush="DarkViolet"
                  FontWeight="Bold"
