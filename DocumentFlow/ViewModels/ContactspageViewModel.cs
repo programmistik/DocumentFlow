@@ -3,6 +3,7 @@ using DocumentFlow.Services;
 using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
@@ -29,6 +30,9 @@ namespace DocumentFlow.ViewModels
         private ObservableCollection<Contact> contactsList;
         public ObservableCollection<Contact> ContactsList { get => contactsList; set => Set(ref contactsList, value); }
 
+        private bool addIsEnabled;
+        public bool AddIsEnabled { get => addIsEnabled; set => Set(ref addIsEnabled, value); }
+
         public ContactsPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
             this.navigationService = navigationService;
@@ -37,7 +41,29 @@ namespace DocumentFlow.ViewModels
 
             ContactsList = new ObservableCollection<Contact>(db.Contacts);
 
+            Messenger.Default.Register<NotificationMessage<User>>(this, OnHitIt);
         }
+
+        private void OnHitIt(NotificationMessage<User> usr)
+        {
+            if (usr.Notification == "Contacts")
+            {
+               
+                var CurrentUser = usr.Content;
+                var CurrentEmployee = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+                AddIsEnabled = CurrentEmployee.CanEditContacts;
+                
+            }
+        }
+
+        private RelayCommand addContactCommand;
+        public RelayCommand AddContactCommand => addContactCommand ?? (addContactCommand = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<CreateNewContactPageView>();
+                }
+            ));
+
 
         #region NavigationCommands
         //Upper Menu

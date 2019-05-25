@@ -197,6 +197,9 @@
     <Compile Include="ModalWindows\AddContactInfoWindow.xaml.cs">
       <DependentUpon>AddContactInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModalWindows\AddOrganizationWindow.xaml.cs">
+      <DependentUpon>AddOrganizationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModalWindows\LinkWin.xaml.cs">
       <DependentUpon>LinkWin.xaml</DependentUpon>
     </Compile>
@@ -244,6 +247,7 @@
     <Compile Include="ViewModels\ComposeNewMailPageViewModel.cs" />
     <Compile Include="ViewModels\ConstantsPageViewModel.cs" />
     <Compile Include="ViewModels\ContactsPageViewModel.cs" />
+    <Compile Include="ViewModels\CreateNewContactPageViewModel.cs" />
     <Compile Include="ViewModels\NewsListPageViewModel.cs" />
     <Compile Include="ViewModels\NormativeInfoPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
@@ -368,6 +372,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="ModalWindows\AddContactInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModalWindows\AddOrganizationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

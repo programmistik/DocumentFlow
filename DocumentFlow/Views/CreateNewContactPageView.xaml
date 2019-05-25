@@ -6,6 +6,48 @@
              xmlns:local="clr-namespace:DocumentFlow.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ListBoxItemTemplate">
+            <StackPanel>
+
+                <Grid  HorizontalAlignment="Stretch">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+                        <DockPanel>
+                            <Label FontWeight="Bold"
+                               Content="{Binding ContactInfoType.InfoType}" />
+                            <Label 
+                               Content="{Binding Value}" />
+                        </DockPanel>
+                    </StackPanel>
+
+
+                    <Button  Grid.Column="1" 
+                            Margin="1"
+                            Command="{Binding DataContext.DeleteEventCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Delete
+                    </Button>
+
+                    <Button Grid.Column="2"  
+                            Margin="1" 
+                            Command="{Binding DataContext.EditEventCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Edit
+                    </Button>
+
+
+                </Grid>
+
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <StackPanel>
         <Label Content="Name:"
                FontSize="15"
@@ -20,10 +62,55 @@
         <Label Content="Organization:" 
                FontSize="15"
                Margin="2"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right">
         <ComboBox Margin="2"
+                  HorizontalContentAlignment="Left"
                   ItemsSource="{Binding Path = OrgCollection}"    
                   SelectedItem="{Binding Path = Organization}"  
-                  DisplayMemberPath = "OrganizationName"/>
+                  DisplayMemberPath = "OrganizationName" Width="615"/>
+            <Button Content="Add new organization"
+                    Command="{Binding AddNewOrgCommans}"
+                    Margin="2"/>
+        </StackPanel>
+        <Button Content="Add" Width="100"
+                HorizontalAlignment="Left"
+                            Margin="2"
+                            Command="{Binding AddCommand}"/>
+        <ListBox Grid.Column="1" Grid.ColumnSpan="2" 
+                      Grid.Row="3" 
+                      Grid.RowSpan="10"
+                     BorderBrush="DarkViolet"
+                     BorderThickness="1"
+            
+            HorizontalContentAlignment="Stretch" 
+                            ItemsSource="{Binding InfoList}"                   
+                            Margin="14,3,14,3"
+                            ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"         
+                            ItemTemplate="{StaticResource ListBoxItemTemplate}" Height="160">
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+        </ListBox>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Back"
+                    Margin="5"
+                    Width="150"
+                    Background="DarkRed"
+                    BorderBrush="PaleVioletRed"
+                    Command="{Binding BackCommand}"/>
+            <Button Content="{Binding ButtonOkContent}"
+                    Margin="5"
+                    Width="150"
+                    Background="Green"
+                    BorderBrush="DarkGreen"
+                    Command="{Binding OkCommand}"/>
+        </StackPanel>
 
     </StackPanel>
 </UserControl>

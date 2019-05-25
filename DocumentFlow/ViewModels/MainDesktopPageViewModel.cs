@@ -149,7 +149,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GContacts => gContacts ?? (gContacts = new RelayCommand(
                 () =>
                 {
-
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "Contacts"));
                     navigationService.Navigate<ContactsPageView>();
                 }
             ));

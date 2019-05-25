@@ -18,6 +18,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="0.2*" />
                         <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.2*" />
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
@@ -33,20 +34,22 @@
                     </StackPanel>
 
 
-                    <Button  Grid.Column="1" 
+                    <Button  Grid.Column="1"                             
                             Margin="1"
                             Command="{Binding DataContext.DeleteContactCommand, ElementName=This}"
-                            CommandParameter="{Binding}">
+                            CommandParameter="{Binding}"
+                             IsEnabled="{Binding DataContext.AddIsEnabled}">
                         Delete
                     </Button>
 
                     <Button Grid.Column="2"  
                             Margin="1" 
                             Command="{Binding DataContext.EditContactCommand, ElementName=This}"
-                            CommandParameter="{Binding}">
+                            CommandParameter="{Binding}"
+                            IsEnabled="{Binding DataContext.AddIsEnabled}">
                         Edit
                     </Button>
-                    <Button Grid.Column="2"  
+                    <Button Grid.Column="3"  
                             Margin="1" 
                             Command="{Binding DataContext.ShowContactCommand, ElementName=This}"
                             CommandParameter="{Binding}">

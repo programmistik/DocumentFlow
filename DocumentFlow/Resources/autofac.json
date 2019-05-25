@@ -21,6 +21,7 @@
     { "type": "DocumentFlow.ViewModels.NewsListPageViewModel" },
     { "type": "DocumentFlow.ViewModels.ConstantsPageViewModel" },
     { "type": "DocumentFlow.ViewModels.ChangeMyPassPageViewModel" },
+    { "type": "DocumentFlow.ViewModels.CreateNewContactPageViewModel" },
 
     {
       "type": "DocumentFlow.Models.AppDbContext",

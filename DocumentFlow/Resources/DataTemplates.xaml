@@ -67,5 +67,8 @@
     <DataTemplate DataType="{x:Type vm:ChangeMyPassPageViewModel}">
         <v:ChangeMyPassPageView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CreateNewContactPageViewModel}">
+        <v:CreateNewContactPageView/>
+    </DataTemplate>
 
 </ResourceDictionary>
