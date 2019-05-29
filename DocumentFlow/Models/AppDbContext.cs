@@ -32,6 +32,7 @@ namespace DocumentFlow.Models
         public DbSet<NewsPost> NewsPosts { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<ExternalContact> ExternalContacts { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<ColorScheme> ColorSchemes { get; set; }
         public DbSet<Constant> Constants { get; set; }

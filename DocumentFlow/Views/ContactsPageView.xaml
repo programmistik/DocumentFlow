@@ -9,6 +9,10 @@
              x:Name="This"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        
+        <local:OrgCompany x:Key="OrgCompany" />
+        <local:MultiValueConverter x:Key="MultiValueConverter" />
+        
         <DataTemplate x:Key="ListBoxItemTemplate">
             <StackPanel>
 
@@ -23,30 +27,42 @@
 
                     <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
 
-                        <!--<Label FontWeight="Bold"
-                               Content="{Binding ContactInfoType.ContactName}" />-->
-                        <Label 
+                        
+                        <StackPanel Orientation="Horizontal">
+                        <Label FontWeight="Bold"
                                Content="{Binding Name}" />
-                        <Label 
+                            <Label FontWeight="Bold"
                                Content="{Binding Surname}" />
+                        </StackPanel>
                         <Label 
-                               Content="{Binding Company.CompanyName}" />
+                               Content="{Binding Converter={StaticResource OrgCompany}}"/>
                     </StackPanel>
 
 
                     <Button  Grid.Column="1"                             
                             Margin="1"
                             Command="{Binding DataContext.DeleteContactCommand, ElementName=This}"
-                            CommandParameter="{Binding}"
-                             IsEnabled="{Binding DataContext.AddIsEnabled}">
+                            CommandParameter="{Binding}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                                <Binding />
+                                <Binding  ElementName="btnAddNewContact" Path="IsEnabled" />
+                            </MultiBinding>
+                        </Button.IsEnabled>
+
                         Delete
                     </Button>
 
                     <Button Grid.Column="2"  
                             Margin="1" 
                             Command="{Binding DataContext.EditContactCommand, ElementName=This}"
-                            CommandParameter="{Binding}"
-                            IsEnabled="{Binding DataContext.AddIsEnabled}">
+                            CommandParameter="{Binding}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                                <Binding />
+                                <Binding  ElementName="btnAddNewContact" Path="IsEnabled" />
+                            </MultiBinding>
+                        </Button.IsEnabled>
                         Edit
                     </Button>
                     <Button Grid.Column="3"  
@@ -57,7 +73,17 @@
                     </Button>
 
                 </Grid>
-
+                <Separator>
+                    <Separator.Style>
+                        <Style TargetType="Separator">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Separator.Style>
+                </Separator>
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
@@ -214,6 +240,7 @@
             Grid.Column="1" Grid.ColumnSpan="7" 
             Grid.Row="1" Grid.RowSpan="6">
             <Button Content="Add new contact"
+                    x:Name="btnAddNewContact"
                     Margin="5"
                     IsEnabled="{Binding AddIsEnabled}"
                     Command="{Binding AddContactCommand}"/>
@@ -224,7 +251,7 @@
             <TextBox BorderBrush="DarkViolet"
                      BorderThickness="2"
                      Background="White"
-                     Text="{Binding Path=MailFilter, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Path=ContactsFilter, UpdateSourceTrigger=PropertyChanged}"
                      Margin="5,0,5,0" />
             </DockPanel>
             <!--<DataGrid x:Name="ContactsGrid" 
@@ -259,7 +286,7 @@
                      BorderThickness="1"
             
             HorizontalContentAlignment="Stretch" 
-                            ItemsSource="{Binding ContactsList}"                   
+                            ItemsSource="{Binding FilteredContacts}"                   
                             Margin="5"
                             ScrollViewer.CanContentScroll="True"
                             ScrollViewer.VerticalScrollBarVisibility="Visible"         

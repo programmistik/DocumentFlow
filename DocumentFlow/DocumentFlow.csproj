@@ -203,6 +203,9 @@
     <Compile Include="ModalWindows\LinkWin.xaml.cs">
       <DependentUpon>LinkWin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModalWindows\SelectableMessageBox.xaml.cs">
+      <DependentUpon>SelectableMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\ColorScheme.cs" />
     <Compile Include="Models\Companies.cs" />
@@ -380,6 +383,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ModalWindows\LinkWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModalWindows\SelectableMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

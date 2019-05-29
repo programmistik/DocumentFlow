@@ -32,8 +32,13 @@ namespace DocumentFlow.ViewModels
         private ObservableCollection<Organization> orgCollection;
         public ObservableCollection<Organization> OrgCollection { get => orgCollection; set => Set(ref orgCollection, value); }
 
+        private ObservableCollection<ContactInformation> infoList;
+        public ObservableCollection<ContactInformation> InfoList { get => infoList; set => Set(ref infoList, value); }
+
         private string buttonOkContent;
         public string ButtonOkContent { get => buttonOkContent; set => Set(ref buttonOkContent, value); }
+
+        private ExternalContact CurrentContact { get; set; }
 
         public CreateNewContactPageViewModel(INavigationService navigationService,
                                            IMessageService messageService,
@@ -43,21 +48,29 @@ namespace DocumentFlow.ViewModels
             this.messageService = messageService;
             this.db = db;
 
-            OrgCollection = new ObservableCollection<Organization>(db.Organizations);
 
-            Messenger.Default.Register<NotificationMessage<Contact>>(this, OnHitIt);
+            Messenger.Default.Register<NotificationMessage<ExternalContact>>(this, OnHitIt);
         }
 
-        private void OnHitIt(NotificationMessage<Contact> cont)
+        private void OnHitIt(NotificationMessage<ExternalContact> cont)
         {
+            OrgCollection = new ObservableCollection<Organization>(db.Organizations);
+
             if (cont.Notification == "ChangeContact")
             {
                 ButtonOkContent = "Save";
+                CurrentContact = cont.Content;
+                Name = CurrentContact.Name;
+                Surname = CurrentContact.Surname;
+                Organization = CurrentContact.Organization;
+                InfoList = new ObservableCollection<ContactInformation>(CurrentContact.ContactInfos);
             }
-            //else if (cont.Notification == "CreateContact")
-            //{
-            //    ButtonOkContent = "Create";
-            //}
+            else if (cont.Notification == "AddContact")
+            {
+                ButtonOkContent = "Create";
+                CurrentContact = cont.Content;
+                InfoList = new ObservableCollection<ContactInformation>();
+            }
         }
 
         private RelayCommand backCommand;
@@ -69,6 +82,24 @@ namespace DocumentFlow.ViewModels
                     
                    navigationService.Navigate<ContactsPageView>();
                    
+                }
+            ));
+        }
+
+        private RelayCommand okCommand;
+        public RelayCommand OkCommand
+        {
+            get => okCommand ?? (okCommand = new RelayCommand(
+                async () =>
+                {
+                    CurrentContact.Name = Name;
+                    CurrentContact.Surname = Surname;
+                    CurrentContact.Organization = Organization;
+                    db.Contacts.Add(CurrentContact);
+
+                    await db.SaveChangesAsync();
+                    navigationService.Navigate<ContactsPageView>();
+
                 }
             ));
         }
@@ -120,15 +151,15 @@ namespace DocumentFlow.ViewModels
                     win.ShowDialog();
                     if (!string.IsNullOrEmpty(win.InputValue.Text))
                     {
-                        //var newInfo = new ContactInformation
-                        //{
-                        //    Contact = CurrentEmployee,
-                        //    ContactInfoType = win.InfoCollection.SelectedItem as ContactInfoType,
-                        //    Value = win.InputValue.Text
-                        //};
-                        //InfoList.Add(newInfo);
-                        ////db.Employees.Where(e => e == CurrentEmployee).Single().ContactInfos.Add(newInfo);
-                        //CurrentEmployee.ContactInfos.Add(newInfo);
+                        var newInfo = new ContactInformation
+                        {
+                            Contact = CurrentContact,
+                            ContactInfoType = win.InfoCollection.SelectedItem as ContactInfoType,
+                            Value = win.InputValue.Text
+                        };
+                        InfoList.Add(newInfo);
+                        //db.Employees.Where(e => e == CurrentEmployee).Single().ContactInfos.Add(newInfo);
+                        CurrentContact.ContactInfos.Add(newInfo);
                     }
 
                 }

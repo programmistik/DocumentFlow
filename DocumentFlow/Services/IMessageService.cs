@@ -11,5 +11,6 @@ namespace DocumentFlow.Services
         void ShowInfo(string text, string title = "Info");
         void ShowError(string text, string title = "Error");
         bool ShowYesNo(string text, string title = "Your answer");
+        void SelectableInfo(string text, string title = "Info", string msgUri = "");
     }
 }

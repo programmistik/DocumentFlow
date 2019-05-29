@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFlow.ModalWindows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,12 @@ namespace DocumentFlow.Services
 {
     class MessageService : IMessageService
     {
+        public void SelectableInfo(string text, string title = "Info", string msgUri = "")
+        {
+            
+            var res = SelectableMessageBox.Show(title, text, MessageBoxButton.OK, MessageBoxImage.Information, msgUri);
+        }
+
         public void ShowError(string text, string title = "Error")
         {
             MessageBox.Show(text, title, MessageBoxButton.OK, MessageBoxImage.Error);
