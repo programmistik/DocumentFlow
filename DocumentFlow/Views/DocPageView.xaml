@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="DocumentFlow.Views.DocPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DocumentFlow.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <DockPanel>
+        <Label Content="Data:"
+               FontSize="15"
+               Margin="3"/>
+            <TextBox Text="{Binding DocData}"
+                     FontSize="15"
+                     Margin="3"
+                     Width="200"
+                     IsEnabled="False"/>
+        
+        <Label Content="Number:"
+               FontSize="15"
+               Margin="3"/>
+            <TextBox Text="{Binding DocNumber}"
+                     FontSize="15"
+                     Margin="3"
+                     IsEnabled="False"/>
+        </DockPanel>
+        <DockPanel>
+        <Label Content="Created by:"
+               FontSize="15"
+               Margin="3"/>
+            <TextBox Text="{Binding DocData}"
+                     FontSize="15"
+                     Margin="3"
+                     IsEnabled="False"/>
+        </DockPanel>
+        <DockPanel>
+        <Label Content="Document type:"
+               FontSize="15"
+               Margin="3"/>
+            <ComboBox Text="{Binding DocData}"
+                     FontSize="15"
+                     Margin="3"
+                      Width="200"/>
+        
+        <Label Content="Document status:"
+               FontSize="15"
+               Margin="3"/>
+            <ComboBox Text="{Binding DocData}"
+                     FontSize="15"
+                     Margin="3"/>
+        </DockPanel>
+        <TabControl>
+            <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="3">Files</TextBlock>
+                </StackPanel>
+            </TabItem.Header>
+            <TabItem.Content>
+                    <StackPanel Height="240">
+                        
+                    </StackPanel>
+            </TabItem.Content>
+        </TabItem>
+        </TabControl>
+        <DockPanel>
+        <Label Content="Comment:"
+               FontSize="15"
+               Margin="3"/>
+        <TextBox Text="{Binding DocData}"
+                     FontSize="15"
+                     Margin="3"/>
+        </DockPanel>
+    </StackPanel>
+</UserControl>

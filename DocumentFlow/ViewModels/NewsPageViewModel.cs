@@ -10,12 +10,14 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace DocumentFlow.ViewModels
 {
@@ -24,13 +26,20 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
+
+        private ObservableCollection<NewsPost> newsCollection;
+        public ObservableCollection<NewsPost> NewsCollection { get => newsCollection; set => Set(ref newsCollection, value); }
+
         public NewsPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
 
+            NewsCollection = new ObservableCollection<NewsPost>(db.NewsPosts.Where(p => p.PostEndDate >= DateTime.Today));
         }
+
+        
 
         #region NavigationCommands
         //Upper Menu
@@ -114,5 +123,33 @@ namespace DocumentFlow.ViewModels
                 }
             ));
         #endregion
+    }
+
+    public static class WebBrowserUtility
+    {
+        public static readonly DependencyProperty BindableSourceProperty =
+            DependencyProperty.RegisterAttached("BindableSource", typeof(string), typeof(WebBrowserUtility), new UIPropertyMetadata(null, BindableSourcePropertyChanged));
+
+        public static string GetBindableSource(DependencyObject obj)
+        {
+            return (string)obj.GetValue(BindableSourceProperty);
+        }
+
+        public static void SetBindableSource(DependencyObject obj, string value)
+        {
+            obj.SetValue(BindableSourceProperty, value);
+        }
+
+        public static void BindableSourcePropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            WebBrowser browser = o as WebBrowser;
+            if (browser != null)
+            {
+                string html = e.NewValue as string;
+                //browser.Source = !String.IsNullOrEmpty(uri) ? new Uri(uri) : null;
+                browser.NavigateToString(html ?? "&nbsp;");
+            }
+        }
+
     }
 }
