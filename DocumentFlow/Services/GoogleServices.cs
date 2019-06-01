@@ -84,6 +84,12 @@ namespace DocumentFlow.Services
 
         public void addNewEvent(CalendarService service, Event NewEvent, string calendarId = "primary")
         {
+            if (string.IsNullOrEmpty(NewEvent.Location))
+            {
+                NewEvent.Location = "Баку, Азербайджан";
+            }
+            
+            // "RRULE:FREQ=;INTERVAL=0;COUNT=0"
             service.Events.Insert(NewEvent, calendarId).Execute();
         }
 

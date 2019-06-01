@@ -91,6 +91,21 @@ namespace DocumentFlow.ViewModels
 
         }
 
+        private void OnHitUser(NotificationMessage<User> usr)
+        {
+            if (usr.Notification == "SendCurrentUser")
+            {
+                CurrentUser = usr.Content;
+                var emp = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+                Fio = emp.Name + " " + emp.Surname;
+
+                if (string.IsNullOrEmpty(emp.Photo))
+                    Avatara = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png";
+                else
+                    Avatara = emp.Photo;
+            }
+        }
+
         private void OnHitIt(NotificationMessage<User> usr)
         {
             if (usr.Notification == "SendCurrentUser")
@@ -287,8 +302,9 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GSettings => gSettings ?? (gSettings = new RelayCommand(
                 () =>
                 {
-                    // do nothing
-                    //navigationService.Navigate<SettingsPageView>();
+                    StopCamera();
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    navigationService.Navigate<SettingsPageView>();
                 }
             ));
 
@@ -309,6 +325,7 @@ namespace DocumentFlow.ViewModels
                 () =>
                 {
                     StopCamera();
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<SchedulePageView>();
                 }
             ));
@@ -318,6 +335,7 @@ namespace DocumentFlow.ViewModels
                 () =>
                 {
                     StopCamera();
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<DocumentsPageView>();
                 }
             ));
@@ -327,6 +345,7 @@ namespace DocumentFlow.ViewModels
                 () =>
                 {
                     StopCamera();
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<NewsPageView>();
                 }
             ));
@@ -336,6 +355,7 @@ namespace DocumentFlow.ViewModels
                 () =>
                 {
                     StopCamera();
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<CalendarPageView>();
                 }
             ));
@@ -345,6 +365,7 @@ namespace DocumentFlow.ViewModels
                 () =>
                 {
                     StopCamera();
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<GMailPageView>();
                 }
             ));
@@ -354,9 +375,13 @@ namespace DocumentFlow.ViewModels
                 () =>
                 {
                     StopCamera();
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "Contacts"));
                     navigationService.Navigate<ContactsPageView>();
                 }
             ));
+
+
         #endregion
 
         private RelayCommand addCommand;

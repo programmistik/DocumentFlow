@@ -83,9 +83,9 @@
             <Button
                 Command="{Binding GMain}" 
                 Background="Transparent" BorderThickness="0" Height="64" Width="64" Padding="0">
-                <Image Margin="0" Source="../Resources/Images/user.png" />
+                <Image Margin="0" Source="{Binding Avatara}" />
             </Button>
-            <Label FontSize="20" Content="Имя Фамилия Отчество" Foreground="White" VerticalContentAlignment="Center"></Label>
+            <Label FontSize="20" Content="{Binding Fio}" Foreground="White" VerticalContentAlignment="Center"></Label>
         </StackPanel>
 
         <Grid Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="0" Background="#FF353436">

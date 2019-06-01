@@ -57,6 +57,15 @@ namespace DocumentFlow.ViewModels
         private Event SelectedEvent { get; set; }
         private CalendarService GoogleCalendarService;
 
+
+        private User CurrentUser { get; set; }
+
+        private string fio;
+        public string Fio { get => fio; set => Set(ref fio, value); }
+
+        private string avatara;
+        public string Avatara { get => avatara; set => Set(ref avatara, value); }
+
         public AddEditEventPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db, IGoogleService googleService)
         {
             this.navigationService = navigationService;
@@ -67,6 +76,7 @@ namespace DocumentFlow.ViewModels
             colorIndex = 1;
 
             Messenger.Default.Register<NotificationMessage<Event>>(this, OnHitIt);
+            Messenger.Default.Register<NotificationMessage<User>>(this, OnHitUser);
 
             Messenger.Default.Register<NotificationMessage<CalendarService>>(this, goo =>
             {
@@ -122,18 +132,34 @@ namespace DocumentFlow.ViewModels
 
         }
 
+
+        private void OnHitUser(NotificationMessage<User> usr)
+        {
+            if (usr.Notification == "SendCurrentUser")
+            {
+                CurrentUser = usr.Content;
+                var emp = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+                Fio = emp.Name + " " + emp.Surname;
+
+                if (string.IsNullOrEmpty(emp.Photo))
+                    Avatara = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png";
+                else
+                    Avatara = emp.Photo;
+            }
+        }
+
         #region NavigationCommands
 
         private RelayCommand saveEvent;
         public RelayCommand SaveEvent => saveEvent ?? (saveEvent = new RelayCommand(
                 () =>
                 {
-                    var CurrentUserEmail = "3565733@gmail.com";
+                    var CurrentUserEmail = CurrentUser.GoogleAccount;
 
                     SelectedEvent.Summary = EventSummary;
                     SelectedEvent.Location = Location;
                     SelectedEvent.Description = Description;
-                    SelectedEvent.ColorId = (ColorIndex+1).ToString();
+                    SelectedEvent.ColorId = (ColorIndex + 1).ToString();
                     SelectedEvent.Start = new EventDateTime()
                     {
                         DateTime = StartDate,
@@ -144,6 +170,18 @@ namespace DocumentFlow.ViewModels
                         DateTime = EndDate,
                         TimeZone = "Asia/Baku",
                     };
+                    if (string.IsNullOrEmpty(Freq))
+                    {
+                        Freq = "DAILY";
+                    }
+                    if (Count == 0)
+                    {
+                        Count = 1;
+                    }
+                    if (Interval == 0)
+                    {
+                        Interval = 1;
+                    }
                     SelectedEvent.Recurrence = new string[] { $"RRULE:FREQ={Freq};INTERVAL={Interval};COUNT={Count}" };
                     SelectedEvent.Attendees = AttendeesList;
                     

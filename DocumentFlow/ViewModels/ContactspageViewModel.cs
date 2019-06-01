@@ -36,6 +36,14 @@ namespace DocumentFlow.ViewModels
         private Employee currentEmployee;
         public Employee CurrentEmployee { get => currentEmployee; set => Set(ref currentEmployee, value); }
 
+        private User CurrentUser { get; set; }
+
+        private string fio;
+        public string Fio { get => fio; set => Set(ref fio, value); }
+
+        private string avatara;
+        public string Avatara { get => avatara; set => Set(ref avatara, value); }
+
         public ContactsPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
             this.navigationService = navigationService;
@@ -46,7 +54,28 @@ namespace DocumentFlow.ViewModels
             ContactsList.OrderBy(c => c.Name);
 
             Messenger.Default.Register<NotificationMessage<User>>(this, OnHitIt);
+            Messenger.Default.Register<NotificationMessage<User>>(this, OnHitUser);
+
         }
+
+
+        private void OnHitUser(NotificationMessage<User> usr)
+        {
+            if (usr.Notification == "SendCurrentUser")
+            {
+                CurrentUser = usr.Content;
+                var emp = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+                Fio = emp.Name + " " + emp.Surname;
+
+                if (string.IsNullOrEmpty(emp.Photo))
+                    Avatara = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png";
+                else
+                    Avatara = emp.Photo;
+            }
+        }
+
+
+
 
         private void OnHitIt(NotificationMessage<User> usr)
         {
@@ -138,7 +167,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GMain => gMain ?? (gMain = new RelayCommand(
                 () =>
                 {
-
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<MainDesktopPageView>();
                 }
             ));
@@ -147,7 +176,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GSettings => gSettings ?? (gSettings = new RelayCommand(
                 () =>
                 {
-
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<SettingsPageView>();
                 }
             ));
@@ -156,7 +185,6 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GExit => gExit ?? (gExit = new RelayCommand(
                 () =>
                 {
-
                     navigationService.Navigate<LogInPageView>();
                 }
             ));
@@ -168,6 +196,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GSchedule => gSchedule ?? (gSchedule = new RelayCommand(
                 () =>
                 {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<SchedulePageView>();
                 }
             ));
@@ -176,6 +205,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GDocuments => gDocuments ?? (gDocuments = new RelayCommand(
                 () =>
                 {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<DocumentsPageView>();
                 }
             ));
@@ -184,6 +214,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GNews => gNews ?? (gNews = new RelayCommand(
                 () =>
                 {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<NewsPageView>();
                 }
             ));
@@ -192,6 +223,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GCalendar => gCalendar ?? (gCalendar = new RelayCommand(
                 () =>
                 {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<CalendarPageView>();
                 }
             ));
@@ -200,7 +232,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GMail => gMail ?? (gMail = new RelayCommand(
                 () =>
                 {
-
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<GMailPageView>();
                 }
             ));
@@ -209,10 +241,13 @@ namespace DocumentFlow.ViewModels
         public RelayCommand GContacts => gContacts ?? (gContacts = new RelayCommand(
                 () =>
                 {
-
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "Contacts"));
                     navigationService.Navigate<ContactsPageView>();
                 }
             ));
+
+
         #endregion
     }
 }
