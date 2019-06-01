@@ -172,9 +172,15 @@
                         <Label FontSize="12" 
                                 Margin="2"
                                 Content="Frequency (DAILY or WEEKLY)"/>
-                        <TextBox FontSize="15" 
-                                Margin="2"
-                                Text="{Binding Freq}"/>
+
+                        <ComboBox Width="100" Height="25" Margin="2"
+                                  HorizontalAlignment="Left" 
+                                  SelectedIndex="{Binding Freq}">
+                            <ComboBoxItem FontSize="15" 
+                                     Content="DAILY"/>
+                            <ComboBoxItem FontSize="15" 
+                                     Content="WEEKLY"/>
+                        </ComboBox>
                         <Label FontSize="12" 
                                 Margin="2"
                                 Content="Interval (integer from 1)"/>

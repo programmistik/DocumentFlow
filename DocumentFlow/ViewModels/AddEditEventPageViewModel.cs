@@ -170,6 +170,13 @@ namespace DocumentFlow.ViewModels
                         DateTime = EndDate,
                         TimeZone = "Asia/Baku",
                     };
+                    if (Freq == "1")
+                    {
+                        Freq = "WEEKLY";
+                    }else if (Freq == "0")
+                    {
+                        Freq = "DAILY";
+                    }
                     if (string.IsNullOrEmpty(Freq))
                     {
                         Freq = "DAILY";
