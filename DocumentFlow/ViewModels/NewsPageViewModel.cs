@@ -36,10 +36,17 @@ namespace DocumentFlow.ViewModels
             this.messageService = messageService;
             this.db = db;
 
-            NewsCollection = new ObservableCollection<NewsPost>(db.NewsPosts.Where(p => p.PostEndDate >= DateTime.Today));
+           // NewsCollection = new ObservableCollection<NewsPost>(db.NewsPosts.Where(p => p.PostEndDate >= DateTime.Today));
         }
 
-        
+        private RelayCommand loadedCommand;
+        public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(
+        () =>
+        {
+            NewsCollection = new ObservableCollection<NewsPost>(db.NewsPosts.Where(p => p.PostEndDate >= DateTime.Today));
+
+        }));
+
 
         #region NavigationCommands
         //Upper Menu

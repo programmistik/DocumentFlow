@@ -219,7 +219,7 @@ namespace DocumentFlow.ViewModels
                         ImageLink = openFileDialog.FileName;
                     }
 
-                    if (ImageLink != "")
+                    if (!string.IsNullOrEmpty(ImageLink))
                     {
                         StopCamera();
                         Image = new BitmapImage(new Uri(ImageLink));
