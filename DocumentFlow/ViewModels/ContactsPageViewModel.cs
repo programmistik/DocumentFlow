@@ -237,6 +237,16 @@ namespace DocumentFlow.ViewModels
                 }
             ));
 
+        private RelayCommand gContacts;
+        public RelayCommand GContacts => gContacts ?? (gContacts = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "Contacts"));
+                    navigationService.Navigate<ContactsPageView>();
+                }
+            ));
+
 
         #endregion
     }
