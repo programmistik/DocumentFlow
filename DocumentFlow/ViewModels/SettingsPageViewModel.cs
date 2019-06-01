@@ -298,16 +298,6 @@ namespace DocumentFlow.ViewModels
                 }
             ));
 
-        private RelayCommand gSettings;
-        public RelayCommand GSettings => gSettings ?? (gSettings = new RelayCommand(
-                () =>
-                {
-                    StopCamera();
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    navigationService.Navigate<SettingsPageView>();
-                }
-            ));
-
         private RelayCommand gExit;
         public RelayCommand GExit => gExit ?? (gExit = new RelayCommand(
                 () =>

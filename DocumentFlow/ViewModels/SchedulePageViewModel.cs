@@ -88,15 +88,6 @@ namespace DocumentFlow.ViewModels
 
         //Aside
 
-        private RelayCommand gSchedule;
-        public RelayCommand GSchedule => gSchedule ?? (gSchedule = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    navigationService.Navigate<SchedulePageView>();
-                }
-            ));
-
         private RelayCommand gDocuments;
         public RelayCommand GDocuments => gDocuments ?? (gDocuments = new RelayCommand(
                 () =>

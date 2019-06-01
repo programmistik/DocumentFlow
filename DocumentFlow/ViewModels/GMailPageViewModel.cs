@@ -204,15 +204,6 @@ namespace DocumentFlow.ViewModels
                 }
             ));
 
-        private RelayCommand gMail;
-        public RelayCommand GMail => gMail ?? (gMail = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    navigationService.Navigate<GMailPageView>();
-                }
-            ));
-
         private RelayCommand gContacts;
         public RelayCommand GContacts => gContacts ?? (gContacts = new RelayCommand(
                 () =>

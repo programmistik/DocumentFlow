@@ -122,15 +122,6 @@ namespace DocumentFlow.ViewModels
                 }
             ));
 
-        private RelayCommand gNews;
-        public RelayCommand GNews => gNews ?? (gNews = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    navigationService.Navigate<NewsPageView>();
-                }
-            ));
-
         private RelayCommand gCalendar;
         public RelayCommand GCalendar => gCalendar ?? (gCalendar = new RelayCommand(
                 () =>
