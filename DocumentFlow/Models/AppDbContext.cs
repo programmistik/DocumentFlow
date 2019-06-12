@@ -36,7 +36,8 @@ namespace DocumentFlow.Models
         public DbSet<Language> Languages { get; set; }
         public DbSet<ColorScheme> ColorSchemes { get; set; }
         public DbSet<Constant> Constants { get; set; }
-
+        public DbSet<Currency> Currencies { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

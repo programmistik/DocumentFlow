@@ -71,4 +71,8 @@
         <v:CreateNewContactPageView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:DocPageViewModel}">
+        <v:DocPageView/>
+    </DataTemplate>
+
 </ResourceDictionary>

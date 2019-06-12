@@ -131,6 +131,9 @@
                                 <DataGridTextColumn  
                                                     Binding="{Binding DocTypeName, UpdateSourceTrigger=PropertyChanged}" 
                                                     Header="Document type name" Width="500"/>
+                                <DataGridTextColumn  
+                                                    Binding="{Binding DocTypeAcc, UpdateSourceTrigger=PropertyChanged}" 
+                                                    Header="Acronym" Width="100"/>
                             </DataGrid.Columns>
 
                         </DataGrid>
@@ -155,6 +158,34 @@
                                 <DataGridTextColumn  
                                                     Binding="{Binding DocStateName, UpdateSourceTrigger=PropertyChanged}" 
                                                     Header="Document state name" Width="500"/>
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">Currency</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel DataContext="{Binding CurrencyCollection}" >
+                        <DataGrid AutoGenerateColumns="False" 
+                      EnableRowVirtualization="True" Height="340" 
+                      ItemsSource="{Binding}" Margin="10,0" 
+                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                            <DataGrid.Columns>
+
+                                <DataGridTextColumn  
+                                                    Binding="{Binding CurrancyCode, UpdateSourceTrigger=PropertyChanged}" 
+                                                    Header="Code" Width="80"/>
+                                <DataGridTextColumn  
+                                                    Binding="{Binding CurrancyName, UpdateSourceTrigger=PropertyChanged}" 
+                                                    Header="Currency name" Width="500"/>
+                                
                             </DataGrid.Columns>
 
                         </DataGrid>

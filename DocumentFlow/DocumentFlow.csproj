@@ -194,6 +194,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Migrations\201905230702474_InitialCreate.cs" />
+    <Compile Include="Migrations\201905230702474_InitialCreate.Designer.cs">
+      <DependentUpon>201905230702474_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906120800509_curr.cs" />
+    <Compile Include="Migrations\201906120800509_curr.Designer.cs">
+      <DependentUpon>201906120800509_curr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906120810173_state.cs" />
+    <Compile Include="Migrations\201906120810173_state.Designer.cs">
+      <DependentUpon>201906120810173_state.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906121325209_qr.cs" />
+    <Compile Include="Migrations\201906121325209_qr.Designer.cs">
+      <DependentUpon>201906121325209_qr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModalWindows\AddContactInfoWindow.xaml.cs">
       <DependentUpon>AddContactInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -251,6 +268,7 @@
     <Compile Include="ViewModels\ConstantsPageViewModel.cs" />
     <Compile Include="ViewModels\ContactsPageViewModel.cs" />
     <Compile Include="ViewModels\CreateNewContactPageViewModel.cs" />
+    <Compile Include="ViewModels\DocPageViewModel.cs" />
     <Compile Include="ViewModels\NewsListPageViewModel.cs" />
     <Compile Include="ViewModels\NormativeInfoPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
@@ -353,6 +371,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201905230702474_InitialCreate.resx">
+      <DependentUpon>201905230702474_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906120800509_curr.resx">
+      <DependentUpon>201906120800509_curr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906120810173_state.resx">
+      <DependentUpon>201906120810173_state.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906121325209_qr.resx">
+      <DependentUpon>201906121325209_qr.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ru-RU.Designer.cs</LastGenOutput>
@@ -374,7 +404,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Messages\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="ModalWindows\AddContactInfoWindow.xaml">

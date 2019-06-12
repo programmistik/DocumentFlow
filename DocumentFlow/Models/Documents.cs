@@ -13,21 +13,32 @@ namespace DocumentFlow.Models
         public DateTime DocDate { get; set; }
         public int CompanyId { get; set; }
         public virtual Company Company { get; set; }
-        public int DepartmentId { get; set; }
-        public virtual Department Department { get; set; }
+        //public int DepartmentId { get; set; }
+        //public virtual Department Department { get; set; }
         public int DocumentTypeId { get; set; }
         public virtual DocumentType DocumentType { get; set; }
         public int DocumentStateId { get; set; }
         public virtual DocumentState DocumentState { get; set; }
+
+        public DateTime DocInfoDate { get; set; }
         public int OrganizationId { get; set; }
         public virtual Organization Organization { get; set; }
+
+        public int ContactId { get; set; }
+        public virtual ExternalContact InfoContact { get; set; }
+
+        public decimal DocSum { get; set; }
+        public int CurrencyId { get; set; }
+        public virtual Currency DocCurrency { get; set; }
+        public string DocInfoComment { get; set; }
+
         // Organization contacts here //
-        public DateTime CreateDate { get; set; }
+        //public DateTime CreateDate { get; set; }
         public int CrUserId { get; set; }
         public virtual User CreatedBy { get; set; }
-        public DateTime ModifyDate { get; set; }
-        public int MdUserId { get; set; }
-        public virtual User ModifyBy { get; set; }
+        //public DateTime ModifyDate { get; set; }
+        //public int MdUserId { get; set; }
+        //public virtual User ModifyBy { get; set; }
 
         public string Comment { get; set; }
 

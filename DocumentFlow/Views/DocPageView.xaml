@@ -4,71 +4,326 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:tp="http://schemas.xceed.com/wpf/xaml/toolkit"
+             Name="This"
+             mc:Ignorable="d" d:DesignWidth="800" Height="474.789">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="FilesListItemTemplate">
+            <StackPanel>
+
+
+                <Grid  HorizontalAlignment="Stretch">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+
+                        <Label FontWeight="Bold"
+                               Content="{Binding FileName}"/>
+                        <Label 
+                               Content="{Binding FileComment}"/>
+                    </StackPanel>
+
+
+                    <Button  Grid.Column="1" 
+                            Margin="1"
+                            Command="{Binding DataContext.EditFileCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        Edit
+                    </Button>
+
+
+                </Grid>
+                <Separator>
+                    <Separator.Style>
+                        <Style TargetType="Separator">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Separator.Style>
+                </Separator>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    
     <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Back"
+                    Margin="5"
+                    Width="150"
+                    Background="DarkRed"
+                    BorderBrush="PaleVioletRed"
+                    Command="{Binding BackCommand}"/>
+            <Button Content="OK"
+                    Margin="5"
+                    Width="150"
+                    Background="Green"
+                    BorderBrush="DarkGreen"
+                    Command="{Binding OkCommand}"
+                    CommandParameter="{Binding ElementName=This}"/>
+        </StackPanel>
         <DockPanel>
-        <Label Content="Data:"
+            <Label Content="Data:"
                FontSize="15"
                Margin="3"/>
             <TextBox Text="{Binding DocData}"
                      FontSize="15"
                      Margin="3"
                      Width="200"
-                     IsEnabled="False"/>
-        
-        <Label Content="Number:"
+                     IsReadOnly="True"
+                     Foreground="Gray"/>
+
+            <Label Content="Number:"
                FontSize="15"
                Margin="3"/>
             <TextBox Text="{Binding DocNumber}"
                      FontSize="15"
                      Margin="3"
-                     IsEnabled="False"/>
+                     IsReadOnly="True"
+                     Foreground="Gray"/>
         </DockPanel>
         <DockPanel>
-        <Label Content="Created by:"
+            <Label Content="Created by:"
                FontSize="15"
                Margin="3"/>
-            <TextBox Text="{Binding DocData}"
+            <TextBox Text="{Binding CreatedByName}"
                      FontSize="15"
                      Margin="3"
-                     IsEnabled="False"/>
+                     Width="300"
+                     IsReadOnly="True"
+                     Foreground="Gray"/>
+            <Label Content="Company:"
+               FontSize="15"
+               Margin="3"/>
+            <TextBox Text="{Binding DocCompany}"
+                     FontSize="15"
+                     Margin="3"
+                     IsReadOnly="True"
+                     Foreground="Gray"/>
         </DockPanel>
         <DockPanel>
-        <Label Content="Document type:"
+            <Label Content="Document type:"
                FontSize="15"
                Margin="3"/>
-            <ComboBox Text="{Binding DocData}"
-                     FontSize="15"
-                     Margin="3"
-                      Width="200"/>
-        
-        <Label Content="Document status:"
+            <ComboBox ItemsSource="{Binding Path = DocTypeCollection}"    
+                  SelectedItem="{Binding Path = DocType}"  
+                  DisplayMemberPath = "DocTypeName"
+                  FontSize="15"
+                  Margin="3"
+                  Width="200"/>
+
+            <Label Content="Document status:"
                FontSize="15"
                Margin="3"/>
-            <ComboBox Text="{Binding DocData}"
-                     FontSize="15"
-                     Margin="3"/>
+            <ComboBox ItemsSource="{Binding Path = DocStatusCollection}"    
+                  SelectedItem="{Binding Path = DocStatus}"  
+                  DisplayMemberPath = "DocStateName"
+                  FontSize="15"
+                  Margin="3">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter
+                    Property="IsEnabled"
+                    Value="{Binding IsSelectable}" />
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
         </DockPanel>
         <TabControl>
             <TabItem>
-            <TabItem.Header>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="3">Files</TextBlock>
-                </StackPanel>
-            </TabItem.Header>
-            <TabItem.Content>
-                    <StackPanel Height="240">
-                        
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">Short info about document</TextBlock>
                     </StackPanel>
-            </TabItem.Content>
-        </TabItem>
-        </TabControl>
-        <DockPanel>
-        <Label Content="Comment:"
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel Height="240">
+                        <DockPanel HorizontalAlignment="Left">
+                            <Label Content="Date:"
+                           FontSize="15"
+                           Margin="3"/>
+                            <DatePicker    
+                        SelectedDate="{Binding DocDocumentDate, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}"
+                        Width="245" Margin="3"
+                                IsEnabled="{Binding InfoEnabled}"/>
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label Content="Organization:"
                FontSize="15"
                Margin="3"/>
-        <TextBox Text="{Binding DocData}"
+                            <ComboBox ItemsSource="{Binding Path = OrgCollection}"    
+                  SelectedItem="{Binding Path = Org}"  
+                  DisplayMemberPath = "OrganizationName"
+                  FontSize="15"
+                  Margin="3"
+                  Width="200">
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction  Command="{Binding SelectionChangedCommand}" 
+                                                                />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+
+                            </ComboBox>
+                            <Label Content="Contact:"
+               FontSize="15"
+               Margin="3"/>
+                            <ComboBox x:Name="cbContact"
+                                ItemsSource="{Binding Path = ContactCollection}"    
+                  SelectedItem="{Binding Path = Contact}"  
+                  
+                  FontSize="15"
+                  Margin="3">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction  Command="{Binding Contact_SelectionChangedCommand}" 
+                                           CommandParameter="{Binding ElementName=cbContact, Path=SelectedItem}"                     />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label Content="Sum:"
+               FontSize="15"
+               Margin="3"/>
+                            <tp:DecimalUpDown Margin="3"
+                                              Width="300"
+                                              Text="{Binding DocSum}"
+                                              FormatString="F2"/>
+                            <!--<TextBox Text="{Binding DocSum}"
+                     FontSize="15"
+                     Margin="3"
+                     Width="300"
+                     IsEnabled="{Binding InfoEnabled}"/>-->
+                            <Label Content="Currency:"
+               FontSize="15"
+               Margin="3"/>
+                            <ComboBox ItemsSource="{Binding Path = CurrCollection}"    
+                  SelectedItem="{Binding Path = Currency}"  
+                  DisplayMemberPath = "CurrancyCode"
+                  FontSize="15"
+                  Margin="3"/>
+                        </DockPanel>
+                        <Label Content="Comment:"
+               FontSize="15"
+               Margin="3"/>
+                        <TextBox Text="{Binding DocInfoComment}"
+                     FontSize="15"
+                     Margin="3"/>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">Files</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel Height="240" Orientation="Horizontal">
+                        <StackPanel>
+                            <ListBox HorizontalContentAlignment="Stretch" 
+                                     VerticalAlignment="Stretch"
+                                     Margin="3"
+                                     BorderThickness="2"
+                                     BorderBrush="DarkViolet"
+                                     ItemsSource="{Binding DocFils}" 
+                                     ScrollViewer.CanContentScroll="True"
+                                     ScrollViewer.VerticalScrollBarVisibility="Visible"       
+                                     ItemTemplate="{StaticResource FilesListItemTemplate}" 
+                                     Height="220"
+                                     Width="400">
+
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+
+                            </ListBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="{Binding AddNewFileContent}"
+                                   FontSize="20"
+                                   Margin="3" 
+                                   FontWeight="Bold"
+                                   Foreground="BlueViolet"
+                                   Width="364"/>
+                            <DockPanel>
+                                <Label Content="File name:"
+                                   FontSize="15"
+                                   Margin="3"/>
+                                <TextBox Text="{Binding FileName}"
+                                     Margin="3"
+                                     IsReadOnly="{Binding roEditFile}"/>
+                            </DockPanel>
+                            <Label Content="File path:"
+                                   FontSize="15"
+                                   Margin="3"/>
+                            <DockPanel>
+                                <TextBox Text="{Binding AddNewFilePath}"
+                                         Width="320"
+                                         Margin="3"
+                                         IsReadOnly="{Binding roEditFile}"/>
+                                <Button Command="{Binding NewFilePathCommand}"
+                                        Content="📂"
+                                        Margin="3"
+                                        IsEnabled="{Binding roEditFile}"/>
+                            </DockPanel>
+                            <DockPanel>
+                                <Label Content="Comment:"
+                                   FontSize="15"
+                                   Margin="3"/>
+                                <TextBox Text="{Binding FileComment}"
+                                     Margin="3"/>
+                            </DockPanel>
+                            <Button Command="{Binding AddNewFileCommand}"
+                                        Content="{Binding AddFileContent}"
+                                    Margin="5"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3">Buisiness process</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel Height="240">
+
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+        <DockPanel>
+            <Label Content="Comment:"
+               FontSize="15"
+               Margin="3"/>
+            <TextBox Text="{Binding DocComment}"
                      FontSize="15"
                      Margin="3"/>
         </DockPanel>

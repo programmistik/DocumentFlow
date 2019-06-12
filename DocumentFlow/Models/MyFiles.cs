@@ -11,6 +11,7 @@ namespace DocumentFlow.Models
         public int Id { get; set; }
         public string FileName { get; set; }
         public string FileUri { get; set; }
+        public string FileComment { get; set; }
 
         public int DocId { get; set; }
         public virtual Document Doc { get; set; }

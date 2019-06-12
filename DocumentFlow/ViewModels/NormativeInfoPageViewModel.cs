@@ -34,6 +34,15 @@ namespace DocumentFlow.ViewModels
         private ObservableCollection<ContactInfoType> infoTypesCollection;
         public ObservableCollection<ContactInfoType> InfoTypesCollection { get => infoTypesCollection; set => Set(ref infoTypesCollection, value); }
 
+        private ObservableCollection<DocumentType> docTypesCollection;
+        public ObservableCollection<DocumentType> DocTypesCollection { get => docTypesCollection; set => Set(ref docTypesCollection, value); }
+
+        private ObservableCollection<DocumentState> docStatesCollection;
+        public ObservableCollection<DocumentState> DocStatesCollection { get => docStatesCollection; set => Set(ref docStatesCollection, value); }
+
+        private ObservableCollection<Currency> currencyCollection;
+        public ObservableCollection<Currency> CurrencyCollection { get => currencyCollection; set => Set(ref currencyCollection, value); }
+
 
         public NormativeInfoPageViewModel(INavigationService navigationService, 
                                              IMessageService messageService, 
@@ -57,6 +66,12 @@ namespace DocumentFlow.ViewModels
             PositionCollection = db.Positions.Local;
             await db.ContactInfoTypes.LoadAsync();
             InfoTypesCollection = db.ContactInfoTypes.Local;
+            await db.DocumentTypes.LoadAsync();
+            DocTypesCollection = db.DocumentTypes.Local;
+            await db.DocumentStates.LoadAsync();
+            DocStatesCollection = db.DocumentStates.Local;
+            await db.Currencies.LoadAsync();
+            CurrencyCollection = db.Currencies.Local;
         }
 
         private RelayCommand backCommand;

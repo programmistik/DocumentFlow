@@ -18,6 +18,11 @@ namespace DocumentFlow.Models
         {
             this.ContactInfos = new HashSet<ContactInformation>();
         }
+
+        public override string ToString()
+        {
+            return $"{Name} {Surname}";
+        }
     }
 
     public class Employee : Contact

@@ -85,6 +85,7 @@ namespace DocumentFlow.ViewModels
             this.db = db;            
 
             Messenger.Default.Register<NotificationMessage<User>>(this, OnHitIt);
+            Messenger.Default.Register<NotificationMessage<User>>(this, OnHitUser);
 
             VideoDevices = new ObservableCollection<FilterInfo>();
             GetVideoDevices();

@@ -61,6 +61,16 @@ namespace DocumentFlow.ViewModels
             }
         }
 
+        private RelayCommand addNewDocument;
+        public RelayCommand AddNewDocument => addNewDocument ?? (addNewDocument = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    Messenger.Default.Send(new NotificationMessage<Document>(new Document(), "NewDocument"));
+                    navigationService.Navigate<DocPageView>();
+                }
+            ));
+
         #region NavigationCommands
         //Upper Menu
         private RelayCommand gMain;
