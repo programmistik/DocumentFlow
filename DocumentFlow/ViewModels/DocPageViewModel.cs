@@ -3,6 +3,7 @@ using DocumentFlow.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -97,6 +98,12 @@ namespace DocumentFlow.ViewModels
         private bool RoEditFile;
         public bool roEditFile { get => RoEditFile; set => Set(ref RoEditFile, value); }
 
+        private bool RoBtnEditFile;
+        public bool roBtnEditFile { get => RoBtnEditFile; set => Set(ref RoBtnEditFile, value); }
+
+        private ObservableCollection<MyFile> docFiles;
+        public ObservableCollection<MyFile> DocFiles { get => docFiles; set => Set(ref docFiles, value); }
+
         public DocPageViewModel(INavigationService navigationService,
                                    IMessageService messageService,
                                       AppDbContext db)
@@ -139,6 +146,9 @@ namespace DocumentFlow.ViewModels
                 AddNewFileContent = "Add new file";
                 AddFileContent = "Add";
                 roEditFile = false;
+                roBtnEditFile = true;
+                DocFiles = new ObservableCollection<MyFile>();
+                DocDocumentDate = DateTime.Now;
             }
         }
 
@@ -192,25 +202,25 @@ namespace DocumentFlow.ViewModels
                             await db.SaveChangesAsync();
                         }
                     }
+
+                    if (!string.IsNullOrEmpty(FileName) && !string.IsNullOrEmpty(AddNewFilePath))
+                    {
+                        var newFile = new MyFile
+                        {
+                            FileName = FileName,
+                            FileUri = AddNewFilePath,
+                            Doc = CurrentDocument,
+                            FileComment = FileComment
+                        };
+
+                        CurrentDocument.myFiles.Add(newFile);
+                        DocFiles.Add(newFile);
+                    }
                     else
                     {
-                        if (!string.IsNullOrEmpty(FileName) && !string.IsNullOrEmpty(AddNewFilePath))
-                        {
-                            var newFile = new MyFile
-                            {
-                                FileName = FileName,
-                                FileUri = AddNewFilePath,
-                                Doc = CurrentDocument,
-                                FileComment = FileComment
-                            };
-
-                            CurrentDocument.myFiles.Add(newFile);
-                        }
-                        else
-                        {
-                            messageService.ShowError("You should select a file and fill FileName field");
-                        }
+                        messageService.ShowError("You should select a file and fill FileName field");
                     }
+                    
                 }
             ));
 
@@ -221,7 +231,31 @@ namespace DocumentFlow.ViewModels
                    AddNewFileContent = "Edit file comment";
                    AddFileContent = "Save";
                    roEditFile = true;
+                   roBtnEditFile = false;
                }
             ));
+
+        private RelayCommand newFilePathCommand;
+        public RelayCommand NewFilePathCommand
+        {
+            get => newFilePathCommand ?? (newFilePathCommand = new RelayCommand(
+                () =>
+                {
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "All files (*.*)|*.*";
+                    string Link = null;
+
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        Link = openFileDialog.FileName;
+                    }
+
+                    if (!string.IsNullOrEmpty(Link))
+                    {
+                        AddNewFilePath = Link;
+                    }
+                }
+            ));
+        }
     }
 }
