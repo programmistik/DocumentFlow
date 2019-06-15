@@ -5,8 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
+    
     <Grid Background="#FFE1E1E1">
         <Grid.RowDefinitions>
             <RowDefinition Height="64"></RowDefinition>
@@ -138,6 +149,44 @@
         <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
                 Content="Add new document"
                 Command="{Binding AddNewDocument}"></Button>
+        <Button Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" 
+                Content="Selection"
+                Command="{Binding AddSelection}"></Button>
+        <StackPanel DataContext="{Binding DocsCollection}" 
+            Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" Margin="0,0,0,10" Grid.RowSpan="5"> 
+        <DataGrid 
+            AutoGenerateColumns="True" 
+            EnableRowVirtualization="True" 
+            ItemsSource="{Binding}" 
+            Margin="10,0,10,10" 
+            BorderBrush="BlueViolet"
+            BorderThickness="2"
+            IsReadOnly="True"
+            RowDetailsVisibilityMode="VisibleWhenSelected" Grid.RowSpan="5" Height="304" 
+            >
+            <!--<DataGrid.Columns>
+                <DataGridTextColumn  
+                      Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}" 
+                      Header="Date" 
+                      />
+
+
+            </DataGrid.Columns>-->
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding DoubleClickCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            
+                <DataGrid.Resources>
+                    <Style TargetType="ScrollBar">
+                        <Setter Property="BorderBrush" Value="DarkViolet" />
+                        
+                    </Style>
+                    
+                </DataGrid.Resources>
+            </DataGrid>
+        </StackPanel>
         <!--#endregion-->
     </Grid>
 </UserControl>

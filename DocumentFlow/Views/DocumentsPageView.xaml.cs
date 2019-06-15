@@ -24,5 +24,10 @@ namespace DocumentFlow.Views
         {
             InitializeComponent();
         }
+
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Hi");
+        }
     }
 }

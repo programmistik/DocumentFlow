@@ -11,6 +11,7 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,9 @@ namespace DocumentFlow.ViewModels
         private string avatara;
         public string Avatara { get => avatara; set => Set(ref avatara, value); }
 
+        private ObservableCollection<Document> docsCollection;
+        public ObservableCollection<Document> DocsCollection { get => docsCollection; set => Set(ref docsCollection, value); }
+
 
         public DocumentsPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db)
         {
@@ -45,6 +49,12 @@ namespace DocumentFlow.ViewModels
 
         }
 
+        private RelayCommand loadedCommand;
+        public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(
+        () =>
+        {
+            DocsCollection = new ObservableCollection<Document>(db.Documents); 
+        }));
 
         private void OnHitUser(NotificationMessage<User> usr)
         {
@@ -70,6 +80,13 @@ namespace DocumentFlow.ViewModels
                     navigationService.Navigate<DocPageView>();
                 }
             ));
+
+        private RelayCommand doubleClickCommand;
+        public RelayCommand DoubleClickCommand => doubleClickCommand ?? (doubleClickCommand = new RelayCommand(
+        () =>
+        {
+            messageService.ShowInfo("OK");
+        }));
 
         #region NavigationCommands
         //Upper Menu

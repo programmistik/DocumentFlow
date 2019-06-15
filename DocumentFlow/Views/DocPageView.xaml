@@ -158,10 +158,15 @@
                             <Label Content="Date:"
                            FontSize="15"
                            Margin="3"/>
-                            <DatePicker    
-                        SelectedDate="{Binding DocDocumentDate, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}"
-                        Width="245" Margin="3"
-                                IsEnabled="{Binding InfoEnabled}"/>
+                            <DatePicker
+                                    SelectedDate="{Binding Path=DocDocumentDate,
+                                                   Mode=TwoWay,
+                                                   TargetNullValue={x:Static System:DateTime.Now}}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top" 
+                                    Width="245" 
+                                Margin="5"/>
+                           
                         </DockPanel>
 
                         <DockPanel>
@@ -210,7 +215,7 @@
                             <tp:DecimalUpDown Margin="3"
                                               Width="300"
                                               Text="{Binding DocSum}"
-                                              FormatString="F2"/>
+                                              FormatString="N2"/>
                             <!--<TextBox Text="{Binding DocSum}"
                      FontSize="15"
                      Margin="3"
@@ -243,7 +248,27 @@
                 <TabItem.Content>
                     <StackPanel Height="240" Orientation="Horizontal">
                         <StackPanel>
-                            <ListBox HorizontalContentAlignment="Stretch" 
+                            <ListBox  
+                                Height="220"
+                                Width="400"
+                                BorderBrush="DarkViolet"
+                                BorderThickness="1"
+            
+                            HorizontalContentAlignment="Stretch" 
+                            ItemsSource="{Binding DocFiles}"                   
+                            Margin="3,3,14,3"
+                            ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Visible"         
+                            ItemTemplate="{StaticResource FilesListItemTemplate}">
+
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+
+                            </ListBox>
+                            <!--<ListBox HorizontalContentAlignment="Stretch" 
                                      VerticalAlignment="Stretch"
                                      Margin="3"
                                      BorderThickness="2"
@@ -251,7 +276,6 @@
                                      ItemsSource="{Binding DocFils}" 
                                      ScrollViewer.CanContentScroll="True"
                                      ScrollViewer.VerticalScrollBarVisibility="Visible"       
-                                     ItemTemplate="{StaticResource FilesListItemTemplate}" 
                                      Height="220"
                                      Width="400">
 
@@ -261,7 +285,7 @@
                                     </Style>
                                 </ListBox.ItemContainerStyle>
 
-                            </ListBox>
+                            </ListBox>-->
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
                             <Label Content="{Binding AddNewFileContent}"
@@ -289,7 +313,7 @@
                                 <Button Command="{Binding NewFilePathCommand}"
                                         Content="📂"
                                         Margin="3"
-                                        IsEnabled="{Binding roEditFile}"/>
+                                        IsEnabled="{Binding roBtnEditFile}"/>
                             </DockPanel>
                             <DockPanel>
                                 <Label Content="Comment:"
