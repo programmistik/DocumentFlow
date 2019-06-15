@@ -570,6 +570,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Newspaper-Feed-add-icon.png" />
+    <Resource Include="Resources\Images\Cancel.png" />
+    <Resource Include="Resources\Images\location.png" />
+    <Resource Include="Resources\Images\notification.png" />
+    <Resource Include="Resources\Images\pen.png" />
     <Content Include="Resources\New.html" />
     <Resource Include="Resources\RibonImages\folder-icon.png" />
     <Resource Include="Resources\RibonImages\closeLarge.png" />

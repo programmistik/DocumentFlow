@@ -10,221 +10,276 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="34*"></RowDefinition>
+            <RowDefinition Height="40*"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="150*"></RowDefinition>
         </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="511*" MaxWidth="1000"/>
+            <ColumnDefinition Width="239*"/>
         </Grid.ColumnDefinitions>
-        <TabControl 
-            Grid.Row="0" Grid.Column="0"
-            x:Name="GeleralInfo">
-            <TabItem x:Name="generalTab">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3">General Information</TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel>
-                        <Label FontSize="12" 
-                               Margin="2"
-                               Content="Name"/>
-                        <TextBox FontSize="15" 
-                                Margin="2"
-                                Text="{Binding EventSummary}"/>
-                        <Label FontSize="12" 
-                               Margin="2"
-                               Content="Location"/>
-                        <TextBox FontSize="15" 
-                                 Margin="2"
-                                 Text="{Binding Location}"/>
-                        <Label FontSize="12" 
-                               Margin="2"
-                               Content="Description"/>
-                        <TextBox FontSize="15" 
-                                 Margin="2"
-                                 Text="{Binding Description}"/>
-                        <StackPanel Orientation="Vertical">
-                            <Label FontSize="12" 
-                                   Margin="2"
-                                   Content="Start date:"/>
-                            <DockPanel>
-                                <DatePicker
-                                    SelectedDate="{Binding Path=StartDate,
-                                                   Mode=TwoWay,
-                                                   TargetNullValue={x:Static System:DateTime.Now}}"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top" 
-                                    Width="120" />
-                                <tp:TimePicker Height="25" 
-                                               Width="100" 
-                                               Margin="10 0"
-                                               HorizontalAlignment="Left"
-                                               TimeInterval="00:30:00.000"
-                                               ShowButtonSpinner="False"
-                                               Value="{Binding StartDate}"/>
-                            </DockPanel>
-                            <Label FontSize="12" 
-                                   Margin="2"
-                                   Content="End date:"/>
-                            <DockPanel>
-                                <DatePicker HorizontalAlignment="Left"
-                                            SelectedDate="{Binding Path=EndDate,
-                                                         Mode=TwoWay,
-                                                         TargetNullValue={x:Static System:DateTime.Now}}"
-                                            VerticalAlignment="Top" 
-                                            Width="120" />
-                                <tp:TimePicker Height="25" 
-                                               Width="100" 
-                                               Margin="10 0"
-                                               HorizontalAlignment="Left"
-                                               TimeInterval="00:30:00.000"
-                                               ShowButtonSpinner="False"
-                                               Value="{Binding EndDate}"/>
-                            </DockPanel>
+        <Button Background="White"
+                BorderBrush="White"
+                Command="{Binding BackCommand}"
+                Padding="5">
+            <Image Margin="7" Source="/DocumentFlow;component/Resources/Images/Cancel.png"></Image>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
-                        </StackPanel>
-                        <ComboBox Width="50" Height="25" Margin="2"
-                                  HorizontalAlignment="Left" 
-                                  SelectedIndex="{Binding ColorIndex}">
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" x:Name="EnterNameTextBox" Margin="5,12,5,12" Grid.Row="0" Grid.Column="1" Height="26" Text="{Binding EventSummary}"/>
+        <TextBlock IsHitTestVisible="False" Text="Введите название" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,18,0,16" Foreground="DarkGray" Grid.Row="0" Grid.Column="1" Height="16" Width="355">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=EnterNameTextBox}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Lavender"
-                                     Background="#7986cb"
-                                     Foreground="Black"/>
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Sage" 
-                                     Background="#33b679"
-                                     Foreground="Black"/>
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Grape" 
-                                     Background="#8e24aa"
-                                     Foreground="Black"/>
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Flamingo" 
-                                     Background="#e67c73"
-                                     Foreground="Black"/>
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Banana" 
-                                     Background="#f6c026"
-                                     Foreground="Black"/>
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Tangerine" 
-                                     Background="#f5511d"
-                                     Foreground="Black"/>
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Peacock" 
-                                     Background="#039be5"
-                                     Foreground="Black"/>
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Graphite" 
-                                     Background="#616161"
-                                     Foreground="Black"/>
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Blueberry"
-                                     Background="#3f51b5"
-                                     Foreground="Black"/>
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Basil" 
-                                     Background="#0b8043"
-                                     Foreground="Black"/>
-                            <ComboBoxItem FontSize="15" 
-                                     Content="Tomato" 
-                                     Background="#d60000"
-                                     Foreground="Black"/>
-                        </ComboBox>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
-            
-            <TabItem x:Name="AttendeesTab">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3">Attendees</TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <DockPanel>
-                        <DataGrid AutoGenerateColumns="False" 
-                                  EnableRowVirtualization="True"
-                                  ItemsSource="{Binding AttendeesList}" Margin="10,0" 
-                                  RowDetailsVisibilityMode="VisibleWhenSelected">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Header="Name" Width="350"/>
-                                <DataGridTextColumn Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Header="Email" Width="350"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </DockPanel>
-                </TabItem.Content>
-            </TabItem>
-            
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3">Recurrence and Reminders</TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel>
-                        <Label FontSize="12" 
+        <Button Content="Save"
+                    Width="130" MaxWidth="130" MaxHeight="50" HorizontalAlignment="Left"
+                    Grid.Column="2" Grid.Row="0"
+                    Command="{Binding SaveEvent}" Height="Auto" Margin="0,9"/>
+
+        <DockPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
+            <DatePicker
+                       SelectedDate="{Binding Path=StartDate,
+                                              Mode=TwoWay,
+                                              TargetNullValue={x:Static System:DateTime.Now}}"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top" 
+                       Width="120" />
+            <tp:TimePicker Height="25" 
+                           Width="100" 
+                           Margin="10 0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           TimeInterval="00:30:00.000"
+                           ShowButtonSpinner="False"
+                           Value="{Binding StartDate}"/>
+            <Label>
+                -
+            </Label>
+            <tp:TimePicker Height="25" 
+                           Width="100" 
+                           Margin="10 0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           TimeInterval="00:30:00.000"
+                           ShowButtonSpinner="False"
+                           Value="{Binding EndDate}"/>
+
+            <DatePicker HorizontalAlignment="Left"
+                        SelectedDate="{Binding Path=EndDate,
+                                               Mode=TwoWay,
+                                               TargetNullValue={x:Static System:DateTime.Now}}"
+                        VerticalAlignment="Top" 
+                        Width="120" />
+        </DockPanel>
+
+        <Image Margin="10" Grid.Row="2" Grid.Column="0" Source="/DocumentFlow;component/Resources/Images/Location.png"></Image>
+
+
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" x:Name="EnterLocationTextBox" Margin="5,8,5,7" Grid.Row="2" Grid.Column="1" Height="26" Text="{Binding Location}"/>
+        <TextBlock IsHitTestVisible="False" Text="Укажите место проведения" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,10,0,11" Foreground="DarkGray" Grid.Row="2" Grid.Column="1" Height="17" Width="355">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=EnterLocationTextBox}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <StackPanel VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+            <Label FontSize="12" 
                                 Margin="2"
                                 Content="Frequency (DAILY or WEEKLY)"/>
 
-                        <ComboBox Width="100" Height="25" Margin="2"
+            <ComboBox Width="100" Height="25" Margin="2"
+                      VerticalAlignment="Top"
                                   HorizontalAlignment="Left" 
                                   SelectedIndex="{Binding Freq}">
-                            <ComboBoxItem FontSize="15" 
+                <ComboBoxItem FontSize="15" 
                                      Content="DAILY"/>
-                            <ComboBoxItem FontSize="15" 
+                <ComboBoxItem FontSize="15" 
                                      Content="WEEKLY"/>
-                        </ComboBox>
-                        <Label FontSize="12" 
-                                Margin="2"
-                                Content="Interval (integer from 1)"/>
-                        <TextBox x:Name="Interval" TextChanged="Interval_TextChanged"
-                                FontSize="15" 
-                                 Margin="2"
-                                 Text="{Binding Interval}"/>
-                        <Label FontSize="12" 
+            </ComboBox>
+
+        </StackPanel>
+
+        <DockPanel VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" LastChildFill="True">
+            <Label FontSize="12" 
+                   Margin="2"
+                   Content="Interval (integer from 1)"/>
+
+            <Grid VerticalAlignment="Center">
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="15" x:Name="Interval" Height="26" Text="{Binding Interval}" TextChanged="Interval_TextChanged"/>
+                <TextBlock IsHitTestVisible="False" Text="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,0,3" Foreground="DarkGray" Height="22" Width="355" FontSize="15">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=Interval}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+        </DockPanel>
+
+        <DockPanel VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" LastChildFill="True">
+            <Label FontSize="12" 
                                Margin="2"
                                Content="Count"/>
-                        <TextBox x:Name="Count" TextChanged="Count_TextChanged"
-                                FontSize="15" 
-                                 Margin="2"
-                                 Text="{Binding Count}"/>
-                        <Label FontSize="12" 
-                                Margin="2"
-                                Content="Remainder"/>
-                        <CheckBox
+
+            <Grid>
+                <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="15" x:Name="Count" Height="26" Text="{Binding Count}" TextChanged="Count_TextChanged"/>
+                <TextBlock IsHitTestVisible="False" Text="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,0,3" Foreground="DarkGray" Height="22" Width="355" FontSize="15">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=Count}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+        </DockPanel>
+
+        <Image Margin="7" Grid.Row="6" Grid.Column="0" Source="/DocumentFlow;component/Resources/Images/notification.png"></Image>
+
+        <DockPanel VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" LastChildFill="True">
+
+            <CheckBox
                             IsChecked="{Binding HasRemaider}"></CheckBox>
-                        <Label FontSize="12" 
+
+            <Label FontSize="12" 
                                 Margin="2"
                                 Content="Time in minutes"/>
-                        <TextBox x:Name="Time" TextChanged="Time_TextChanged"
+            <TextBox x:Name="Time" TextChanged="Time_TextChanged"
                                 FontSize="15" 
                                 Margin="2"
                                 Text="{Binding Minutes}"/>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
-        </TabControl>
-        
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Content="Save"
-                    Margin="5"
-                    Grid.Column="0"
-                    Command="{Binding SaveEvent}"/>
-            <Button Content="Back"
-                    Margin="5"
-                    Grid.Column="1"
-                    Command="{Binding BackCommand}"/>
+        </DockPanel>
+
+        <Image Margin="8" Grid.Row="7" Grid.Column="0" Source="/DocumentFlow;component/Resources/Images/calendar.png"></Image>
+
+        <DockPanel VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" LastChildFill="True">
+            <Label FontSize="12" 
+                               Margin="2"
+                               Content="{Binding Fio}"/>
+            <ComboBox Width="80" Height="25" Margin="2"
+                                  HorizontalAlignment="Left" 
+                                  SelectedIndex="{Binding ColorIndex}">
+                <ComboBoxItem FontSize="15" 
+                                     Content="Lavender"
+                                     Background="#7986cb"
+                                     Foreground="Black"/>
+                <ComboBoxItem FontSize="15" 
+                                     Content="Sage" 
+                                     Background="#33b679"
+                                     Foreground="Black"/>
+                <ComboBoxItem FontSize="15" 
+                                     Content="Grape" 
+                                     Background="#8e24aa"
+                                     Foreground="Black"/>
+                <ComboBoxItem FontSize="15" 
+                                     Content="Flamingo" 
+                                     Background="#e67c73"
+                                     Foreground="Black"/>
+                <ComboBoxItem FontSize="15" 
+                                     Content="Banana" 
+                                     Background="#f6c026"
+                                     Foreground="Black"/>
+                <ComboBoxItem FontSize="15" 
+                                     Content="Tangerine" 
+                                     Background="#f5511d"
+                                     Foreground="Black"/>
+                <ComboBoxItem FontSize="15" 
+                                     Content="Peacock" 
+                                     Background="#039be5"
+                                     Foreground="Black"/>
+                <ComboBoxItem FontSize="15" 
+                                     Content="Graphite" 
+                                     Background="#616161"
+                                     Foreground="Black"/>
+                <ComboBoxItem FontSize="15" 
+                                     Content="Blueberry"
+                                     Background="#3f51b5"
+                                     Foreground="Black"/>
+                <ComboBoxItem FontSize="15" 
+                                     Content="Basil" 
+                                     Background="#0b8043"
+                                     Foreground="Black"/>
+                <ComboBoxItem FontSize="15" 
+                                     Content="Tomato" 
+                                     Background="#d60000"
+                                     Foreground="Black"/>
+            </ComboBox>
+
+        </DockPanel>
+
+        <Image Margin="8" Grid.Row="8" Grid.Column="0" Source="/DocumentFlow;component/Resources/Images/pen.png"></Image>
+
+        <Grid VerticalAlignment="Center" Grid.Row="8" Grid.Column="1">
+            <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="15" x:Name="Description" Height="26" Text="{Binding EventSummary}"/>
+            <TextBlock IsHitTestVisible="False" Text="Введите описание" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,0,3" Foreground="DarkGray" Height="22" Width="355" FontSize="15">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=Description}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
         </Grid>
+
+        <DockPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="7">
+            <DataGrid AutoGenerateColumns="False" 
+                      Background="White"
+                                  EnableRowVirtualization="True"
+                                  ItemsSource="{Binding AttendeesList}" Margin="10,0" 
+                                  RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Header="Name" />
+                    <DataGridTextColumn Width="*" Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Header="Email" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </DockPanel>
     </Grid>
 </UserControl>

@@ -86,7 +86,7 @@ namespace DocumentFlow.ViewModels
             });
         }
 
-        
+
 
         private void OnHitIt(NotificationMessage<Event> edev)
         {
@@ -115,7 +115,7 @@ namespace DocumentFlow.ViewModels
                 }
                 else
                     EndDate = ev.End.DateTime;
-                
+
                 if (ev.Attendees != null)
                     AttendeesList = new ObservableCollection<EventAttendee>(ev.Attendees);
             }
@@ -151,7 +151,7 @@ namespace DocumentFlow.ViewModels
         }
 
 
-    
+
 
         #region NavigationCommands
 
@@ -178,7 +178,8 @@ namespace DocumentFlow.ViewModels
                     if (Freq == "1")
                     {
                         Freq = "WEEKLY";
-                    }else if (Freq == "0")
+                    }
+                    else if (Freq == "0")
                     {
                         Freq = "DAILY";
                     }
@@ -196,7 +197,7 @@ namespace DocumentFlow.ViewModels
                     }
                     SelectedEvent.Recurrence = new string[] { $"RRULE:FREQ={Freq};INTERVAL={Interval};COUNT={Count}" };
                     SelectedEvent.Attendees = AttendeesList;
-                    
+
 
                     if (HasRemainder)
                     {

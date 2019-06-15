@@ -42,5 +42,6 @@ namespace DocumentFlow.Views
             Count.Text = Regex.Replace(Count.Text, "[^0-9]+", "");
 
         }
+
     }
 }
