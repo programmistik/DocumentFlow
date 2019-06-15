@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,23 @@ namespace DocumentFlow.Views
         public AddEditEventPageView()
         {
             InitializeComponent();
+        }
+
+        private void Interval_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Interval.Text = Regex.Replace(Interval.Text, "[^0-9]+", "");
+        }
+
+        private void Time_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Time.Text = Regex.Replace(Time.Text, "[^0-9]+", "");
+
+        }
+
+        private void Count_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Count.Text = Regex.Replace(Count.Text, "[^0-9]+", "");
+
         }
     }
 }

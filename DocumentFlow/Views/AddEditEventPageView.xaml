@@ -184,16 +184,17 @@
                         <Label FontSize="12" 
                                 Margin="2"
                                 Content="Interval (integer from 1)"/>
-                        <TextBox FontSize="15" 
+                        <TextBox x:Name="Interval" TextChanged="Interval_TextChanged"
+                                FontSize="15" 
                                  Margin="2"
                                  Text="{Binding Interval}"/>
                         <Label FontSize="12" 
                                Margin="2"
                                Content="Count"/>
-                        <TextBox FontSize="15" 
+                        <TextBox x:Name="Count" TextChanged="Count_TextChanged"
+                                FontSize="15" 
                                  Margin="2"
                                  Text="{Binding Count}"/>
-
                         <Label FontSize="12" 
                                 Margin="2"
                                 Content="Remainder"/>
@@ -202,7 +203,8 @@
                         <Label FontSize="12" 
                                 Margin="2"
                                 Content="Time in minutes"/>
-                        <TextBox FontSize="15" 
+                        <TextBox x:Name="Time" TextChanged="Time_TextChanged"
+                                FontSize="15" 
                                 Margin="2"
                                 Text="{Binding Minutes}"/>
                     </StackPanel>
