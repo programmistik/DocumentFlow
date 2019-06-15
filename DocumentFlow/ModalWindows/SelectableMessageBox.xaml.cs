@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -179,9 +180,17 @@ namespace DocumentFlow.ModalWindows
         }
         private void SetImagePhoto(string msgUri)
         {
-            string uri = string.Format(msgUri);
-            var uriSource = new Uri(uri, UriKind.RelativeOrAbsolute);
-            img.Source = new BitmapImage(uriSource);
+            try
+            {
+                string uri = string.Format(msgUri);
+                var uriSource = new Uri(uri, UriKind.RelativeOrAbsolute);
+                img.Source = new BitmapImage(uriSource);
+            }
+            catch {
+                var uriSource = new Uri(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png", UriKind.RelativeOrAbsolute);
+                img.Source = new BitmapImage(uriSource);
+
+            }
         }
     }
 }
