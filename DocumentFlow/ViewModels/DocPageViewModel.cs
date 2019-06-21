@@ -1,5 +1,6 @@
 ﻿using DocumentFlow.Models;
 using DocumentFlow.Services;
+using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -7,6 +8,9 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,12 +29,18 @@ namespace DocumentFlow.ViewModels
         private User CreatedBy { get; set; }
         private Employee CreatedByEmp { get; set; }
         private Document CurrentDocument { get; set; }
+        private MyFile CurrentFile { get; set; }
+        private bool EditFileMode { get; set; }
+        private DocumentState StateBeforeOpen { get; set; }
 
         private DateTime docData;
         public DateTime DocData { get => docData; set => Set(ref docData, value); }
 
-        private Document currentDoc;
-        public Document CurrentDoc { get => currentDoc; set => Set(ref currentDoc, value); }
+        private string docNumber;
+        public string DocNumber { get => docNumber; set => Set(ref docNumber, value); }
+
+        //private Document currentDoc;
+        //public Document CurrentDoc { get => currentDoc; set => Set(ref currentDoc, value); }
 
         private string createdByName;
         public string CreatedByName { get => createdByName; set => Set(ref createdByName, value); }
@@ -101,8 +111,14 @@ namespace DocumentFlow.ViewModels
         private bool RoBtnEditFile;
         public bool roBtnEditFile { get => RoBtnEditFile; set => Set(ref RoBtnEditFile, value); }
 
+        private bool RoDocType;
+        public bool roDocType { get => RoDocType; set => Set(ref RoDocType, value); }
+
         private ObservableCollection<MyFile> docFiles;
         public ObservableCollection<MyFile> DocFiles { get => docFiles; set => Set(ref docFiles, value); }
+
+        private ObservableCollection<TaskProcess> processCollection;
+        public ObservableCollection<TaskProcess> ProcessCollection { get => processCollection; set => Set(ref processCollection, value); }
 
         public DocPageViewModel(INavigationService navigationService,
                                    IMessageService messageService,
@@ -130,7 +146,7 @@ namespace DocumentFlow.ViewModels
             if (doc.Notification == "NewDocument")
             {
                 IsNew = true;
-                CurrentDoc = doc.Content;
+                CurrentDocument = doc.Content;                
                 DocData = DateTime.Now;
                 CreatedBy = CurrentUser;
                 CreatedByEmp = db.Employees.Where(e => e.UserId == CreatedBy.Id).Single();
@@ -148,7 +164,64 @@ namespace DocumentFlow.ViewModels
                 roEditFile = false;
                 roBtnEditFile = true;
                 DocFiles = new ObservableCollection<MyFile>();
+                ProcessCollection = new ObservableCollection<TaskProcess>();
                 DocDocumentDate = DateTime.Now;
+                EditFileMode = false;
+                StateBeforeOpen = DocStatus;
+                roDocType = false;
+            }
+            else if(doc.Notification == "CurrentDocument")
+            {
+                IsNew = false;
+                CurrentDocument = doc.Content;
+                DocData = CurrentDocument.DocDate;
+                DocNumber = CurrentDocument.DocNumber;
+                CreatedBy = CurrentDocument.CreatedBy;
+                CreatedByEmp = db.Employees.Where(e => e.UserId == CreatedBy.Id).Single();
+                CreatedByName = CreatedByEmp.Name + " " + CreatedByEmp.Surname;
+                DocCompany = CurrentDocument.Company.CompanyName;
+                DocType = CurrentDocument.DocumentType;
+                DocStatus = CurrentDocument.DocumentState;
+                DocDocumentDate = CurrentDocument.DocInfoDate;
+                Org = CurrentDocument.Organization;
+                Contact = CurrentDocument.InfoContact;
+                DocSum = CurrentDocument.DocSum;
+                Currency = CurrentDocument.DocCurrency;
+                DocInfoComment = CurrentDocument.DocInfoComment;
+                DocFiles = new ObservableCollection<MyFile>(CurrentDocument.myFiles);
+                ProcessCollection = new ObservableCollection<TaskProcess>(CurrentDocument.myProcesses);
+
+                DocTypeCollection = new ObservableCollection<DocumentType>(db.DocumentTypes);
+                DocStatusCollection = new ObservableCollection<DocumentState>(db.DocumentStates);
+                OrgCollection = new ObservableCollection<Organization>(db.Organizations);
+                ContactCollection = new ObservableCollection<ExternalContact>(db.ExternalContacts);
+                CurrCollection = new ObservableCollection<Currency>(db.Currencies);
+
+                if (CreatedBy == CurrentUser)
+                {
+                    if (DocStatus.DocStateName == "New")
+                    {
+                        DocStatus.IsSelectable = true;
+                        DocStatusCollection.Where(s => s.DocStateName == "In progress").Single().IsSelectable = true;
+                        DocStatusCollection.Where(s => s.DocStateName == "Rejected").Single().IsSelectable = true;
+
+                        AddNewFileContent = "Add new file";
+                        AddFileContent = "Add";
+                        roEditFile = false;
+                        roBtnEditFile = true;
+                        EditFileMode = false;
+                    }
+                }
+                else
+                {
+                    if (DocStatus.DocStateName == "In progress")
+                        if (ProcessCollection.Last().TaskUser == CurrentUser)
+                        {
+                            DocStatusCollection.Where(s => s.DocStateName == "In progress").Single().IsSelectable = true;
+                        }
+                }
+                StateBeforeOpen = DocStatus;
+                roDocType = true;
             }
         }
 
@@ -175,50 +248,115 @@ namespace DocumentFlow.ViewModels
         public RelayCommand AddNewFileCommand => addNewFileCommand ?? (addNewFileCommand = new RelayCommand(
                 async() =>
                 {
-                    if (CurrentDocument == null)
+                    if (IsNew == true)
                     {
                         var res = messageService.ShowYesNo("Save this document?");
                         if (res)
                         {
-                            CurrentDocument = new Document
+                            if (DocType == null)
                             {
-                                DocDate = DocData,
-                                CreatedBy = CreatedBy,
-                                Company = CreatedByEmp.Company,
-                                Comment = DocComment,
-                                DocumentType = DocType,
-                                DocumentState = DocStatus,
-                                DocInfoDate = DocDocumentDate,
-                                Organization = Org,
-                                InfoContact = Contact,
-                                DocSum = DocSum,
-                                DocCurrency = Currency,
-                                DocInfoComment = DocInfoComment
-                            };
+                                messageService.ShowError("Document type can't be empty.");
+                                return;
+                            }
 
-                            CurrentDocument.myFiles = new List<MyFile>();
+                            CurrentDocument.DocDate = DocData;
+                            CurrentDocument.CreatedBy = CreatedBy;
+                            CurrentDocument.Company = CreatedByEmp.Company;
+                            CurrentDocument.Comment = DocComment;
+                            CurrentDocument.DocumentType = DocType;
+                            CurrentDocument.DocumentState = DocStatus;
+                            CurrentDocument.DocInfoDate = DocDocumentDate;
+                            CurrentDocument.Organization = Org;
+                            CurrentDocument.InfoContact = Contact;
+                            CurrentDocument.DocSum = DocSum;
+                            CurrentDocument.DocCurrency = Currency;
+                            CurrentDocument.DocInfoComment = DocInfoComment;
+                           
+
+                            var docCount = db.Documents.Count() + 1;
+                            StringBuilder strNumber = new StringBuilder(docCount.ToString());
+
+                            while (strNumber.Length < 6)
+                            {
+                                strNumber = strNumber.Insert(0,"0");
+                            }
+
+                            strNumber = strNumber.Insert(0, CurrentDocument.DocumentType.DocTypeAcc);
+                            DocNumber = strNumber.ToString();
+                            CurrentDocument.DocNumber = DocNumber;
 
                             db.Documents.Add(CurrentDocument);
                             await db.SaveChangesAsync();
+                            IsNew = false;
+                            roDocType = true;
+                            DocStatusCollection.Where(s => s.DocStateName == "In progress").Single().IsSelectable = true;
+                            DocStatusCollection.Where(s => s.DocStateName == "Rejected").Single().IsSelectable = true;
+                        }
+                        else
+                        {
+                            messageService.ShowInfo("You must save document before add files.");
+                            return;
                         }
                     }
 
-                    if (!string.IsNullOrEmpty(FileName) && !string.IsNullOrEmpty(AddNewFilePath))
+                    if (EditFileMode == false)
                     {
-                        var newFile = new MyFile
+                        if (!string.IsNullOrEmpty(FileName) && !string.IsNullOrEmpty(AddNewFilePath))
                         {
-                            FileName = FileName,
-                            FileUri = AddNewFilePath,
-                            Doc = CurrentDocument,
-                            FileComment = FileComment
-                        };
+                            //var icon = Icon.ExtractAssociatedIcon(AddNewFilePath);
+                            //FileIcon = Bitmap.FromHicon(icon.Handle);
 
-                        CurrentDocument.myFiles.Add(newFile);
-                        DocFiles.Add(newFile);
+
+                            // (!) Copy new file to fileserver
+                            var newPath = db.Constants.FirstOrDefault().DocPath +"\\" + Guid.NewGuid().ToString() + Path.GetExtension(AddNewFilePath);
+
+                            try
+                            {
+                                File.Copy(AddNewFilePath, newPath, false);
+                            }
+                            catch (Exception ex)
+                            {
+                                messageService.ShowError(ex.Message);
+                                throw;
+                            }
+
+                            var newFile = new MyFile
+                            {
+                                FileName = FileName,
+                                FileUri = newPath,
+                                Doc = CurrentDocument,
+                                FileComment = FileComment
+                            };
+
+                            CurrentDocument.myFiles.Add(newFile);
+                            DocFiles.Add(newFile);
+
+                            await db.SaveChangesAsync();
+
+                            FileName = "";
+                            AddNewFilePath = "";
+                            FileComment = "";
+
+                        }
+                        else
+                        {
+                            messageService.ShowError("You should select a file and fill FileName field");
+                        }
                     }
                     else
                     {
-                        messageService.ShowError("You should select a file and fill FileName field");
+                        CurrentFile.FileComment = FileComment;
+                        await db.SaveChangesAsync();
+                        CurrentFile = null;
+                        EditFileMode = false;
+
+                        FileName = "";
+                        AddNewFilePath = "";
+                        FileComment = "";
+                        AddNewFileContent = "Add new file";
+                        AddFileContent = "Add";
+                        roEditFile = false;
+                        roBtnEditFile = true;
                     }
                     
                 }
@@ -228,10 +366,39 @@ namespace DocumentFlow.ViewModels
         public RelayCommand<MyFile> EditFileCommand => editFileCommand ?? (editFileCommand = new RelayCommand<MyFile>(
                param =>
                {
+                   CurrentFile = param;
+                   EditFileMode = true;
+
                    AddNewFileContent = "Edit file comment";
                    AddFileContent = "Save";
                    roEditFile = true;
                    roBtnEditFile = false;
+                   FileName = param.FileName;
+                   AddNewFilePath = "File server";
+                   FileComment = param.FileComment;
+               }
+            ));
+
+        private RelayCommand<MyFile> viewFileCommand;
+        public RelayCommand<MyFile> ViewFileCommand => viewFileCommand ?? (viewFileCommand = new RelayCommand<MyFile>(
+               param =>
+               {
+                   var path = param.FileUri;
+                   var ext = Path.GetExtension(path);
+                   var tempPath = Path.GetTempPath() + param.FileName + ext;
+
+                   try
+                   {
+                       File.Copy(path, tempPath, true);
+                   }
+                   catch (Exception ex)
+                   {
+                       messageService.ShowError(ex.Message);
+                       throw;
+                   }
+                   
+
+                   Process.Start(tempPath);
                }
             ));
 
@@ -257,5 +424,147 @@ namespace DocumentFlow.ViewModels
                 }
             ));
         }
+
+        private RelayCommand backCommand;
+        public RelayCommand BackCommand => backCommand ?? (backCommand = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    navigationService.Navigate<DocumentsPageView>();
+                }
+            ));
+
+        private RelayCommand okCommand;
+        public RelayCommand OkCommand => okCommand ?? (okCommand = new RelayCommand(
+                async() =>
+                {
+                    if (IsNew == true)
+                    {
+                        if (DocType == null)
+                        {
+                            messageService.ShowError("Document type can't be empty.");
+                            return;
+                        }
+
+                        CurrentDocument.DocDate = DocData;
+                        CurrentDocument.CreatedBy = CreatedBy;
+                        CurrentDocument.Company = CreatedByEmp.Company;
+                        CurrentDocument.Comment = DocComment;
+                        CurrentDocument.DocumentType = DocType;
+                        CurrentDocument.DocumentState = DocStatus;
+                        CurrentDocument.DocInfoDate = DocDocumentDate;
+                        CurrentDocument.Organization = Org;
+                        CurrentDocument.InfoContact = Contact;
+                        CurrentDocument.DocSum = DocSum;
+                        CurrentDocument.DocCurrency = Currency;
+                        CurrentDocument.DocInfoComment = DocInfoComment;
+
+
+                        var docCount = db.Documents.Count() + 1;
+                        StringBuilder strNumber = new StringBuilder(docCount.ToString());
+
+                        while (strNumber.Length < 6)
+                        {
+                            strNumber = strNumber.Insert(0, "0");
+                        }
+
+                        strNumber = strNumber.Insert(0, CurrentDocument.DocumentType.DocTypeAcc);
+                        DocNumber = strNumber.ToString();
+                        CurrentDocument.DocNumber = DocNumber;
+
+                        db.Documents.Add(CurrentDocument);
+                        await db.SaveChangesAsync();
+                        IsNew = false;
+                        roDocType = true;
+                        DocStatusCollection.Where(s => s.DocStateName == "In progress").Single().IsSelectable = true;
+                        DocStatusCollection.Where(s => s.DocStateName == "Rejected").Single().IsSelectable = true;
+                    }
+                    else
+                    {
+                        // if State changes
+                        if(StateBeforeOpen != DocStatus)
+                        {
+                            var InProgress = DocStatusCollection.Where(s => s.DocStateName == "In progress").Single();
+                            var done = DocStatusCollection.Where(s => s.DocStateName == "Done").Single();
+                            if (DocStatus == InProgress)
+                            {
+                                // Check all fields is not null
+                                // at least present one file
+                                // at least one direction
+                                var ErrorMsg = new StringBuilder("This fields in document can't be empty:\n");
+                                var ok = true;
+                                if(string.IsNullOrEmpty(DocDocumentDate.ToString()))
+                                {
+                                    ok = false;
+                                    ErrorMsg.Append("Date in short info about document\n");
+                                }
+                                if (Org == null)
+                                {
+                                    ok = false;
+                                    ErrorMsg.Append("Organization\n");
+                                }
+                                if (Contact == null)
+                                {
+                                    ok = false;
+                                    ErrorMsg.Append("Contact\n");
+                                }
+                                if (DocSum == 0.0m)
+                                {
+                                    ok = false;
+                                    ErrorMsg.Append("Sum\n");
+                                }
+                                if (Currency == null)
+                                {
+                                    ok = false;
+                                    ErrorMsg.Append("Currency\n");
+                                }
+                                if (ok)
+                                    ErrorMsg.Clear();
+
+                                if(DocFiles.Count() == 0)
+                                {
+                                    ok = false;
+                                    ErrorMsg.Append("You didn't attach any file!\n");
+                                }
+
+                                if (ProcessCollection.Count() == 0)
+                                {
+                                    ok = false;
+                                    ErrorMsg.Append("You didn't start business process!\n");
+                                }
+
+                                if (ok == false)
+                                {
+                                    ErrorMsg.Append("Changes not saved.");
+                                    messageService.ShowError(ErrorMsg.ToString());
+                                    return;
+                                }
+
+                            }
+                            else if(DocStatus == done)
+                            {
+
+                            }
+                        }
+                        
+                        CurrentDocument.Comment = DocComment;
+                        
+                        CurrentDocument.DocumentState = DocStatus;
+                        CurrentDocument.DocInfoDate = DocDocumentDate;
+                        CurrentDocument.Organization = Org;
+                        CurrentDocument.InfoContact = Contact;
+                        CurrentDocument.DocSum = DocSum;
+                        CurrentDocument.DocCurrency = Currency;
+                        CurrentDocument.DocInfoComment = DocInfoComment;
+
+                        await db.SaveChangesAsync();
+
+                       
+                    }
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    navigationService.Navigate<DocumentsPageView>();
+                }
+            ));
+
     }
 }

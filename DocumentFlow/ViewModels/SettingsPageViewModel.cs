@@ -274,11 +274,19 @@ namespace DocumentFlow.ViewModels
 
                         var newPath = imgDir + "\\" + CurrentUser.Login + Path.GetExtension(oldPath);
 
-                        File.Copy(oldPath, newPath, true);
-
-                        CurrentEmployee.Photo = newPath;
+                        try
+                        {
+                            File.Copy(oldPath, newPath, true);
+                            CurrentEmployee.Photo = newPath;
+                        }
+                        catch (Exception ex)
+                        {
+                            messageService.ShowError(ex.Message);
+                            throw;
+                        }
+                        
+                        
                     }
-                    //CurrentEmployee.ContactInfos = new ObservableCollection<ContactInformation>(InfoList);
                     await db.SaveChangesAsync();
 
                     StopCamera();
@@ -393,7 +401,6 @@ namespace DocumentFlow.ViewModels
                             Value = win.InputValue.Text
                         };
                         InfoList.Add(newInfo);
-                        //db.Employees.Where(e => e == CurrentEmployee).Single().ContactInfos.Add(newInfo);
                         CurrentEmployee.ContactInfos.Add(newInfo);
                     }
 

@@ -18,6 +18,7 @@
     </i:Interaction.Triggers>
 
     <UserControl.Resources>
+        <local:ImageDetailConverter x:Key="converter" />
         <DataTemplate x:Key="FilesListItemTemplate">
             <StackPanel>
 
@@ -25,12 +26,15 @@
                 <Grid  HorizontalAlignment="Stretch">
 
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.2*" />
                         <ColumnDefinition Width="0.2*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
-
+                    <Image Grid.Column="0" Margin="0" Source="{Binding Converter={StaticResource converter}}" />
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
+                        
                         <Label FontWeight="Bold"
                                Content="{Binding FileName}"/>
                         <Label 
@@ -38,11 +42,17 @@
                     </StackPanel>
 
 
-                    <Button  Grid.Column="1" 
+                    <Button  Grid.Column="2" 
                             Margin="1"
                             Command="{Binding DataContext.EditFileCommand, ElementName=This}"
                             CommandParameter="{Binding}">
-                        Edit
+                        ✏
+                    </Button>
+                    <Button  Grid.Column="3" 
+                            Margin="1"
+                            Command="{Binding DataContext.ViewFileCommand, ElementName=This}"
+                            CommandParameter="{Binding}">
+                        📖
                     </Button>
 
 
@@ -75,8 +85,7 @@
                     Width="150"
                     Background="Green"
                     BorderBrush="DarkGreen"
-                    Command="{Binding OkCommand}"
-                    CommandParameter="{Binding ElementName=This}"/>
+                    Command="{Binding OkCommand}"/>
         </StackPanel>
         <DockPanel>
             <Label Content="Data:"
@@ -126,7 +135,8 @@
                   DisplayMemberPath = "DocTypeName"
                   FontSize="15"
                   Margin="3"
-                  Width="200"/>
+                  Width="200"
+                  IsReadOnly="{Binding roDocType}" />
 
             <Label Content="Document status:"
                FontSize="15"
@@ -333,12 +343,39 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3">Buisiness process</TextBlock>
+                        <TextBlock Margin="3">Business process</TextBlock>
                     </StackPanel>
                 </TabItem.Header>
                 <TabItem.Content>
                     <StackPanel Height="240">
+                        <DataGrid 
+            IsSynchronizedWithCurrentItem="True"
+            AutoGenerateColumns="False" 
+            EnableRowVirtualization="True" 
+            ItemsSource="{Binding ProcessCollection}" 
+            Margin="10,0,10,10" 
+            BorderBrush="BlueViolet"
+            BorderThickness="2"
+           
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            RowDetailsVisibilityMode="VisibleWhenSelected" Height="304">
+                            <DataGrid.Columns>
 
+                                <DataGridTextColumn  
+                      Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Number" 
+                     Width="100"/>
+                            </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type ScrollBar}">
+                                    <Setter Property="BorderBrush" Value="DarkViolet" />
+
+                                </Style>
+
+                            </DataGrid.Resources>
+
+                        </DataGrid>
                     </StackPanel>
                 </TabItem.Content>
             </TabItem>

@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -152,19 +153,104 @@
         <Button Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" 
                 Content="Selection"
                 Command="{Binding AddSelection}"></Button>
-        <StackPanel DataContext="{Binding DocsCollection}" 
-            Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" Margin="0,0,0,10" Grid.RowSpan="5"> 
-        <DataGrid 
-            AutoGenerateColumns="True" 
+        <StackPanel 
+            Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" 
+            Margin="0,0,0,10" Grid.RowSpan="5">
+            
+            <DataGrid x:Name="myGrd"
+            IsSynchronizedWithCurrentItem="True"
+            AutoGenerateColumns="False" 
             EnableRowVirtualization="True" 
-            ItemsSource="{Binding}" 
+            ItemsSource="{Binding DocsCollection}" 
             Margin="10,0,10,10" 
             BorderBrush="BlueViolet"
             BorderThickness="2"
             IsReadOnly="True"
-            RowDetailsVisibilityMode="VisibleWhenSelected" Grid.RowSpan="5" Height="304" 
-            >
-            <!--<DataGrid.Columns>
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            RowDetailsVisibilityMode="VisibleWhenSelected" Height="304">
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Number" 
+                     Width="100"/>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding DocDate, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Date" 
+                     Width="100"/>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding Company.CompanyName, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Company" 
+                     Width="100"/>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding DocumentType.DocTypeName, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Type" 
+                     Width="100"/>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding DocumentState.DocStateName, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="State" 
+                     Width="100"/>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding DocInfoDate, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="DocInfoDate" 
+                     Width="100"/>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding Organization.OrganizationName, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Organization" 
+                     Width="100"/>
+
+                    <!--<DataGridTextColumn  
+                      Binding="{Binding InfoContact.Name, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Contact" 
+                     Width="100"/>-->
+                    <DataGridTextColumn                        
+                     Header="Contact" 
+                     Width="100">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="InfoContact.Name" />
+                                <Binding Path="InfoContact.Surname" />
+                        </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding DocSum, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Sum" 
+                     Width="100"/>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding DocCurrency.CurrancyCode, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Currency" 
+                     Width="100"/>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding CreatedBy, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Created By" 
+                     Width="100"/>
+
+                    <DataGridTextColumn  
+                      Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" 
+                     Header="Comment" 
+                     Width="100"/>
+
+
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <cmd:EventToCommand Command="{Binding DoubleClickCommand}"  
+                                CommandParameter="{Binding ElementName=myGrd, Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <!--<DataGrid.Columns>
                 <DataGridTextColumn  
                       Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}" 
                       Header="Date" 
@@ -172,19 +258,20 @@
 
 
             </DataGrid.Columns>-->
-                <i:Interaction.Triggers>
+                <!--<i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
                         <i:InvokeCommandAction Command="{Binding DoubleClickCommand}"/>
                     </i:EventTrigger>
-                </i:Interaction.Triggers>
-            
+                </i:Interaction.Triggers>-->
+
                 <DataGrid.Resources>
-                    <Style TargetType="ScrollBar">
+                    <Style TargetType="{x:Type ScrollBar}">
                         <Setter Property="BorderBrush" Value="DarkViolet" />
-                        
+
                     </Style>
-                    
+
                 </DataGrid.Resources>
+                
             </DataGrid>
         </StackPanel>
         <!--#endregion-->

@@ -21,14 +21,14 @@ namespace DocumentFlow.Models
         public virtual DocumentState DocumentState { get; set; }
 
         public DateTime DocInfoDate { get; set; }
-        public int OrganizationId { get; set; }
+        public int? OrganizationId { get; set; }
         public virtual Organization Organization { get; set; }
 
-        public int ContactId { get; set; }
+        public int? ContactId { get; set; }
         public virtual ExternalContact InfoContact { get; set; }
 
         public decimal DocSum { get; set; }
-        public int CurrencyId { get; set; }
+        public int? CurrencyId { get; set; }
         public virtual Currency DocCurrency { get; set; }
         public string DocInfoComment { get; set; }
 
@@ -43,10 +43,12 @@ namespace DocumentFlow.Models
         public string Comment { get; set; }
 
         public virtual ICollection<MyFile> myFiles { get; set; }
+        public virtual ICollection<TaskProcess> myProcesses { get; set; }
 
         public Document()
         {
             myFiles = new HashSet<MyFile>();
+            myProcesses = new HashSet<TaskProcess>();
         }
 
     }

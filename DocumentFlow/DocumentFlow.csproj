@@ -210,6 +210,18 @@
     <Compile Include="Migrations\201906121325209_qr.Designer.cs">
       <DependentUpon>201906121325209_qr.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906210733076_nullable_curr.cs" />
+    <Compile Include="Migrations\201906210733076_nullable_curr.Designer.cs">
+      <DependentUpon>201906210733076_nullable_curr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906210735050_nullable.cs" />
+    <Compile Include="Migrations\201906210735050_nullable.Designer.cs">
+      <DependentUpon>201906210735050_nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906211233242_qw.cs" />
+    <Compile Include="Migrations\201906211233242_qw.Designer.cs">
+      <DependentUpon>201906211233242_qw.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModalWindows\AddContactInfoWindow.xaml.cs">
       <DependentUpon>AddContactInfoWindow.xaml</DependentUpon>
@@ -242,6 +254,7 @@
     <Compile Include="Models\NewsPosts.cs" />
     <Compile Include="Models\Organizations.cs" />
     <Compile Include="Models\Positions.cs" />
+    <Compile Include="Models\Tasks.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\Resources.ru-RU.Designer.cs">
       <DependentUpon>Resources.ru-RU.resx</DependentUpon>
@@ -382,6 +395,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906121325209_qr.resx">
       <DependentUpon>201906121325209_qr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906210733076_nullable_curr.resx">
+      <DependentUpon>201906210733076_nullable_curr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906210735050_nullable.resx">
+      <DependentUpon>201906210735050_nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906211233242_qw.resx">
+      <DependentUpon>201906211233242_qw.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -81,11 +81,13 @@ namespace DocumentFlow.ViewModels
                 }
             ));
 
-        private RelayCommand doubleClickCommand;
-        public RelayCommand DoubleClickCommand => doubleClickCommand ?? (doubleClickCommand = new RelayCommand(
-        () =>
+        private RelayCommand<Document> doubleClickCommand;
+        public RelayCommand<Document> DoubleClickCommand => doubleClickCommand ?? (doubleClickCommand = new RelayCommand<Document>(
+        param =>
         {
-            messageService.ShowInfo("OK");
+            Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+            Messenger.Default.Send(new NotificationMessage<Document>(param, "CurrentDocument"));
+            navigationService.Navigate<DocPageView>();
         }));
 
         #region NavigationCommands
