@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocumentFlow.ModalWindows"
         mc:Ignorable="d"
-        Title="AddContactInfoWindow" Height="200" Width="500">
+        Title="AddContactInfoWindow" Height="200" Width="500" Closing="Window_Closing">
     <StackPanel>
         <ComboBox  x:Name="InfoCollection"
                    Margin="3"
