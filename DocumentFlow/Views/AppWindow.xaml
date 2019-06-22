@@ -8,7 +8,7 @@
         Name="TheMainView"
         Title="{Binding ApplicationTitle, UpdateSourceTrigger=PropertyChanged}"
         Height="450" Width="800"
-        MinWidth="750" MinHeight="450">
+        MinWidth="750" MinHeight="450" Closing="TheMainView_Closing">
 
     <Window.Resources>
         <ResourceDictionary Source="../Resources/DataTemplates.xaml"/>
