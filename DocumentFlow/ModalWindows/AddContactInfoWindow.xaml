@@ -8,16 +8,14 @@
         Title="AddContactInfoWindow" Height="200" Width="500">
     <StackPanel>
         <ComboBox  x:Name="InfoCollection"
-            Margin="3"
+                   Margin="3"
                    FontSize="15"
-              
-            DisplayMemberPath = "InfoType" SelectionChanged="InfoCollection_SelectionChanged"/>
+                   DisplayMemberPath = "InfoType" SelectionChanged="InfoCollection_SelectionChanged"/>
         <TextBox x:Name="InputValue"
-                Margin="3"
-                   FontSize="15"/>
+                 Margin="3"
+                 FontSize="15"/>
         <Button Content="OK"
-                Margin="3" Click="OkButton_Click"
-                />
+                Margin="3" Click="OkButton_Click"/>
         <Button Content="Cancel"
                 Margin="3"
                 Click="CancelButton_Click"/>

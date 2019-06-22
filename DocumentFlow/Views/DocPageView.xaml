@@ -9,7 +9,7 @@
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              xmlns:tp="http://schemas.xceed.com/wpf/xaml/toolkit"
              Name="This"
-             mc:Ignorable="d" d:DesignWidth="800" Height="474.789">
+             mc:Ignorable="d" Background="White">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -21,7 +21,6 @@
         <local:ImageDetailConverter x:Key="converter" />
         <DataTemplate x:Key="FilesListItemTemplate">
             <StackPanel>
-
 
                 <Grid  HorizontalAlignment="Stretch">
 
@@ -71,9 +70,27 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
+
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" VerticalAlignment="Top" Orientation="Horizontal">
             <Button Content="Back"
                     Margin="5"
                     Width="150"
@@ -87,7 +104,8 @@
                     BorderBrush="DarkGreen"
                     Command="{Binding OkCommand}"/>
         </StackPanel>
-        <DockPanel>
+
+        <DockPanel Grid.Row="1" VerticalAlignment="Top">
             <Label Content="Data:"
                FontSize="15"
                Margin="3"/>
@@ -107,7 +125,9 @@
                      IsReadOnly="True"
                      Foreground="Gray"/>
         </DockPanel>
-        <DockPanel>
+
+
+        <DockPanel Grid.Row="2" VerticalAlignment="Top">
             <Label Content="Created by:"
                FontSize="15"
                Margin="3"/>
@@ -126,7 +146,8 @@
                      IsReadOnly="True"
                      Foreground="Gray"/>
         </DockPanel>
-        <DockPanel>
+
+        <DockPanel Grid.Row="3" VerticalAlignment="Top">
             <Label Content="Document type:"
                FontSize="15"
                Margin="3"/>
@@ -155,7 +176,8 @@
                 </ComboBox.ItemContainerStyle>
             </ComboBox>
         </DockPanel>
-        <TabControl>
+
+        <TabControl Grid.Row="4" Grid.RowSpan="6" VerticalAlignment="Top">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -176,38 +198,36 @@
                                     VerticalAlignment="Top" 
                                     Width="245" 
                                 Margin="5"/>
-                           
+
                         </DockPanel>
 
                         <DockPanel>
                             <Label Content="Organization:"
-               FontSize="15"
-               Margin="3"/>
+                                   FontSize="15"
+                                   Margin="3"/>
                             <ComboBox ItemsSource="{Binding Path = OrgCollection}"    
-                  SelectedItem="{Binding Path = Org}"  
-                  DisplayMemberPath = "OrganizationName"
-                  FontSize="15"
-                  Margin="3"
-                  Width="200">
+                                      SelectedItem="{Binding Path = Org}"  
+                                      DisplayMemberPath = "OrganizationName"
+                                      FontSize="15"
+                                      Margin="3"
+                                      Width="200">
 
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction  Command="{Binding SelectionChangedCommand}" 
-                                                                />
+                                        <i:InvokeCommandAction  Command="{Binding SelectionChangedCommand}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
 
 
                             </ComboBox>
                             <Label Content="Contact:"
-               FontSize="15"
-               Margin="3"/>
+                                   FontSize="15"
+                                   Margin="3"/>
                             <ComboBox x:Name="cbContact"
-                                ItemsSource="{Binding Path = ContactCollection}"    
-                  SelectedItem="{Binding Path = Contact}"  
-                  
-                  FontSize="15"
-                  Margin="3">
+                                      ItemsSource="{Binding Path = ContactCollection}"    
+                                      SelectedItem="{Binding Path = Contact}"  
+                                      FontSize="15"
+                                      Margin="3">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
                                         <i:InvokeCommandAction  Command="{Binding Contact_SelectionChangedCommand}" 
@@ -220,32 +240,32 @@
 
                         <DockPanel>
                             <Label Content="Sum:"
-               FontSize="15"
-               Margin="3"/>
+                                   FontSize="15"
+                                   Margin="3"/>
                             <tp:DecimalUpDown Margin="3"
                                               Width="300"
                                               Text="{Binding DocSum}"
                                               FormatString="N2"/>
-                            <!--<TextBox Text="{Binding DocSum}"
-                     FontSize="15"
-                     Margin="3"
-                     Width="300"
-                     IsEnabled="{Binding InfoEnabled}"/>-->
+                            <TextBox Text="{Binding DocSum}"
+                                     FontSize="15"
+                                     Margin="3"
+                                     Width="300"
+                                     IsEnabled="{Binding InfoEnabled}"/>
                             <Label Content="Currency:"
-               FontSize="15"
-               Margin="3"/>
+                                   FontSize="15"
+                                   Margin="3"/>
                             <ComboBox ItemsSource="{Binding Path = CurrCollection}"    
-                  SelectedItem="{Binding Path = Currency}"  
-                  DisplayMemberPath = "CurrancyCode"
-                  FontSize="15"
-                  Margin="3"/>
+                                      SelectedItem="{Binding Path = Currency}"  
+                                      DisplayMemberPath = "CurrancyCode"
+                                      FontSize="15"
+                                      Margin="3"/>
                         </DockPanel>
                         <Label Content="Comment:"
-               FontSize="15"
-               Margin="3"/>
+                               FontSize="15"
+                               Margin="3"/>
                         <TextBox Text="{Binding DocInfoComment}"
-                     FontSize="15"
-                     Margin="3"/>
+                                 FontSize="15"
+                                 Margin="3"/>
                     </StackPanel>
                 </TabItem.Content>
             </TabItem>
@@ -263,13 +283,12 @@
                                 Width="400"
                                 BorderBrush="DarkViolet"
                                 BorderThickness="1"
-            
-                            HorizontalContentAlignment="Stretch" 
-                            ItemsSource="{Binding DocFiles}"                   
-                            Margin="3,3,14,3"
-                            ScrollViewer.CanContentScroll="True"
-                            ScrollViewer.VerticalScrollBarVisibility="Visible"         
-                            ItemTemplate="{StaticResource FilesListItemTemplate}">
+                                HorizontalContentAlignment="Stretch" 
+                                ItemsSource="{Binding DocFiles}"                   
+                                Margin="3,3,14,3"
+                                ScrollViewer.CanContentScroll="True"
+                                ScrollViewer.VerticalScrollBarVisibility="Visible"         
+                                ItemTemplate="{StaticResource FilesListItemTemplate}">
 
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="ListBoxItem">
@@ -278,24 +297,6 @@
                                 </ListBox.ItemContainerStyle>
 
                             </ListBox>
-                            <!--<ListBox HorizontalContentAlignment="Stretch" 
-                                     VerticalAlignment="Stretch"
-                                     Margin="3"
-                                     BorderThickness="2"
-                                     BorderBrush="DarkViolet"
-                                     ItemsSource="{Binding DocFils}" 
-                                     ScrollViewer.CanContentScroll="True"
-                                     ScrollViewer.VerticalScrollBarVisibility="Visible"       
-                                     Height="220"
-                                     Width="400">
-
-                                <ListBox.ItemContainerStyle>
-                                    <Style TargetType="ListBoxItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                    </Style>
-                                </ListBox.ItemContainerStyle>
-
-                            </ListBox>-->
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
                             <Label Content="{Binding AddNewFileContent}"
@@ -306,11 +307,11 @@
                                    Width="364"/>
                             <DockPanel>
                                 <Label Content="File name:"
-                                   FontSize="15"
-                                   Margin="3"/>
+                                       FontSize="15"
+                                       Margin="3"/>
                                 <TextBox Text="{Binding FileName}"
-                                     Margin="3"
-                                     IsReadOnly="{Binding roEditFile}"/>
+                                         Margin="3"
+                                         IsReadOnly="{Binding roEditFile}"/>
                             </DockPanel>
                             <Label Content="File path:"
                                    FontSize="15"
@@ -327,13 +328,13 @@
                             </DockPanel>
                             <DockPanel>
                                 <Label Content="Comment:"
-                                   FontSize="15"
-                                   Margin="3"/>
+                                       FontSize="15"
+                                       Margin="3"/>
                                 <TextBox Text="{Binding FileComment}"
-                                     Margin="3"/>
+                                         Margin="3"/>
                             </DockPanel>
                             <Button Command="{Binding AddNewFileCommand}"
-                                        Content="{Binding AddFileContent}"
+                                    Content="{Binding AddFileContent}"
                                     Margin="5"/>
                         </StackPanel>
 
@@ -348,31 +349,26 @@
                 </TabItem.Header>
                 <TabItem.Content>
                     <StackPanel Height="240">
-                        <DataGrid 
-            IsSynchronizedWithCurrentItem="True"
-            AutoGenerateColumns="False" 
-            EnableRowVirtualization="True" 
-            ItemsSource="{Binding ProcessCollection}" 
-            Margin="10,0,10,10" 
-            BorderBrush="BlueViolet"
-            BorderThickness="2"
-           
-            SelectionMode="Single"
-            SelectionUnit="FullRow"
-            RowDetailsVisibilityMode="VisibleWhenSelected" Height="304">
+                        <DataGrid IsSynchronizedWithCurrentItem="True"
+                                  AutoGenerateColumns="False" 
+                                  EnableRowVirtualization="True" 
+                                  ItemsSource="{Binding ProcessCollection}" 
+                                  Margin="10,0,10,10" 
+                                  BorderBrush="BlueViolet"
+                                  BorderThickness="2"
+                                  SelectionMode="Single"
+                                  SelectionUnit="FullRow"
+                                  RowDetailsVisibilityMode="VisibleWhenSelected" Height="304">
                             <DataGrid.Columns>
-
                                 <DataGridTextColumn  
-                      Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
-                     Header="Number" 
-                     Width="100"/>
+                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Header="Number" 
+                                             Width="100"/>
                             </DataGrid.Columns>
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type ScrollBar}">
                                     <Setter Property="BorderBrush" Value="DarkViolet" />
-
                                 </Style>
-
                             </DataGrid.Resources>
 
                         </DataGrid>
@@ -380,7 +376,8 @@
                 </TabItem.Content>
             </TabItem>
         </TabControl>
-        <DockPanel>
+
+        <DockPanel Grid.Row="10" VerticalAlignment="Top">
             <Label Content="Comment:"
                FontSize="15"
                Margin="3"/>
@@ -388,5 +385,5 @@
                      FontSize="15"
                      Margin="3"/>
         </DockPanel>
-    </StackPanel>
+    </Grid>
 </UserControl>
