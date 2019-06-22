@@ -12,6 +12,7 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace DocumentFlow.ViewModels
@@ -117,14 +118,19 @@ namespace DocumentFlow.ViewModels
                             if (hashValueFromDB.Equals(hashToCompare))
                             {
                                 var Usr = qwr.Single();
-                                Messenger.Default.Send(new NotificationMessage<User>(Usr, "SendCurrentUser"));
-                                //navigationService.Navigate<MainPageView>();
-                                navigationService.Navigate<MainDesktopPageView>();
+                                if (Usr.IsActive){
+                                    Messenger.Default.Send(new NotificationMessage<User>(Usr, "SendCurrentUser"));
+                                    //navigationService.Navigate<MainPageView>();
+                                    navigationService.Navigate<MainDesktopPageView>();
+                                 }
+                                else
+                                {
+                                    messageService.ShowError("Your account is deactiveted. Contact administrator");
+                                }
                             }
                             else
                                 messageService.ShowError("Login credentials incorrect. User not validated.");
                         }
-
                         //navigationService.Navigate<MainDesktopPageView>();
                     }
                 }
