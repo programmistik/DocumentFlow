@@ -552,9 +552,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\TestLogo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -602,6 +599,7 @@
     <Resource Include="Resources\Images\location.png" />
     <Resource Include="Resources\Images\notification.png" />
     <Resource Include="Resources\Images\pen.png" />
+    <Resource Include="Resources\Images\Background.png" />
     <Content Include="Resources\New.html" />
     <Resource Include="Resources\RibonImages\folder-icon.png" />
     <Resource Include="Resources\RibonImages\closeLarge.png" />

@@ -69,6 +69,21 @@
                 </Separator>
             </StackPanel>
         </DataTemplate>
+
+        <Style TargetType="{x:Type tp:DecimalUpDown}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="tp:DecimalUpDown">
+                        <tp:ButtonSpinner
+                    Name="PART_Spinner">
+                            <tp:WatermarkTextBox
+                        Name="PART_TextBox" />
+                        </tp:ButtonSpinner>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </UserControl.Resources>
 
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -242,10 +257,10 @@
                             <Label Content="Sum:"
                                    FontSize="15"
                                    Margin="3"/>
-                            <tp:DecimalUpDown Margin="3"
+                            <!--<tp:DecimalUpDown Margin="3"
                                               Width="300"
                                               Text="{Binding DocSum}"
-                                              FormatString="N2"/>
+                                              FormatString="D2"/>-->
                             <TextBox Text="{Binding DocSum}"
                                      FontSize="15"
                                      Margin="3"
