@@ -600,6 +600,12 @@
     <Resource Include="Resources\Images\notification.png" />
     <Resource Include="Resources\Images\pen.png" />
     <Resource Include="Resources\Images\Background.png" />
+    <Resource Include="Resources\Images\CalendarWhite.png" />
+    <Resource Include="Resources\Images\ContactsWhite.png" />
+    <Resource Include="Resources\Images\DocumentsWhite.png" />
+    <Resource Include="Resources\Images\MailWhite.png" />
+    <Resource Include="Resources\Images\NewsWhite.png" />
+    <Resource Include="Resources\Images\TasksWhite.png" />
     <Content Include="Resources\New.html" />
     <Resource Include="Resources\RibonImages\folder-icon.png" />
     <Resource Include="Resources\RibonImages\closeLarge.png" />

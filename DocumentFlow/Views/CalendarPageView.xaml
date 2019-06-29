@@ -185,7 +185,7 @@
         <!--#endregion-->
 
         <!--#region Content-->
-        <Calendar
+        <Calendar 
             Grid.Column="1" Grid.ColumnSpan="3"
             Grid.Row="1" Grid.RowSpan="5"
             SelectedDate="{Binding CurrentDate}"
@@ -206,7 +206,7 @@
             Grid.Column="1" Grid.ColumnSpan="3"
             Content="{x:Static p:Resources.AddNewEvent}"
             Margin="5,6"
-            Command="{Binding AddEvent}" Height="Auto"/>
+            Command="{Binding AddEvent}" Height="Auto" />
 
         <Label
             Grid.Row="1"
