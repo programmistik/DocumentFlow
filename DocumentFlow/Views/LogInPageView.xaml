@@ -13,17 +13,16 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="28*"></RowDefinition>
             <RowDefinition Height="41*"></RowDefinition>
+            <RowDefinition Height="28*"></RowDefinition>
             <RowDefinition Height="41*"></RowDefinition>
-            <RowDefinition Height="41*"></RowDefinition>
-            <RowDefinition Height="41*"></RowDefinition>
-            <RowDefinition Height="41*"></RowDefinition>
-            <RowDefinition Height="41*"></RowDefinition>
-            <RowDefinition Height="41*"></RowDefinition>
-            <RowDefinition Height="41*"></RowDefinition>
-            <RowDefinition Height="41*"></RowDefinition>
-            <RowDefinition Height="40*"></RowDefinition>
-            <RowDefinition Height="41*"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -32,25 +31,22 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
-
-
-
         </Grid.ColumnDefinitions>
 
         <Grid.Background>
             <ImageBrush ImageSource="../Resources/Images/Background.png"/>
         </Grid.Background>
 
-
+             
         <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="../Resources/Images/TestLogo.png"/>
 
         <Label Grid.Row="4" Grid.Column="3"
                FontSize="25"
-               Content="{x:Static p:Resources.UserName}" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+               Content="{x:Static p:Resources.UserName}" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Foreground="#DDFFFFFF"/>
 
         <TextBox    Grid.Column="3"
                     Grid.Row="5"
-                   
+                    MaxHeight="100"
                     Name="tbUserName" 
                     FontSize="35"
                     VerticalContentAlignment="Center"
@@ -62,14 +58,13 @@
             </b:Interaction.Triggers>
         </TextBox>
 
-
-
         <Label Grid.Column="3"
                Grid.Row="6"
                Content="{x:Static p:Resources.Password}"
-               FontSize="25" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+               FontSize="25" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Foreground="#DDFFFFFF"/>
 
         <PasswordBox Grid.Column="3" Grid.ColumnSpan="2"
+                     MaxHeight="100"
                      VerticalContentAlignment="Center"
                      Grid.Row="7"
                      Name="pBox" 
@@ -85,9 +80,9 @@
             </TextBlock.InputBindings>
         </TextBlock>
 
-        <Button Content="{x:Static p:Resources.LogIn}"
+        <Button Content="{x:Static p:Resources.LogIn}" MaxHeight="55"
                 IsDefault="True"
-                    Margin="5"
+                    Margin="7"
                     Grid.Column="3"
                     Grid.Row="8"
                     FontSize="15"
