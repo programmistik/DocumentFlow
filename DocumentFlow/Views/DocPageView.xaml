@@ -9,7 +9,7 @@
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              xmlns:tp="http://schemas.xceed.com/wpf/xaml/toolkit"
              Name="This"
-             mc:Ignorable="d" Background="White">
+             mc:Ignorable="d" Background="White" d:DesignWidth="800">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -245,7 +245,7 @@
                             <tp:DecimalUpDown Margin="3"
                                               Width="300"
                                               Text="{Binding DocSum}"
-                                              FormatString="N2"/>
+                                              FormatString="C2"/>
                             <TextBox Text="{Binding DocSum}"
                                      FontSize="15"
                                      Margin="3"
@@ -348,7 +348,10 @@
                     </StackPanel>
                 </TabItem.Header>
                 <TabItem.Content>
+                    
                     <StackPanel Height="240">
+                        <Button Content="Add"
+                                Margin="5"/>
                         <DataGrid IsSynchronizedWithCurrentItem="True"
                                   AutoGenerateColumns="False" 
                                   EnableRowVirtualization="True" 
@@ -358,11 +361,35 @@
                                   BorderThickness="2"
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
-                                  RowDetailsVisibilityMode="VisibleWhenSelected" Height="304">
+                                  RowDetailsVisibilityMode="VisibleWhenSelected" Height="189">
                             <DataGrid.Columns>
                                 <DataGridTextColumn  
                                              Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
-                                             Header="Number" 
+                                             Header="Data" 
+                                             Width="100"/>
+                                <DataGridTextColumn  
+                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Header="Owener" 
+                                             Width="100"/>
+                                <DataGridTextColumn  
+                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Header="Department" 
+                                             Width="100"/>
+                                <DataGridTextColumn  
+                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Header="Respons.person" 
+                                             Width="100"/>
+                                <DataGridTextColumn  
+                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Header="State" 
+                                             Width="100"/>
+                                <DataGridTextColumn  
+                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Header="State date" 
+                                             Width="100"/>
+                                <DataGridTextColumn  
+                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Header="Comment" 
                                              Width="100"/>
                             </DataGrid.Columns>
                             <DataGrid.Resources>
