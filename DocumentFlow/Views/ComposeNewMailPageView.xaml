@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              Name="This"
              d:DesignHeight="450" d:DesignWidth="800"
-             Loaded="UserControl_Loaded">
+             Loaded="UserControl_Loaded" Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="19*"/>

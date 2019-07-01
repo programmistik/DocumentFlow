@@ -272,6 +272,7 @@
         </Grid>
 
         <DockPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="7">
+            <Label Content="Guests" DockPanel.Dock="Top" FontSize="16" HorizontalContentAlignment="Center"/>
             <DataGrid AutoGenerateColumns="False" 
                       Background="White"
                                   EnableRowVirtualization="True"

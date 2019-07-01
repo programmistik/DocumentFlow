@@ -7,13 +7,15 @@
              xmlns:p="clr-namespace:DocumentFlow.Properties"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
+    
+    
     <Grid Background="#FFE1E1E1">
         <Grid.RowDefinitions>
             <RowDefinition Height="64"></RowDefinition>
@@ -64,7 +66,7 @@
         <!--#endregion-->
         
         <!--#region Aside Panel-->
-        <StackPanel Grid.Column="0"
+        <!--<StackPanel Grid.Column="0"
                     Grid.Row="1" Grid.RowSpan="6"
                     Background="White">
             <Button
@@ -138,64 +140,89 @@
                 </Button.Style>
             </Button>
 
-        </StackPanel>
+        </StackPanel>-->
         <!--#endregion-->
         
         <!--#region Content-->
-        <Button Grid.Column="1" Grid.ColumnSpan="2"
+
+
+        <Button Grid.Column="0" Grid.ColumnSpan="2"
                 Grid.Row="1" Grid.RowSpan="2"
                 Command="{Binding GCalendar}" 
-                Content="{x:Static p:Resources.OpenCalendar}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch" Background="#FF673AB7">
+                HorizontalAlignment="Stretch" Background="#FF6C4A97">
+            <StackPanel>
+                <Image Source="../Resources/Images/CalendarWhite.png" Width="40" />
+                <TextBlock Text="{x:Static p:Resources.OpenCalendar}"></TextBlock>
+            </StackPanel>
         </Button>
 
-        <Button Grid.Column="3" Grid.ColumnSpan="2"
+        <Button Grid.Column="2" Grid.ColumnSpan="3"
                 Grid.Row="1" Grid.RowSpan="2"
                 Command="{Binding GMail}" 
-                Content="{x:Static p:Resources.Mail}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
+                HorizontalAlignment="Stretch" Background="#FF6C4A97">
+            <StackPanel>
+                <Image Source="../Resources/Images/MailWhite.png" Width="40" />
+                <TextBlock Text="{x:Static p:Resources.Mail}"></TextBlock>
+            </StackPanel>
+        </Button>
 
         <Button Grid.Column="5" Grid.ColumnSpan="3"
                 Grid.Row="1" Grid.RowSpan="2"
                 Command="{Binding GSchedule}" 
-                Content="Scheldule"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
+                HorizontalAlignment="Stretch" Background="#FF6C4A97">
+            <StackPanel>
+                <Image Source="../Resources/Images/TasksWhite.png" Width="40" />
+                <TextBlock Text="Scheldule"></TextBlock>
+            </StackPanel>
+        </Button>
 
-        <Button Grid.Column="1" Grid.ColumnSpan="3"
+        <Button Grid.Column="0" Grid.ColumnSpan="4"
                 Grid.Row="3" Grid.RowSpan="2"
                 Command="{Binding GDocuments}" 
-                Content="{x:Static p:Resources.Documents}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
+                HorizontalAlignment="Stretch" Background="#FF6C4A97">
+            <StackPanel>
+                <Image Source="../Resources/Images/DocumentsWhite.png" Width="40" />
+                <TextBlock Text="{x:Static p:Resources.Documents}"></TextBlock>
+            </StackPanel>
+        </Button>
 
         <Button Grid.Column="4" Grid.ColumnSpan="4"
                 Grid.Row="3" Grid.RowSpan="2"
                 Command="{Binding GNews}" 
-                Content="{x:Static p:Resources.News}"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
-        <!--#endregion-->
+                HorizontalAlignment="Stretch" Background="#FF6C4A97">
+            <StackPanel>
+                <Image Source="../Resources/Images/NewsWhite.png" Width="40" />
+                <TextBlock Text="{x:Static p:Resources.News}"></TextBlock>
+            </StackPanel>
+        </Button>
         <Button Grid.Column="2" Grid.ColumnSpan="4"
                 Grid.Row="5" Grid.RowSpan="2"
                 Command="{Binding GContacts}" 
-                Content="Contacts"
                 Height="Auto"
                 Margin="10"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch" Background="#FF673AB7"></Button>
+                HorizontalAlignment="Stretch" Background="#FF6C4A97">
+            <StackPanel>
+                <Image Source="../Resources/Images/ContactsWhite.png" Width="40" />
+                <TextBlock Text="Contacts" ></TextBlock>
+            </StackPanel>
+        </Button>
+        <!--#endregion-->
     
     </Grid>
 

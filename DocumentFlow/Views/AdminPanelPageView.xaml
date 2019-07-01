@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              x:Name="This"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
     
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -59,13 +59,13 @@
         </DataTemplate>
     </UserControl.Resources>
     
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
+
+    
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" LastChildFill="False">
             <Button Content="Add new user"
                 Margin="5"
                 Command="{Binding AddNewUserCommand}" />
-            <!--<Button Content="Edit user"
-                Margin="5"/>-->
             <Button Content="Normative information"
                     Command="{Binding NormInfoCommand}"
                 Margin="5"/>
@@ -76,7 +76,7 @@
                     Command="{Binding NewsCommand}"
                 Margin="5"/>
             <Button Content="Change my password"                    
-                Margin="30,5,5,5"
+                Margin="25,5,5,5"
                     BorderBrush="SlateBlue"
                     Background="DarkSlateBlue"
                     Command="{Binding ChangeMyPassword}"/>
@@ -85,8 +85,8 @@
                     Background="DarkRed"
                      BorderBrush="PaleVioletRed"
                     Command="{Binding LogOffCommand}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
+        </DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
         <CheckBox IsChecked="{Binding ShowActiveOnly}" 
                   Command="{Binding ShowUsersCommand}"
                   Margin="5"
@@ -104,14 +104,16 @@
                  Text="{Binding Path=UserFilter, UpdateSourceTrigger=PropertyChanged}"
                  Width="478" />
         </StackPanel>
-        <ListBox HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
+        <Grid DockPanel.Dock="Top">
+        <ListBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1"
+                HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
                  Margin="3"
                  BorderThickness="2"
                  BorderBrush="DarkViolet"
                  ItemsSource="{Binding FilteredUsers}" 
                  ScrollViewer.CanContentScroll="True"
                  ScrollViewer.VerticalScrollBarVisibility="Visible"       
-                 ItemTemplate="{StaticResource UserListItemTemplate}" Height="388">
+                 ItemTemplate="{StaticResource UserListItemTemplate}">
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
@@ -120,5 +122,7 @@
             </ListBox.ItemContainerStyle>
 
         </ListBox>
-    </StackPanel>
+            
+        </Grid>
+    </DockPanel>
 </UserControl>
