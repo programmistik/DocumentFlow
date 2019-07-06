@@ -33,7 +33,7 @@
 
                     <Image Grid.Column="0" Margin="0" Source="{Binding Converter={StaticResource converter}}" />
                     <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
-                        
+
                         <Label FontWeight="Bold"
                                Content="{Binding FileName}"/>
                         <Label 
@@ -83,7 +83,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
     </UserControl.Resources>
 
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -257,9 +257,9 @@
                             <Label Content="Sum:"
                                    FontSize="15"
                                    Margin="3"/>
-                            <!--<tp:DecimalUpDown Margin="3"
+                            <tp:DecimalUpDown Margin="3"
                                               Width="300"
-                                              Text="{Binding DocSum}"
+                                              Value="{Binding DocSum}"
                                               FormatString="N2"/>
                             <TextBox Text="{Binding DocSum}"
                                      FontSize="15"
@@ -363,7 +363,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <TabItem.Content>
-                    
+
                     <StackPanel Height="240">
                         <Button Content="Add"
                                 Margin="5"/>
