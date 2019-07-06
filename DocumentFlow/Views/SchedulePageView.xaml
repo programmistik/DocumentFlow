@@ -18,39 +18,18 @@
     <UserControl.Resources>
         <DataTemplate x:Key="ListBoxEventItemTemplate">
             <StackPanel>
-
                 <Grid  HorizontalAlignment="Stretch">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="0.2*" />
-                        <ColumnDefinition Width="0.2*" />
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
-
                         <Label FontWeight="Bold"
-                               Content="{Binding Summary}" />
+                               Content="{Binding Summary}"  Height="31"/>
+                        <Label FontWeight="Bold"
+                               Content="{Binding Path=Start.DateTime.TimeOfDay}"  Height="31"></Label>
                     </StackPanel>
-
-
-                    <Button  Grid.Column="1" 
-                            Margin="1"
-                            Command="{Binding DataContext.DeleteEventCommand, ElementName=This}"
-                            CommandParameter="{Binding}">
-                        Delete
-                    </Button>
-
-                    <Button Grid.Column="2"  
-                            Margin="1" 
-                            Command="{Binding DataContext.EditEventCommand, ElementName=This}"
-                            CommandParameter="{Binding}">
-                        Edit
-                    </Button>
-
-
                 </Grid>
-
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
@@ -183,7 +162,7 @@
         <!--#endregion-->
 
         <!--#region Content-->
-        <Grid ShowGridLines="True"
+        <Grid
             Margin="15"
             Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="7" Grid.RowSpan="6">
             <Grid.RowDefinitions>
@@ -209,16 +188,123 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
+            <Label Grid.Row="0" Grid.Column="0"
+                   Content="Monday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            <ListBox Grid.Row="1" Grid.RowSpan="10"
+                     Grid.Column="0" Grid.ColumnSpan="1"
+                     HorizontalContentAlignment="Stretch" 
+                     ItemsSource="{Binding EventListMonday}"                   
+                     Margin="3"
+                     ScrollViewer.CanContentScroll="True"
+                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
 
-            <ListBox 
-            Grid.Row="3" Grid.RowSpan="4"
-            Grid.Column="4" Grid.ColumnSpan="4"
-            HorizontalContentAlignment="Stretch" 
-                            ItemsSource="{Binding EventList}"                   
-                            Margin="3"
-                            ScrollViewer.CanContentScroll="True"
-                            ScrollViewer.VerticalScrollBarVisibility="Visible"         
-                            ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+            </ListBox>
+
+            <Label Grid.Row="0" Grid.Column="1"
+                   Content="Tuesday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            <ListBox Grid.Row="1" Grid.RowSpan="10"
+                     Grid.Column="1" Grid.ColumnSpan="1"
+                     HorizontalContentAlignment="Stretch" 
+                     ItemsSource="{Binding EventListTuesday}"                   
+                     Margin="3"
+                     ScrollViewer.CanContentScroll="True"
+                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+            </ListBox>
+
+            <Label Grid.Row="0" Grid.Column="2"
+                   Content="Wednesday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            <ListBox Grid.Row="1" Grid.RowSpan="10"
+                     Grid.Column="2" Grid.ColumnSpan="1"
+                     HorizontalContentAlignment="Stretch" 
+                     ItemsSource="{Binding EventListWednesday}"                   
+                     Margin="3"
+                     ScrollViewer.CanContentScroll="True"
+                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+            </ListBox>
+
+            <Label Grid.Row="0" Grid.Column="3"
+                   Content="Thursday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            <ListBox Grid.Row="1" Grid.RowSpan="10"
+                     Grid.Column="3" Grid.ColumnSpan="1"
+                     HorizontalContentAlignment="Stretch" 
+                     ItemsSource="{Binding EventListThursday}"                   
+                     Margin="3"
+                     ScrollViewer.CanContentScroll="True"
+                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+            </ListBox>
+
+            <Label Grid.Row="0" Grid.Column="4"
+                   Content="Friday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            <ListBox Grid.Row="1" Grid.RowSpan="10"
+                     Grid.Column="4" Grid.ColumnSpan="1"
+                     HorizontalContentAlignment="Stretch" 
+                     ItemsSource="{Binding EventListFriday}"                   
+                     Margin="3"
+                     ScrollViewer.CanContentScroll="True"
+                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+            </ListBox>
+
+            <Label Grid.Row="0" Grid.Column="5"
+                   Content="Saturday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            <ListBox Grid.Row="1" Grid.RowSpan="10"
+                     Grid.Column="5" Grid.ColumnSpan="1"
+                     HorizontalContentAlignment="Stretch" 
+                     ItemsSource="{Binding EventListSaturday}"                   
+                     Margin="3"
+                     ScrollViewer.CanContentScroll="True"
+                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+            </ListBox>
+
+            <Label Grid.Row="0" Grid.Column="6"
+                   Content="Sunday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            <ListBox Grid.Row="1" Grid.RowSpan="10"
+                     Grid.Column="6" Grid.ColumnSpan="1"
+                     HorizontalContentAlignment="Stretch" 
+                     ItemsSource="{Binding EventListSunday}"                   
+                     Margin="3"
+                     ScrollViewer.CanContentScroll="True"
+                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
 
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
