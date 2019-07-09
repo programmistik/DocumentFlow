@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -197,9 +198,9 @@ namespace DocumentFlow.ViewModels
                 ContactCollection = new ObservableCollection<ExternalContact>(db.ExternalContacts);
                 CurrCollection = new ObservableCollection<Currency>(db.Currencies);
 
-                if (CreatedBy == CurrentUser)
+                if (DocStatus.DocStateName == "New")
                 {
-                    if (DocStatus.DocStateName == "New")
+                    if (CreatedBy == CurrentUser) 
                     {
                         DocStatus.IsSelectable = true;
                         DocStatusCollection.Where(s => s.DocStateName == "In progress").Single().IsSelectable = true;
@@ -210,6 +211,10 @@ namespace DocumentFlow.ViewModels
                         roEditFile = false;
                         roBtnEditFile = true;
                         EditFileMode = false;
+                    }
+                    else
+                    {
+
                     }
                 }
                 else
@@ -561,6 +566,20 @@ namespace DocumentFlow.ViewModels
 
                        
                     }
+                    // save history
+                    var newHistoryItem = new History
+                    {
+                        EditionData = DateTime.Now,
+                        WhoEdited = CurrentUser.GoogleAccount,
+                        ClassName = "Document",
+                        ObjectId = CurrentDocument.Id,
+                        ObjectJson = JsonConvert.SerializeObject(CurrentDocument)
+                    };
+
+                    db.Histories.Add(newHistoryItem);
+                    await db.SaveChangesAsync();
+
+                    //close page
                     Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<DocumentsPageView>();
                 }

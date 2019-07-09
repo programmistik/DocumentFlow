@@ -53,7 +53,22 @@ namespace DocumentFlow.ViewModels
         public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(
         () =>
         {
-            DocsCollection = new ObservableCollection<Document>(db.Documents); 
+            var emp = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+
+            if (emp.HeadOfDep)
+            {
+                DocsCollection = new ObservableCollection<Document>(db.Documents.Where(d => d.CreatedBy.Id == CurrentUser.Id ||
+                d.myProcesses.Any(p => p.StartUser.Id == CurrentUser.Id) || d.myProcesses.Any(p => p.TaskUser.Id == CurrentUser.Id) ||
+                d.myProcesses.Any(p => p.Department.Id == emp.Department.Id) ));
+            }
+            else
+            {
+                var docs = db.Documents.Where(d => d.CreatedBy.Id == CurrentUser.Id ||
+                d.myProcesses.Any(p => p.StartUser.Id == CurrentUser.Id) || d.myProcesses.Any(p => p.TaskUser.Id == CurrentUser.Id)).ToList();
+
+                DocsCollection = new ObservableCollection<Document>(docs);
+            }
+
         }));
 
         private void OnHitUser(NotificationMessage<User> usr)

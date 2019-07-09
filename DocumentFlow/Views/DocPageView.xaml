@@ -260,7 +260,7 @@
                             <!--<tp:DecimalUpDown Margin="3"
                                               Width="300"
                                               Text="{Binding DocSum}"
-                                              FormatString="N2"/>
+                                              FormatString="N2"/>-->
                             <TextBox Text="{Binding DocSum}"
                                      FontSize="15"
                                      Margin="3"

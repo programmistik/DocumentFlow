@@ -1,0 +1,34 @@
+﻿<Window x:Class="DocumentFlow.ModalWindows.AddEditProcessWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DocumentFlow.ModalWindows"
+        mc:Ignorable="d"
+        Title="AddEditProcessWindow" Height="300" Width="400">
+    <StackPanel>
+        <Label Content="Department:"/>
+        <TextBox Text="{Binding Dept}"/>
+        <Label Content="Responce person:"/>
+        <TextBox Text="{Binding Dept}"/>
+        <Label Content="State:"/>
+        <TextBox Text="{Binding Dept}"/>
+        <Label Content="Comment:"/>
+        <TextBox Text="{Binding Dept}"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Content="Cancel"
+                    Margin="5"
+                    Width="150"
+                    Background="DarkRed"
+                    BorderBrush="PaleVioletRed"
+                    Command="{Binding CancelCommand}"/>
+            <Button Content="Create"
+                    Margin="5"
+                    Width="150"
+                    Background="Green"
+                    BorderBrush="DarkGreen"
+                    Command="{Binding OkCommand}"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

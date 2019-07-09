@@ -228,9 +228,16 @@
     <Compile Include="Migrations\201906211233242_qw.Designer.cs">
       <DependentUpon>201906211233242_qw.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907011232044_zx.cs" />
+    <Compile Include="Migrations\201907011232044_zx.Designer.cs">
+      <DependentUpon>201907011232044_zx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModalWindows\AddContactInfoWindow.xaml.cs">
       <DependentUpon>AddContactInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModalWindows\AddEditProcessWindow.xaml.cs">
+      <DependentUpon>AddEditProcessWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModalWindows\AddOrganizationWindow.xaml.cs">
       <DependentUpon>AddOrganizationWindow.xaml</DependentUpon>
@@ -411,6 +418,9 @@
     <EmbeddedResource Include="Migrations\201906211233242_qw.resx">
       <DependentUpon>201906211233242_qw.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907011232044_zx.resx">
+      <DependentUpon>201907011232044_zx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ru-RU.Designer.cs</LastGenOutput>
@@ -435,6 +445,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="ModalWindows\AddContactInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModalWindows\AddEditProcessWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

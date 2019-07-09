@@ -38,6 +38,7 @@ namespace DocumentFlow.Models
         public DbSet<Constant> Constants { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<Document> Documents { get; set; }
+        public DbSet<History> Histories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
