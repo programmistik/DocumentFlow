@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DocumentFlow.Models;
+using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,13 @@ namespace DocumentFlow.ModalWindows
     /// </summary>
     public partial class AddEditProcessWindow : Window
     {
-        public AddEditProcessWindow()
+
+        public AddEditProcessWindow(TaskProcess taskProcess, List<Department> DeptCollection, List<Employee> EmpCollection, List<DocumentState> StateCollection)
         {
             InitializeComponent();
+            DataContext = new AddEditProcessViewModel(taskProcess, DeptCollection, EmpCollection, StateCollection);
         }
+
+        
     }
 }

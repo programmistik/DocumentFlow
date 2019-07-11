@@ -22,6 +22,7 @@ namespace DocumentFlow.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<MyFile> MyFiles { get; set; }
+        public DbSet<TaskProcess> MyProcesses { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<DocumentState> DocumentStates { get; set; }
         public DbSet<ContactInfoType> ContactInfoTypes { get; set; }

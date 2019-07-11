@@ -5,16 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocumentFlow.ModalWindows"
         mc:Ignorable="d"
-        Title="AddEditProcessWindow" Height="300" Width="400">
+        x:Name="This"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Title="{Binding Title}" Height="300" Width="400" >
+    
+    <!--<i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>-->
+    
     <StackPanel>
         <Label Content="Department:"/>
-        <TextBox Text="{Binding Dept}"/>
+        <ComboBox ItemsSource="{Binding Path = DeptCollection}"    
+                  SelectedItem="{Binding Path = Dept}" 
+                  DisplayMemberPath="DepartmentName">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction  Command="{Binding SelectionChangedCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
         <Label Content="Responce person:"/>
-        <TextBox Text="{Binding Dept}"/>
+        <ComboBox ItemsSource="{Binding Path = EmpCollection}"    
+                  SelectedItem="{Binding Path = Emp}" 
+                  Name="cbEmp">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction  Command="{Binding Emp_SelectionChangedCommand}" 
+                                           CommandParameter="{Binding ElementName=cbEmp, Path=SelectedItem}"                     />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
         <Label Content="State:"/>
-        <TextBox Text="{Binding Dept}"/>
+        <ComboBox ItemsSource="{Binding Path = StateCollection}"    
+                  SelectedItem="{Binding Path = State}" 
+                  DisplayMemberPath="DocStateName">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter
+                    Property="IsEnabled"
+                    Value="{Binding IsSelectable}" />
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
         <Label Content="Comment:"/>
-        <TextBox Text="{Binding Dept}"/>
+        <TextBox Text="{Binding Comment}"/>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Content="Cancel"
@@ -28,7 +64,8 @@
                     Width="150"
                     Background="Green"
                     BorderBrush="DarkGreen"
-                    Command="{Binding OkCommand}"/>
+                    Command="{Binding OkCommand}" 
+                    CommandParameter="{Binding ElementName=This}"/>
         </StackPanel>
     </StackPanel>
 </Window>

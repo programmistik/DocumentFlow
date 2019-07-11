@@ -261,11 +261,11 @@
                                               Width="300"
                                               Value="{Binding DocSum}"
                                               FormatString="N2"/>
-                            <TextBox Text="{Binding DocSum}"
+                            <!--<TextBox Text="{Binding DocSum}"
                                      FontSize="15"
                                      Margin="3"
                                      Width="300"
-                                     IsEnabled="{Binding InfoEnabled}"/>
+                                     IsEnabled="{Binding InfoEnabled}"/>-->
                             <Label Content="Currency:"
                                    FontSize="15"
                                    Margin="3"/>
@@ -366,7 +366,8 @@
 
                     <StackPanel Height="240">
                         <Button Content="Add"
-                                Margin="5"/>
+                                Margin="5" 
+                                Command="{Binding AddNewProcessCommand}"/>
                         <DataGrid IsSynchronizedWithCurrentItem="True"
                                   AutoGenerateColumns="False" 
                                   EnableRowVirtualization="True" 

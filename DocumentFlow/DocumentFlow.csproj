@@ -232,10 +232,19 @@
     <Compile Include="Migrations\201907011232044_zx.Designer.cs">
       <DependentUpon>201907011232044_zx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907111013120_emp.cs" />
+    <Compile Include="Migrations\201907111013120_emp.Designer.cs">
+      <DependentUpon>201907111013120_emp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907111041284_process.cs" />
+    <Compile Include="Migrations\201907111041284_process.Designer.cs">
+      <DependentUpon>201907111041284_process.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModalWindows\AddContactInfoWindow.xaml.cs">
       <DependentUpon>AddContactInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModalWindows\AddEditProcessViewModel.cs" />
     <Compile Include="ModalWindows\AddEditProcessWindow.xaml.cs">
       <DependentUpon>AddEditProcessWindow.xaml</DependentUpon>
     </Compile>
@@ -420,6 +429,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907011232044_zx.resx">
       <DependentUpon>201907011232044_zx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907111013120_emp.resx">
+      <DependentUpon>201907111013120_emp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907111041284_process.resx">
+      <DependentUpon>201907111041284_process.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>

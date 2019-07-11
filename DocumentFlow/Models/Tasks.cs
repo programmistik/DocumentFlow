@@ -12,7 +12,7 @@ namespace DocumentFlow.Models
         public DateTime StartDate { get; set; }
         public User StartUser { get; set; }
         public Department Department { get; set; }
-        public User TaskUser { get; set; }
+        public Employee TaskUser { get; set; }
         public DateTime Deadline { get; set; }
         public DocumentState State { get; set; }
         public string Comment { get; set; }

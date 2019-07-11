@@ -1,6 +1,7 @@
 ﻿using DocumentFlow.Models;
 using DocumentFlow.Services;
 using DocumentFlow.Views;
+using DocumentFlow.ModalWindows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -220,7 +221,7 @@ namespace DocumentFlow.ViewModels
                 else
                 {
                     if (DocStatus.DocStateName == "In progress")
-                        if (ProcessCollection.Last().TaskUser == CurrentUser)
+                        if (ProcessCollection.Last().TaskUser == CurrentEmployee)
                         {
                             DocStatusCollection.Where(s => s.DocStateName == "In progress").Single().IsSelectable = true;
                         }
@@ -573,7 +574,11 @@ namespace DocumentFlow.ViewModels
                         WhoEdited = CurrentUser.GoogleAccount,
                         ClassName = "Document",
                         ObjectId = CurrentDocument.Id,
-                        ObjectJson = JsonConvert.SerializeObject(CurrentDocument)
+                        ObjectJson = JsonConvert.SerializeObject(CurrentDocument, Formatting.None,
+                        new JsonSerializerSettings()
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        })
                     };
 
                     db.Histories.Add(newHistoryItem);
@@ -582,6 +587,30 @@ namespace DocumentFlow.ViewModels
                     //close page
                     Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                     navigationService.Navigate<DocumentsPageView>();
+                }
+            ));
+
+        private RelayCommand addNewProcessCommand;
+        public RelayCommand AddNewProcessCommand => addNewProcessCommand ?? (addNewProcessCommand = new RelayCommand(
+                () =>
+                {
+                    var win = new AddEditProcessWindow(null, new List<Department>(db.Departments), 
+                        new List<Employee>(db.Employees), 
+                        new List<DocumentState>(db.DocumentStates));
+
+                    win.ShowDialog();
+                    if (win.DataContext is AddEditProcessViewModel)
+                    {
+                        var dc = win.DataContext as AddEditProcessViewModel;
+                        if(dc.Process != null)
+                        {
+                            dc.Process.StartDate = DateTime.Now;
+                            dc.Process.StartUser = CurrentUser;
+                            dc.Process.FinishDate = DateTime.Now;
+
+                            ProcessCollection.Add(dc.Process);
+                        }
+                    }
                 }
             ));
 

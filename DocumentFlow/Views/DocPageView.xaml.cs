@@ -28,6 +28,7 @@ namespace DocumentFlow.Views
             InitializeComponent();
         }
 
+        
     }
 
     public class ImageDetailConverter : IValueConverter
