@@ -252,19 +252,6 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
 
-                <!--<DataGrid.Columns>
-                <DataGridTextColumn  
-                      Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}" 
-                      Header="Date" 
-                      />
-
-
-            </DataGrid.Columns>-->
-                <!--<i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding DoubleClickCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>-->
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type ScrollBar}">

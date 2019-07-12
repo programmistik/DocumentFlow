@@ -19,6 +19,7 @@
         <Label Content="Department:"/>
         <ComboBox ItemsSource="{Binding Path = DeptCollection}"    
                   SelectedItem="{Binding Path = Dept}" 
+                  IsEditable="{Binding roDept}"
                   DisplayMemberPath="DepartmentName">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -29,6 +30,7 @@
         <Label Content="Responce person:"/>
         <ComboBox ItemsSource="{Binding Path = EmpCollection}"    
                   SelectedItem="{Binding Path = Emp}" 
+                  IsEditable="{Binding roEmp}"
                   Name="cbEmp">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -40,6 +42,7 @@
         <Label Content="State:"/>
         <ComboBox ItemsSource="{Binding Path = StateCollection}"    
                   SelectedItem="{Binding Path = State}" 
+                  IsEditable="{Binding roState}"
                   DisplayMemberPath="DocStateName">
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
@@ -50,7 +53,8 @@
             </ComboBox.ItemContainerStyle>
         </ComboBox>
         <Label Content="Comment:"/>
-        <TextBox Text="{Binding Comment}"/>
+        <TextBox Text="{Binding Comment}"
+                 IsReadOnly="{Binding roComment}"/>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Content="Cancel"

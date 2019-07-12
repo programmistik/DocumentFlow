@@ -606,13 +606,65 @@ namespace DocumentFlow.ViewModels
                         {
                             dc.Process.StartDate = DateTime.Now;
                             dc.Process.StartUser = CurrentUser;
-                            dc.Process.FinishDate = DateTime.Now;
-
+                            dc.Process.StateDate = DateTime.Now;
+                            dc.Process.Doc = CurrentDocument;
+                            
                             ProcessCollection.Add(dc.Process);
+                            db.MyProcesses.Add(dc.Process);
                         }
                     }
                 }
             ));
+
+        private RelayCommand<TaskProcess> doubleClickCommand;
+        public RelayCommand<TaskProcess> DoubleClickCommand => doubleClickCommand ?? (doubleClickCommand = new RelayCommand<TaskProcess>(
+        param =>
+        {
+            if(param.State.DocStateName == "Done")
+            {
+                // Open read only window
+                var win = new AddEditProcessWindow(param, null, null, null);
+                
+                win.ShowDialog();
+            }
+            else
+            {
+                if(param.StartUser == CurrentUser)
+                {
+                    if (param.State.DocStateName == "New")
+                    {
+                        // full edit exp. state
+                        var win = new AddEditProcessWindow(param, new List<Department>(db.Departments),
+                        new List<Employee>(db.Employees),
+                        null);
+
+                        win.ShowDialog();
+                    }
+                   
+                }
+                if(param.TaskUser == null)
+                {
+                    if (param.Department == CurrentEmployee.Department && CurrentEmployee.HeadOfDep == true)
+                    {
+                        // edit resp. person only
+                        var win = new AddEditProcessWindow(param, null,
+                        new List<Employee>(db.Employees),
+                        null);
+
+                        win.ShowDialog();
+                    }
+                }
+                if (param.TaskUser == CurrentEmployee)
+                {
+                    //edit state only
+                    var win = new AddEditProcessWindow(param, null,
+                        null,
+                        new List<DocumentState>(db.DocumentStates));
+
+                    win.ShowDialog();
+                }
+            }
+        }));
 
     }
 }

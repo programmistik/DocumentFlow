@@ -368,7 +368,8 @@
                         <Button Content="Add"
                                 Margin="5" 
                                 Command="{Binding AddNewProcessCommand}"/>
-                        <DataGrid IsSynchronizedWithCurrentItem="True"
+                        <DataGrid x:Name="myGrd"
+                                  IsSynchronizedWithCurrentItem="True"
                                   AutoGenerateColumns="False" 
                                   EnableRowVirtualization="True" 
                                   ItemsSource="{Binding ProcessCollection}" 
@@ -377,37 +378,45 @@
                                   BorderThickness="2"
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
+                                  IsReadOnly="True"
                                   RowDetailsVisibilityMode="VisibleWhenSelected" Height="189">
                             <DataGrid.Columns>
                                 <DataGridTextColumn  
-                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Binding="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" 
                                              Header="Data" 
                                              Width="100"/>
                                 <DataGridTextColumn  
-                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Binding="{Binding StartUser, UpdateSourceTrigger=PropertyChanged}" 
                                              Header="Owener" 
                                              Width="100"/>
                                 <DataGridTextColumn  
-                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Binding="{Binding Department.DepartmentName, UpdateSourceTrigger=PropertyChanged}" 
                                              Header="Department" 
                                              Width="100"/>
                                 <DataGridTextColumn  
-                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Binding="{Binding TaskUser, UpdateSourceTrigger=PropertyChanged}" 
                                              Header="Respons.person" 
                                              Width="100"/>
                                 <DataGridTextColumn  
-                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Binding="{Binding State.DocStateName, UpdateSourceTrigger=PropertyChanged}" 
                                              Header="State" 
                                              Width="100"/>
                                 <DataGridTextColumn  
-                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Binding="{Binding StateDate, UpdateSourceTrigger=PropertyChanged}" 
                                              Header="State date" 
                                              Width="100"/>
                                 <DataGridTextColumn  
-                                             Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}" 
+                                             Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" 
                                              Header="Comment" 
                                              Width="100"/>
                             </DataGrid.Columns>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <cmd:EventToCommand Command="{Binding DoubleClickCommand}"  
+                                CommandParameter="{Binding ElementName=myGrd, Path=SelectedItem}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type ScrollBar}">
                                     <Setter Property="BorderBrush" Value="DarkViolet" />

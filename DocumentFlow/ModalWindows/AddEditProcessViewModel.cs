@@ -40,6 +40,20 @@ namespace DocumentFlow.ModalWindows
         private List<Employee> AllEmployees { get; set; }
         public TaskProcess Process { get; set; }
 
+        #region ReadonlyProperties
+        private bool RoDept;
+        public bool roDept { get => RoDept; set => Set(ref RoDept, value); }
+
+        private bool RoEmp;
+        public bool roEmp { get => RoEmp; set => Set(ref RoEmp, value); }
+
+        private bool RoState;
+        public bool roState { get => RoState; set => Set(ref RoState, value); }
+
+        private bool RoComment;
+        public bool roComment { get => RoComment; set => Set(ref RoComment, value); }
+        #endregion
+
         public AddEditProcessViewModel(TaskProcess taskProcess, List<Department> DeptCollection,
                 List<Employee> EmpCollection, List<DocumentState> StateCollection)
         {
@@ -51,8 +65,38 @@ namespace DocumentFlow.ModalWindows
                 AllEmployees = EmpCollection;
                 this.EmpCollection = new ObservableCollection<Employee>(EmpCollection);
                 State = StateCollection.Where(s => s.DocStateName == "New").Single();
-                State.IsSelectable = true;
+                roState = false;
                 this.StateCollection = new ObservableCollection<DocumentState>(StateCollection);
+            }
+            else
+            {
+                Process = taskProcess;
+                Title = "Business Process";
+                Dept = Process.Department;
+                if (DeptCollection == null)
+                    roDept = true;
+                else
+                    this.DeptCollection = new ObservableCollection<Department>(DeptCollection);
+
+                Emp = Process.TaskUser;
+                if (EmpCollection == null)
+                    roEmp = true;
+                else
+                    this.EmpCollection = new ObservableCollection<Employee>(EmpCollection);
+
+                State = Process.State;
+                if (StateCollection == null)
+                {
+                    roState = true;
+                    this.StateCollection = new ObservableCollection<DocumentState> { State };
+                }
+                else
+                    this.StateCollection = new ObservableCollection<DocumentState>(StateCollection);
+
+                Comment = Process.Comment;
+                if (State.DocStateName == "Done")
+                    roComment = true;
+
             }
         }
 
@@ -85,11 +129,11 @@ namespace DocumentFlow.ModalWindows
                 ok = false;
                 ErrorMsg.Append("- Department\n");
             }
-            if (Emp == null)
-            {
-                ok = false;
-                ErrorMsg.Append("- Responce person\n");
-            }
+            //if (Emp == null)
+            //{
+            //    ok = false;
+            //    ErrorMsg.Append("- Responce person\n");
+            //}
             if (State == null)
             {
                 ok = false;
