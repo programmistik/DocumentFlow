@@ -9,7 +9,7 @@
              xmlns:p="clr-namespace:DocumentFlow.Properties"
              mc:Ignorable="d" 
              Name="This"
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -29,11 +29,15 @@
                         <ColumnDefinition Width="0.2*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+                    <DockPanel Grid.Column="0" HorizontalAlignment="Stretch" LastChildFill="False">
 
                         <Label FontWeight="Bold"
+                               DockPanel.Dock="Left"
                                Content="{Binding Summary}" />
-                    </StackPanel>
+                        <Label FontWeight="Bold"
+                               DockPanel.Dock="Right"
+                               Content="{Binding Start.DateTime.TimeOfDay}" />
+                    </DockPanel>
 
 
                     <Button  Grid.Column="1" 

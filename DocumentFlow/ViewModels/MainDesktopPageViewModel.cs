@@ -72,6 +72,14 @@ namespace DocumentFlow.ViewModels
         }));
 
 
+        private RelayCommand<string> menuClickCommand;
+        public RelayCommand<string> MenuClickCommand => menuClickCommand ?? (menuClickCommand = new RelayCommand<string>(
+        param =>
+        {
+            MessageBox.Show(param);
+
+        }));
+
         #region NavigationCommands
         //Upper Menu
 

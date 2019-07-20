@@ -5,16 +5,46 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+             xmlns:hx="clr-namespace:HexGridControl;assembly=HexGridControl"        
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    
+    
 
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
 
+        <BooleanToVisibilityConverter x:Key="Btw"/>
+        
+
+        <Style TargetType="{x:Type hx:HexItem}">
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="MinHeight" Value="80"/>
+            <Setter Property="MinWidth"  Value="80"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Button Content="{TemplateBinding Content}"
+                                        Background="{Binding Path=Background, RelativeSource={RelativeSource AncestorType={x:Type hx:HexItem}}}"
+                                        Click="MenuClick" Style="{x:Null}"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
 
     <Grid Background="#FFE1E1E1">
         <Grid.RowDefinitions>
@@ -145,7 +175,37 @@
 
         <!--#region Content-->
 
-        <Grid Grid.Row="1" Grid.Column="0"
+        <Grid Margin="10" Background="DarkBlue"
+              Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="8">
+
+            
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <hx:HexGrid Grid.Row="0" Grid.Column="0"
+                            RowCount="3" ColumnCount="3" Orientation="Horizontal" Grid.ColumnSpan="4" Grid.RowSpan="3">
+                <hx:HexItem Grid.Row="0" Grid.Column="1" Content="2"/>
+
+                <hx:HexItem Grid.Row="1" Grid.Column="0" Content="1"/>
+                <hx:HexItem Grid.Row="1" Grid.Column="1" Content="0" Background="Gold"/>
+                <hx:HexItem Grid.Row="1" Grid.Column="2" Content="3"/>
+
+                <hx:HexItem Grid.Row="2" Grid.Column="0" Content="6"/>
+                <hx:HexItem Grid.Row="2" Grid.Column="1" Content="5"/>
+                <hx:HexItem Grid.Row="2" Grid.Column="2" Content="4"/>
+            </hx:HexGrid>
+
+        </Grid>
+
+        <!--<Grid Grid.Row="1" Grid.Column="0"
               Grid.RowSpan="6" Grid.ColumnSpan="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -234,7 +294,7 @@
                     <TextBlock Text="Contacts" HorizontalAlignment="Center" FontSize="16" ></TextBlock>
                 </StackPanel>
             </Button>
-        </Grid>
+        </Grid>-->
         <!--#endregion-->
 
     </Grid>

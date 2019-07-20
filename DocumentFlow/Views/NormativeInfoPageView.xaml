@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:m="clr-namespace:DocumentFlow.Models"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
     
     
-    <StackPanel>
-        <TabControl>
+    <DockPanel>
+        <TabControl DockPanel.Dock="Top">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -20,7 +20,7 @@
                 <TabItem.Content>
                     <StackPanel DataContext="{Binding CompanyCollection}" >
                         <DataGrid AutoGenerateColumns="False" 
-                                  EnableRowVirtualization="True" Height="340" 
+                                  EnableRowVirtualization="True" Height="650" MinHeight="300"
                                   ItemsSource="{Binding}" 
                                   Margin="10,0" 
                                   
@@ -193,7 +193,7 @@
                 </TabItem.Content>
             </TabItem>
         </TabControl>
-        <Button Command="{Binding BackCommand}" Content="Back"
+        <Button Command="{Binding BackCommand}" Content="Back" VerticalAlignment="Bottom"
                 Margin="5"/>
-    </StackPanel>
+    </DockPanel>
 </UserControl>

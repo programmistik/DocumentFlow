@@ -24,5 +24,21 @@ namespace DocumentFlow.Views
         {
             InitializeComponent();
         }
+        private void MenuClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null)
+                return;
+
+            MessageBox.Show(button.Content.ToString(), "HexMenu", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+
+        private void HexItem_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
+
+
 }

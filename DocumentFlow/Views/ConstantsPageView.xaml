@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
     
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -14,18 +14,19 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     
-    <StackPanel>
+    <DockPanel>
         <Label Content="Documents storage path:"
+               DockPanel.Dock="Top"
                Margin="5"
                FontSize="20"/>
-        <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
             <TextBox Text="{Binding DocPath}"
                      x:Name="Doc"
                  HorizontalContentAlignment="Stretch"    
                  Margin="5"
                  FontSize="20"
                  BorderBrush="BlueViolet"
-                 BorderThickness="1" Width="708"/>
+                 BorderThickness="1" Width="900"/>
             <Button Content="📂"
                     Margin="5"
                     Width="63"
@@ -33,16 +34,17 @@
                     Command="{Binding DocPathCommand}"/>
         </DockPanel>
         <Label Content="Files (images, avatars and ets.) storage path:"
+               DockPanel.Dock="Top"
                Margin="5"
                FontSize="20"/>
-        <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
             <TextBox Text="{Binding FilePath}"
                      x:Name="File"
                  HorizontalContentAlignment="Stretch"    
                  Margin="5"
                  FontSize="20"
                  BorderBrush="BlueViolet"
-                 BorderThickness="1" Width="708"/>
+                 BorderThickness="1" Width="900"/>
             <Button Content="📂"
                     Margin="5"
                     Width="63"
@@ -50,7 +52,9 @@
                     Command="{Binding FilePathCommand}"/>
         </DockPanel>
         <Button Content="OK"
+                VerticalAlignment="Bottom"
+                DockPanel.Dock="Bottom"
                     Margin="5"         
-                    Command="{Binding OkCommand}"/>
-    </StackPanel>
+                    Command="{Binding OkCommand}" VerticalContentAlignment="Center"/>
+    </DockPanel>
 </UserControl>

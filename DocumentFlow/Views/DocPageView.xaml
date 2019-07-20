@@ -9,7 +9,7 @@
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              xmlns:tp="http://schemas.xceed.com/wpf/xaml/toolkit"
              Name="This"
-             mc:Ignorable="d" Background="White" d:DesignWidth="800">
+             mc:Ignorable="d" d:DesignHeight="750" d:DesignWidth="1300" Background="White">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

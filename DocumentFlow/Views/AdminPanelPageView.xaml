@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              x:Name="This"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
     
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -62,26 +62,32 @@
 
     
     <DockPanel>
-        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" LastChildFill="False">
+        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch"  LastChildFill="False">
             <Button Content="Add new user"
-                Margin="5"
+                Margin="15,5,5,5"
                 Command="{Binding AddNewUserCommand}" />
             <Button Content="Normative information"
                     Command="{Binding NormInfoCommand}"
-                Margin="5"/>
+                Margin="25,5,5,5"/>
             <Button Content="Constants"
                     Command="{Binding ConstCommand}"
-                Margin="5"/>
+                Margin="25,5,5,5"/>
             <Button Content="News"
                     Command="{Binding NewsCommand}"
-                Margin="5"/>
+                Margin="25,5,5,5"/>
+            <Button Content="History of changes"                    
+                Margin="25,5,5,5"
+                    BorderBrush="SlateBlue"
+                    Command="{}"/>
             <Button Content="Change my password"                    
                 Margin="25,5,5,5"
                     BorderBrush="SlateBlue"
                     Background="DarkSlateBlue"
                     Command="{Binding ChangeMyPassword}"/>
+
             <Button Content="Log off"                    
                 Margin="10,5,5,5"
+                    DockPanel.Dock="Right"
                     Background="DarkRed"
                      BorderBrush="PaleVioletRed"
                     Command="{Binding LogOffCommand}"/>
@@ -101,8 +107,7 @@
                  Background="White"
                  BorderBrush="DarkViolet"
                  BorderThickness="1"
-                 Text="{Binding Path=UserFilter, UpdateSourceTrigger=PropertyChanged}"
-                 Width="478" />
+                 Text="{Binding Path=UserFilter, UpdateSourceTrigger=PropertyChanged}" Width="496" />
         </StackPanel>
         <Grid DockPanel.Dock="Top">
         <ListBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1"

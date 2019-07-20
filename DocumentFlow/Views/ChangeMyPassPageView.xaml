@@ -7,12 +7,14 @@
              xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              mc:Ignorable="d" 
              x:Name="This"
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
-    <StackPanel>
+             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
+    <DockPanel LastChildFill="False">
         <Label Content="Current password:"
+               DockPanel.Dock="Top"
                Margin="5"
                FontSize="20"/>
         <PasswordBox Name="pBoxCurr"
+                     DockPanel.Dock="Top"
                  HorizontalContentAlignment="Stretch"    
                  Margin="5"
                  FontSize="20"
@@ -21,9 +23,11 @@
             
         </PasswordBox>
         <Label Content="New password:"
+               DockPanel.Dock="Top"
                Margin="5"
                FontSize="20"/>
         <PasswordBox Name="pBox"
+                     DockPanel.Dock="Top"
                  HorizontalContentAlignment="Stretch"    
                  Margin="5"
                  FontSize="20"
@@ -37,8 +41,10 @@
         </PasswordBox>
         <Label Content="Confirm password:"
                Margin="5"
+               DockPanel.Dock="Top"
                FontSize="20"/>
         <PasswordBox Name="pBox2"
+                     DockPanel.Dock="Top"
                  HorizontalContentAlignment="Stretch"    
                  Margin="5"
                  FontSize="20"
@@ -52,9 +58,10 @@
         </PasswordBox>
         <Label Content="{Binding PasswordConfirmation}"
                Margin="5"
+               DockPanel.Dock="Top"
                Foreground="Red"
                FontSize="20"/>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
             <Button Content="Back"
                     Margin="5"
                     Width="150"
@@ -70,5 +77,5 @@
                     CommandParameter="{Binding ElementName=This}"/>
         </StackPanel>
 
-    </StackPanel>
+    </DockPanel>
 </UserControl>
