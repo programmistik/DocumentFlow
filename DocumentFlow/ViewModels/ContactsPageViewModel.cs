@@ -50,13 +50,21 @@ namespace DocumentFlow.ViewModels
             this.messageService = messageService;
             this.db = db;
 
-            ContactsList = new ObservableCollection<Contact>(db.Contacts);
-            ContactsList.OrderBy(c => c.Name);
+            //ContactsList = new ObservableCollection<Contact>(db.Contacts);
+            //ContactsList.OrderBy(c => c.Name);
 
             Messenger.Default.Register<NotificationMessage<User>>(this, OnHitIt);
             Messenger.Default.Register<NotificationMessage<User>>(this, OnHitUser);
 
         }
+
+        private void OnLoaded(NotificationMessage<User> usr)
+        {
+            ContactsList = new ObservableCollection<Contact>(db.Contacts);
+            ContactsList.OrderBy(c => c.Name);
+        }
+
+
 
 
         private void OnHitUser(NotificationMessage<User> usr)

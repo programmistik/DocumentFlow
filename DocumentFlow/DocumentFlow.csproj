@@ -293,11 +293,6 @@
     <Compile Include="Models\Positions.cs" />
     <Compile Include="Models\Tasks.cs" />
     <Compile Include="Models\Users.cs" />
-    <Compile Include="Properties\Resources.ru-RU.Designer.cs">
-      <DependentUpon>Resources.ru-RU.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Resources\ViewModelLocator.cs" />
     <Compile Include="Services\GoogleServices.cs" />
     <Compile Include="Services\IGoogleService.cs" />
@@ -459,10 +454,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907121109175_docproc.resx">
       <DependentUpon>201907121109175_docproc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ru-RU.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

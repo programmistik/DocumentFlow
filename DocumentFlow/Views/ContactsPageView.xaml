@@ -5,9 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              x:Name="This"
-             d:DesignHeight="750" d:DesignWidth="1300" Background="White" Loaded="{Binding OnLoaded}">
+             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
+    
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding OnLoaded}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
     <UserControl.Resources>
         
         <local:OrgCompany x:Key="OrgCompany" />

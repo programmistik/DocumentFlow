@@ -8,6 +8,7 @@
              xmlns:hx="clr-namespace:HexGridControl;assembly=HexGridControl"        
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
+             Name="Parent"
              d:DesignHeight="750" d:DesignWidth="1300" Background="White">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -31,7 +32,7 @@
             <Setter Property="MinWidth"  Value="80"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="DarkViolet"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
             <Setter Property="ContentTemplate">
@@ -39,14 +40,14 @@
                     <DataTemplate>
                         <Button Content="{TemplateBinding Content}"
                                         Background="{Binding Path=Background, RelativeSource={RelativeSource AncestorType={x:Type hx:HexItem}}}"
-                                        Click="MenuClick" Style="{x:Null}"/>
+                                        Command="{Binding DataContext.MenuClickCommand, ElementName=Parent}" CommandParameter="{Binding}" Style="{x:Null}"/>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </UserControl.Resources>
 
-    <Grid Background="#FFE1E1E1">
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="64"></RowDefinition>
             <RowDefinition Height="65*"></RowDefinition>
@@ -175,7 +176,7 @@
 
         <!--#region Content-->
 
-        <Grid Margin="10" Background="DarkBlue"
+        <Grid Margin="10"
               Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="8">
 
             
@@ -192,15 +193,45 @@
 
             <hx:HexGrid Grid.Row="0" Grid.Column="0"
                             RowCount="3" ColumnCount="3" Orientation="Horizontal" Grid.ColumnSpan="4" Grid.RowSpan="3">
-                <hx:HexItem Grid.Row="0" Grid.Column="1" Content="2"/>
+                <hx:HexItem Grid.Row="0" Grid.Column="1">
+                    <StackPanel Name="Calendar">
+                        <Image Source="../Resources/Images/Calendar.png" Width="60" />
+                        <TextBlock Text="{x:Static p:Resources.OpenCalendar}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                    </StackPanel>
+                </hx:HexItem>
 
-                <hx:HexItem Grid.Row="1" Grid.Column="0" Content="1"/>
-                <hx:HexItem Grid.Row="1" Grid.Column="1" Content="0" Background="Gold"/>
-                <hx:HexItem Grid.Row="1" Grid.Column="2" Content="3"/>
+                <hx:HexItem Grid.Row="1" Grid.Column="0">
+                    <StackPanel Name="Mail">
+                        <Image Source="../Resources/Images/Mail.png" Width="60" />
+                        <TextBlock Text="{x:Static p:Resources.Mail}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                    </StackPanel>
+                </hx:HexItem>
+                <hx:HexItem Grid.Row="1" Grid.Column="1" Background="BlueViolet">
+                    <StackPanel Name="News">
+                        <Image Source="../Resources/Images/News.png" Width="60" />
+                        <TextBlock Text="{x:Static p:Resources.News}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                    </StackPanel>
+                </hx:HexItem>
+                <hx:HexItem Grid.Row="1" Grid.Column="2">
+                    <StackPanel Name="Schedule">
+                        <Image Source="../Resources/Images/Tasks.png" Width="60" Margin="0,0,0,5" />
+                        <TextBlock Text="{x:Static p:Resources.Schedule}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                    </StackPanel>
+                </hx:HexItem>
 
-                <hx:HexItem Grid.Row="2" Grid.Column="0" Content="6"/>
-                <hx:HexItem Grid.Row="2" Grid.Column="1" Content="5"/>
-                <hx:HexItem Grid.Row="2" Grid.Column="2" Content="4"/>
+                <hx:HexItem Grid.Row="2" Grid.Column="0">
+                    <StackPanel Name="Documents">
+                        <Image Source="../Resources/Images/Documents.png" Width="60" Margin="0,0,0,5" />
+                        <TextBlock Text="{x:Static p:Resources.Documents}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                    </StackPanel>
+                </hx:HexItem>
+                <hx:HexItem Grid.Row="2" Grid.Column="1">
+                    <StackPanel Name="Contacts">
+                        <Image Source="../Resources/Images/Contacts.png" Width="60" Margin="0,0,0,5" />
+                        <TextBlock Text="{x:Static p:Resources.Contacts}" HorizontalAlignment="Center" FontSize="16" ></TextBlock>
+                    </StackPanel>
+                </hx:HexItem>
+                <hx:HexItem Grid.Row="2" Grid.Column="2" Content="Will be added soon..."/>
             </hx:HexGrid>
 
         </Grid>

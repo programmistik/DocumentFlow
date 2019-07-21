@@ -1,4 +1,5 @@
 ﻿using DocumentFlow.Models;
+using DocumentFlow.Properties;
 using DocumentFlow.Services;
 using DocumentFlow.Views;
 using GalaSoft.MvvmLight;
@@ -17,6 +18,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace DocumentFlow.ViewModels
 {
@@ -72,11 +74,41 @@ namespace DocumentFlow.ViewModels
         }));
 
 
-        private RelayCommand<string> menuClickCommand;
-        public RelayCommand<string> MenuClickCommand => menuClickCommand ?? (menuClickCommand = new RelayCommand<string>(
+        private RelayCommand<StackPanel> menuClickCommand;
+        public RelayCommand<StackPanel> MenuClickCommand => menuClickCommand ?? (menuClickCommand = new RelayCommand<StackPanel>(
         param =>
         {
-            MessageBox.Show(param);
+            if (param.Name == Resources.News)
+            {
+                Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                navigationService.Navigate<NewsPageView>();
+            }
+            else if(param.Name == Resources.Mail)
+            {
+                Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                navigationService.Navigate<GMailPageView>();
+            }
+            else if (param.Name == Resources.Calendar)
+            {
+                Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                navigationService.Navigate<CalendarPageView>();
+            }
+            else if (param.Name == Resources.Schedule)
+            {
+                Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                navigationService.Navigate<SchedulePageView>();
+            }
+            else if (param.Name == Resources.Contacts)
+            {
+                Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "Contacts"));
+                navigationService.Navigate<ContactsPageView>();
+            }
+            else if (param.Name == Resources.Documents)
+            {
+                Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                navigationService.Navigate<DocumentsPageView>();
+            }
 
         }));
 
