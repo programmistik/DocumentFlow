@@ -650,6 +650,9 @@
     <Resource Include="Resources\Images\MailWhite.png" />
     <Resource Include="Resources\Images\NewsWhite.png" />
     <Resource Include="Resources\Images\TasksWhite.png" />
+    <Resource Include="Resources\Images\DFIcon.png" />
+    <Resource Include="Resources\Images\DFLogo.png" />
+    <Resource Include="Resources\Images\D_icon.png" />
     <Content Include="Resources\New.html" />
     <Resource Include="Resources\RibonImages\folder-icon.png" />
     <Resource Include="Resources\RibonImages\closeLarge.png" />

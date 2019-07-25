@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Name="TheMainView"
         Title="{Binding ApplicationTitle, UpdateSourceTrigger=PropertyChanged}"
+        Icon="../Resources/Images/D_icon.png"
         Height="750" Width="1300"
         MinWidth="1100" MinHeight="600" Closing="TheMainView_Closing">
 

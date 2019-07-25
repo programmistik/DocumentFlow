@@ -38,7 +38,7 @@
         </Grid.Background>
 
              
-        <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="../Resources/Images/TestLogo.png"/>
+        <Image Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Source="../Resources/Images/DFLogo.png"/>
 
         <Label Grid.Row="4" Grid.Column="3"
                FontSize="25"
