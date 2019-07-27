@@ -1,18 +1,20 @@
 ﻿<UserControl x:Class="DocumentFlow.Views.AddEditEventPageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             x:Name="This"
              xmlns:tp="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
-             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
+             d:DesignHeight="750"
+             d:DesignWidth="1300"
+             Background="White">
 
 
-        <Grid Background="White">
-        
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"></RowDefinition>
             <RowDefinition Height="34*"></RowDefinition>
@@ -28,128 +30,204 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="511*" MaxWidth="1000"/>
-            <ColumnDefinition Width="239*"/>
+            <ColumnDefinition Width="511*"
+                              MaxWidth="1000" />
+            <ColumnDefinition Width="239*" />
         </Grid.ColumnDefinitions>
 
         <Button Background="White"
                 BorderBrush="White"
                 Command="{Binding BackCommand}"
                 Padding="5">
-            <Image Margin="7" Source="/DocumentFlow;component/Resources/Images/Cancel.png"></Image>
+            <Image Margin="7"
+                   Source="/DocumentFlow;component/Resources/Images/Cancel.png"></Image>
             <Button.Style>
                 <Style TargetType="Button">
                     <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
                         </Trigger>
                     </Style.Triggers>
                 </Style>
             </Button.Style>
         </Button>
 
-        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" x:Name="EnterNameTextBox" Margin="5,12,5,12" Grid.Row="0" Grid.Column="1" Height="26" Text="{Binding EventSummary}"/>
-        <TextBlock IsHitTestVisible="False" Text="Введите название" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,18,0,16" Foreground="DarkGray" Grid.Row="0" Grid.Column="1" Height="16" Width="355">
+        <TextBox VerticalAlignment="Center"
+                 HorizontalAlignment="Stretch"
+                 x:Name="EnterNameTextBox"
+                 Margin="5,12,5,12"
+                 Grid.Row="0"
+                 Grid.Column="1"
+                 Height="26"
+                 Text="{Binding EventSummary}" />
+        <TextBlock IsHitTestVisible="False"
+                   Text="{x:Static p:Resources.EnterNameOfFile}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Margin="10,18,0,16"
+                   Foreground="DarkGray"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   Height="16"
+                   Width="355">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Setter Property="Visibility"
+                            Value="Collapsed" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=EnterNameTextBox}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
+                        <DataTrigger Binding="{Binding Text, ElementName=EnterNameTextBox}"
+                                     Value="">
+                            <Setter Property="Visibility"
+                                    Value="Visible" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </TextBlock.Style>
         </TextBlock>
 
-        <Button Content="Save"
-                    Width="130" MaxWidth="130" MaxHeight="50" HorizontalAlignment="Left"
-                    Grid.Column="2" Grid.Row="0"
-                    Command="{Binding SaveEvent}" Height="Auto" Margin="0,9"/>
+        <Button Content="{x:Static p:Resources.Save}"
+                Width="130"
+                MaxWidth="130"
+                MaxHeight="50"
+                HorizontalAlignment="Left"
+                Grid.Column="2"
+                Grid.Row="0"
+                Command="{Binding SaveEvent}"
+                Height="Auto"
+                Margin="0,9" />
 
-        <DockPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
-            <DatePicker
-                       SelectedDate="{Binding Path=StartDate,
+        <DockPanel VerticalAlignment="Center"
+                   Grid.Row="1"
+                   Grid.Column="1">
+            <DatePicker SelectedDate="{Binding Path=StartDate,
                                               Mode=TwoWay,
                                               TargetNullValue={x:Static System:DateTime.Now}}"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top" 
-                       Width="120" />
-            <tp:TimePicker Height="25" 
-                           Width="100" 
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Width="120" />
+            <tp:TimePicker Height="25"
+                           Width="100"
                            Margin="10 0"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
                            TimeInterval="00:30:00.000"
                            ShowButtonSpinner="False"
-                           Value="{Binding StartDate}"/>
+                           Value="{Binding StartDate}" />
             <Label>
                 -
             </Label>
-            <tp:TimePicker Height="25" 
-                           Width="100" 
+            <tp:TimePicker Height="25"
+                           Width="100"
                            Margin="10 0"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
                            TimeInterval="00:30:00.000"
                            ShowButtonSpinner="False"
-                           Value="{Binding EndDate}"/>
+                           Value="{Binding EndDate}" />
 
             <DatePicker HorizontalAlignment="Left"
                         SelectedDate="{Binding Path=EndDate,
                                                Mode=TwoWay,
                                                TargetNullValue={x:Static System:DateTime.Now}}"
-                        VerticalAlignment="Top" 
+                        VerticalAlignment="Top"
                         Width="120" />
         </DockPanel>
 
-        <Image Margin="10" Grid.Row="2" Grid.Column="0" Source="/DocumentFlow;component/Resources/Images/Location.png"></Image>
+        <Image Margin="10"
+               Grid.Row="2"
+               Grid.Column="0"
+               Source="/DocumentFlow;component/Resources/Images/Location.png"></Image>
 
 
-        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" x:Name="EnterLocationTextBox" Margin="5,8,5,7" Grid.Row="2" Grid.Column="1" Height="26" Text="{Binding Location}"/>
-        <TextBlock IsHitTestVisible="False" Text="Укажите место проведения" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,10,0,11" Foreground="DarkGray" Grid.Row="2" Grid.Column="1" Height="17" Width="355">
+        <TextBox VerticalAlignment="Center"
+                 HorizontalAlignment="Stretch"
+                 x:Name="EnterLocationTextBox"
+                 Margin="5,8,5,7"
+                 Grid.Row="2"
+                 Grid.Column="1"
+                 Height="26"
+                 Text="{Binding Location}" />
+        <TextBlock IsHitTestVisible="False"
+                   Text="{x:Static p:Resources.EnterLocation}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Margin="10,10,0,11"
+                   Foreground="DarkGray"
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   Height="17"
+                   Width="355">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Setter Property="Visibility"
+                            Value="Collapsed" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=EnterLocationTextBox}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
+                        <DataTrigger Binding="{Binding Text, ElementName=EnterLocationTextBox}"
+                                     Value="">
+                            <Setter Property="Visibility"
+                                    Value="Visible" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </TextBlock.Style>
         </TextBlock>
 
-        <StackPanel VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-            <Label FontSize="12" 
-                                Margin="2"
-                                Content="Frequency (DAILY or WEEKLY)"/>
+        <StackPanel VerticalAlignment="Center"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+            <Label FontSize="12"
+                   Margin="2"
+                   Content="{x:Static p:Resources.Frequency}" />
 
-            <ComboBox Width="100" Height="25" Margin="2"
+            <ComboBox Width="100"
+                      Height="25"
+                      Margin="2"
                       VerticalAlignment="Top"
-                                  HorizontalAlignment="Left" 
-                                  SelectedIndex="{Binding Freq}">
-                <ComboBoxItem FontSize="15" 
-                                     Content="DAILY"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="WEEKLY"/>
+                      HorizontalAlignment="Left"
+                      SelectedIndex="{Binding Freq}">
+                <ComboBoxItem FontSize="15"
+                              Content="DAILY" />
+                <ComboBoxItem FontSize="15"
+                              Content="WEEKLY" />
             </ComboBox>
 
         </StackPanel>
 
-        <DockPanel VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" LastChildFill="True">
-            <Label FontSize="12" 
+        <DockPanel VerticalAlignment="Center"
+                   Grid.Row="4"
+                   Grid.Column="1"
+                   LastChildFill="True">
+            <Label FontSize="12"
                    Margin="2"
-                   Content="Interval (integer from 1)"/>
+                   Content="{x:Static p:Resources.Interval}" />
 
             <Grid VerticalAlignment="Center">
-                <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="15" x:Name="Interval" Height="26" Text="{Binding Interval}" TextChanged="Interval_TextChanged"/>
-                <TextBlock IsHitTestVisible="False" Text="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,0,3" Foreground="DarkGray" Height="22" Width="355" FontSize="15">
+                <TextBox VerticalAlignment="Center"
+                         HorizontalAlignment="Stretch"
+                         FontSize="15"
+                         x:Name="Interval"
+                         Height="26"
+                         Text="{Binding Interval}"
+                         TextChanged="Interval_TextChanged" />
+                <TextBlock IsHitTestVisible="False"
+                           Text="1"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="5,5,0,3"
+                           Foreground="DarkGray"
+                           Height="22"
+                           Width="355"
+                           FontSize="15">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=Interval}" Value="">
-                                    <Setter Property="Visibility" Value="Visible"/>
+                                <DataTrigger Binding="{Binding Text, ElementName=Interval}"
+                                             Value="">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -158,20 +236,40 @@
             </Grid>
         </DockPanel>
 
-        <DockPanel VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" LastChildFill="True">
-            <Label FontSize="12" 
-                               Margin="2"
-                               Content="Count"/>
+        <DockPanel VerticalAlignment="Center"
+                   Grid.Row="5"
+                   Grid.Column="1"
+                   LastChildFill="True">
+            <Label FontSize="12"
+                   Margin="2"
+                   Content="{x:Static p:Resources.Count}" />
 
             <Grid>
-                <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="15" x:Name="Count" Height="26" Text="{Binding Count}" TextChanged="Count_TextChanged"/>
-                <TextBlock IsHitTestVisible="False" Text="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,0,3" Foreground="DarkGray" Height="22" Width="355" FontSize="15">
+                <TextBox VerticalAlignment="Center"
+                         HorizontalAlignment="Stretch"
+                         FontSize="15"
+                         x:Name="Count"
+                         Height="26"
+                         Text="{Binding Count}"
+                         TextChanged="Count_TextChanged" />
+                <TextBlock IsHitTestVisible="False"
+                           Text="1"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="5,5,0,3"
+                           Foreground="DarkGray"
+                           Height="22"
+                           Width="355"
+                           FontSize="15">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=Count}" Value="">
-                                    <Setter Property="Visibility" Value="Visible"/>
+                                <DataTrigger Binding="{Binding Text, ElementName=Count}"
+                                             Value="">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -180,90 +278,125 @@
             </Grid>
         </DockPanel>
 
-        <Image Margin="7" Grid.Row="6" Grid.Column="0" Source="/DocumentFlow;component/Resources/Images/notification.png"></Image>
+        <Image Margin="7"
+               Grid.Row="6"
+               Grid.Column="0"
+               Source="/DocumentFlow;component/Resources/Images/notification.png"></Image>
 
-        <DockPanel VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" LastChildFill="True">
+        <DockPanel VerticalAlignment="Center"
+                   Grid.Row="6"
+                   Grid.Column="1"
+                   LastChildFill="True">
 
-            <CheckBox
-                            IsChecked="{Binding HasRemaider}"></CheckBox>
+            <CheckBox IsChecked="{Binding HasRemaider}"></CheckBox>
 
-            <Label FontSize="12" 
-                                Margin="2"
-                                Content="Time in minutes"/>
-            <TextBox x:Name="Time" TextChanged="Time_TextChanged"
-                                FontSize="15" 
-                                Margin="2"
-                                Text="{Binding Minutes}"/>
+            <Label FontSize="12"
+                   Margin="2"
+                   Content="{x:Static p:Resources.TimeInMinutes}" />
+            <TextBox x:Name="Time"
+                     TextChanged="Time_TextChanged"
+                     FontSize="15"
+                     Margin="2"
+                     Text="{Binding Minutes}" />
         </DockPanel>
 
-        <Image Margin="8" Grid.Row="7" Grid.Column="0" Source="/DocumentFlow;component/Resources/Images/calendar.png"></Image>
+        <Image Margin="8"
+               Grid.Row="7"
+               Grid.Column="0"
+               Source="/DocumentFlow;component/Resources/Images/calendar.png"></Image>
 
-        <DockPanel VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" LastChildFill="True">
-            <Label FontSize="12" 
-                               Margin="2"
-                               Content="{Binding Fio}"/>
-            <ComboBox Width="80" Height="25" Margin="2"
-                                  HorizontalAlignment="Left" 
-                                  SelectedIndex="{Binding ColorIndex}">
-                <ComboBoxItem FontSize="15" 
-                                     Content="Lavender"
-                                     Background="#7986cb"
-                                     Foreground="Black"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="Sage" 
-                                     Background="#33b679"
-                                     Foreground="Black"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="Grape" 
-                                     Background="#8e24aa"
-                                     Foreground="Black"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="Flamingo" 
-                                     Background="#e67c73"
-                                     Foreground="Black"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="Banana" 
-                                     Background="#f6c026"
-                                     Foreground="Black"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="Tangerine" 
-                                     Background="#f5511d"
-                                     Foreground="Black"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="Peacock" 
-                                     Background="#039be5"
-                                     Foreground="Black"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="Graphite" 
-                                     Background="#616161"
-                                     Foreground="Black"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="Blueberry"
-                                     Background="#3f51b5"
-                                     Foreground="Black"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="Basil" 
-                                     Background="#0b8043"
-                                     Foreground="Black"/>
-                <ComboBoxItem FontSize="15" 
-                                     Content="Tomato" 
-                                     Background="#d60000"
-                                     Foreground="Black"/>
+        <DockPanel VerticalAlignment="Center"
+                   Grid.Row="7"
+                   Grid.Column="1"
+                   LastChildFill="True">
+            <Label FontSize="12"
+                   Margin="2"
+                   Content="{Binding Fio}" />
+            <ComboBox Width="80"
+                      Height="25"
+                      Margin="2"
+                      HorizontalAlignment="Left"
+                      SelectedIndex="{Binding ColorIndex}">
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Lavender}"
+                              Background="#7986cb"
+                              Foreground="Black" />
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Sage}"
+                              Background="#33b679"
+                              Foreground="Black" />
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Grape}"
+                              Background="#8e24aa"
+                              Foreground="Black" />
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Flamingo}"
+                              Background="#e67c73"
+                              Foreground="Black" />
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Banana}"
+                              Background="#f6c026"
+                              Foreground="Black" />
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Tangerine}"
+                              Background="#f5511d"
+                              Foreground="Black" />
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Peacock}"
+                              Background="#039be5"
+                              Foreground="Black" />
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Graphite}"
+                              Background="#616161"
+                              Foreground="Black" />
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Blueberry}"
+                              Background="#3f51b5"
+                              Foreground="Black" />
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Basil}"
+                              Background="#0b8043"
+                              Foreground="Black" />
+                <ComboBoxItem FontSize="15"
+                              Content="{x:Static p:Resources.Tomato}"
+                              Background="#d60000"
+                              Foreground="Black" />
             </ComboBox>
 
         </DockPanel>
 
-        <Image Margin="8" Grid.Row="8" Grid.Column="0" Source="/DocumentFlow;component/Resources/Images/pen.png"></Image>
+        <Image Margin="8"
+               Grid.Row="8"
+               Grid.Column="0"
+               Source="/DocumentFlow;component/Resources/Images/pen.png"></Image>
 
-        <Grid VerticalAlignment="Center" Grid.Row="8" Grid.Column="1">
-            <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="15" x:Name="Description" Height="26" Text="{Binding EventSummary}"/>
-            <TextBlock IsHitTestVisible="False" Text="Введите описание" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,0,3" Foreground="DarkGray" Height="22" Width="355" FontSize="15">
+        <Grid VerticalAlignment="Center"
+              Grid.Row="8"
+              Grid.Column="1">
+            <TextBox VerticalAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     FontSize="15"
+                     x:Name="Description"
+                     Height="26"
+                     Text="{Binding EventSummary}" />
+            <TextBlock IsHitTestVisible="False"
+                       Text="{x:Static p:Resources.EnterDescription}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="5,5,0,3"
+                       Foreground="DarkGray"
+                       Height="22"
+                       Width="355"
+                       FontSize="15">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Setter Property="Visibility"
+                                Value="Collapsed" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=Description}" Value="">
-                                <Setter Property="Visibility" Value="Visible"/>
+                            <DataTrigger Binding="{Binding Text, ElementName=Description}"
+                                         Value="">
+                                <Setter Property="Visibility"
+                                        Value="Visible" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -271,16 +404,26 @@
             </TextBlock>
         </Grid>
 
-        <DockPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="7">
-            <Label Content="Guests" DockPanel.Dock="Top" FontSize="16" HorizontalContentAlignment="Center"/>
-            <DataGrid AutoGenerateColumns="False" 
+        <DockPanel Grid.Column="2"
+                   Grid.Row="2"
+                   Grid.RowSpan="7">
+            <Label Content="{x:Static p:Resources.Guests}"
+                   DockPanel.Dock="Top"
+                   FontSize="16"
+                   HorizontalContentAlignment="Center" />
+            <DataGrid AutoGenerateColumns="False"
                       Background="White"
-                                  EnableRowVirtualization="True"
-                                  ItemsSource="{Binding AttendeesList}" Margin="10,0" 
-                                  RowDetailsVisibilityMode="VisibleWhenSelected">
+                      EnableRowVirtualization="True"
+                      ItemsSource="{Binding AttendeesList}"
+                      Margin="10,0"
+                      RowDetailsVisibilityMode="VisibleWhenSelected">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Header="Name" />
-                    <DataGridTextColumn Width="*" Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Header="Email" />
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
+                                        Header="{x:Static p:Resources.Name}" />
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                                        Header="{x:Static p:Resources.Email}" />
                 </DataGrid.Columns>
 
             </DataGrid>

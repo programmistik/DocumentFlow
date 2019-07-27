@@ -1,19 +1,23 @@
 ﻿<UserControl x:Class="DocumentFlow.Views.DocPageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
              xmlns:tp="http://schemas.xceed.com/wpf/xaml/toolkit"
              Name="This"
-             mc:Ignorable="d" d:DesignHeight="750" d:DesignWidth="1300" Background="White">
+             mc:Ignorable="d"
+             d:DesignHeight="750"
+             d:DesignWidth="1300"
+             Background="White">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -31,26 +35,28 @@
                         <ColumnDefinition Width="0.2*" />
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" Margin="0" Source="{Binding Converter={StaticResource converter}}" />
-                    <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
+                    <Image Grid.Column="0"
+                           Margin="0"
+                           Source="{Binding Converter={StaticResource converter}}" />
+                    <StackPanel Grid.Column="1"
+                                HorizontalAlignment="Stretch">
 
                         <Label FontWeight="Bold"
-                               Content="{Binding FileName}"/>
-                        <Label 
-                               Content="{Binding FileComment}"/>
+                               Content="{Binding FileName}" />
+                        <Label Content="{Binding FileComment}" />
                     </StackPanel>
 
 
-                    <Button  Grid.Column="2" 
-                            Margin="1"
-                            Command="{Binding DataContext.EditFileCommand, ElementName=This}"
-                            CommandParameter="{Binding}">
+                    <Button  Grid.Column="2"
+                             Margin="1"
+                             Command="{Binding DataContext.EditFileCommand, ElementName=This}"
+                             CommandParameter="{Binding}">
                         ✏
                     </Button>
-                    <Button  Grid.Column="3" 
-                            Margin="1"
-                            Command="{Binding DataContext.ViewFileCommand, ElementName=This}"
-                            CommandParameter="{Binding}">
+                    <Button  Grid.Column="3"
+                             Margin="1"
+                             Command="{Binding DataContext.ViewFileCommand, ElementName=This}"
+                             CommandParameter="{Binding}">
                         📖
                     </Button>
 
@@ -60,8 +66,10 @@
                     <Separator.Style>
                         <Style TargetType="Separator">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-                                    <Setter Property="Visibility" Value="Visible"/>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}"
+                                             Value="{x:Null}">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -74,10 +82,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="tp:DecimalUpDown">
-                        <tp:ButtonSpinner
-                    Name="PART_Spinner">
-                            <tp:WatermarkTextBox
-                        Name="PART_TextBox" />
+                        <tp:ButtonSpinner Name="PART_Spinner">
+                            <tp:WatermarkTextBox Name="PART_TextBox" />
                         </tp:ButtonSpinner>
                     </ControlTemplate>
                 </Setter.Value>
@@ -86,7 +92,8 @@
 
     </UserControl.Resources>
 
-    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Grid VerticalAlignment="Stretch"
+          HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -105,148 +112,154 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" VerticalAlignment="Top" Orientation="Horizontal">
-            <Button Content="Back"
+        <StackPanel Grid.Row="0"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+            <Button Content="{x:Static p:Resources.Back}"
                     Margin="5"
                     Width="150"
                     Background="DarkRed"
                     BorderBrush="PaleVioletRed"
-                    Command="{Binding BackCommand}"/>
-            <Button Content="OK"
+                    Command="{Binding BackCommand}" />
+            <Button Content="{x:Static p:Resources.Ok}"
                     Margin="5"
                     Width="150"
                     Background="Green"
                     BorderBrush="DarkGreen"
-                    Command="{Binding OkCommand}"/>
+                    Command="{Binding OkCommand}" />
         </StackPanel>
 
-        <DockPanel Grid.Row="1" VerticalAlignment="Top">
-            <Label Content="Data:"
-               FontSize="15"
-               Margin="3"/>
+        <DockPanel Grid.Row="1"
+                   VerticalAlignment="Top">
+            <Label Content="{x:Static p:Resources.Date}"
+                   FontSize="15"
+                   Margin="3" />
             <TextBox Text="{Binding DocData}"
                      FontSize="15"
                      Margin="3"
                      Width="200"
                      IsReadOnly="True"
-                     Foreground="Gray"/>
+                     Foreground="Gray" />
 
-            <Label Content="Number:"
-               FontSize="15"
-               Margin="3"/>
+            <Label Content="{x:Static p:Resources.Number}"
+                   FontSize="15"
+                   Margin="3" />
             <TextBox Text="{Binding DocNumber}"
                      FontSize="15"
                      Margin="3"
                      IsReadOnly="True"
-                     Foreground="Gray"/>
+                     Foreground="Gray" />
         </DockPanel>
 
 
-        <DockPanel Grid.Row="2" VerticalAlignment="Top">
-            <Label Content="Created by:"
-               FontSize="15"
-               Margin="3"/>
+        <DockPanel Grid.Row="2"
+                   VerticalAlignment="Top">
+            <Label Content="{x:Static p:Resources.CreatedBy}"
+                   FontSize="15"
+                   Margin="3" />
             <TextBox Text="{Binding CreatedByName}"
                      FontSize="15"
                      Margin="3"
                      Width="300"
                      IsReadOnly="True"
-                     Foreground="Gray"/>
-            <Label Content="Company:"
-               FontSize="15"
-               Margin="3"/>
+                     Foreground="Gray" />
+            <Label Content="{x:Static p:Resources.Company}"
+                   FontSize="15"
+                   Margin="3" />
             <TextBox Text="{Binding DocCompany}"
                      FontSize="15"
                      Margin="3"
                      IsReadOnly="True"
-                     Foreground="Gray"/>
+                     Foreground="Gray" />
         </DockPanel>
 
-        <DockPanel Grid.Row="3" VerticalAlignment="Top">
-            <Label Content="Document type:"
-               FontSize="15"
-               Margin="3"/>
-            <ComboBox ItemsSource="{Binding Path = DocTypeCollection}"    
-                  SelectedItem="{Binding Path = DocType}"  
-                  DisplayMemberPath = "DocTypeName"
-                  FontSize="15"
-                  Margin="3"
-                  Width="200"
-                  IsReadOnly="{Binding roDocType}" />
+        <DockPanel Grid.Row="3"
+                   VerticalAlignment="Top">
+            <Label Content="{x:Static p:Resources.DocumentType}"
+                   FontSize="15"
+                   Margin="3" />
+            <ComboBox ItemsSource="{Binding Path = DocTypeCollection}"
+                      SelectedItem="{Binding Path = DocType}"
+                      DisplayMemberPath="DocTypeName"
+                      FontSize="15"
+                      Margin="3"
+                      Width="200"
+                      IsReadOnly="{Binding roDocType}" />
 
-            <Label Content="Document status:"
-               FontSize="15"
-               Margin="3"/>
-            <ComboBox ItemsSource="{Binding Path = DocStatusCollection}"    
-                  SelectedItem="{Binding Path = DocStatus}"  
-                  DisplayMemberPath = "DocStateName"
-                  FontSize="15"
-                  Margin="3">
+            <Label Content="{x:Static p:Resources.DocumentStatus}"
+                   FontSize="15"
+                   Margin="3" />
+            <ComboBox ItemsSource="{Binding Path = DocStatusCollection}"
+                      SelectedItem="{Binding Path = DocStatus}"
+                      DisplayMemberPath="DocStateName"
+                      FontSize="15"
+                      Margin="3">
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem">
-                        <Setter
-                    Property="IsEnabled"
-                    Value="{Binding IsSelectable}" />
+                        <Setter Property="IsEnabled"
+                                Value="{Binding IsSelectable}" />
                     </Style>
                 </ComboBox.ItemContainerStyle>
             </ComboBox>
         </DockPanel>
 
-        <TabControl Grid.Row="4" Grid.RowSpan="6" VerticalAlignment="Top">
+        <TabControl Grid.Row="4"
+                    Grid.RowSpan="6"
+                    VerticalAlignment="Top">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3">Short info about document</TextBlock>
+                        <TextBlock Margin="3"
+                                   Text="{x:Static p:Resources.ShortInfoAboutDocument}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <TabItem.Content>
                     <StackPanel Height="240">
                         <DockPanel HorizontalAlignment="Left">
-                            <Label Content="Date:"
-                           FontSize="15"
-                           Margin="3"/>
-                            <DatePicker
-                                    SelectedDate="{Binding Path=DocDocumentDate,
+                            <Label Content="{x:Static p:Resources.Date}"
+                                   FontSize="15"
+                                   Margin="3" />
+                            <DatePicker SelectedDate="{Binding Path=DocDocumentDate,
                                                    Mode=TwoWay,
                                                    TargetNullValue={x:Static System:DateTime.Now}}"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top" 
-                                    Width="245" 
-                                Margin="5"/>
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Width="245"
+                                        Margin="5" />
 
                         </DockPanel>
 
                         <DockPanel>
-                            <Label Content="Organization:"
+                            <Label Content="{x:Static p:Resources.Organization}"
                                    FontSize="15"
-                                   Margin="3"/>
-                            <ComboBox ItemsSource="{Binding Path = OrgCollection}"    
-                                      SelectedItem="{Binding Path = Org}"  
-                                      DisplayMemberPath = "OrganizationName"
+                                   Margin="3" />
+                            <ComboBox ItemsSource="{Binding Path = OrgCollection}"
+                                      SelectedItem="{Binding Path = Org}"
+                                      DisplayMemberPath="OrganizationName"
                                       FontSize="15"
                                       Margin="3"
                                       Width="200">
 
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction  Command="{Binding SelectionChangedCommand}"/>
+                                        <i:InvokeCommandAction  Command="{Binding SelectionChangedCommand}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
 
 
                             </ComboBox>
-                            <Label Content="Contact:"
+                            <Label Content="{x:Static p:Resources.Contact}"
                                    FontSize="15"
-                                   Margin="3"/>
+                                   Margin="3" />
                             <ComboBox x:Name="cbContact"
-                                      ItemsSource="{Binding Path = ContactCollection}"    
-                                      SelectedItem="{Binding Path = Contact}"  
+                                      ItemsSource="{Binding Path = ContactCollection}"
+                                      SelectedItem="{Binding Path = Contact}"
                                       FontSize="15"
                                       Margin="3">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction  Command="{Binding Contact_SelectionChangedCommand}" 
-                                           CommandParameter="{Binding ElementName=cbContact, Path=SelectedItem}"                     />
+                                        <i:InvokeCommandAction  Command="{Binding Contact_SelectionChangedCommand}"
+                                                                CommandParameter="{Binding ElementName=cbContact, Path=SelectedItem}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ComboBox>
@@ -254,60 +267,62 @@
                         </DockPanel>
 
                         <DockPanel>
-                            <Label Content="Sum:"
+                            <Label Content="{x:Static p:Resources.Sum}"
                                    FontSize="15"
-                                   Margin="3"/>
+                                   Margin="3" />
                             <tp:DecimalUpDown Margin="3"
                                               Width="300"
                                               Value="{Binding DocSum}"
-                                              FormatString="N2"/>
+                                              FormatString="N2" />
                             <!--<TextBox Text="{Binding DocSum}"
                                      FontSize="15"
                                      Margin="3"
                                      Width="300"
                                      IsEnabled="{Binding InfoEnabled}"/>-->
-                            <Label Content="Currency:"
+                            <Label Content="{x:Static p:Resources.Currency}"
                                    FontSize="15"
-                                   Margin="3"/>
-                            <ComboBox ItemsSource="{Binding Path = CurrCollection}"    
-                                      SelectedItem="{Binding Path = Currency}"  
-                                      DisplayMemberPath = "CurrancyCode"
+                                   Margin="3" />
+                            <ComboBox ItemsSource="{Binding Path = CurrCollection}"
+                                      SelectedItem="{Binding Path = Currency}"
+                                      DisplayMemberPath="CurrancyCode"
                                       FontSize="15"
-                                      Margin="3"/>
+                                      Margin="3" />
                         </DockPanel>
-                        <Label Content="Comment:"
+                        <Label Content="{x:Static p:Resources.Comment}"
                                FontSize="15"
-                               Margin="3"/>
+                               Margin="3" />
                         <TextBox Text="{Binding DocInfoComment}"
                                  FontSize="15"
-                                 Margin="3"/>
+                                 Margin="3" />
                     </StackPanel>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3">Files</TextBlock>
+                        <TextBlock Margin="3"
+                                   Text="{x:Static p:Resources.Files}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <StackPanel Height="240" Orientation="Horizontal">
+                    <StackPanel Height="240"
+                                Orientation="Horizontal">
                         <StackPanel>
-                            <ListBox  
-                                Height="220"
-                                Width="400"
-                                BorderBrush="DarkViolet"
-                                BorderThickness="1"
-                                HorizontalContentAlignment="Stretch" 
-                                ItemsSource="{Binding DocFiles}"                   
-                                Margin="3,3,14,3"
-                                ScrollViewer.CanContentScroll="True"
-                                ScrollViewer.VerticalScrollBarVisibility="Visible"         
-                                ItemTemplate="{StaticResource FilesListItemTemplate}">
+                            <ListBox Height="220"
+                                     Width="400"
+                                     BorderBrush="DarkViolet"
+                                     BorderThickness="1"
+                                     HorizontalContentAlignment="Stretch"
+                                     ItemsSource="{Binding DocFiles}"
+                                     Margin="3,3,14,3"
+                                     ScrollViewer.CanContentScroll="True"
+                                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                     ItemTemplate="{StaticResource FilesListItemTemplate}">
 
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="ListBoxItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        <Setter Property="HorizontalContentAlignment"
+                                                Value="Stretch" />
                                     </Style>
                                 </ListBox.ItemContainerStyle>
 
@@ -316,41 +331,41 @@
                         <StackPanel Orientation="Vertical">
                             <Label Content="{Binding AddNewFileContent}"
                                    FontSize="20"
-                                   Margin="3" 
+                                   Margin="3"
                                    FontWeight="Bold"
                                    Foreground="BlueViolet"
-                                   Width="364"/>
+                                   Width="364" />
                             <DockPanel>
-                                <Label Content="File name:"
+                                <Label Content="{x:Static p:Resources.FileName}"
                                        FontSize="15"
-                                       Margin="3"/>
+                                       Margin="3" />
                                 <TextBox Text="{Binding FileName}"
                                          Margin="3"
-                                         IsReadOnly="{Binding roEditFile}"/>
+                                         IsReadOnly="{Binding roEditFile}" />
                             </DockPanel>
-                            <Label Content="File path:"
+                            <Label Content="{x:Static p:Resources.FilePath}"
                                    FontSize="15"
-                                   Margin="3"/>
+                                   Margin="3" />
                             <DockPanel>
                                 <TextBox Text="{Binding AddNewFilePath}"
                                          Width="320"
                                          Margin="3"
-                                         IsReadOnly="{Binding roEditFile}"/>
+                                         IsReadOnly="{Binding roEditFile}" />
                                 <Button Command="{Binding NewFilePathCommand}"
                                         Content="📂"
                                         Margin="3"
-                                        IsEnabled="{Binding roBtnEditFile}"/>
+                                        IsEnabled="{Binding roBtnEditFile}" />
                             </DockPanel>
                             <DockPanel>
-                                <Label Content="Comment:"
+                                <Label Content="{x:Static p:Resources.Comment}"
                                        FontSize="15"
-                                       Margin="3"/>
+                                       Margin="3" />
                                 <TextBox Text="{Binding FileComment}"
-                                         Margin="3"/>
+                                         Margin="3" />
                             </DockPanel>
                             <Button Command="{Binding AddNewFileCommand}"
                                     Content="{Binding AddFileContent}"
-                                    Margin="5"/>
+                                    Margin="5" />
                         </StackPanel>
 
                     </StackPanel>
@@ -359,67 +374,63 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3">Business process</TextBlock>
+                        <TextBlock Margin="3"
+                                   Text="{x:Static p:Resources.BusinessProcess}" />
                     </StackPanel>
                 </TabItem.Header>
                 <TabItem.Content>
 
                     <StackPanel Height="240">
-                        <Button Content="Add"
-                                Margin="5" 
-                                Command="{Binding AddNewProcessCommand}"/>
+                        <Button Content="{x:Static p:Resources.Add}"
+                                Margin="5"
+                                Command="{Binding AddNewProcessCommand}" />
                         <DataGrid x:Name="myGrd"
                                   IsSynchronizedWithCurrentItem="True"
-                                  AutoGenerateColumns="False" 
-                                  EnableRowVirtualization="True" 
-                                  ItemsSource="{Binding ProcessCollection}" 
-                                  Margin="10,0,10,10" 
+                                  AutoGenerateColumns="False"
+                                  EnableRowVirtualization="True"
+                                  ItemsSource="{Binding ProcessCollection}"
+                                  Margin="10,0,10,10"
                                   BorderBrush="BlueViolet"
                                   BorderThickness="2"
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
                                   IsReadOnly="True"
-                                  RowDetailsVisibilityMode="VisibleWhenSelected" Height="189">
+                                  RowDetailsVisibilityMode="VisibleWhenSelected"
+                                  Height="189">
                             <DataGrid.Columns>
-                                <DataGridTextColumn  
-                                             Binding="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" 
-                                             Header="Data" 
-                                             Width="100"/>
-                                <DataGridTextColumn  
-                                             Binding="{Binding StartUser, UpdateSourceTrigger=PropertyChanged}" 
-                                             Header="Owener" 
-                                             Width="100"/>
-                                <DataGridTextColumn  
-                                             Binding="{Binding Department.DepartmentName, UpdateSourceTrigger=PropertyChanged}" 
-                                             Header="Department" 
-                                             Width="100"/>
-                                <DataGridTextColumn  
-                                             Binding="{Binding TaskUser, UpdateSourceTrigger=PropertyChanged}" 
-                                             Header="Respons.person" 
-                                             Width="100"/>
-                                <DataGridTextColumn  
-                                             Binding="{Binding State.DocStateName, UpdateSourceTrigger=PropertyChanged}" 
-                                             Header="State" 
-                                             Width="100"/>
-                                <DataGridTextColumn  
-                                             Binding="{Binding StateDate, UpdateSourceTrigger=PropertyChanged}" 
-                                             Header="State date" 
-                                             Width="100"/>
-                                <DataGridTextColumn  
-                                             Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" 
-                                             Header="Comment" 
-                                             Width="100"/>
+                                <DataGridTextColumn Binding="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"
+                                                    Header="Data"
+                                                    Width="100" />
+                                <DataGridTextColumn Binding="{Binding StartUser, UpdateSourceTrigger=PropertyChanged}"
+                                                    Header="Owener"
+                                                    Width="100" />
+                                <DataGridTextColumn Binding="{Binding Department.DepartmentName, UpdateSourceTrigger=PropertyChanged}"
+                                                    Header="Department"
+                                                    Width="100" />
+                                <DataGridTextColumn Binding="{Binding TaskUser, UpdateSourceTrigger=PropertyChanged}"
+                                                    Header="Respons.person"
+                                                    Width="100" />
+                                <DataGridTextColumn Binding="{Binding State.DocStateName, UpdateSourceTrigger=PropertyChanged}"
+                                                    Header="State"
+                                                    Width="100" />
+                                <DataGridTextColumn Binding="{Binding StateDate, UpdateSourceTrigger=PropertyChanged}"
+                                                    Header="State date"
+                                                    Width="100" />
+                                <DataGridTextColumn Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+                                                    Header="Comment"
+                                                    Width="100" />
                             </DataGrid.Columns>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDoubleClick">
-                                    <cmd:EventToCommand Command="{Binding DoubleClickCommand}"  
-                                CommandParameter="{Binding ElementName=myGrd, Path=SelectedItem}" />
+                                    <cmd:EventToCommand Command="{Binding DoubleClickCommand}"
+                                                        CommandParameter="{Binding ElementName=myGrd, Path=SelectedItem}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
 
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type ScrollBar}">
-                                    <Setter Property="BorderBrush" Value="DarkViolet" />
+                                    <Setter Property="BorderBrush"
+                                            Value="DarkViolet" />
                                 </Style>
                             </DataGrid.Resources>
 
@@ -429,13 +440,14 @@
             </TabItem>
         </TabControl>
 
-        <DockPanel Grid.Row="10" VerticalAlignment="Top">
-            <Label Content="Comment:"
-               FontSize="15"
-               Margin="3"/>
+        <DockPanel Grid.Row="10"
+                   VerticalAlignment="Top">
+            <Label Content="{x:Static p:Resources.Comment}"
+                   FontSize="15"
+                   Margin="3" />
             <TextBox Text="{Binding DocComment}"
                      FontSize="15"
-                     Margin="3"/>
+                     Margin="3" />
         </DockPanel>
     </Grid>
 </UserControl>

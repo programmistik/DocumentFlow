@@ -117,17 +117,71 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Acronym" xml:space="preserve">
+    <value>Acronym</value>
+  </data>
+  <data name="ActualByDate" xml:space="preserve">
+    <value>Actual by date</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Add new</value>
+  </data>
+  <data name="AddNewContact" xml:space="preserve">
+    <value>Add new contact</value>
+  </data>
+  <data name="AddNewDocument" xml:space="preserve">
+    <value>Add new document</value>
+  </data>
   <data name="AddNewEvent" xml:space="preserve">
     <value>Add New Event</value>
+  </data>
+  <data name="AddNewOrganization" xml:space="preserve">
+    <value>Add new organization</value>
+  </data>
+  <data name="AddNewUser" xml:space="preserve">
+    <value>Add New User</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Banana" xml:space="preserve">
+    <value>Banana</value>
+  </data>
+  <data name="Basil" xml:space="preserve">
+    <value>Basil</value>
+  </data>
+  <data name="Blueberry" xml:space="preserve">
+    <value>Blueberry</value>
+  </data>
+  <data name="BusinessProcess" xml:space="preserve">
+    <value>Business process</value>
   </data>
   <data name="Calendar" xml:space="preserve">
     <value>Calendar</value>
   </data>
+  <data name="CanAddEditContacts" xml:space="preserve">
+    <value>Can add/edit contacts</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="ChangeMyPass" xml:space="preserve">
+    <value>Change my password</value>
+  </data>
   <data name="ChangePicture" xml:space="preserve">
     <value>Change Picture</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
   </data>
   <data name="CoEmail" xml:space="preserve">
     <value>Co-Email</value>
@@ -135,62 +189,329 @@
   <data name="ColorScheme" xml:space="preserve">
     <value>Choose Color Scheme</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Company:</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Company name</value>
+  </data>
+  <data name="Compose" xml:space="preserve">
+    <value>Compose</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="Constants" xml:space="preserve">
+    <value>Constants</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="ContactInfoType" xml:space="preserve">
+    <value>Contact info type</value>
+  </data>
   <data name="Contacts" xml:space="preserve">
     <value>Contacts</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="CreatedBy" xml:space="preserve">
+    <value>Created by</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="CurrencyName" xml:space="preserve">
+    <value>Currency Name</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="DepartmentName" xml:space="preserve">
+    <value>Department name</value>
+  </data>
+  <data name="DocInfoDate" xml:space="preserve">
+    <value>DocInfoDate</value>
   </data>
   <data name="Documents" xml:space="preserve">
     <value>Documents</value>
   </data>
+  <data name="DocumentsStoragePath" xml:space="preserve">
+    <value>Documents storage path</value>
+  </data>
+  <data name="DocumentStates" xml:space="preserve">
+    <value>Document States</value>
+  </data>
+  <data name="DocumentStatesName" xml:space="preserve">
+    <value>Document State name</value>
+  </data>
+  <data name="DocumentStatus" xml:space="preserve">
+    <value>Document status</value>
+  </data>
+  <data name="DocumentType" xml:space="preserve">
+    <value>Document type</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Edition" xml:space="preserve">
+    <value>Edition</value>
+  </data>
+  <data name="Editor" xml:space="preserve">
+    <value>Editor</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>E-Mail</value>
+  </data>
+  <data name="EnterDescription" xml:space="preserve">
+    <value>Enter the description</value>
+  </data>
+  <data name="EnterLocation" xml:space="preserve">
+    <value>Enter Location</value>
+  </data>
+  <data name="EnterNameOfFile" xml:space="preserve">
+    <value>Enter Name of File</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="ExitAndDoNotSend" xml:space="preserve">
+    <value>Exit and do not send</value>
   </data>
   <data name="File" xml:space="preserve">
     <value>File</value>
   </data>
+  <data name="FileName" xml:space="preserve">
+    <value>File name</value>
+  </data>
+  <data name="FilePath" xml:space="preserve">
+    <value>File path</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="FilesStoragePath" xml:space="preserve">
+    <value>Files (images, avatars and ets.) storage path</value>
+  </data>
+  <data name="Flamingo" xml:space="preserve">
+    <value>Flamingo</value>
+  </data>
   <data name="ForgetPassword" xml:space="preserve">
     <value>Forget password?</value>
+  </data>
+  <data name="Frequency" xml:space="preserve">
+    <value>Frequency (DAILY or WEEKLY)</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="GoogleAccount" xml:space="preserve">
+    <value>Google account:</value>
+  </data>
+  <data name="Grape" xml:space="preserve">
+    <value>Grape</value>
+  </data>
+  <data name="Graphite" xml:space="preserve">
+    <value>Graphite</value>
+  </data>
+  <data name="Guests" xml:space="preserve">
+    <value>Guests</value>
+  </data>
+  <data name="HistoryOfChanges" xml:space="preserve">
+    <value>History of changes</value>
+  </data>
+  <data name="InfoTypes" xml:space="preserve">
+    <value>InfoTypes</value>
+  </data>
+  <data name="Interval" xml:space="preserve">
+    <value>Interval (integer starting from 1)</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Is Active</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Choose Language</value>
   </data>
+  <data name="Lavender" xml:space="preserve">
+    <value>Lavender</value>
+  </data>
   <data name="LogIn" xml:space="preserve">
     <value>Log in</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Log off</value>
   </data>
   <data name="Mail" xml:space="preserve">
     <value>Mail</value>
   </data>
+  <data name="Main" xml:space="preserve">
+    <value>Main</value>
+  </data>
   <data name="Mobile" xml:space="preserve">
     <value>Mobile Phone</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="New" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\New.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
   <data name="News" xml:space="preserve">
     <value>News</value>
+  </data>
+  <data name="NormativeInfo" xml:space="preserve">
+    <value>Normative information</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="OpenCalendar" xml:space="preserve">
     <value>Open Calendar</value>
   </data>
+  <data name="Organization" xml:space="preserve">
+    <value>Organization</value>
+  </data>
+  <data name="OrUploadFromFile" xml:space="preserve">
+    <value>or upload from file</value>
+  </data>
   <data name="Password" xml:space="preserve">
-    <value>Password:</value>
+    <value>Password</value>
+  </data>
+  <data name="Peacock" xml:space="preserve">
+    <value>Peacock</value>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>
   </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="PositionName" xml:space="preserve">
+    <value>Position name</value>
+  </data>
+  <data name="Positions" xml:space="preserve">
+    <value>Positions</value>
+  </data>
+  <data name="PostEditor" xml:space="preserve">
+    <value>Post Editor</value>
+  </data>
   <data name="ReceiveMail" xml:space="preserve">
     <value>Receive Mail</value>
+  </data>
+  <data name="Sage" xml:space="preserve">
+    <value>Sage</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Saturday</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="SaveCreatePost" xml:space="preserve">
+    <value>Save changes / Create new post</value>
+  </data>
   <data name="Schedule" xml:space="preserve">
     <value>Schedule</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Selection</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Send Message</value>
+  </data>
+  <data name="ShortInfoAboutDocument" xml:space="preserve">
+    <value>Short info about document</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="ShowActiveUsers" xml:space="preserve">
+    <value>Show only active users</value>
+  </data>
+  <data name="ShowActualNews" xml:space="preserve">
+    <value>Show actual news only</value>
+  </data>
+  <data name="SnapImage" xml:space="preserve">
+    <value>Snap image</value>
+  </data>
+  <data name="Soon" xml:space="preserve">
+    <value>Will be added soon...</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="SubHeadOfDepartment" xml:space="preserve">
+    <value>(Sub) Head of department</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="Tangerine" xml:space="preserve">
+    <value>Tangerine</value>
   </data>
   <data name="Tasks" xml:space="preserve">
     <value>Tasks</value>
   </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="TimeInMinutes" xml:space="preserve">
+    <value>Time in minutes</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Tomato" xml:space="preserve">
+    <value>Tomato</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
   <data name="UserName" xml:space="preserve">
-    <value>User name:</value>
+    <value>User name</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Wednesday</value>
   </data>
 </root>

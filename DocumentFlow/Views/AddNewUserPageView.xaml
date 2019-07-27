@@ -1,13 +1,16 @@
 ﻿<UserControl x:Class="DocumentFlow.Views.AddNewUserPageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:b="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
              xmlns:local="clr-namespace:DocumentFlow.Views"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              x:Name="This"
-             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
+             d:DesignHeight="750"
+             d:DesignWidth="1300"
+             Background="White">
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
             <b:InvokeCommandAction Command="{Binding LoadedCommand}" />
@@ -15,90 +18,101 @@
     </b:Interaction.Triggers>
     
     <DockPanel VerticalAlignment="Stretch">
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-            <CheckBox Content="Is active"
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top">
+            <CheckBox Content="{x:Static p:Resources.IsActive}"
                       Margin="2"
-                  IsChecked="{Binding IsActive}"/>
-            <CheckBox Content="(Sub) Head of department"
+                      IsChecked="{Binding IsActive}" />
+            <CheckBox Content="{x:Static p:Resources.SubHeadOfDepartment}"
                       Margin="2"
-                  IsChecked="{Binding HeadOfDep}"/>
-            <CheckBox Content="Can add/edit contacts"
+                      IsChecked="{Binding HeadOfDep}" />
+            <CheckBox Content="{x:Static p:Resources.CanAddEditContacts}"
                       Margin="2"
-                  IsChecked="{Binding CanEditContacts}"/>
-
+                      IsChecked="{Binding CanEditContacts}" />
         </StackPanel>
-    <Label DockPanel.Dock="Top" Content="Google account:" />
-        <TextBox Text="{Binding GoogleAccount}"  DockPanel.Dock="Top"
+        <Label DockPanel.Dock="Top"
+               Content="{x:Static p:Resources.GoogleAccount}" />
+        <TextBox Text="{Binding GoogleAccount}"
+                 DockPanel.Dock="Top"
                  IsReadOnly="{Binding GAccountIsReadOnly}">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="LostFocus">
-                    <b:InvokeCommandAction  Command="{Binding LostFocusCommand_GoogleAccount}" CommandParameter="{Binding ElementName=This}"/>
+                    <b:InvokeCommandAction  Command="{Binding LostFocusCommand_GoogleAccount}"
+                                            CommandParameter="{Binding ElementName=This}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </TextBox>
 
-        <Label DockPanel.Dock="Top" Content="Password:" />
-        <PasswordBox Name="pBox" DockPanel.Dock="Top">
+        <Label DockPanel.Dock="Top"
+               Content="{x:Static p:Resources.Password}" />
+        <PasswordBox Name="pBox"
+                     DockPanel.Dock="Top">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="LostFocus">
-                    <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}" CommandParameter="{Binding ElementName=This}"/>
+                    <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}"
+                                            CommandParameter="{Binding ElementName=This}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </PasswordBox>
 
-        <Label Content="Confirm password:" DockPanel.Dock="Top" />
-        <PasswordBox Name="pBox2" DockPanel.Dock="Top">
+        <Label Content="{x:Static p:Resources.ConfirmPassword}"
+               DockPanel.Dock="Top" />
+        <PasswordBox Name="pBox2"
+                     DockPanel.Dock="Top">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="LostFocus">
-                    <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}" CommandParameter="{Binding ElementName=This}"/>
+                    <b:InvokeCommandAction  Command="{Binding LostFocusCommand_pBox}"
+                                            CommandParameter="{Binding ElementName=This}" />
                 </b:EventTrigger>
             </b:Interaction.Triggers>
         </PasswordBox>
-        
-        <Label x:Name="PassCheckError"                       
-                       FontSize="20"                       
-                       Foreground="Red"
+
+        <Label x:Name="PassCheckError"
+               FontSize="20"
+               Foreground="Red"
                DockPanel.Dock="Top"
-                       Content="{Binding PassCheckError}"/>
+               Content="{Binding PassCheckError}" />
 
-        <Label Content="Name:" DockPanel.Dock="Top" />
-        <TextBox Text="{Binding Name}" DockPanel.Dock="Top"/>
-        <Label Content="Surname:" DockPanel.Dock="Top" />
-        <TextBox Text="{Binding Surname}" DockPanel.Dock="Top"/>
-
+        <Label Content="{x:Static p:Resources.Name}"
+               DockPanel.Dock="Top" />
+        <TextBox Text="{Binding Name}"
+                 DockPanel.Dock="Top" />
+        <Label Content="{x:Static p:Resources.Surname}"
+               DockPanel.Dock="Top" />
+        <TextBox Text="{Binding Surname}"
+                 DockPanel.Dock="Top" />
+        
         <StackPanel DockPanel.Dock="Top">
-            <Label Content="Company:" />
-            <ComboBox 
-                  ItemsSource="{Binding Path = CompanyCollection}"    
-                  SelectedItem="{Binding Path = Company}"  
-                  DisplayMemberPath = "CompanyName"/>
+            <Label Content="{x:Static p:Resources.Company}" />
+            <ComboBox ItemsSource="{Binding Path = CompanyCollection}"
+                      SelectedItem="{Binding Path = Company}"
+                      DisplayMemberPath="CompanyName" />
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Top">
-            <Label Content="Department:" />
-            <ComboBox 
-                  ItemsSource="{Binding Path = DepartmentCollection}"    
-                  SelectedItem="{Binding Path = Department}"  
-                  DisplayMemberPath = "DepartmentName"/>
+            <Label Content="{x:Static p:Resources.Department}" />
+            <ComboBox ItemsSource="{Binding Path = DepartmentCollection}"
+                      SelectedItem="{Binding Path = Department}"
+                      DisplayMemberPath="DepartmentName" />
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Top">
-            <Label Content="Position:" />
-            <ComboBox 
-                  ItemsSource="{Binding Path = PositionCollection}"    
-                  SelectedItem="{Binding Path = Position}"  
-                  DisplayMemberPath = "PositionName"/>
+            <Label Content="{x:Static p:Resources.Position}" />
+            <ComboBox ItemsSource="{Binding Path = PositionCollection}"
+                      SelectedItem="{Binding Path = Position}"
+                      DisplayMemberPath="PositionName" />
         </StackPanel>
 
-        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-            <Button Content="{Binding ButtonOkContent}" 
+        <StackPanel DockPanel.Dock="Bottom"
+                    VerticalAlignment="Bottom">
+            <Button Content="{Binding ButtonOkContent}"
                     Margin="10"
                     Command="{Binding CreateNewUserCommand}"
-                    CommandParameter="{Binding ElementName=This}"/>
-            <Button Content="Back"
+                    CommandParameter="{Binding ElementName=This}" />
+            <Button Content="{x:Static p:Resources.Back}"
                     Margin="10"
-                    Command="{Binding GoBackCommand}"/>
+                    Command="{Binding GoBackCommand}" />
         </StackPanel>
-        
+
     </DockPanel>
 </UserControl>

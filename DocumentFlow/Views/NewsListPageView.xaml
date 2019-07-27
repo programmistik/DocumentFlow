@@ -1,23 +1,25 @@
 ﻿<UserControl x:Class="DocumentFlow.Views.NewsListPageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             mc:Ignorable="d" 
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
+             mc:Ignorable="d"
              x:Name="This"
-            d:DesignHeight="750" d:DesignWidth="1300" Background="White">
+             d:DesignHeight="750"
+             d:DesignWidth="1300"
+             Background="White">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
-    <UserControl.Resources>           
-            
-        
+
+    <UserControl.Resources>
+
         <DataTemplate x:Key="UserListItemTemplate">
             <DockPanel>
 
@@ -28,63 +30,63 @@
                         <ColumnDefinition Width="0.2*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+                    <StackPanel Grid.Column="0"
+                                HorizontalAlignment="Stretch">
 
                         <Label FontWeight="Bold"
                                Content="{Binding PostHeader}" />
-                        <Label 
-                               Content="{Binding PostEndDate}" />
+                        <Label Content="{Binding PostEndDate}" />
                     </StackPanel>
 
-
-                    <Button  Grid.Column="1" 
-                            Margin="1"
-                            Command="{Binding DataContext.EditNewsCommand, ElementName=This}"
-                            CommandParameter="{Binding}">
-                        ✏Edit
-                    </Button>
-
-
+                    <Button  Grid.Column="1"
+                             Margin="1"
+                             Command="{Binding DataContext.EditNewsCommand, ElementName=This}"
+                             CommandParameter="{Binding}"
+                             Content="{x:Static p:Resources.Edit}"/>
+                   
                 </Grid>
 
             </DockPanel>
         </DataTemplate>
     </UserControl.Resources>
-    
+
     <DockPanel>
-        <DockPanel DockPanel.Dock="Top" LastChildFill="False">
-            <Button Content="Add new"
-                    
-                Margin="5"                 
-                Command="{Binding AddNewsCommand}" />
-            
-            <CheckBox IsChecked="{Binding ShowActualOnly}" 
+        <DockPanel DockPanel.Dock="Top"
+                   LastChildFill="False">
+            <Button Content="{x:Static p:Resources.AddNew}"
+                    Margin="5"
+                    Command="{Binding AddNewsCommand}" />
+
+            <CheckBox IsChecked="{Binding ShowActualOnly}"
                       Command="{Binding ShowActualOnlyCommand}"
                       Foreground="DarkViolet"
                       FontWeight="Bold"
                       FontSize="15"
-                      Content="Show actual news only" />
-            
-            
-            <Button Content="Back"      
+                      Content="{x:Static p:Resources.ShowActualNews}" />
+
+
+            <Button Content="{x:Static p:Resources.Back}"
                     DockPanel.Dock="Right"
-                Margin="440,5,5,5"
+                    Margin="440,5,5,5"
                     Background="DarkRed"
-                    Command="{Binding BackCommand}"/>
-            
+                    Command="{Binding BackCommand}" />
+
         </DockPanel>
-        <ListBox HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
+        <ListBox HorizontalContentAlignment="Stretch"
+                 VerticalAlignment="Stretch"
                  Margin="3"
                  BorderThickness="2"
                  BorderBrush="DarkViolet"
-                 ItemsSource="{Binding NewsList}" 
+                 ItemsSource="{Binding NewsList}"
                  ScrollViewer.CanContentScroll="True"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible"       
-                 ItemTemplate="{StaticResource UserListItemTemplate}" Height="700">
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 ItemTemplate="{StaticResource UserListItemTemplate}"
+                 Height="700">
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch" />
                 </Style>
             </ListBox.ItemContainerStyle>
 

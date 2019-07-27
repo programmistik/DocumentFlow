@@ -1,20 +1,22 @@
 ﻿<UserControl x:Class="DocumentFlow.Views.SchedulePageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
-             mc:Ignorable="d" 
-            d:DesignHeight="750" d:DesignWidth="1300" Background="White">
+             mc:Ignorable="d"
+             d:DesignHeight="750"
+             d:DesignWidth="1300"
+             Background="White">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
+
     <UserControl.Resources>
         <DataTemplate x:Key="ListBoxEventItemTemplate">
             <StackPanel>
@@ -23,17 +25,20 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+                    <StackPanel Grid.Column="0"
+                                HorizontalAlignment="Stretch">
                         <Label FontWeight="Bold"
-                               Content="{Binding Summary}"  Height="31"/>
+                               Content="{Binding Summary}"
+                               Height="31" />
                         <Label FontWeight="Bold"
-                               Content="{Binding Path=Start.DateTime.TimeOfDay}"  Height="31"></Label>
+                               Content="{Binding Path=Start.DateTime.TimeOfDay}"
+                               Height="31"></Label>
                     </StackPanel>
                 </Grid>
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    
+
     <Grid Background="#FFE1E1E1">
         <Grid.RowDefinitions>
             <RowDefinition Height="64"></RowDefinition>
@@ -56,102 +61,140 @@
         </Grid.ColumnDefinitions>
 
         <!--#region TopMenu-->
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Orientation="Horizontal" Background="#FF353436">
-            <Button
-                Command="{Binding GMain}" 
-                Background="Transparent" BorderThickness="0" Height="64" Width="64" Padding="0">
-                <Image Margin="0" Source="{Binding Avatara}" />
+        <StackPanel Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="6"
+                    Orientation="Horizontal"
+                    Background="#FF353436">
+            <Button Command="{Binding GMain}"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Height="64"
+                    Width="64"
+                    Padding="0">
+                <Image Margin="0"
+                       Source="{Binding Avatara}" />
             </Button>
-            <Label FontSize="20" Content="{Binding Fio}" Foreground="White" VerticalContentAlignment="Center"></Label>
+            <Label FontSize="20"
+                   Content="{Binding Fio}"
+                   Foreground="White"
+                   VerticalContentAlignment="Center"></Label>
         </StackPanel>
 
-        <Grid Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="0" Background="#FF353436">
+        <Grid Grid.Column="6"
+              Grid.ColumnSpan="2"
+              Grid.Row="0"
+              Background="#FF353436">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button
-                Command="{Binding GSettings}"
-                Grid.Column="0" Background="Transparent" Height="Auto" BorderThickness="0">
-                <Image Source="/DocumentFlow;component/Resources/Images/Settings.png"/>
+            <Button Command="{Binding GSettings}"
+                    Grid.Column="0"
+                    Background="Transparent"
+                    Height="Auto"
+                    BorderThickness="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Settings.png" />
             </Button>
-            <Button
-                Command="{Binding GExit}"
-                Grid.Column="1" Background="Transparent" Height="Auto" BorderThickness="0">
-                <Image Source="/DocumentFlow;component/Resources/Images/Exit.png"/>
+            <Button Command="{Binding GExit}"
+                    Grid.Column="1"
+                    Background="Transparent"
+                    Height="Auto"
+                    BorderThickness="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Exit.png" />
             </Button>
         </Grid>
         <!--#endregion-->
 
         <!--#region Aside Panel-->
         <StackPanel Grid.Column="0"
-                    Grid.Row="1" Grid.RowSpan="6"
+                    Grid.Row="1"
+                    Grid.RowSpan="6"
                     Background="White">
-            <Button
-                Command="{Binding GMail}"
-                Height="50" Background="White" BorderBrush="Black" Padding="0">
+            <Button Command="{Binding GMail}"
+                    Height="50"
+                    Background="White"
+                    BorderBrush="Black"
+                    Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Mail.png"></Image>
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
             </Button>
-            <Button 
-                Command="{Binding GCalendar}"
-                Height="50" Background="White" BorderBrush="Black" Padding="0">
+            <Button Command="{Binding GCalendar}"
+                    Height="50"
+                    Background="White"
+                    BorderBrush="Black"
+                    Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/Calendar.png"></Image>
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
             </Button>
-            <Button 
-                Command="{Binding GSchedule}"
-                Height="50" Background="White" BorderBrush="Black" Padding="5">
+            <Button Command="{Binding GSchedule}"
+                    Height="50"
+                    Background="White"
+                    BorderBrush="Black"
+                    Padding="5">
                 <Image Source="/DocumentFlow;component/Resources/Images/Tasks.png"></Image>
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
             </Button>
-            <Button 
-                Command="{Binding GNews}"
-                Height="50" Background="White" BorderBrush="Black" Padding="0">
+            <Button Command="{Binding GNews}"
+                    Height="50"
+                    Background="White"
+                    BorderBrush="Black"
+                    Padding="0">
                 <Image Source="/DocumentFlow;component/Resources/Images/News.png"></Image>
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
             </Button>
-            <Button
-                Command="{Binding GContacts}"
-                Height="50" Background="White" BorderBrush="Black" Padding="0">
-                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png" Height="40" Width="45"></Image>
+            <Button Command="{Binding GContacts}"
+                    Height="50"
+                    Background="White"
+                    BorderBrush="Black"
+                    Padding="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Contacts.png"
+                       Height="40"
+                       Width="45"></Image>
             </Button>
-            <Button 
-                Command="{Binding GDocuments}"
-                Height="50" Background="White" BorderBrush="Black" Padding="5">
+            <Button Command="{Binding GDocuments}"
+                    Height="50"
+                    Background="White"
+                    BorderBrush="Black"
+                    Padding="5">
                 <Image Source="/DocumentFlow;component/Resources/Images/Documents.png"></Image>
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -162,22 +205,29 @@
         <!--#endregion-->
 
         <!--#region Content-->
-        <Grid
-            Margin="15"
-            Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="7" Grid.RowSpan="6">
+        <Grid Margin="15"
+              Grid.Row="1"
+              Grid.Column="1"
+              Grid.ColumnSpan="7"
+              Grid.RowSpan="6">
             <Grid.Resources>
                 <Style TargetType="{x:Type ListBoxItem}">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch" />
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
                                 <StackPanel>
-                                    <Separator Background="BlueViolet" x:Name="Separator"/>
-                                    <ContentPresenter/>
+                                    <Separator Background="BlueViolet"
+                                               x:Name="Separator" />
+                                    <ContentPresenter />
                                 </StackPanel>
                                 <ControlTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-                                        <Setter Property="Visibility" TargetName="Separator" Value="Collapsed"/>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}"
+                                                 Value="{x:Null}">
+                                        <Setter Property="Visibility"
+                                                TargetName="Separator"
+                                                Value="Collapsed" />
                                     </DataTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -186,7 +236,7 @@
                 </Style>
 
             </Grid.Resources>
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -209,32 +259,46 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
-            
+
+
             <Border Background="#FF9400D3">
-                <Label Grid.Row="0" Grid.Column="0"
-                       Content="Monday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Content="{x:Static p:Resources.Monday}"
+                       FontSize="18"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"></Label>
             </Border>
-            <Border Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="10" BorderThickness="1" BorderBrush="#FF9400D3">
-                <ListBox HorizontalContentAlignment="Stretch" 
-                     ItemsSource="{Binding EventListMonday}"                   
-                     Margin="3"
-                     ScrollViewer.CanContentScroll="True"
-                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+            <Border Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="1"
+                    Grid.RowSpan="10"
+                    BorderThickness="1"
+                    BorderBrush="#FF9400D3">
+                <ListBox HorizontalContentAlignment="Stretch"
+                         ItemsSource="{Binding EventListMonday}"
+                         Margin="3"
+                         ScrollViewer.CanContentScroll="True"
+                         ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
 
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Stretch" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListBoxItem">
                                         <StackPanel>
-                                            <Separator Background="BlueViolet" x:Name="Separator"/>
-                                            <ContentPresenter/>
+                                            <Separator Background="BlueViolet"
+                                                       x:Name="Separator" />
+                                            <ContentPresenter />
                                         </StackPanel>
                                         <ControlTemplate.Triggers>
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-                                                <Setter Property="Visibility" TargetName="Separator" Value="Collapsed"/>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}"
+                                                         Value="{x:Null}">
+                                                <Setter Property="Visibility"
+                                                        TargetName="Separator"
+                                                        Value="Collapsed" />
                                             </DataTrigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
@@ -244,92 +308,147 @@
                     </ListBox.ItemContainerStyle>
                 </ListBox>
             </Border>
-            
-            
-            <Border Background="#FF9400D3" Grid.Row="0" Grid.Column="1">
-                <Label Content="Tuesday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-            </Border>
-            <Border Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="10" BorderThickness="1" BorderBrush="#FF9400D3">
-                <ListBox HorizontalContentAlignment="Stretch" 
-                     ItemsSource="{Binding EventListTuesday}"                   
-                     Margin="3"
-                     ScrollViewer.CanContentScroll="True"
-                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
-                </ListBox>
-            </Border>
-            
-            
-            <Border Background="#FF9400D3" Grid.Row="0" Grid.Column="2">
-                <Label Content="Wednesday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-            </Border>
-            <Border Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="10" BorderThickness="1" BorderBrush="#FF9400D3">
-                <ListBox 
-                     HorizontalContentAlignment="Stretch" 
-                     ItemsSource="{Binding EventListWednesday}"                   
-                     Margin="3"
-                     ScrollViewer.CanContentScroll="True"
-                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
-                </ListBox>
-            </Border>
-            
-            
-            <Border Background="#FF9400D3" Grid.Row="0" Grid.Column="3">
-                <Label Content="Thursday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-            </Border>
-            <Border Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="10" BorderThickness="1" BorderBrush="#FF9400D3">
-                <ListBox
-                     HorizontalContentAlignment="Stretch" 
-                     ItemsSource="{Binding EventListThursday}"                   
-                     Margin="3"
-                     ScrollViewer.CanContentScroll="True"
-                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
-                </ListBox>
-            </Border>
-            
-            
-            <Border Background="#FF9400D3" Grid.Row="0" Grid.Column="4">
-                <Label Content="Friday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-            </Border>
-            <Border Grid.Column="4" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="10" BorderThickness="1" BorderBrush="#FF9400D3">
 
-                <ListBox 
-                     HorizontalContentAlignment="Stretch" 
-                     ItemsSource="{Binding EventListFriday}"                   
-                     Margin="3"
-                     ScrollViewer.CanContentScroll="True"
-                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+
+            <Border Background="#FF9400D3"
+                    Grid.Row="0"
+                    Grid.Column="1">
+                <Label Content="{x:Static p:Resources.Tuesday}"
+                       FontSize="18"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"></Label>
+            </Border>
+            <Border Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="1"
+                    Grid.RowSpan="10"
+                    BorderThickness="1"
+                    BorderBrush="#FF9400D3">
+                <ListBox HorizontalContentAlignment="Stretch"
+                         ItemsSource="{Binding EventListTuesday}"
+                         Margin="3"
+                         ScrollViewer.CanContentScroll="True"
+                         ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
                 </ListBox>
             </Border>
-            
-            
-            <Border Background="#FF9400D3" Grid.Row="0" Grid.Column="5">
-                <Label Content="Saturday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+
+
+            <Border Background="#FF9400D3"
+                    Grid.Row="0"
+                    Grid.Column="2">
+                <Label Content="{x:Static p:Resources.Wednesday}"
+                       FontSize="18"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"></Label>
             </Border>
-            <Border  Grid.Column="5" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="10" BorderThickness="1" BorderBrush="#FF9400D3">
-                <ListBox
-                     HorizontalContentAlignment="Stretch" 
-                     ItemsSource="{Binding EventListSaturday}"                   
-                     Margin="3"
-                     ScrollViewer.CanContentScroll="True"
-                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+            <Border Grid.Column="2"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="1"
+                    Grid.RowSpan="10"
+                    BorderThickness="1"
+                    BorderBrush="#FF9400D3">
+                <ListBox HorizontalContentAlignment="Stretch"
+                         ItemsSource="{Binding EventListWednesday}"
+                         Margin="3"
+                         ScrollViewer.CanContentScroll="True"
+                         ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
                 </ListBox>
             </Border>
-            
-            
-            <Border Background="#FF9400D3" Grid.Row="0" Grid.Column="6">
-                <Label Content="Sunday" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+
+
+            <Border Background="#FF9400D3"
+                    Grid.Row="0"
+                    Grid.Column="3">
+                <Label Content="{x:Static p:Resources.Thursday}"
+                       FontSize="18"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"></Label>
             </Border>
-            <Border Grid.Column="6" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="10" BorderThickness="1" BorderBrush="#FF9400D3">
-                <ListBox 
-                     HorizontalContentAlignment="Stretch" 
-                     ItemsSource="{Binding EventListSunday}"                   
-                     Margin="3"
-                     ScrollViewer.CanContentScroll="True"
-                     ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+            <Border Grid.Column="3"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="1"
+                    Grid.RowSpan="10"
+                    BorderThickness="1"
+                    BorderBrush="#FF9400D3">
+                <ListBox HorizontalContentAlignment="Stretch"
+                         ItemsSource="{Binding EventListThursday}"
+                         Margin="3"
+                         ScrollViewer.CanContentScroll="True"
+                         ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+                </ListBox>
+            </Border>
+
+
+            <Border Background="#FF9400D3"
+                    Grid.Row="0"
+                    Grid.Column="4">
+                <Label Content="{x:Static p:Resources.Friday}"
+                       FontSize="18"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"></Label>
+            </Border>
+            <Border Grid.Column="4"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="1"
+                    Grid.RowSpan="10"
+                    BorderThickness="1"
+                    BorderBrush="#FF9400D3">
+
+                <ListBox HorizontalContentAlignment="Stretch"
+                         ItemsSource="{Binding EventListFriday}"
+                         Margin="3"
+                         ScrollViewer.CanContentScroll="True"
+                         ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+                </ListBox>
+            </Border>
+
+
+            <Border Background="#FF9400D3"
+                    Grid.Row="0"
+                    Grid.Column="5">
+                <Label Content="{x:Static p:Resources.Saturday}"
+                       FontSize="18"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"></Label>
+            </Border>
+            <Border  Grid.Column="5"
+                     Grid.ColumnSpan="1"
+                     Grid.Row="1"
+                     Grid.RowSpan="10"
+                     BorderThickness="1"
+                     BorderBrush="#FF9400D3">
+                <ListBox HorizontalContentAlignment="Stretch"
+                         ItemsSource="{Binding EventListSaturday}"
+                         Margin="3"
+                         ScrollViewer.CanContentScroll="True"
+                         ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
+                </ListBox>
+            </Border>
+
+
+            <Border Background="#FF9400D3"
+                    Grid.Row="0"
+                    Grid.Column="6">
+                <Label Content="{x:Static p:Resources.Sunday}"
+                       FontSize="18"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"></Label>
+            </Border>
+            <Border Grid.Column="6"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="1"
+                    Grid.RowSpan="10"
+                    BorderThickness="1"
+                    BorderBrush="#FF9400D3">
+                <ListBox HorizontalContentAlignment="Stretch"
+                         ItemsSource="{Binding EventListSunday}"
+                         Margin="3"
+                         ScrollViewer.CanContentScroll="True"
+                         ItemTemplate="{StaticResource ListBoxEventItemTemplate}">
                 </ListBox>
             </Border>
         </Grid>
-        
+
         <!--#endregion-->
     </Grid>
 </UserControl>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentFlow.Views"
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1300" Background="White">
@@ -15,7 +16,7 @@
     </i:Interaction.Triggers>
     
     <DockPanel>
-        <Label Content="Documents storage path:"
+        <Label Content="{x:Static p:Resources.DocumentsStoragePath}"
                DockPanel.Dock="Top"
                Margin="5"
                FontSize="20"/>
@@ -33,7 +34,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding DocPathCommand}"/>
         </DockPanel>
-        <Label Content="Files (images, avatars and ets.) storage path:"
+        <Label Content="{x:Static p:Resources.FilesStoragePath}"
                DockPanel.Dock="Top"
                Margin="5"
                FontSize="20"/>
@@ -51,7 +52,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding FilePathCommand}"/>
         </DockPanel>
-        <Button Content="OK"
+        <Button Content="{x:Static p:Resources.Ok}"
                 VerticalAlignment="Bottom"
                 DockPanel.Dock="Bottom"
                     Margin="5"         

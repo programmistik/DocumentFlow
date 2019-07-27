@@ -1,14 +1,17 @@
 ﻿<UserControl x:Class="DocumentFlow.Views.AdminPanelPageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:DocumentFlow.Views"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              x:Name="This"
+             xmlns:p="clr-namespace:DocumentFlow.Properties"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
-    
+             d:DesignHeight="750"
+             d:DesignWidth="1300"
+             Background="White">
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
@@ -18,28 +21,25 @@
         <local:IsActiveToColorConverter x:Key="IsActiveToColorConverter" />
         <DataTemplate x:Key="UserListItemTemplate">
             <StackPanel>
-                
-                    
-                    <Grid  HorizontalAlignment="Stretch">
-
+                <Grid  HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="0.2*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
-
+                    <StackPanel Grid.Column="0"
+                                HorizontalAlignment="Stretch">
                         <Label FontWeight="Bold"
                                Content="{Binding}"
-                               Foreground="{Binding IsActive, Converter={StaticResource IsActiveToColorConverter}}"/>
+                               Foreground="{Binding IsActive, Converter={StaticResource IsActiveToColorConverter}}" />
                     </StackPanel>
 
 
-                    <Button  Grid.Column="1" 
-                            Margin="1"
-                            Command="{Binding DataContext.EditUserCommand, ElementName=This}"
-                            CommandParameter="{Binding}">
-                        Edit 
+                    <Button  Grid.Column="1"
+                             Margin="1"
+                             Command="{Binding DataContext.EditUserCommand, ElementName=This}"
+                             CommandParameter="{Binding}">
+                        Edit
                     </Button>
 
 
@@ -48,8 +48,10 @@
                     <Separator.Style>
                         <Style TargetType="Separator">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-                                    <Setter Property="Visibility" Value="Visible"/>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}"
+                                             Value="{x:Null}">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -58,76 +60,85 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    
 
-    
+
+
     <DockPanel>
-        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch"  LastChildFill="False">
-            <Button Content="Add new user"
-                Margin="15,5,5,5"
-                Command="{Binding AddNewUserCommand}" />
-            <Button Content="Normative information"
+        <DockPanel DockPanel.Dock="Top"
+                   HorizontalAlignment="Stretch"
+                   LastChildFill="False">
+            <Button Content="{x:Static p:Resources.AddNewUser}"
+                    Margin="15,5,5,5"
+                    Command="{Binding AddNewUserCommand}" />
+            <Button Content="{x:Static p:Resources.NormativeInfo}"
                     Command="{Binding NormInfoCommand}"
-                Margin="25,5,5,5"/>
-            <Button Content="Constants"
+                    Margin="25,5,5,5" />
+            <Button Content="{x:Static p:Resources.Constants}"
                     Command="{Binding ConstCommand}"
-                Margin="25,5,5,5"/>
-            <Button Content="News"
+                    Margin="25,5,5,5" />
+            <Button Content="{x:Static p:Resources.News}"
                     Command="{Binding NewsCommand}"
-                Margin="25,5,5,5"/>
-            <Button Content="History of changes"                    
-                Margin="25,5,5,5"
+                    Margin="25,5,5,5" />
+            <Button Content="{x:Static p:Resources.HistoryOfChanges}"
+                    Margin="25,5,5,5"
                     BorderBrush="SlateBlue"
-                    Command="{}"/>
-            <Button Content="Change my password"                    
-                Margin="25,5,5,5"
+                    Command="{}" />
+            <Button Content="{x:Static p:Resources.ChangeMyPass}"
+                    Margin="25,5,5,5"
                     BorderBrush="SlateBlue"
                     Background="DarkSlateBlue"
-                    Command="{Binding ChangeMyPassword}"/>
+                    Command="{Binding ChangeMyPassword}" />
 
-            <Button Content="Log off"                    
-                Margin="10,5,5,5"
+            <Button Content="{x:Static p:Resources.LogOff}"
+                    Margin="10,5,5,5"
                     DockPanel.Dock="Right"
                     Background="DarkRed"
-                     BorderBrush="PaleVioletRed"
-                    Command="{Binding LogOffCommand}"/>
+                    BorderBrush="PaleVioletRed"
+                    Command="{Binding LogOffCommand}" />
         </DockPanel>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-        <CheckBox IsChecked="{Binding ShowActiveOnly}" 
-                  Command="{Binding ShowUsersCommand}"
-                  Margin="5"
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top">
+            <CheckBox IsChecked="{Binding ShowActiveOnly}"
+                      Command="{Binding ShowUsersCommand}"
+                      Margin="5"
                       Foreground="BlueViolet"
                       FontWeight="Bold"
                       FontSize="15"
-                      Content="Show only active users" />
-        <Label Content="🔎" FontSize="15"
-               Foreground="DarkViolet"
-               Margin="80,0,0,0"/>
-        <TextBox Margin="5" 
-                 Background="White"
-                 BorderBrush="DarkViolet"
-                 BorderThickness="1"
-                 Text="{Binding Path=UserFilter, UpdateSourceTrigger=PropertyChanged}" Width="496" />
+                      Content="{x:Static p:Resources.ShowActiveUsers}" />
+            <Label Content="🔎"
+                   FontSize="15"
+                   Foreground="DarkViolet"
+                   Margin="80,0,0,0" />
+            <TextBox Margin="5"
+                     Background="White"
+                     BorderBrush="DarkViolet"
+                     BorderThickness="1"
+                     Text="{Binding Path=UserFilter, UpdateSourceTrigger=PropertyChanged}"
+                     Width="496" />
         </StackPanel>
         <Grid DockPanel.Dock="Top">
-        <ListBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1"
-                HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch"
-                 Margin="3"
-                 BorderThickness="2"
-                 BorderBrush="DarkViolet"
-                 ItemsSource="{Binding FilteredUsers}" 
-                 ScrollViewer.CanContentScroll="True"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible"       
-                 ItemTemplate="{StaticResource UserListItemTemplate}">
+            <ListBox Grid.Column="1"
+                     Grid.Row="0"
+                     Grid.ColumnSpan="1"
+                     HorizontalContentAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     Margin="3"
+                     BorderThickness="2"
+                     BorderBrush="DarkViolet"
+                     ItemsSource="{Binding FilteredUsers}"
+                     ScrollViewer.CanContentScroll="True"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+                     ItemTemplate="{StaticResource UserListItemTemplate}">
 
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
 
-        </ListBox>
-            
+            </ListBox>
+
         </Grid>
     </DockPanel>
 </UserControl>

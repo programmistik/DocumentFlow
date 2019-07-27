@@ -1,43 +1,56 @@
 ﻿<UserControl x:Class="DocumentFlow.Views.MainDesktopPageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:DocumentFlow.Views"
              xmlns:p="clr-namespace:DocumentFlow.Properties"
-             xmlns:hx="clr-namespace:HexGridControl;assembly=HexGridControl"        
+             xmlns:hx="clr-namespace:HexGridControl;assembly=HexGridControl"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              Name="Parent"
-             d:DesignHeight="750" d:DesignWidth="1300" Background="White">
+             d:DesignHeight="750"
+             d:DesignWidth="1300"
+             Background="White">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
- 
+
     <UserControl.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize"
+                    Value="16" />
         </Style>
 
-        <BooleanToVisibilityConverter x:Key="Btw"/>
+        <BooleanToVisibilityConverter x:Key="Btw" />
 
         <Style TargetType="{x:Type hx:HexItem}">
-            <Setter Property="Margin" Value="8"/>
-            <Setter Property="MinHeight" Value="80"/>
-            <Setter Property="MinWidth"  Value="80"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Background" Value="DarkViolet"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Margin"
+                    Value="8" />
+            <Setter Property="MinHeight"
+                    Value="80" />
+            <Setter Property="MinWidth"
+                    Value="80" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Background"
+                    Value="DarkViolet" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Stretch" />
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
                         <Button Content="{TemplateBinding Content}"
-                                        Background="{Binding Path=Background, RelativeSource={RelativeSource AncestorType={x:Type hx:HexItem}}}"
-                                        Command="{Binding DataContext.MenuClickCommand, ElementName=Parent}" CommandParameter="{Binding}" Style="{x:Null}"/>
+                                Background="{Binding Path=Background, RelativeSource={RelativeSource AncestorType={x:Type hx:HexItem}}}"
+                                Command="{Binding DataContext.MenuClickCommand, ElementName=Parent}"
+                                CommandParameter="{Binding}"
+                                Style="{x:Null}" />
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
@@ -66,29 +79,48 @@
         </Grid.ColumnDefinitions>
 
         <!--#region TopMenu-->
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Orientation="Horizontal" Background="#FF353436">
-            <Button
-                Command="{Binding GMain}" 
-                Background="Transparent" BorderThickness="0" Height="64" Width="64" Padding="0">
-                <Image Margin="0" Source="{Binding Avatara}" />
+        <StackPanel Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="6"
+                    Orientation="Horizontal"
+                    Background="#FF353436">
+            <Button Command="{Binding GMain}"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Height="64"
+                    Width="64"
+                    Padding="0">
+                <Image Margin="0"
+                       Source="{Binding Avatara}" />
             </Button>
-            <Label FontSize="20" Content="{Binding Fio}" Foreground="White" VerticalContentAlignment="Center"></Label>
+            <Label FontSize="20"
+                   Content="{Binding Fio}"
+                   Foreground="White"
+                   VerticalContentAlignment="Center"></Label>
         </StackPanel>
 
-        <Grid Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="0" Background="#FF353436">
+        <Grid Grid.Column="6"
+              Grid.ColumnSpan="2"
+              Grid.Row="0"
+              Background="#FF353436">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button
-                Command="{Binding GSettings}"
-                Grid.Column="0" Background="Transparent" Height="Auto" BorderThickness="0">
-                <Image Source="/DocumentFlow;component/Resources/Images/Settings.png"/>
+            <Button Command="{Binding GSettings}"
+                    Grid.Column="0"
+                    Background="Transparent"
+                    Height="Auto"
+                    BorderThickness="0">
+                <Image Source="/DocumentFlow;component/Resources/Images/Settings.png" />
             </Button>
-            <Button
-                Command="{Binding GExit}"
-                Grid.Column="1" Background="Transparent" Height="Auto" BorderThickness="0" BorderBrush="{x:Null}">
-                <Image Source="/DocumentFlow;component/Resources/Images/Exit.png"/>
+            <Button Command="{Binding GExit}"
+                    Grid.Column="1"
+                    Background="Transparent"
+                    Height="Auto"
+                    BorderThickness="0"
+                    BorderBrush="{x:Null}">
+                <Image Source="/DocumentFlow;component/Resources/Images/Exit.png" />
             </Button>
         </Grid>
         <!--#endregion-->
@@ -174,61 +206,98 @@
         <!--#region Content-->
 
         <Grid Margin="10"
-              Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="8">
+              Grid.Row="1"
+              Grid.RowSpan="6"
+              Grid.ColumnSpan="8">
 
-            
+
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <hx:HexGrid Grid.Row="0" Grid.Column="0"
-                            RowCount="3" ColumnCount="3" Orientation="Horizontal" Grid.ColumnSpan="4" Grid.RowSpan="3">
-                <hx:HexItem Grid.Row="0" Grid.Column="1">
+            <hx:HexGrid Grid.Row="0"
+                        Grid.Column="0"
+                        RowCount="3"
+                        ColumnCount="3"
+                        Orientation="Horizontal"
+                        Grid.ColumnSpan="4"
+                        Grid.RowSpan="3">
+                <hx:HexItem Grid.Row="0"
+                            Grid.Column="1">
                     <StackPanel Name="Calendar">
-                        <Image Source="../Resources/Images/Calendar.png" Width="60" />
-                        <TextBlock Text="{x:Static p:Resources.OpenCalendar}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                        <Image Source="../Resources/Images/Calendar.png"
+                               Width="60" />
+                        <TextBlock Text="{x:Static p:Resources.OpenCalendar}"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
 
-                <hx:HexItem Grid.Row="1" Grid.Column="0">
+                <hx:HexItem Grid.Row="1"
+                            Grid.Column="0">
                     <StackPanel Name="Mail">
-                        <Image Source="../Resources/Images/Mail.png" Width="60" />
-                        <TextBlock Text="{x:Static p:Resources.Mail}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                        <Image Source="../Resources/Images/Mail.png"
+                               Width="60" />
+                        <TextBlock Text="{x:Static p:Resources.Mail}"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
-                <hx:HexItem Grid.Row="1" Grid.Column="1" Background="BlueViolet">
+                <hx:HexItem Grid.Row="1"
+                            Grid.Column="1"
+                            Background="BlueViolet">
                     <StackPanel Name="News">
-                        <Image Source="../Resources/Images/News.png" Width="60" />
-                        <TextBlock Text="{x:Static p:Resources.News}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                        <Image Source="../Resources/Images/News.png"
+                               Width="60" />
+                        <TextBlock Text="{x:Static p:Resources.News}"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
-                <hx:HexItem Grid.Row="1" Grid.Column="2">
+                <hx:HexItem Grid.Row="1"
+                            Grid.Column="2">
                     <StackPanel Name="Schedule">
-                        <Image Source="../Resources/Images/Tasks.png" Width="60" Margin="0,0,0,5" />
-                        <TextBlock Text="{x:Static p:Resources.Schedule}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                        <Image Source="../Resources/Images/Tasks.png"
+                               Width="60"
+                               Margin="0,0,0,5" />
+                        <TextBlock Text="{x:Static p:Resources.Schedule}"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
 
-                <hx:HexItem Grid.Row="2" Grid.Column="0">
+                <hx:HexItem Grid.Row="2"
+                            Grid.Column="0">
                     <StackPanel Name="Documents">
-                        <Image Source="../Resources/Images/Documents.png" Width="60" Margin="0,0,0,5" />
-                        <TextBlock Text="{x:Static p:Resources.Documents}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                        <Image Source="../Resources/Images/Documents.png"
+                               Width="60"
+                               Margin="0,0,0,5" />
+                        <TextBlock Text="{x:Static p:Resources.Documents}"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
-                <hx:HexItem Grid.Row="2" Grid.Column="1">
+                <hx:HexItem Grid.Row="2"
+                            Grid.Column="1">
                     <StackPanel Name="Contacts">
-                        <Image Source="../Resources/Images/Contacts.png" Width="60" Margin="0,0,0,5" />
-                        <TextBlock Text="{x:Static p:Resources.Contacts}" HorizontalAlignment="Center" FontSize="16" ></TextBlock>
+                        <Image Source="../Resources/Images/Contacts.png"
+                               Width="60"
+                               Margin="0,0,0,5" />
+                        <TextBlock Text="{x:Static p:Resources.Contacts}"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
-                <hx:HexItem Grid.Row="2" Grid.Column="2" Content="Will be added soon..."/>
+                <hx:HexItem Grid.Row="2"
+                            Grid.Column="2"
+                            Content="{x:Static p:Resources.Soon}" />
             </hx:HexGrid>
 
         </Grid>

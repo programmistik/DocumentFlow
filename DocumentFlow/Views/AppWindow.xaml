@@ -8,14 +8,17 @@
         Name="TheMainView"
         Title="{Binding ApplicationTitle, UpdateSourceTrigger=PropertyChanged}"
         Icon="../Resources/Images/D_icon.png"
-        Height="750" Width="1300"
-        MinWidth="1100" MinHeight="600" Closing="TheMainView_Closing">
+        Height="750"
+        Width="1300"
+        MinWidth="1100"
+        MinHeight="600"
+        Closing="TheMainView_Closing">
 
     <Window.Resources>
-        <ResourceDictionary Source="../Resources/DataTemplates.xaml"/>
+        <ResourceDictionary Source="../Resources/DataTemplates.xaml" />
     </Window.Resources>
 
     <DockPanel>
-        <ContentControl Content="{Binding CurrentPage}"/>
+        <ContentControl Content="{Binding CurrentPage}" />
     </DockPanel>
 </Window>
