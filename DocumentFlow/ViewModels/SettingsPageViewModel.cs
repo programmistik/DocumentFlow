@@ -269,10 +269,11 @@ namespace DocumentFlow.ViewModels
                 {
                     if (Image != null)
                     {
-                        var oldPath = Image.UriSource.OriginalString;
-                        var imgDir = db.Constants.FirstOrDefault().FilePath;
+                        
+                            var oldPath = Image.UriSource.OriginalString;
+                            var imgDir = db.Constants.FirstOrDefault().FilePath;
 
-                        var newPath = imgDir + "\\" + Guid.NewGuid() + Path.GetExtension(oldPath);
+                            var newPath = imgDir + "\\" + Guid.NewGuid() + Path.GetExtension(oldPath);
 
                         try
                         {
