@@ -50,19 +50,19 @@ namespace DocumentFlow.ViewModels
             this.messageService = messageService;
             this.db = db;
 
-            //ContactsList = new ObservableCollection<Contact>(db.Contacts);
-            //ContactsList.OrderBy(c => c.Name);
-
             Messenger.Default.Register<NotificationMessage<User>>(this, OnHitIt);
             Messenger.Default.Register<NotificationMessage<User>>(this, OnHitUser);
 
         }
 
-        private void OnLoaded(NotificationMessage<User> usr)
-        {
+        private RelayCommand loadedCommand;
+        public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(
+        () =>
+        { 
             ContactsList = new ObservableCollection<Contact>(db.Contacts);
             ContactsList.OrderBy(c => c.Name);
-        }
+            RaisePropertyChanged("FilteredContacts");
+        }));
 
 
 

@@ -269,23 +269,25 @@ namespace DocumentFlow.ViewModels
                 {
                     if (Image != null)
                     {
-                        
+                        if (Image.UriSource != null)
+                        {
+
                             var oldPath = Image.UriSource.OriginalString;
                             var imgDir = db.Constants.FirstOrDefault().FilePath;
 
                             var newPath = imgDir + "\\" + Guid.NewGuid() + Path.GetExtension(oldPath);
 
-                        try
-                        {
-                            File.Copy(oldPath, newPath, true);
-                            CurrentEmployee.Photo = newPath;
+                            try
+                            {
+                                File.Copy(oldPath, newPath, true);
+                                CurrentEmployee.Photo = newPath;
+                            }
+                            catch (Exception ex)
+                            {
+                                messageService.ShowError(ex.Message);
+                                throw;
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            messageService.ShowError(ex.Message);
-                            throw;
-                        }
-                        
                         
                     }
                     await db.SaveChangesAsync();
