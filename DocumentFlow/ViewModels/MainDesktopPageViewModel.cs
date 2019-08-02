@@ -78,33 +78,33 @@ namespace DocumentFlow.ViewModels
         public RelayCommand<StackPanel> MenuClickCommand => menuClickCommand ?? (menuClickCommand = new RelayCommand<StackPanel>(
         param =>
         {
-            if (param.Name == Resources.News)
+            if (param.Name == "News")
             {
                 Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                 navigationService.Navigate<NewsPageView>();
             }
-            else if(param.Name == Resources.Mail)
+            else if(param.Name == "Mail")
             {
                 Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                 navigationService.Navigate<GMailPageView>();
             }
-            else if (param.Name == Resources.Calendar)
+            else if (param.Name == "Calendar")
             {
                 Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                 navigationService.Navigate<CalendarPageView>();
             }
-            else if (param.Name == Resources.Schedule)
+            else if (param.Name == "Schedule")
             {
                 Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                 navigationService.Navigate<SchedulePageView>();
             }
-            else if (param.Name == Resources.Contacts)
+            else if (param.Name == "Contacts")
             {
                 Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                 Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "Contacts"));
                 navigationService.Navigate<ContactsPageView>();
             }
-            else if (param.Name == Resources.Documents)
+            else if (param.Name == "Documents")
             {
                 Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
                 navigationService.Navigate<DocumentsPageView>();

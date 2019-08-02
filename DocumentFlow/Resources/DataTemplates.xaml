@@ -75,4 +75,8 @@
         <v:DocPageView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:ShowHistoryPageViewModel}">
+        <v:ShowHistoryPageView/>
+    </DataTemplate>
+
 </ResourceDictionary>

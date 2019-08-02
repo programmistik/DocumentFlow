@@ -6,11 +6,13 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -27,15 +29,6 @@ namespace DocumentFlow.ViewModels
 
         private string loginCheck;
         public string LoginCheck { get => loginCheck; set => Set(ref loginCheck, value); }
-
-        //private string lb_UserName;
-        //public string lbUserName { get => lb_UserName; set => Set(ref lb_UserName, value); }
-        //private string pwd;
-        //public string lbPassword { get => pwd; set => Set(ref pwd, value); }
-        //private string forgotPwd;
-        //public string ForgotPwd { get => forgotPwd; set => Set(ref forgotPwd, value); }
-        //private string btnLogin;
-        //public string btnLogIn { get => btnLogin; set => Set(ref btnLogin, value); }
 
         private string checkColor;
         public string CheckColor { get => checkColor; set => Set(ref checkColor, value); }
@@ -121,6 +114,9 @@ namespace DocumentFlow.ViewModels
                                 if (Usr.IsActive){
                                     Messenger.Default.Send(new NotificationMessage<User>(Usr, "SendCurrentUser"));
                                     //navigationService.Navigate<MainPageView>();
+                                    var emp = db.Employees.Where(e => e.UserId == Usr.Id).Single();
+                                    var lanCode = emp.Language.LangCultureCode;
+                                    Thread.CurrentThread.CurrentUICulture = new CultureInfo(lanCode);
                                     navigationService.Navigate<MainDesktopPageView>();
                                  }
                                 else

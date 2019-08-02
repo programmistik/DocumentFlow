@@ -42,15 +42,6 @@ namespace DocumentFlow.ViewModels
         private string fio;
         public string Fio { get => fio; set => Set(ref fio, value); }
 
-        //private string msgColor;
-        //public string MsgColor { get => msgColor; set => Set(ref msgColor, value); }
-
-        //private string passCheckError;
-        //public string PassCheckError { get => passCheckError; set => Set(ref passCheckError, value); }
-
-        //private bool passwordConfirmation;
-        //public bool PasswordConfirmation { get => passwordConfirmation; set => Set(ref passwordConfirmation, value); }
-
         private User CurrentUser { get; set; }
         private Employee CurrentEmployee { get; set; }
 
@@ -290,6 +281,9 @@ namespace DocumentFlow.ViewModels
                         }
                         
                     }
+                    CurrentEmployee.Language = SelectedLanguage;
+                    CurrentEmployee.ColorScheme = SelectedColor;
+
                     await db.SaveChangesAsync();
 
                     StopCamera();

@@ -144,5 +144,13 @@ namespace DocumentFlow.ViewModels
                     navigationService.Navigate<LogInPageView>();
                 }
                  ));
+
+        private RelayCommand historyCommand;
+        public RelayCommand HistoryCommand => historyCommand ?? (historyCommand = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<ShowHistoryPageView>();
+                }
+                 ));
     }
 }

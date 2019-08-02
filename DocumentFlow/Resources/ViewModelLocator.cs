@@ -40,6 +40,7 @@ namespace DocumentFlow
         private ChangeMyPassPageViewModel ChangeMyPassPageViewModel;
         private CreateNewContactPageViewModel CreateNewContactPageViewModel;
         private DocPageViewModel DocPageViewModel;
+        private ShowHistoryPageViewModel ShowHistoryPageViewModel;
 
         private INavigationService navigationService;
 
@@ -80,6 +81,7 @@ namespace DocumentFlow
                 ChangeMyPassPageViewModel = Container.Resolve<ChangeMyPassPageViewModel>();
                 CreateNewContactPageViewModel = Container.Resolve<CreateNewContactPageViewModel>();
                 DocPageViewModel = Container.Resolve<DocPageViewModel>();
+                ShowHistoryPageViewModel = Container.Resolve<ShowHistoryPageViewModel>();
 
                 navigationService.Register<LogInPageView>(LogInViewModel);
                 navigationService.Register<MainDesktopPageView>(MainDesktopPageViewModel);
@@ -102,6 +104,7 @@ namespace DocumentFlow
                 navigationService.Register<ChangeMyPassPageView>(ChangeMyPassPageViewModel);
                 navigationService.Register<CreateNewContactPageView>(CreateNewContactPageViewModel);
                 navigationService.Register<DocPageView>(DocPageViewModel);
+                navigationService.Register<ShowHistoryPageView>(ShowHistoryPageViewModel);
 
                 navigationService.Navigate<LogInPageView>();
             }
