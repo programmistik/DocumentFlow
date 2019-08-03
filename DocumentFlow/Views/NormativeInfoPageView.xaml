@@ -11,207 +11,221 @@
              d:DesignWidth="1300"
              Background="White">
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="43"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-    <DockPanel>
-        <TabControl DockPanel.Dock="Top">
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3"
-                                   Text="{x:Static p:Resources.Company}" />
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel DataContext="{Binding CompanyCollection}">
-                        <DataGrid AutoGenerateColumns="False"
-                                  EnableRowVirtualization="True"
-                                  Height="650"
-                                  MinHeight="300"
-                                  ItemsSource="{Binding}"
-                                  Margin="10,0"
-                                  RowDetailsVisibilityMode="VisibleWhenSelected">
-                            <DataGrid.Columns>
 
-                                <DataGridTextColumn Binding="{Binding CompanyName, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="{x:Static p:Resources.CompanyName}"
-                                                    Width="500" />
+        <DockPanel Grid.Row="0">
+            <TabControl DockPanel.Dock="Top"
+                        Background="#FFFAFAFA">
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="3"
+                                       Text="{x:Static p:Resources.Company}" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel DataContext="{Binding CompanyCollection}">
+                            <DataGrid AutoGenerateColumns="False"
+                                      EnableRowVirtualization="True"
+                                      ItemsSource="{Binding}"
+                                      Margin="10,0"
+                                      MaxHeight="935"
+                                      RowDetailsVisibilityMode="VisibleWhenSelected"
+                                      VerticalAlignment="Top">
+                                <DataGrid.Columns>
 
-                            </DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding CompanyName, UpdateSourceTrigger=PropertyChanged}"
+                                                        Header="{x:Static p:Resources.CompanyName}"
+                                                        Width="500" />
 
-                        </DataGrid>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3"
-                                   Text="{x:Static p:Resources.Department}" />
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel DataContext="{Binding DepartmentCollection}">
-                        <DataGrid AutoGenerateColumns="False"
-                                  EnableRowVirtualization="True"
-                                  Height="340"
-                                  ItemsSource="{Binding}"
-                                  Margin="10,0"
-                                  RowDetailsVisibilityMode="VisibleWhenSelected">
-                            <DataGrid.Columns>
+                                </DataGrid.Columns>
 
-                                <DataGridTextColumn Binding="{Binding DepartmentName, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="{x:Static p:Resources.DepartmentName}"
-                                                    Width="500" />
+                            </DataGrid>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="3"
+                                       Text="{x:Static p:Resources.Department}" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel DataContext="{Binding DepartmentCollection}">
+                            <DataGrid AutoGenerateColumns="False"
+                                      EnableRowVirtualization="True"
+                                      ItemsSource="{Binding}"
+                                      Margin="10,0"
+                                      MaxHeight="935"
+                                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                                <DataGrid.Columns>
 
-                            </DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding DepartmentName, UpdateSourceTrigger=PropertyChanged}"
+                                                        Header="{x:Static p:Resources.DepartmentName}"
+                                                        Width="500" />
 
-                        </DataGrid>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3"
-                                   Text="{x:Static p:Resources.Positions}" />
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel DataContext="{Binding PositionCollection}">
-                        <DataGrid AutoGenerateColumns="False"
-                                  EnableRowVirtualization="True"
-                                  Height="340"
-                                  ItemsSource="{Binding}"
-                                  Margin="10,0"
-                                  RowDetailsVisibilityMode="VisibleWhenSelected">
-                            <DataGrid.Columns>
+                                </DataGrid.Columns>
 
-                                <DataGridTextColumn Binding="{Binding PositionName, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="{x:Static p:Resources.PositionName}"
-                                                    Width="500" />
+                            </DataGrid>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="3"
+                                       Text="{x:Static p:Resources.Positions}" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel DataContext="{Binding PositionCollection}">
+                            <DataGrid AutoGenerateColumns="False"
+                                      EnableRowVirtualization="True"
+                                      ItemsSource="{Binding}"
+                                      Margin="10,0"
+                                      MaxHeight="935"
+                                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                                <DataGrid.Columns>
 
-                            </DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding PositionName, UpdateSourceTrigger=PropertyChanged}"
+                                                        Header="{x:Static p:Resources.PositionName}"
+                                                        Width="500" />
 
-                        </DataGrid>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3" Text="{x:Static p:Resources.InfoTypes}" />
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel DataContext="{Binding InfoTypesCollection}">
-                        <DataGrid AutoGenerateColumns="False"
-                                  EnableRowVirtualization="True"
-                                  Height="340"
-                                  ItemsSource="{Binding}"
-                                  Margin="10,0"
-                                  RowDetailsVisibilityMode="VisibleWhenSelected">
-                            <DataGrid.Columns>
+                                </DataGrid.Columns>
 
-                                <DataGridTextColumn Binding="{Binding InfoType, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="{x:Static p:Resources.ContactInfoType}"
-                                                    Width="500" />
-                            </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="3"
+                                       Text="{x:Static p:Resources.InfoTypes}" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel DataContext="{Binding InfoTypesCollection}">
+                            <DataGrid AutoGenerateColumns="False"
+                                      EnableRowVirtualization="True"
+                                      ItemsSource="{Binding}"
+                                      Margin="10,0"
+                                      MaxHeight="935"
+                                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                                <DataGrid.Columns>
 
-                        </DataGrid>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3"
-                                   Text="{x:Static p:Resources.DocumentType}" />
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel DataContext="{Binding DocTypesCollection}">
-                        <DataGrid AutoGenerateColumns="False"
-                                  EnableRowVirtualization="True"
-                                  Height="340"
-                                  ItemsSource="{Binding}"
-                                  Margin="10,0"
-                                  RowDetailsVisibilityMode="VisibleWhenSelected">
-                            <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding InfoType, UpdateSourceTrigger=PropertyChanged}"
+                                                        Header="{x:Static p:Resources.ContactInfoType}"
+                                                        Width="500" />
+                                </DataGrid.Columns>
 
-                                <DataGridTextColumn Binding="{Binding DocTypeName, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="{x:Static p:Resources.DocumentType}"
-                                                    Width="500" />
-                                <DataGridTextColumn Binding="{Binding DocTypeAcc, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="{x:Static p:Resources.Acronym}"
-                                                    Width="100" />
-                            </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="3"
+                                       Text="{x:Static p:Resources.DocumentType}" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel DataContext="{Binding DocTypesCollection}">
+                            <DataGrid AutoGenerateColumns="False"
+                                      EnableRowVirtualization="True"
+                                      ItemsSource="{Binding}"
+                                      Margin="10,0"
+                                      MaxHeight="935"
+                                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                                <DataGrid.Columns>
 
-                        </DataGrid>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
+                                    <DataGridTextColumn Binding="{Binding DocTypeName, UpdateSourceTrigger=PropertyChanged}"
+                                                        Header="{x:Static p:Resources.DocumentType}"
+                                                        Width="500" />
+                                    <DataGridTextColumn Binding="{Binding DocTypeAcc, UpdateSourceTrigger=PropertyChanged}"
+                                                        Header="{x:Static p:Resources.Acronym}"
+                                                        Width="100" />
+                                </DataGrid.Columns>
 
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3"
-                                   Text="{x:Static p:Resources.DocumentStates}" />
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel DataContext="{Binding DocStatesCollection}">
-                        <DataGrid AutoGenerateColumns="False"
-                                  EnableRowVirtualization="True"
-                                  Height="340"
-                                  ItemsSource="{Binding}"
-                                  Margin="10,0"
-                                  RowDetailsVisibilityMode="VisibleWhenSelected">
-                            <DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
 
-                                <DataGridTextColumn Binding="{Binding DocStateName, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="{x:Static p:Resources.DocumentStatesName}"
-                                                    Width="500" />
-                            </DataGrid.Columns>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="3"
+                                       Text="{x:Static p:Resources.DocumentStates}" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel DataContext="{Binding DocStatesCollection}">
+                            <DataGrid AutoGenerateColumns="False"
+                                      EnableRowVirtualization="True"
+                                      ItemsSource="{Binding}"
+                                      Margin="10,0"
+                                      MaxHeight="935"
+                                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                                <DataGrid.Columns>
 
-                        </DataGrid>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
+                                    <DataGridTextColumn Binding="{Binding DocStateName, UpdateSourceTrigger=PropertyChanged}"
+                                                        Header="{x:Static p:Resources.DocumentStatesName}"
+                                                        Width="500" />
+                                </DataGrid.Columns>
 
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="3"
-                                   Text="{x:Static p:Resources.Currency}" />
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel DataContext="{Binding CurrencyCollection}">
-                        <DataGrid AutoGenerateColumns="False"
-                                  EnableRowVirtualization="True"
-                                  Height="340"
-                                  ItemsSource="{Binding}"
-                                  Margin="10,0"
-                                  RowDetailsVisibilityMode="VisibleWhenSelected">
-                            <DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
 
-                                <DataGridTextColumn Binding="{Binding CurrancyCode, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="{x:Static p:Resources.Code}"
-                                                    Width="80" />
-                                <DataGridTextColumn Binding="{Binding CurrancyName, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="{x:Static p:Resources.CurrencyName}"
-                                                    Width="500" />
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="3"
+                                       Text="{x:Static p:Resources.Currency}" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel DataContext="{Binding CurrencyCollection}">
+                            <DataGrid AutoGenerateColumns="False"
+                                      EnableRowVirtualization="True"
+                                      ItemsSource="{Binding}"
+                                      Margin="10,0"
+                                      MaxHeight="935"
+                                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                                <DataGrid.Columns>
 
-                            </DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding CurrancyCode, UpdateSourceTrigger=PropertyChanged}"
+                                                        Header="{x:Static p:Resources.Code}"
+                                                        Width="80" />
+                                    <DataGridTextColumn Binding="{Binding CurrancyName, UpdateSourceTrigger=PropertyChanged}"
+                                                        Header="{x:Static p:Resources.CurrencyName}"
+                                                        Width="500" />
 
-                        </DataGrid>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
-        </TabControl>
-        <Button Command="{Binding BackCommand}"
+                                </DataGrid.Columns>
+
+                            </DataGrid>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+
+        <Button Grid.Row="1"
+                Command="{Binding BackCommand}"
                 Content="{x:Static p:Resources.Back}"
                 VerticalAlignment="Bottom"
                 Margin="5" />
-    </DockPanel>
+    </Grid>
 </UserControl>

@@ -31,7 +31,7 @@
             <Button Content="📂"
                     Margin="5"
                     Width="63"
-                    HorizontalAlignment="Right"
+                    HorizontalAlignment="Left"
                     Command="{Binding DocPathCommand}"/>
         </DockPanel>
         <Label Content="{x:Static p:Resources.FilesStoragePath}"
@@ -49,7 +49,7 @@
             <Button Content="📂"
                     Margin="5"
                     Width="63"
-                    HorizontalAlignment="Right"
+                    HorizontalAlignment="Left"
                     Command="{Binding FilePathCommand}"/>
         </DockPanel>
         <Button Content="{x:Static p:Resources.Ok}"

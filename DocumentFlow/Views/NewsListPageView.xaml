@@ -80,8 +80,7 @@
                  ItemsSource="{Binding NewsList}"
                  ScrollViewer.CanContentScroll="True"
                  ScrollViewer.VerticalScrollBarVisibility="Visible"
-                 ItemTemplate="{StaticResource UserListItemTemplate}"
-                 Height="700">
+                 ItemTemplate="{StaticResource UserListItemTemplate}">
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
