@@ -139,7 +139,7 @@
     <value>Добавить новое событие</value>
   </data>
   <data name="AddNewOrganization" xml:space="preserve">
-    <value>Добавить новую организацию</value>
+    <value>Добавить организацию</value>
   </data>
   <data name="AddNewUser" xml:space="preserve">
     <value>Добавить нового пользователя</value>
@@ -238,7 +238,7 @@
     <value>Дата</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Удалитғ</value>
+    <value>Удалить</value>
   </data>
   <data name="Department" xml:space="preserve">
     <value>Департамент</value>
@@ -259,7 +259,7 @@
     <value>Состояния документов</value>
   </data>
   <data name="DocumentStatesName" xml:space="preserve">
-    <value>Название состояний документов</value>
+    <value>Названия состояний документов</value>
   </data>
   <data name="DocumentStatus" xml:space="preserve">
     <value>Статус документа</value>
@@ -268,7 +268,7 @@
     <value>Тип документа</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Редактировать</value>
+    <value>Изменить</value>
   </data>
   <data name="Edition" xml:space="preserve">
     <value>Редактирование</value>
@@ -322,7 +322,7 @@
     <value>Пятница</value>
   </data>
   <data name="GoogleAccount" xml:space="preserve">
-    <value>Аккаунт гугл:</value>
+    <value>Аккаунт Google:</value>
   </data>
   <data name="Grape" xml:space="preserve">
     <value>Виноградный</value>
@@ -398,7 +398,7 @@
     <value>Организация</value>
   </data>
   <data name="OrUploadFromFile" xml:space="preserve">
-    <value>или загрузите из файла</value>
+    <value>Загрузите из файла</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
@@ -513,5 +513,44 @@
   </data>
   <data name="Wednesday" xml:space="preserve">
     <value>Среда</value>
+  </data>
+  <data name="AddInfo" xml:space="preserve">
+    <value>Добавить информацию</value>
+  </data>
+  <data name="AddNewFile" xml:space="preserve">
+    <value>Добавить новый файл</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="InputDocNumber" xml:space="preserve">
+    <value>Введите номер документа</value>
+  </data>
+  <data name="Numberr" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="OrganizationName" xml:space="preserve">
+    <value>Название организации</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Владелец</value>
+  </data>
+  <data name="Read" xml:space="preserve">
+    <value>Прочитать</value>
+  </data>
+  <data name="ResponsPerson" xml:space="preserve">
+    <value>Ответственное лицо</value>
+  </data>
+  <data name="ShowInFile" xml:space="preserve">
+    <value>Показать в файле</value>
+  </data>
+  <data name="StateDate" xml:space="preserve">
+    <value>Дата изменения состояния</value>
+  </data>
+  <data name="WhoEdited" xml:space="preserve">
+    <value>Кто редактировал</value>
   </data>
 </root>

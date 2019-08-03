@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocumentFlow.ModalWindows"
+        xmlns:p="clr-namespace:DocumentFlow.Properties"
         mc:Ignorable="d"
         Title="AddContactInfoWindow" Height="200" Width="500" Closing="Window_Closing">
     <StackPanel>
@@ -14,9 +15,9 @@
         <TextBox x:Name="InputValue"
                  Margin="3"
                  FontSize="15"/>
-        <Button Content="OK"
+        <Button Content="{x:Static p:Resources.Ok}"
                 Margin="3" Click="OkButton_Click"/>
-        <Button Content="Cancel"
+        <Button Content="{x:Static p:Resources.Cancel}"
                 Margin="3"
                 Click="CancelButton_Click"/>
     </StackPanel>

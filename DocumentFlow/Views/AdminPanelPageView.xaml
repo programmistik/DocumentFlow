@@ -38,8 +38,9 @@
                     <Button  Grid.Column="1"
                              Margin="1"
                              Command="{Binding DataContext.EditUserCommand, ElementName=This}"
-                             CommandParameter="{Binding}">
-                        Edit
+                             CommandParameter="{Binding}"
+                             Content="{x:Static p:Resources.Edit}">
+                        
                     </Button>
 
 

@@ -141,7 +141,7 @@
                      IsReadOnly="True"
                      Foreground="Gray" />
 
-            <Label Content="{x:Static p:Resources.Number}"
+            <Label Content="{x:Static p:Resources.Numberr}"
                    FontSize="15"
                    Margin="3" />
             <TextBox Text="{Binding DocNumber}"
@@ -329,7 +329,7 @@
                             </ListBox>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <Label Content="{Binding AddNewFileContent}"
+                            <Label Content="{x:Static p:Resources.AddNewFile}"
                                    FontSize="20"
                                    Margin="3"
                                    FontWeight="Bold"
@@ -364,7 +364,7 @@
                                          Margin="3" />
                             </DockPanel>
                             <Button Command="{Binding AddNewFileCommand}"
-                                    Content="{Binding AddFileContent}"
+                                    Content="{x:Static p:Resources.Add}"
                                     Margin="5" />
                         </StackPanel>
 
@@ -399,26 +399,26 @@
                                   Height="189">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="Data"
-                                                    Width="100" />
+                                                    Header="{x:Static p:Resources.Date}"
+                                                    />
                                 <DataGridTextColumn Binding="{Binding StartUser, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="Owener"
-                                                    Width="100" />
+                                                    Header="{x:Static p:Resources.Owner}"
+                                                    />
                                 <DataGridTextColumn Binding="{Binding Department.DepartmentName, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="Department"
-                                                    Width="100" />
+                                                    Header="{x:Static p:Resources.Department}"
+                                                    />
                                 <DataGridTextColumn Binding="{Binding TaskUser, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="Respons.person"
-                                                    Width="100" />
+                                                    Header="{x:Static p:Resources.ResponsPerson}"
+                                                    />
                                 <DataGridTextColumn Binding="{Binding State.DocStateName, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="State"
-                                                    Width="100" />
+                                                    Header="{x:Static p:Resources.State}"
+                                                    />
                                 <DataGridTextColumn Binding="{Binding StateDate, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="State date"
-                                                    Width="100" />
+                                                    Header="{x:Static p:Resources.StateDate}"
+                                                    />
                                 <DataGridTextColumn Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
-                                                    Header="Comment"
-                                                    Width="100" />
+                                                    Header="{x:Static p:Resources.Comment}"
+                                                    />
                             </DataGrid.Columns>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDoubleClick">

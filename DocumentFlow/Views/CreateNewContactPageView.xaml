@@ -48,22 +48,43 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    <StackPanel>
+
+    <DockPanel>
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Bottom">
+            <Button Content="{x:Static p:Resources.Back}"
+                    Margin="5"
+                    Width="150"
+                    Background="DarkRed"
+                    BorderBrush="PaleVioletRed"
+                    Command="{Binding BackCommand}" />
+            <Button Content="{x:Static p:Resources.Create}"
+                    Margin="5"
+                    Width="150"
+                    Background="Green"
+                    BorderBrush="DarkGreen"
+                    Command="{Binding OkCommand}" />
+        </StackPanel>
         <Label Content="{x:Static p:Resources.Name}"
                FontSize="15"
+               DockPanel.Dock="Top"
                Margin="2" />
         <TextBox Text="{Binding Name}"
-                 Margin="2" />
+                 DockPanel.Dock="Top"
+                 Margin="2,2,20,2" />
         <Label Content="{x:Static p:Resources.Surname}"
+               DockPanel.Dock="Top"
                FontSize="15"
                Margin="2" />
         <TextBox Text="{Binding Surname}"
-                 Margin="2" />
+                 DockPanel.Dock="Top"
+                 Margin="2,2,20,2" />
         <Label Content="{x:Static p:Resources.Organization}"
                FontSize="15"
+               DockPanel.Dock="Top"
                Margin="2" />
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Right">
+        <DockPanel HorizontalAlignment="Left"
+                   DockPanel.Dock="Top">
             <ComboBox Margin="2"
                       HorizontalContentAlignment="Left"
                       ItemsSource="{Binding Path = OrgCollection}"
@@ -72,49 +93,33 @@
                       Width="615" />
             <Button Content="{x:Static p:Resources.AddNewOrganization}"
                     Command="{Binding AddNewOrgCommans}"
-                    Margin="2" />
-        </StackPanel>
-        <Button Content="{x:Static p:Resources.Add}"
+                    Margin="15,2,2,2"/>
+        </DockPanel>
+        <Button Content="{x:Static p:Resources.AddInfo}"
                 Width="100"
+                DockPanel.Dock="Top"
                 HorizontalAlignment="Left"
                 Margin="2"
                 Command="{Binding AddCommand}" />
-        <ListBox Grid.Column="1"
-                 Grid.ColumnSpan="2"
-                 Grid.Row="3"
-                 Grid.RowSpan="10"
-                 BorderBrush="DarkViolet"
-                 BorderThickness="1"
-                 HorizontalContentAlignment="Stretch"
-                 ItemsSource="{Binding InfoList}"
-                 Margin="14,3,14,3"
-                 ScrollViewer.CanContentScroll="True"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible"
-                 ItemTemplate="{StaticResource ListBoxItemTemplate}"
-                 Height="160">
+        <Grid VerticalAlignment="Stretch">
+            <ListBox BorderBrush="DarkViolet"
+                     BorderThickness="1"
+                     HorizontalContentAlignment="Stretch"
+                     ItemsSource="{Binding InfoList}"
+                     Margin="14,3,14,3"
+                     ScrollViewer.CanContentScroll="True"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+                     ItemTemplate="{StaticResource ListBoxItemTemplate}"
+                     VerticalAlignment="Stretch">
 
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment"
-                            Value="Stretch" />
-                </Style>
-            </ListBox.ItemContainerStyle>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
 
-        </ListBox>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="{x:Static p:Resources.Back}"
-                    Margin="5"
-                    Width="150"
-                    Background="DarkRed"
-                    BorderBrush="PaleVioletRed"
-                    Command="{Binding BackCommand}" />
-            <Button Content="{Binding ButtonOkContent}"
-                    Margin="5"
-                    Width="150"
-                    Background="Green"
-                    BorderBrush="DarkGreen"
-                    Command="{Binding OkCommand}" />
-        </StackPanel>
-
-    </StackPanel>
+            </ListBox>
+        </Grid>
+    </DockPanel>
 </UserControl>

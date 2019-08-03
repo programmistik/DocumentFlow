@@ -105,7 +105,7 @@
 
         <StackPanel DockPanel.Dock="Bottom"
                     VerticalAlignment="Bottom">
-            <Button Content="{Binding ButtonOkContent}"
+            <Button Content="{x:Static p:Resources.Create}"
                     Margin="10"
                     Command="{Binding CreateNewUserCommand}"
                     CommandParameter="{Binding ElementName=This}" />

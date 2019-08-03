@@ -36,8 +36,8 @@
                     <Button  Grid.Column="1"
                              Margin="1"
                              Command="{Binding DataContext.ReadMailCommand, ElementName=This}"
-                             CommandParameter="{Binding}">
-                        Read
+                             CommandParameter="{Binding}"
+                             Content="{x:Static p:Resources.Read}">
                     </Button>
 
 

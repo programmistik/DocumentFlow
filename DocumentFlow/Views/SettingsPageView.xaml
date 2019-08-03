@@ -329,7 +329,7 @@
                            HorizontalAlignment="Left" />
 
                     <ComboBox Width="250"
-                              Height="50"
+                              Height="55"
                               FontSize="35"
                               HorizontalAlignment="Right"
                               Margin="2,5"
@@ -352,7 +352,7 @@
                            HorizontalAlignment="Left" />
 
                     <ComboBox Width="250"
-                              Height="50"
+                              Height="55"
                               HorizontalAlignment="Right"
                               Margin="5"
                               Background="White"

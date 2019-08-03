@@ -286,16 +286,16 @@
             </DataGrid.Columns>
         </DataGrid>-->
         <!--#endregion-->
-        <StackPanel Grid.Column="1"
+        <DockPanel Grid.Column="1"
                     Grid.ColumnSpan="7"
                     Grid.Row="1"
-                    Grid.RowSpan="6">
+                    Grid.RowSpan="6" LastChildFill="True">
             <Button Content="{x:Static p:Resources.AddNewContact}"
-                    x:Name="btnAddNewContact"
+                    x:Name="btnAddNewContact" DockPanel.Dock="Top"
                     Margin="5"
                     IsEnabled="{Binding AddIsEnabled}"
                     Command="{Binding AddContactCommand}" />
-            <DockPanel>
+            <DockPanel DockPanel.Dock="Top">
                 <Label Content="🔎"
                        FontSize="20"
                        FontWeight="Bold"
@@ -333,25 +333,23 @@
                     </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>-->
-            <ListBox BorderBrush="DarkViolet"
-                     BorderThickness="1"
-                     HorizontalContentAlignment="Stretch"
-                     ItemsSource="{Binding FilteredContacts}"
-                     Margin="5"
-                     ScrollViewer.CanContentScroll="True"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible"
-                     ItemTemplate="{StaticResource ListBoxItemTemplate}"
-                     Height="293">
+                <ListBox BorderBrush="DarkViolet"
+                         BorderThickness="1"
+                         HorizontalContentAlignment="Stretch"
+                         ItemsSource="{Binding FilteredContacts}"
+                         Margin="5"
+                         ScrollViewer.CanContentScroll="True"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible"
+                         ItemTemplate="{StaticResource ListBoxItemTemplate}">
 
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment"
-                                Value="Stretch" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Stretch" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
 
-            </ListBox>
-        </StackPanel>
-
+                </ListBox>
+        </DockPanel>
     </Grid>
 </UserControl>

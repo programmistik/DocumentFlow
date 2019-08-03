@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocumentFlow.ModalWindows"
+        xmlns:p="clr-namespace:DocumentFlow.Properties"
         mc:Ignorable="d"
         x:Name="This"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
@@ -16,7 +17,7 @@
     </i:Interaction.Triggers>-->
     
     <StackPanel>
-        <Label Content="Department:"/>
+        <Label Content="{x:Static p:Resources.Department}"/>
         <ComboBox ItemsSource="{Binding Path = DeptCollection}"    
                   SelectedItem="{Binding Path = Dept}" 
                   IsEditable="{Binding roDept}"
@@ -27,7 +28,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ComboBox>
-        <Label Content="Responce person:"/>
+        <Label Content="{x:Static p:Resources.ResponsPerson}"/>
         <ComboBox ItemsSource="{Binding Path = EmpCollection}"    
                   SelectedItem="{Binding Path = Emp}" 
                   IsEditable="{Binding roEmp}"
@@ -39,7 +40,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ComboBox>
-        <Label Content="State:"/>
+        <Label Content="{x:Static p:Resources.State}"/>
         <ComboBox ItemsSource="{Binding Path = StateCollection}"    
                   SelectedItem="{Binding Path = State}" 
                   IsEditable="{Binding roState}"
@@ -52,18 +53,18 @@
                 </Style>
             </ComboBox.ItemContainerStyle>
         </ComboBox>
-        <Label Content="Comment:"/>
+        <Label Content="{x:Static p:Resources.Comment}"/>
         <TextBox Text="{Binding Comment}"
                  IsReadOnly="{Binding roComment}"/>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
-            <Button Content="Cancel"
+            <Button Content="{x:Static p:Resources.Cancel}"
                     Margin="5"
                     Width="150"
                     Background="DarkRed"
                     BorderBrush="PaleVioletRed"
                     Command="{Binding CancelCommand}"/>
-            <Button Content="Create"
+            <Button Content="{x:Static p:Resources.Create}"
                     Margin="5"
                     Width="150"
                     Background="Green"

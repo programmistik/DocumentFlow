@@ -88,6 +88,15 @@ namespace DocumentFlow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Information.
+        /// </summary>
+        public static string AddInfo {
+            get {
+                return ResourceManager.GetString("AddInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new.
         /// </summary>
         public static string AddNew {
@@ -120,6 +129,15 @@ namespace DocumentFlow.Properties {
         public static string AddNewEvent {
             get {
                 return ResourceManager.GetString("AddNewEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New File.
+        /// </summary>
+        public static string AddNewFile {
+            get {
+                return ResourceManager.GetString("AddNewFile", resourceCulture);
             }
         }
         
@@ -363,6 +381,15 @@ namespace DocumentFlow.Properties {
         public static string Count {
             get {
                 return ResourceManager.GetString("Count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
             }
         }
         
@@ -637,6 +664,15 @@ namespace DocumentFlow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Find.
+        /// </summary>
+        public static string Find {
+            get {
+                return ResourceManager.GetString("Find", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flamingo.
         /// </summary>
         public static string Flamingo {
@@ -723,6 +759,15 @@ namespace DocumentFlow.Properties {
         public static string InfoTypes {
             get {
                 return ResourceManager.GetString("InfoTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input document number.
+        /// </summary>
+        public static string InputDocNumber {
+            get {
+                return ResourceManager.GetString("InputDocNumber", resourceCulture);
             }
         }
         
@@ -890,6 +935,15 @@ namespace DocumentFlow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number.
+        /// </summary>
+        public static string Numberr {
+            get {
+                return ResourceManager.GetString("Numberr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string Ok {
@@ -917,11 +971,29 @@ namespace DocumentFlow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Organization name.
+        /// </summary>
+        public static string OrganizationName {
+            get {
+                return ResourceManager.GetString("OrganizationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to or upload from file.
         /// </summary>
         public static string OrUploadFromFile {
             get {
                 return ResourceManager.GetString("OrUploadFromFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        public static string Owner {
+            get {
+                return ResourceManager.GetString("Owner", resourceCulture);
             }
         }
         
@@ -989,11 +1061,29 @@ namespace DocumentFlow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Read.
+        /// </summary>
+        public static string Read {
+            get {
+                return ResourceManager.GetString("Read", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receive Mail.
         /// </summary>
         public static string ReceiveMail {
             get {
                 return ResourceManager.GetString("ReceiveMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Responsible person.
+        /// </summary>
+        public static string ResponsPerson {
+            get {
+                return ResourceManager.GetString("ResponsPerson", resourceCulture);
             }
         }
         
@@ -1106,6 +1196,15 @@ namespace DocumentFlow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show in file.
+        /// </summary>
+        public static string ShowInFile {
+            get {
+                return ResourceManager.GetString("ShowInFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Snap image.
         /// </summary>
         public static string SnapImage {
@@ -1129,6 +1228,15 @@ namespace DocumentFlow.Properties {
         public static string State {
             get {
                 return ResourceManager.GetString("State", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StateDate.
+        /// </summary>
+        public static string StateDate {
+            get {
+                return ResourceManager.GetString("StateDate", resourceCulture);
             }
         }
         
@@ -1264,6 +1372,15 @@ namespace DocumentFlow.Properties {
         public static string Wednesday {
             get {
                 return ResourceManager.GetString("Wednesday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Who Edited.
+        /// </summary>
+        public static string WhoEdited {
+            get {
+                return ResourceManager.GetString("WhoEdited", resourceCulture);
             }
         }
     }

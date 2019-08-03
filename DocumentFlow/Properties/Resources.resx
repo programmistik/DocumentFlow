@@ -514,4 +514,43 @@
   <data name="Wednesday" xml:space="preserve">
     <value>Wednesday</value>
   </data>
+  <data name="AddInfo" xml:space="preserve">
+    <value>Add Information</value>
+  </data>
+  <data name="AddNewFile" xml:space="preserve">
+    <value>Add New File</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="InputDocNumber" xml:space="preserve">
+    <value>Input document number</value>
+  </data>
+  <data name="Numberr" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="OrganizationName" xml:space="preserve">
+    <value>Organization name</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Read" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="ResponsPerson" xml:space="preserve">
+    <value>Responsible person</value>
+  </data>
+  <data name="ShowInFile" xml:space="preserve">
+    <value>Show in file</value>
+  </data>
+  <data name="StateDate" xml:space="preserve">
+    <value>StateDate</value>
+  </data>
+  <data name="WhoEdited" xml:space="preserve">
+    <value>Who Edited</value>
+  </data>
 </root>

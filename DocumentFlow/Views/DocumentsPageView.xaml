@@ -223,32 +223,25 @@
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Binding="{Binding DocNumber, UpdateSourceTrigger=PropertyChanged}"
-                                        Header="{x:Static p:Resources.Number}"
-                                        Width="100" />
+                                        Header="{x:Static p:Resources.Number}" />
 
                     <DataGridTextColumn Binding="{Binding DocDate, UpdateSourceTrigger=PropertyChanged}"
-                                        Header="{x:Static p:Resources.Date}"
-                                        Width="100" />
+                                        Header="{x:Static p:Resources.Date}" />
 
                     <DataGridTextColumn Binding="{Binding Company.CompanyName, UpdateSourceTrigger=PropertyChanged}"
-                                        Header="{x:Static p:Resources.Company}"
-                                        Width="100" />
+                                        Header="{x:Static p:Resources.Company}" />
 
                     <DataGridTextColumn Binding="{Binding DocumentType.DocTypeName, UpdateSourceTrigger=PropertyChanged}"
-                                        Header="{x:Static p:Resources.Type}"
-                                        Width="100" />
+                                        Header="{x:Static p:Resources.Type}" />
 
                     <DataGridTextColumn Binding="{Binding DocumentState.DocStateName, UpdateSourceTrigger=PropertyChanged}"
-                                        Header="{x:Static p:Resources.State}"
-                                        Width="100" />
+                                        Header="{x:Static p:Resources.State}" />
 
                     <DataGridTextColumn Binding="{Binding DocInfoDate, UpdateSourceTrigger=PropertyChanged}"
-                                        Header="{x:Static p:Resources.DocInfoDate}"
-                                        Width="100" />
+                                        Header="{x:Static p:Resources.DocInfoDate}" />
 
                     <DataGridTextColumn Binding="{Binding Organization.OrganizationName, UpdateSourceTrigger=PropertyChanged}"
-                                        Header="{x:Static p:Resources.Organization}"
-                                        Width="100" />
+                                        Header="{x:Static p:Resources.Organization}" />
 
                     <!--<DataGridTextColumn  
                       Binding="{Binding InfoContact.Name, UpdateSourceTrigger=PropertyChanged}" 
