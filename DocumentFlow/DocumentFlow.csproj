@@ -256,6 +256,7 @@
       <DependentUpon>201907121109175_docproc.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModalWindows\AddContactInfoViewModel.cs" />
     <Compile Include="ModalWindows\AddContactInfoWindow.xaml.cs">
       <DependentUpon>AddContactInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -472,10 +473,12 @@
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ru-RU1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Resources\autofac.json" />

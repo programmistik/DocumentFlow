@@ -6,19 +6,41 @@
         xmlns:local="clr-namespace:DocumentFlow.ModalWindows"
         xmlns:p="clr-namespace:DocumentFlow.Properties"
         mc:Ignorable="d"
-        Title="AddContactInfoWindow" Height="200" Width="500" Closing="Window_Closing">
+        x:Name="This"
+        Title="{Binding Title}" 
+        Height="150" 
+        Width="500">
     <StackPanel>
-        <ComboBox  x:Name="InfoCollection"
+        <ComboBox  
                    Margin="3"
                    FontSize="15"
-                   DisplayMemberPath = "InfoType" SelectionChanged="InfoCollection_SelectionChanged"/>
-        <TextBox x:Name="InputValue"
+                   DisplayMemberPath = "InfoType" 
+                   ItemsSource="{Binding Path = InfoCollection}"    
+                  SelectedItem="{Binding Path = SelectedInfo}" />
+        
+        <TextBox Text="{Binding InputValue}"
                  Margin="3"
                  FontSize="15"/>
-        <Button Content="{x:Static p:Resources.Ok}"
-                Margin="3" Click="OkButton_Click"/>
-        <Button Content="{x:Static p:Resources.Cancel}"
-                Margin="3"
-                Click="CancelButton_Click"/>
+        
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            
+            <Button Content="{x:Static p:Resources.Ok}"
+                    Margin="5"
+                    Width="150"
+                    Background="Green"
+                    BorderBrush="DarkGreen"
+                    Command="{Binding OkButton_Click}"
+                    CommandParameter="{Binding ElementName=This}"/>
+            
+            <Button Content="{x:Static p:Resources.Cancel}"
+                    Margin="5"
+                    Width="150"
+                    Background="DarkRed"
+                    BorderBrush="PaleVioletRed"
+                    Command ="{Binding CancelButton_Click}"
+                    CommandParameter="{Binding ElementName=This}"/>
+            
+        </StackPanel>
     </StackPanel>
 </Window>

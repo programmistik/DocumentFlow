@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,19 +56,20 @@ namespace DocumentFlow.ViewModels
         private void OnHitIt(NotificationMessage<ExternalContact> cont)
         {
             OrgCollection = new ObservableCollection<Organization>(db.Organizations);
-
+            
             if (cont.Notification == "ChangeContact")
             {
-                ButtonOkContent = "Save";
+                ButtonOkContent = Properties.Resources.Save; //"Save";
                 CurrentContact = cont.Content;
                 Name = CurrentContact.Name;
                 Surname = CurrentContact.Surname;
                 Organization = CurrentContact.Organization;
                 InfoList = new ObservableCollection<ContactInformation>(CurrentContact.ContactInfos);
+                //InfoList = new ObservableCollection<ContactInformation>(db.ContactInformations.Where(x => x.ContactId == CurrentContact.Id));
             }
             else if (cont.Notification == "AddContact")
             {
-                ButtonOkContent = "Create";
+                ButtonOkContent = Properties.Resources.Create; //"Create";
                 CurrentContact = cont.Content;
                 InfoList = new ObservableCollection<ContactInformation>();
             }
@@ -79,8 +81,11 @@ namespace DocumentFlow.ViewModels
             get => backCommand ?? (backCommand = new RelayCommand(
                 () =>
                 {
-                    
-                   navigationService.Navigate<ContactsPageView>();
+                    // clear db context
+
+                    db.ClearContext();
+
+                    navigationService.Navigate<ContactsPageView>();
                    
                 }
             ));
@@ -92,10 +97,13 @@ namespace DocumentFlow.ViewModels
             get => okCommand ?? (okCommand = new RelayCommand(
                 async () =>
                 {
+                    ///
                     CurrentContact.Name = Name;
                     CurrentContact.Surname = Surname;
                     CurrentContact.Organization = Organization;
-                    db.Contacts.Add(CurrentContact);
+
+                    if (ButtonOkContent == "Create")
+                        db.Contacts.Add(CurrentContact);
 
                     await db.SaveChangesAsync();
                     navigationService.Navigate<ContactsPageView>();
@@ -144,24 +152,66 @@ namespace DocumentFlow.ViewModels
         public RelayCommand AddCommand => addCommand ?? (addCommand = new RelayCommand(
                 () =>
                 {
-                    var lst = db.ContactInfoTypes.ToList();
+                    var lst = db.ContactInfoTypes;
 
-                    var win = new AddContactInfoWindow(lst);
+                    var win = new AddContactInfoWindow(lst.ToList(), lst.FirstOrDefault(), "");
 
                     win.ShowDialog();
-                    if (!string.IsNullOrEmpty(win.InputValue.Text))
+                    if (win.DataContext is AddContactInfoViewModel)
                     {
-                        var newInfo = new ContactInformation
-                        {
-                            Contact = CurrentContact,
-                            ContactInfoType = win.InfoCollection.SelectedItem as ContactInfoType,
-                            Value = win.InputValue.Text
-                        };
-                        InfoList.Add(newInfo);
-                        //db.Employees.Where(e => e == CurrentEmployee).Single().ContactInfos.Add(newInfo);
-                        CurrentContact.ContactInfos.Add(newInfo);
-                    }
+                        var dc = win.DataContext as AddContactInfoViewModel;
+                        if (!string.IsNullOrEmpty(dc.InputValue))
 
+                        {
+                            var newInfo = new ContactInformation
+                            {
+                                Contact = CurrentContact,
+                                ContactInfoType = dc.SelectedInfo,
+                                Value = dc.InputValue
+                            };
+                            InfoList.Add(newInfo);
+                            //db.Employees.Where(e => e == CurrentEmployee).Single().ContactInfos.Add(newInfo);
+                            CurrentContact.ContactInfos.Add(newInfo);
+                        }
+
+                    }
+                }
+            ));
+
+        private RelayCommand<ContactInformation> deleteInfoCommand;
+        public RelayCommand<ContactInformation> DeleteInfoCommand => deleteInfoCommand ?? (deleteInfoCommand = new RelayCommand<ContactInformation>(
+                param =>
+                {
+                    var answer = messageService.ShowYesNo("Are you sure?");
+                    if (answer)
+                    {
+                        InfoList.Remove(param);
+                    }
+                }
+            ));
+
+        private RelayCommand<ContactInformation> editInfoCommand;
+        public RelayCommand<ContactInformation> EditInfoCommand => editInfoCommand ?? (editInfoCommand = new RelayCommand<ContactInformation>(
+                param =>
+                {
+                    
+                    var lst = db.ContactInfoTypes;
+
+                    var win = new AddContactInfoWindow(lst.ToList(), param.ContactInfoType, param.Value);
+
+                    win.ShowDialog();
+                    if (win.DataContext is AddContactInfoViewModel)
+                    {
+                        var dc = win.DataContext as AddContactInfoViewModel;
+                        if (!string.IsNullOrEmpty(dc.InputValue))
+
+                        {
+                            param.ContactInfoType = dc.SelectedInfo;
+                            param.Value = dc.InputValue;
+                            InfoList = new ObservableCollection<ContactInformation>(CurrentContact.ContactInfos);
+                        }
+
+                    }
                 }
             ));
 

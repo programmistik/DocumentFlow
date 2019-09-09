@@ -130,11 +130,18 @@ namespace DocumentFlow.ViewModels
 
         private RelayCommand<Contact> deleteContactCommand;
         public RelayCommand<Contact> DeleteContactCommand => deleteContactCommand ?? (deleteContactCommand = new RelayCommand<Contact>(
-                param =>
+                async param =>
                 {
-
+                    var answer = messageService.ShowYesNo($"Are you sure?\nContact {param.ToString()} will delete.");
+                    if (answer)
+                    {
+                        ContactsList.Remove(param);
+                        db.Contacts.Remove(param);
+                        await db.SaveChangesAsync();
+                    }
                 }
             ));
+
         private RelayCommand<Contact> editContactCommand;
         public RelayCommand<Contact> EditContactCommand => editContactCommand ?? (editContactCommand = new RelayCommand<Contact>(
                 param =>
@@ -152,7 +159,7 @@ namespace DocumentFlow.ViewModels
                     if (param is Employee)
                     {
                         var val = param as Employee;
-                        str.Append(val.Company.CompanyName + " ("+val.Department.DepartmentName+" "+val.Position.PositionName+")\n");
+                        str.Append(val.Company.CompanyName + " ("+val.Department.DepartmentName+", "+val.Position.PositionName+")\n");
                     }
                     else if (param is ExternalContact)
                     {

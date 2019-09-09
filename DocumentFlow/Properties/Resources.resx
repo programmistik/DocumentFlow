@@ -553,4 +553,28 @@
   <data name="WhoEdited" xml:space="preserve">
     <value>Who Edited</value>
   </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Administrator's panel</value>
+  </data>
+  <data name="AppConst" xml:space="preserve">
+    <value>Application's constants</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>Edit user</value>
+  </data>
+  <data name="MainPage" xml:space="preserve">
+    <value>Main page</value>
+  </data>
+  <data name="NewMail" xml:space="preserve">
+    <value>New Mail</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="AddContactInfoWindow" xml:space="preserve">
+    <value>Add contact information</value>
+  </data>
+  <data name="EditFileComment" xml:space="preserve">
+    <value>Edit file's comment</value>
+  </data>
 </root>

@@ -329,7 +329,7 @@
                             </ListBox>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <Label Content="{x:Static p:Resources.AddNewFile}"
+                            <Label Content="{Binding AddNewFileContent}"
                                    FontSize="20"
                                    Margin="3"
                                    FontWeight="Bold"
@@ -364,7 +364,7 @@
                                          Margin="3" />
                             </DockPanel>
                             <Button Command="{Binding AddNewFileCommand}"
-                                    Content="{x:Static p:Resources.Add}"
+                                    Content="{Binding AddFileContent}"
                                     Margin="5" />
                         </StackPanel>
 

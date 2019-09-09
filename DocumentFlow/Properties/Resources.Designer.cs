@@ -19,7 +19,7 @@ namespace DocumentFlow.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -84,6 +84,15 @@ namespace DocumentFlow.Properties {
         public static string Add {
             get {
                 return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add contact information.
+        /// </summary>
+        public static string AddContactInfoWindow {
+            get {
+                return ResourceManager.GetString("AddContactInfoWindow", resourceCulture);
             }
         }
         
@@ -156,6 +165,24 @@ namespace DocumentFlow.Properties {
         public static string AddNewUser {
             get {
                 return ResourceManager.GetString("AddNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administrator&apos;s panel.
+        /// </summary>
+        public static string AdminPanel {
+            get {
+                return ResourceManager.GetString("AdminPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application&apos;s constants.
+        /// </summary>
+        public static string AppConst {
+            get {
+                return ResourceManager.GetString("AppConst", resourceCulture);
             }
         }
         
@@ -547,6 +574,15 @@ namespace DocumentFlow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit file&apos;s comment.
+        /// </summary>
+        public static string EditFileComment {
+            get {
+                return ResourceManager.GetString("EditFileComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edition.
         /// </summary>
         public static string Edition {
@@ -561,6 +597,15 @@ namespace DocumentFlow.Properties {
         public static string Editor {
             get {
                 return ResourceManager.GetString("Editor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit user.
+        /// </summary>
+        public static string EditUser {
+            get {
+                return ResourceManager.GetString("EditUser", resourceCulture);
             }
         }
         
@@ -844,6 +889,15 @@ namespace DocumentFlow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Main page.
+        /// </summary>
+        public static string MainPage {
+            get {
+                return ResourceManager.GetString("MainPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile Phone.
         /// </summary>
         public static string Mobile {
@@ -895,6 +949,15 @@ namespace DocumentFlow.Properties {
         public static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Mail.
+        /// </summary>
+        public static string NewMail {
+            get {
+                return ResourceManager.GetString("NewMail", resourceCulture);
             }
         }
         
@@ -1156,6 +1219,15 @@ namespace DocumentFlow.Properties {
         public static string SendMessage {
             get {
                 return ResourceManager.GetString("SendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         

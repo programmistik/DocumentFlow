@@ -34,22 +34,22 @@
                                 HorizontalAlignment="Stretch">
                         <DockPanel>
                             <Label FontWeight="Bold"
-                                   Content="{Binding ContactInfoType.InfoType}" />
-                            <Label Content="{Binding Value}" />
+                                   Content="{Binding ContactInfoType.InfoType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            <Label Content="{Binding Path = Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                         </DockPanel>
                     </StackPanel>
 
 
                     <Button  Grid.Column="1"
                              Margin="1"
-                             Command="{Binding DataContext.DeleteEventCommand, ElementName=This}"
+                             Command="{Binding DataContext.DeleteInfoCommand, ElementName=This}"
                              CommandParameter="{Binding}">
                         Delete
                     </Button>
 
                     <Button Grid.Column="2"
                             Margin="1"
-                            Command="{Binding DataContext.EditEventCommand, ElementName=This}"
+                            Command="{Binding DataContext.EditInfoCommand, ElementName=This}"
                             CommandParameter="{Binding}">
                         Edit
                     </Button>

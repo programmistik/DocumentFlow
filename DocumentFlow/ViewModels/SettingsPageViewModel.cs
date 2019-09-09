@@ -128,7 +128,8 @@ namespace DocumentFlow.ViewModels
         private RelayCommand loadedCommand;
         public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(
         () =>
-        {            
+        {
+
             VideoDevices = new ObservableCollection<FilterInfo>();
             GetVideoDevices();
             if (CurrentDevice != null)
@@ -244,8 +245,10 @@ namespace DocumentFlow.ViewModels
                 () =>
                 {
                     // do nothing
-                   
-                    //User = new User();
+                    // clear db context
+
+                    db.ClearContext();
+
                     StopCamera();
                     navigationService.Navigate<MainDesktopPageView>();
                 }
@@ -384,25 +387,69 @@ namespace DocumentFlow.ViewModels
         public RelayCommand AddCommand => addCommand ?? (addCommand = new RelayCommand(
                 () =>
                 {
-                    var lst = db.ContactInfoTypes.ToList();
+                    var lst = db.ContactInfoTypes;
 
-                    var win = new AddContactInfoWindow(lst);
+                    var win = new AddContactInfoWindow(lst.ToList(), lst.FirstOrDefault(), "");
 
                     win.ShowDialog();
-                    if (!string.IsNullOrEmpty(win.InputValue.Text))
+                    if (win.DataContext is AddContactInfoViewModel)
                     {
-                        var newInfo = new ContactInformation
+                        var dc = win.DataContext as AddContactInfoViewModel;
+                        if (!string.IsNullOrEmpty(dc.InputValue))
+
                         {
-                            Contact = CurrentEmployee,
-                            ContactInfoType = win.InfoCollection.SelectedItem as ContactInfoType,
-                            Value = win.InputValue.Text
-                        };
-                        InfoList.Add(newInfo);
-                        CurrentEmployee.ContactInfos.Add(newInfo);
+                            var newInfo = new ContactInformation
+                            {
+                                Contact = CurrentEmployee,
+                                ContactInfoType = dc.SelectedInfo,
+                                Value = dc.InputValue
+                            };
+                            InfoList.Add(newInfo);
+                            CurrentEmployee.ContactInfos.Add(newInfo);
+                        }
                     }
 
                 }
             ));
+
+        private RelayCommand<ContactInformation> deleteInfoCommand;
+        public RelayCommand<ContactInformation> DeleteInfoCommand => deleteInfoCommand ?? (deleteInfoCommand = new RelayCommand<ContactInformation>(
+                param =>
+                {
+                    var answer = messageService.ShowYesNo("Are you sure?");
+                    if (answer)
+                    {
+                        InfoList.Remove(param);
+                    }
+                }
+            ));
+
+        private RelayCommand<ContactInformation> editInfoCommand;
+        public RelayCommand<ContactInformation> EditInfoCommand => editInfoCommand ?? (editInfoCommand = new RelayCommand<ContactInformation>(
+                param =>
+                {
+
+                    var lst = db.ContactInfoTypes;
+
+                    var win = new AddContactInfoWindow(lst.ToList(), param.ContactInfoType, param.Value);
+
+                    win.ShowDialog();
+                    if (win.DataContext is AddContactInfoViewModel)
+                    {
+                        var dc = win.DataContext as AddContactInfoViewModel;
+                        if (!string.IsNullOrEmpty(dc.InputValue))
+
+                        {
+                           
+                            param.ContactInfoType = dc.SelectedInfo;
+                            param.Value = dc.InputValue;
+                            InfoList = new ObservableCollection<ContactInformation>(CurrentEmployee.ContactInfos);
+                        }
+
+                    }
+                }
+            ));
+
 
         private RelayCommand changeMyPassword;
         public RelayCommand ChangeMyPassword => changeMyPassword ?? (changeMyPassword = new RelayCommand(

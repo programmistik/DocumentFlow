@@ -161,8 +161,8 @@ namespace DocumentFlow.ViewModels
                 DocStatus = DocStatusCollection.Where(s => s.DocStateName == "New").Single();
                 DocStatus.IsSelectable = true;
                 CurrCollection = new ObservableCollection<Currency>(db.Currencies);
-                AddNewFileContent = "Add new file";
-                AddFileContent = "Add";
+                AddNewFileContent = Properties.Resources.AddNewFile; //"Add new file";
+                AddFileContent = Properties.Resources.Add; //"Add";
                 roEditFile = false;
                 roBtnEditFile = true;
                 DocFiles = new ObservableCollection<MyFile>();
@@ -207,8 +207,8 @@ namespace DocumentFlow.ViewModels
                         DocStatusCollection.Where(s => s.DocStateName == "In progress").Single().IsSelectable = true;
                         DocStatusCollection.Where(s => s.DocStateName == "Rejected").Single().IsSelectable = true;
 
-                        AddNewFileContent = "Add new file";
-                        AddFileContent = "Add";
+                        AddNewFileContent = Properties.Resources.AddNewFile; //"Add new file";
+                        AddFileContent = Properties.Resources.Add; //"Add";
                         roEditFile = false;
                         roBtnEditFile = true;
                         EditFileMode = false;
@@ -359,8 +359,8 @@ namespace DocumentFlow.ViewModels
                         FileName = "";
                         AddNewFilePath = "";
                         FileComment = "";
-                        AddNewFileContent = "Add new file";
-                        AddFileContent = "Add";
+                        AddNewFileContent = Properties.Resources.AddNewFile; //"Add new file";
+                        AddFileContent = Properties.Resources.Add; //"Add";
                         roEditFile = false;
                         roBtnEditFile = true;
                     }
@@ -375,8 +375,8 @@ namespace DocumentFlow.ViewModels
                    CurrentFile = param;
                    EditFileMode = true;
 
-                   AddNewFileContent = "Edit file comment";
-                   AddFileContent = "Save";
+                   AddNewFileContent = Properties.Resources.EditFileComment; //"Edit file comment";
+                   AddFileContent = Properties.Resources.Save; //"Save";
                    roEditFile = true;
                    roBtnEditFile = false;
                    FileName = param.FileName;

@@ -553,4 +553,28 @@
   <data name="WhoEdited" xml:space="preserve">
     <value>Кто редактировал</value>
   </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Панель администратора</value>
+  </data>
+  <data name="AppConst" xml:space="preserve">
+    <value>Константы приложения</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>Редактирование пользователя</value>
+  </data>
+  <data name="MainPage" xml:space="preserve">
+    <value>Главная страница</value>
+  </data>
+  <data name="NewMail" xml:space="preserve">
+    <value>Новое письмо</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="AddContactInfoWindow" xml:space="preserve">
+    <value>Добавить контактные данные</value>
+  </data>
+  <data name="EditFileComment" xml:space="preserve">
+    <value>Изменить комментарий файла</value>
+  </data>
 </root>

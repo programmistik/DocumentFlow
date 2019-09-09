@@ -6,6 +6,7 @@
              xmlns:p="clr-namespace:DocumentFlow.Properties"
              xmlns:local="clr-namespace:DocumentFlow.Views"
              mc:Ignorable="d"
+             x:Name="This"
              d:DesignHeight="750"
              d:DesignWidth="1300"
              Background="White">
@@ -25,21 +26,21 @@
                                 HorizontalAlignment="Stretch">
                         <DockPanel>
                             <Label FontWeight="Bold"
-                                   Content="{Binding ContactInfoType.InfoType}" />
-                            <Label Content="{Binding Value}" />
+                                   Content="{Binding Path = ContactInfoType.InfoType}" />
+                            <Label Content="{Binding Path = Value}" />
                         </DockPanel>
                     </StackPanel>
 
 
                     <Button  Grid.Column="1"
                              Margin="1"
-                             Command="{Binding DataContext.DeleteEventCommand, ElementName=This}"
+                             Command="{Binding DataContext.DeleteInfoCommand, ElementName=This}"
                              CommandParameter="{Binding}"
                              Content="{x:Static p:Resources.Delete}" />
 
                     <Button Grid.Column="2"
                             Margin="1"
-                            Command="{Binding DataContext.EditEventCommand, ElementName=This}"
+                            Command="{Binding DataContext.EditInfoCommand, ElementName=This}"
                             CommandParameter="{Binding}"
                             Content="{x:Static p:Resources.Edit}" />
 
@@ -58,7 +59,7 @@
                     Background="DarkRed"
                     BorderBrush="PaleVioletRed"
                     Command="{Binding BackCommand}" />
-            <Button Content="{x:Static p:Resources.Create}"
+            <Button Content="{Binding ButtonOkContent}"
                     Margin="5"
                     Width="150"
                     Background="Green"
@@ -96,7 +97,7 @@
                     Margin="15,2,2,2"/>
         </DockPanel>
         <Button Content="{x:Static p:Resources.AddInfo}"
-                Width="100"
+                
                 DockPanel.Dock="Top"
                 HorizontalAlignment="Left"
                 Margin="2"
