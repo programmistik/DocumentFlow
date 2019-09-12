@@ -37,6 +37,9 @@ namespace DocumentFlow.ModalWindows
         private string title;
         public string Title { get => title; set => Set(ref title, value); }
 
+        private string butt_Ok;
+        public string Butt_Ok { get => butt_Ok; set => Set(ref butt_Ok, value); }
+
         private List<Employee> AllEmployees { get; set; }
         public TaskProcess Process { get; set; }
 
@@ -67,22 +70,34 @@ namespace DocumentFlow.ModalWindows
                 State = StateCollection.Where(s => s.DocStateName == "New").Single();
                 roState = false;
                 this.StateCollection = new ObservableCollection<DocumentState>(StateCollection);
+                Butt_Ok = Properties.Resources.Create;
             }
             else
             {
+                Butt_Ok = Properties.Resources.Save;
                 Process = taskProcess;
                 Title = "Business Process";
                 Dept = Process.Department;
                 if (DeptCollection == null)
+                {
                     roDept = true;
+                    this.DeptCollection = new ObservableCollection<Department> { Dept };
+                }
                 else
                     this.DeptCollection = new ObservableCollection<Department>(DeptCollection);
 
                 Emp = Process.TaskUser;
                 if (EmpCollection == null)
+                {
                     roEmp = true;
+                    this.EmpCollection = new ObservableCollection<Employee> { Process.TaskUser };
+                    AllEmployees = EmpCollection;
+                }
                 else
-                    this.EmpCollection = new ObservableCollection<Employee>(EmpCollection);
+                {
+                    this.EmpCollection = new ObservableCollection<Employee>(EmpCollection.Where(x => x.DepartmentId == Dept.Id));
+                    AllEmployees = EmpCollection;
+                }
 
                 State = Process.State;
                 if (StateCollection == null)
@@ -155,6 +170,13 @@ namespace DocumentFlow.ModalWindows
                     State = State,
                     Comment = Comment
                 };
+            else
+            {
+                Process.Department = Dept;
+                Process.TaskUser = Emp;
+                Process.State = State;
+                Process.Comment = Comment;
+            }
             param.Hide();
         }));
 

@@ -626,6 +626,7 @@ namespace DocumentFlow.ViewModels
                 var win = new AddEditProcessWindow(param, null, null, null);
                 
                 win.ShowDialog();
+                return;
             }
             else
             {
@@ -639,6 +640,7 @@ namespace DocumentFlow.ViewModels
                         null);
 
                         win.ShowDialog();
+                        return;
                     }
                    
                 }
@@ -652,6 +654,7 @@ namespace DocumentFlow.ViewModels
                         null);
 
                         win.ShowDialog();
+                        return;
                     }
                 }
                 if (param.TaskUser == CurrentEmployee)
@@ -662,6 +665,7 @@ namespace DocumentFlow.ViewModels
                         new List<DocumentState>(db.DocumentStates));
 
                     win.ShowDialog();
+                    return;
                 }
             }
         }));

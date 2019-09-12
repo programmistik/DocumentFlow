@@ -255,6 +255,10 @@
     <Compile Include="Migrations\201907121109175_docproc.Designer.cs">
       <DependentUpon>201907121109175_docproc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909120853298_ttt.cs" />
+    <Compile Include="Migrations\201909120853298_ttt.Designer.cs">
+      <DependentUpon>201909120853298_ttt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModalWindows\AddContactInfoViewModel.cs" />
     <Compile Include="ModalWindows\AddContactInfoWindow.xaml.cs">
@@ -469,6 +473,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907121109175_docproc.resx">
       <DependentUpon>201907121109175_docproc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909120853298_ttt.resx">
+      <DependentUpon>201909120853298_ttt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

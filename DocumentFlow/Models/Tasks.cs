@@ -10,11 +10,15 @@ namespace DocumentFlow.Models
     {
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
-        public User StartUser { get; set; }
-        public Department Department { get; set; }
-        public Employee TaskUser { get; set; }
-      //  public DateTime Deadline { get; set; }
-        public DocumentState State { get; set; }
+        public int? StartUserId { get; set; }
+        public virtual User StartUser { get; set; }
+        public int? DepartmentId { get; set; }
+        public virtual Department Department { get; set; }
+        public int? TaskUserId { get; set; }
+        public virtual Employee TaskUser { get; set; }
+        //  public DateTime Deadline { get; set; }
+        public int? StateId { get; set; }
+        public virtual DocumentState State { get; set; }
         public string Comment { get; set; }
         public DateTime? StateDate { get; set; }
 

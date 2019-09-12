@@ -44,9 +44,15 @@ namespace DocumentFlow.ViewModels
                 {
                     if (!string.IsNullOrEmpty(DocNumber))
                     {
-                        var doc = db.Documents.Where(x => x.DocNumber.Equals(DocNumber)).FirstOrDefault().Id;
-                        var col = db.Histories.Where(x => x.ObjectId == doc).ToList();
-                        HistoryCollection = new ObservableCollection<History>(col);
+                        var trydoc = db.Documents.Where(x => x.DocNumber.Equals(DocNumber)).FirstOrDefault();
+                        if (trydoc != null)
+                        {
+                            var doc = trydoc.Id;
+                            var col = db.Histories.Where(x => x.ObjectId == doc).ToList();
+                            HistoryCollection = new ObservableCollection<History>(col);
+                        }
+                        else
+                            messageService.ShowError("Wrong number!");
                     }
                     
                 }
