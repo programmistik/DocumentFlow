@@ -13,12 +13,12 @@ namespace DocumentFlow.Services
 {
     public interface IGoogleService
     {
-        CalendarService GetQuickstartService();
+        CalendarService GetQuickstartService(User usr);
         Events GetEventsByDate(DateTime data, CalendarService service);
         void addNewEvent(CalendarService service, Event NewEvent, string calendarId = "primary");
         void updateEvent(CalendarService service, Event eventToUpdate, string calendarId = "primary");
         void deleteEvent(CalendarService service, Event eventToDelete, string calendarId = "primary");
-        GmailService getGMailService();
+        GmailService getGMailService(User usr);
         Task<GoogleMessage> getMessageAsync(Message email, GmailService GMailService);
         byte[] FromBase64ForUrlString(string base64ForUrlInput);
         string Base64UrlEncode(byte[] input);

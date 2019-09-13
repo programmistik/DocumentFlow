@@ -23,7 +23,8 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
-        private readonly IGoogleService googleService;
+
+        private IGoogleService googleService;
         private GmailService GMailService;
 
         private ObservableCollection<GoogleMessage> inboxList;
@@ -41,6 +42,9 @@ namespace DocumentFlow.ViewModels
         {
             if (usr.Notification == "SendCurrentUser")
             {
+                googleService = new GoogleServices();
+                GMailService = googleService.getGMailService(usr.Content);
+
                 CurrentUser = usr.Content;
                 var emp = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
                 Fio = emp.Name + " " + emp.Surname;
@@ -75,13 +79,16 @@ namespace DocumentFlow.ViewModels
         }
 
 
-        public GMailPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db, IGoogleService googleService)
+        public GMailPageViewModel(INavigationService navigationService, 
+                                    IMessageService messageService, 
+                                    AppDbContext db) 
+                                    //IGoogleService googleService)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
-            this.googleService = googleService;
-            GMailService = googleService.getGMailService();
+            //this.googleService = googleService;
+            
             InboxList = new ObservableCollection<GoogleMessage>();
 
             Messenger.Default.Register<NotificationMessage<User>>(this, OnHitUser);

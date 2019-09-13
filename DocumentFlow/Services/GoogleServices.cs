@@ -19,7 +19,7 @@ namespace DocumentFlow.Services
     public class GoogleServices:IGoogleService
     {
 
-        public CalendarService GetQuickstartService()
+        public CalendarService GetQuickstartService(User usr)
         {
             UserCredential credential;
             string[] Scopes = {
@@ -32,7 +32,7 @@ namespace DocumentFlow.Services
             {
                 // The file token.json stores the user's access and refresh tokens, and is created
                 // automatically when the authorization flow completes for the first time.
-                string credPath = "token.json";
+                string credPath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Google\\" + usr.Login + "\\token.json";
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                     Scopes,
@@ -103,13 +103,13 @@ namespace DocumentFlow.Services
             service.Events.Delete(calendarId, eventToDelete.Id).Execute();
         }
 
-        public int getEventCountForToday()
-        {
-            var evs = GetEventsByDate(DateTime.Today, GetQuickstartService());
-            return evs.Items.Count();
-        }
+        //public int getEventCountForToday()
+        //{
+        //    var evs = GetEventsByDate(DateTime.Today, GetQuickstartService());
+        //    return evs.Items.Count();
+        //}
 
-        public GmailService getGMailService()
+        public GmailService getGMailService(User usr)
         {
             string[] Scopes = {
                 GmailService.Scope.GmailReadonly,
@@ -124,7 +124,9 @@ namespace DocumentFlow.Services
             {
                 // The file token.json stores the user's access and refresh tokens, and is created
                 // automatically when the authorization flow completes for the first time.
-                string credPath = "mail_token.json";
+                //string credPath = "mail_token.json";
+                
+                string credPath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Google\\"+usr.Login+"\\mail_token.json";
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                     Scopes,

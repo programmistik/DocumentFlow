@@ -28,7 +28,7 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
-        private readonly IGoogleService googleService;
+        private IGoogleService googleService;
 
         private DateTime? selectedDate;
         public DateTime? SelectedDate { get => selectedDate; set => Set(ref selectedDate, value); }
@@ -58,23 +58,34 @@ namespace DocumentFlow.ViewModels
                     Avatara = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png";
                 else
                     Avatara = emp.Photo;
+
+                // google
+                googleService = new GoogleServices(); 
+                GoogleCalendarService = googleService.GetQuickstartService(CurrentUser);
+                CurrentDate = DateTime.Today;
+                SelectedDate = (DateTime?)CurrentDate;
+                var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+                EventList = new ObservableCollection<Event>(events.Items);
             }
         }
 
 
 
         private CalendarService GoogleCalendarService;
-        public CalendarPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db, IGoogleService googleService)
+        public CalendarPageViewModel(INavigationService navigationService, 
+                                        IMessageService messageService, 
+                                        AppDbContext db /*, 
+                                        IGoogleService googleService*/)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
-            this.googleService = googleService;
-            GoogleCalendarService = googleService.GetQuickstartService();
-            CurrentDate = DateTime.Today;
-            SelectedDate = (DateTime?)CurrentDate;
-            var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
-            EventList = new ObservableCollection<Event>(events.Items);
+            //this.googleService = googleService;
+            //GoogleCalendarService = googleService.GetQuickstartService();
+            //CurrentDate = DateTime.Today;
+            //SelectedDate = (DateTime?)CurrentDate;
+            //var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+            //EventList = new ObservableCollection<Event>(events.Items);
             Messenger.Default.Register<NotificationMessage<User>>(this, OnHitUser);
         }
 
@@ -82,11 +93,11 @@ namespace DocumentFlow.ViewModels
         public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(UserControlOpened));
         private void UserControlOpened()
         {
-            GoogleCalendarService = googleService.GetQuickstartService();
-            CurrentDate = DateTime.Today;
-            SelectedDate = (DateTime?)CurrentDate;
-            var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
-            EventList = new ObservableCollection<Event>(events.Items);
+            //GoogleCalendarService = googleService.GetQuickstartService();
+            //CurrentDate = DateTime.Today;
+            //SelectedDate = (DateTime?)CurrentDate;
+            //var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+            //EventList = new ObservableCollection<Event>(events.Items);
         }
 
         private RelayCommand<SelectionChangedEventArgs> selectedDatesChangedCommand;

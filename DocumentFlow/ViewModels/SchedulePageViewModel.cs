@@ -27,7 +27,7 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
-        private readonly IGoogleService googleService;
+        private IGoogleService googleService;
 
         private DateTime? selectedDate;
         public DateTime? SelectedDate { get => selectedDate; set => Set(ref selectedDate, value); }
@@ -53,17 +53,162 @@ namespace DocumentFlow.ViewModels
         public ObservableCollection<Event> EventListSunday { get => eventListSunday; set => Set(ref eventListSunday, value); }
 
         private CalendarService GoogleCalendarService;
-        public SchedulePageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db, IGoogleService googleService)
+        public SchedulePageViewModel(INavigationService navigationService, 
+                                        IMessageService messageService, 
+                                        AppDbContext db /*, 
+                                        IGoogleService googleService*/)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
-            this.googleService = googleService;
-            GoogleCalendarService = googleService.GetQuickstartService();
+           
+
+            Messenger.Default.Register<NotificationMessage<User>>(this, OnHitUser);
+        }
+
+        private RelayCommand loadedCommand;
+        public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(UserControlOpened));
+        private void UserControlOpened()
+        {
+            //GoogleCalendarService = googleService.GetQuickstartService();
+            //CurrentDate = DateTime.Today;
+            //SelectedDate = (DateTime?)CurrentDate;
+            //var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+            //EventList = new ObservableCollection<Event>(events.Items);
+        }
+
+        private RelayCommand<SelectionChangedEventArgs> selectedDatesChangedCommand;
+        public RelayCommand<SelectionChangedEventArgs> SelectedDatesChangedCommand => selectedDatesChangedCommand ?? (selectedDatesChangedCommand = new RelayCommand<SelectionChangedEventArgs>(
+                param =>
+                {
+                    EventList.Clear();
+                    SelectedDate = ((System.Windows.Controls.Calendar)param.Source).SelectedDate;
+                    if (SelectedDate != null)
+                    {
+                        var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+                        EventList = new ObservableCollection<Event>(events.Items);
+                    }
+                }
+            ));
+
+        private User CurrentUser { get; set; }
+
+        private string fio;
+        public string Fio { get => fio; set => Set(ref fio, value); }
+
+        private string avatara;
+        public string Avatara { get => avatara; set => Set(ref avatara, value); }
+
+        private void OnHitUser(NotificationMessage<User> usr)
+        {
+            if (usr.Notification == "SendCurrentUser")
+            {
+                CurrentUser = usr.Content;
+                GetSchedule(CurrentUser);
+
+                //CurrentDate = DateTime.Today;
+                //SelectedDate = (DateTime?)CurrentDate;
+                //var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+                //EventList = new ObservableCollection<Event>(events.Items);
+
+                var emp = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
+                Fio = emp.Name + " " + emp.Surname;
+
+                if (string.IsNullOrEmpty(emp.Photo))
+                    Avatara = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png";
+                else
+                    Avatara = emp.Photo;
+            }
+        }
+
+        #region NavigationCommands
+        //Upper Menu
+        private RelayCommand gMain;
+        public RelayCommand GMain => gMain ?? (gMain = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    navigationService.Navigate<MainDesktopPageView>();
+                }
+            ));
+
+        private RelayCommand gSettings;
+        public RelayCommand GSettings => gSettings ?? (gSettings = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    navigationService.Navigate<SettingsPageView>();
+                }
+            ));
+
+        private RelayCommand gExit;
+        public RelayCommand GExit => gExit ?? (gExit = new RelayCommand(
+                () =>
+                {
+                    navigationService.Navigate<LogInPageView>();
+                }
+            ));
+
+
+        //Aside
+
+        private RelayCommand gDocuments;
+        public RelayCommand GDocuments => gDocuments ?? (gDocuments = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    navigationService.Navigate<DocumentsPageView>();
+                }
+            ));
+
+        private RelayCommand gNews;
+        public RelayCommand GNews => gNews ?? (gNews = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    navigationService.Navigate<NewsPageView>();
+                }
+            ));
+
+        private RelayCommand gCalendar;
+        public RelayCommand GCalendar => gCalendar ?? (gCalendar = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    navigationService.Navigate<CalendarPageView>();
+                }
+            ));
+
+        private RelayCommand gMail;
+        public RelayCommand GMail => gMail ?? (gMail = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    navigationService.Navigate<GMailPageView>();
+                }
+            ));
+
+        private RelayCommand gContacts;
+        public RelayCommand GContacts => gContacts ?? (gContacts = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
+                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "Contacts"));
+                    navigationService.Navigate<ContactsPageView>();
+                }
+            ));
+
+
+        #endregion
+
+        private void GetSchedule(User usr)
+        {
+            googleService = new GoogleServices();
+            GoogleCalendarService = googleService.GetQuickstartService(usr);
             CurrentDate = DateTime.Today;
             SelectedDate = (DateTime?)CurrentDate;
             var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
-            if(DateTime.Today.DayOfWeek.ToString() == "Saturday")
+            if (DateTime.Today.DayOfWeek.ToString() == "Saturday")
             {
                 EventListSaturday = new ObservableCollection<Event>(events.Items);
 
@@ -301,136 +446,6 @@ namespace DocumentFlow.ViewModels
                 eventss = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
                 EventListTuesday = new ObservableCollection<Event>(eventss.Items);
             }
-
-            Messenger.Default.Register<NotificationMessage<User>>(this, OnHitUser);
         }
-
-        private RelayCommand loadedCommand;
-        public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(UserControlOpened));
-        private void UserControlOpened()
-        {
-            GoogleCalendarService = googleService.GetQuickstartService();
-            CurrentDate = DateTime.Today;
-            SelectedDate = (DateTime?)CurrentDate;
-            var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
-            EventList = new ObservableCollection<Event>(events.Items);
-        }
-
-        private RelayCommand<SelectionChangedEventArgs> selectedDatesChangedCommand;
-        public RelayCommand<SelectionChangedEventArgs> SelectedDatesChangedCommand => selectedDatesChangedCommand ?? (selectedDatesChangedCommand = new RelayCommand<SelectionChangedEventArgs>(
-                param =>
-                {
-                    EventList.Clear();
-                    SelectedDate = ((System.Windows.Controls.Calendar)param.Source).SelectedDate;
-                    if (SelectedDate != null)
-                    {
-                        var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
-                        EventList = new ObservableCollection<Event>(events.Items);
-                    }
-                }
-            ));
-
-        private User CurrentUser { get; set; }
-
-        private string fio;
-        public string Fio { get => fio; set => Set(ref fio, value); }
-
-        private string avatara;
-        public string Avatara { get => avatara; set => Set(ref avatara, value); }
-
-        private void OnHitUser(NotificationMessage<User> usr)
-        {
-            if (usr.Notification == "SendCurrentUser")
-            {
-                CurrentUser = usr.Content;
-                var emp = db.Employees.Where(e => e.UserId == CurrentUser.Id).Single();
-                Fio = emp.Name + " " + emp.Surname;
-
-                if (string.IsNullOrEmpty(emp.Photo))
-                    Avatara = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png";
-                else
-                    Avatara = emp.Photo;
-            }
-        }
-
-        #region NavigationCommands
-        //Upper Menu
-        private RelayCommand gMain;
-        public RelayCommand GMain => gMain ?? (gMain = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    navigationService.Navigate<MainDesktopPageView>();
-                }
-            ));
-
-        private RelayCommand gSettings;
-        public RelayCommand GSettings => gSettings ?? (gSettings = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    navigationService.Navigate<SettingsPageView>();
-                }
-            ));
-
-        private RelayCommand gExit;
-        public RelayCommand GExit => gExit ?? (gExit = new RelayCommand(
-                () =>
-                {
-                    navigationService.Navigate<LogInPageView>();
-                }
-            ));
-
-
-        //Aside
-
-        private RelayCommand gDocuments;
-        public RelayCommand GDocuments => gDocuments ?? (gDocuments = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    navigationService.Navigate<DocumentsPageView>();
-                }
-            ));
-
-        private RelayCommand gNews;
-        public RelayCommand GNews => gNews ?? (gNews = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    navigationService.Navigate<NewsPageView>();
-                }
-            ));
-
-        private RelayCommand gCalendar;
-        public RelayCommand GCalendar => gCalendar ?? (gCalendar = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    navigationService.Navigate<CalendarPageView>();
-                }
-            ));
-
-        private RelayCommand gMail;
-        public RelayCommand GMail => gMail ?? (gMail = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    navigationService.Navigate<GMailPageView>();
-                }
-            ));
-
-        private RelayCommand gContacts;
-        public RelayCommand GContacts => gContacts ?? (gContacts = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "SendCurrentUser"));
-                    Messenger.Default.Send(new NotificationMessage<User>(CurrentUser, "Contacts"));
-                    navigationService.Navigate<ContactsPageView>();
-                }
-            ));
-
-
-        #endregion
     }
 }

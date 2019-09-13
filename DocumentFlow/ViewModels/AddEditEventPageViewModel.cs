@@ -28,7 +28,7 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
-        private readonly IGoogleService googleService;
+        private IGoogleService googleService;
 
         private string eventSummary;
         public string EventSummary { get => eventSummary; set => Set(ref eventSummary, value); }
@@ -68,12 +68,15 @@ namespace DocumentFlow.ViewModels
         private string avatara;
         public string Avatara { get => avatara; set => Set(ref avatara, value); }
 
-        public AddEditEventPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db, IGoogleService googleService)
+        public AddEditEventPageViewModel(INavigationService navigationService, 
+                                            IMessageService messageService, 
+                                            AppDbContext db /*, 
+                                            IGoogleService googleService*/)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
-            this.googleService = googleService;
+            //this.googleService = googleService;
 
             colorIndex = 1;
 
@@ -147,6 +150,9 @@ namespace DocumentFlow.ViewModels
                     Avatara = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\Resources\\Images\\user.png";
                 else
                     Avatara = emp.Photo;
+
+                // google
+                googleService = new GoogleServices();
             }
         }
 

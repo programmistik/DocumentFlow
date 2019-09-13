@@ -22,7 +22,7 @@ namespace DocumentFlow.ViewModels
         private readonly INavigationService navigationService;
         private readonly IMessageService messageService;
         private readonly AppDbContext db;
-        private readonly IGoogleService googleService;
+        private IGoogleService googleService;
         private GmailService GMailService;
 
         private string textTo;
@@ -31,22 +31,27 @@ namespace DocumentFlow.ViewModels
         public string TextSubject { get => textSubject; set => Set(ref textSubject, value); }
 
 
-        public ComposeNewMailPageViewModel(INavigationService navigationService, IMessageService messageService, AppDbContext db, IGoogleService googleService)
+        public ComposeNewMailPageViewModel(INavigationService navigationService, 
+                                            IMessageService messageService, 
+                                            AppDbContext db /*, 
+                                            IGoogleService googleService*/)
         {
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
-            this.googleService = googleService;
+            //this.googleService = googleService;
 
             TextTo = "programmistik@yahoo.com";
             TextSubject = "Test";
 
+           
             Messenger.Default.Register<NotificationMessage<GmailService>>(this, goo =>
             {
                 GMailService = goo.Content;
             });
 
         }
+        
 
         private RelayCommand closeCommand;
         public RelayCommand CloseCommand => closeCommand ?? (closeCommand = new RelayCommand(
@@ -92,6 +97,8 @@ namespace DocumentFlow.ViewModels
                     var msgPart = new MessagePart();
                     msgPart.MimeType = "text/html";
                     msgPart.Body = new MessagePartBody();
+
+                    googleService = new GoogleServices();
 
                     msgPart.Body.Data = googleService.Base64UrlEncode(Encoding.ASCII.GetBytes(htmlText));
 
