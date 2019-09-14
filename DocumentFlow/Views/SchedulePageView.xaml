@@ -18,6 +18,7 @@
     </i:Interaction.Triggers>
 
     <UserControl.Resources>
+        <local:IdToColorConverter x:Key="IdToColorConverter" />
         <DataTemplate x:Key="ListBoxEventItemTemplate">
             <StackPanel>
                 <Grid  HorizontalAlignment="Stretch">
@@ -28,9 +29,11 @@
                     <StackPanel Grid.Column="0"
                                 HorizontalAlignment="Stretch">
                         <Label FontWeight="Bold"
+                               Background="{Binding ColorId, Converter={StaticResource IdToColorConverter}}"
                                Content="{Binding Summary}"
                                Height="31" />
                         <Label FontWeight="Bold"
+                               Background="{Binding ColorId, Converter={StaticResource IdToColorConverter}}"
                                Content="{Binding Path=Start.DateTime.TimeOfDay}"
                                Height="31"></Label>
                     </StackPanel>

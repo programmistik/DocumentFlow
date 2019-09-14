@@ -93,6 +93,14 @@ namespace DocumentFlow.ViewModels
         public RelayCommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(UserControlOpened));
         private void UserControlOpened()
         {
+            // google
+            
+            GoogleCalendarService = googleService.GetQuickstartService(CurrentUser);
+            CurrentDate = DateTime.Today;
+            SelectedDate = (DateTime?)CurrentDate;
+            var events = googleService.GetEventsByDate((DateTime)SelectedDate, GoogleCalendarService);
+            EventList = new ObservableCollection<Event>(events.Items);
+
             //GoogleCalendarService = googleService.GetQuickstartService();
             //CurrentDate = DateTime.Today;
             //SelectedDate = (DateTime?)CurrentDate;
