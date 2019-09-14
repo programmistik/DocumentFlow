@@ -174,6 +174,7 @@ namespace DocumentFlow.ModalWindows
             {
                 Process.Department = Dept;
                 Process.TaskUser = Emp;
+                Process.TaskUserId = Emp.Id;
                 Process.State = State;
                 Process.Comment = Comment;
             }
