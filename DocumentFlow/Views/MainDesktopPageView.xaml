@@ -233,10 +233,10 @@
                             Grid.Column="1">
                     <StackPanel Name="Calendar">
                         <Image Source="../Resources/Images/Calendar.png"
-                               Width="60" />
+                               Width="120" />
                         <TextBlock Text="{x:Static p:Resources.OpenCalendar}"
                                    HorizontalAlignment="Center"
-                                   FontSize="16"></TextBlock>
+                                   FontSize="20"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
 
@@ -244,10 +244,10 @@
                             Grid.Column="0">
                     <StackPanel Name="Mail">
                         <Image Source="../Resources/Images/Mail.png"
-                               Width="60" />
+                               Width="120" />
                         <TextBlock Text="{x:Static p:Resources.Mail}"
                                    HorizontalAlignment="Center"
-                                   FontSize="16"></TextBlock>
+                                   FontSize="20"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
                 <hx:HexItem Grid.Row="1"
@@ -255,21 +255,21 @@
                             Background="BlueViolet">
                     <StackPanel Name="News">
                         <Image Source="../Resources/Images/News.png"
-                               Width="60" />
+                               Width="120" />
                         <TextBlock Text="{x:Static p:Resources.News}"
                                    HorizontalAlignment="Center"
-                                   FontSize="16"></TextBlock>
+                                   FontSize="20"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
                 <hx:HexItem Grid.Row="1"
                             Grid.Column="2">
                     <StackPanel Name="Schedule">
                         <Image Source="../Resources/Images/Tasks.png"
-                               Width="60"
+                               Width="120"
                                Margin="0,0,0,5" />
                         <TextBlock Text="{x:Static p:Resources.Schedule}"
                                    HorizontalAlignment="Center"
-                                   FontSize="16"></TextBlock>
+                                   FontSize="20"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
 
@@ -277,22 +277,22 @@
                             Grid.Column="0">
                     <StackPanel Name="Documents">
                         <Image Source="../Resources/Images/Documents.png"
-                               Width="60"
+                               Width="120"
                                Margin="0,0,0,5" />
                         <TextBlock Text="{x:Static p:Resources.Documents}"
                                    HorizontalAlignment="Center"
-                                   FontSize="16"></TextBlock>
+                                   FontSize="20"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
                 <hx:HexItem Grid.Row="2"
                             Grid.Column="1">
                     <StackPanel Name="Contacts">
                         <Image Source="../Resources/Images/Contacts.png"
-                               Width="60"
+                               Width="120"
                                Margin="0,0,0,5" />
                         <TextBlock Text="{x:Static p:Resources.Contacts}"
                                    HorizontalAlignment="Center"
-                                   FontSize="16"></TextBlock>
+                                   FontSize="20"></TextBlock>
                     </StackPanel>
                 </hx:HexItem>
                 <hx:HexItem Grid.Row="2"
