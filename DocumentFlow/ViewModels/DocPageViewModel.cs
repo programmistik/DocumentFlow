@@ -562,7 +562,7 @@ namespace DocumentFlow.ViewModels
                         CurrentDocument.DocSum = DocSum;
                         CurrentDocument.DocCurrency = Currency;
                         CurrentDocument.DocInfoComment = DocInfoComment;
-
+                        
                         await db.SaveChangesAsync();
 
                        

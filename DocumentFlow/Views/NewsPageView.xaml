@@ -21,7 +21,9 @@
         <DataTemplate x:Key="ListBoxItemTemplate">
             <StackPanel>
 
-                <Label Content="{Binding PostHeader}" />
+                <Label Content="{Binding PostHeader}" 
+                       FontWeight="Bold" 
+                       FontSize="15"/>
                 <WebBrowser ns:WebBrowserUtility.BindableSource="{Binding PostContent}" />
 
 
