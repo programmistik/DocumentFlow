@@ -137,7 +137,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand<Event> DeleteEventCommand => deleteEventCommand ?? (deleteEventCommand = new RelayCommand<Event>(
                 param =>
                 {
-                    if (messageService.ShowYesNo("Are you sure?"))
+                    if (messageService.ShowYesNo(Properties.Resources.AreYouSure +"?"))
                     {
                         googleService.deleteEvent(GoogleCalendarService, param);
 

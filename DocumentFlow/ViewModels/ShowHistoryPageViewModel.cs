@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -35,7 +36,7 @@ namespace DocumentFlow.ViewModels
             this.navigationService = navigationService;
             this.messageService = messageService;
             this.db = db;
-          
+
         }
 
         private RelayCommand findCommand;
@@ -54,7 +55,7 @@ namespace DocumentFlow.ViewModels
                         else
                             messageService.ShowError("Wrong number!");
                     }
-                    
+
                 }
                  ));
 
@@ -92,9 +93,14 @@ namespace DocumentFlow.ViewModels
                     ws.Range["A16"].Value = "FILES";
 
                     var serlColl = new List<Document>();
-                    
+
+                    var letter = "A";
+
                     foreach (var item in HistoryCollection)
                     {
+                        letter = GetNextCode(letter);
+                        ws.Range[letter + "4"].Value = item.EditionData;
+                        ws.Range[letter + "5"].Value = item.WhoEdited;
                         var doc = JsonConvert.DeserializeObject<Document>(item.ObjectJson);
                         serlColl.Add(doc);
                     }
@@ -106,7 +112,7 @@ namespace DocumentFlow.ViewModels
 
                     ws.Range["A" + procStart].Value = "PROCESSES";
 
-                    var letter = "A";
+                    letter = "A";
 
                     foreach (var item in serlColl)
                     {
@@ -146,22 +152,168 @@ namespace DocumentFlow.ViewModels
                     }
 
 
-                    //DateTime currentDate = DateTime.Now;
+                }
+                 ));
 
-                    //ws.Range["A1:A3"].Value = "Who is number one? :)";
-                    //ws.Range["A4"].Value = "vitoshacademy.com";
-                    //ws.Range["A4"].Interior.Color = XlRgbColor.rgbLightBlue;
-                    //Range rng2 = ws.get_Range("A1");
-                    //rng2.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
+        private RelayCommand showCSV;
+        public RelayCommand ShowCSV => showCSV ?? (showCSV = new RelayCommand(
+                () =>
+                {
+                    var csvString = new StringBuilder();
+                    csvString.AppendLine("\n\n");
+                    var serlColl = new List<Document>();
 
-                    //ws.Range["A5"].Value = currentDate;
-                    //ws.Range["B6"].Value = "Tommorow's date is: =>";
-                    //ws.Range["C6"].FormulaLocal = "= A5 + 1";
-                    //ws.Range["A7"].FormulaLocal = "=SUM(D1:D10)";
-                    //for (int i = 1; i <= 10; i++)
-                    //    ws.Range["D" + i].Value = i * 2;
+                    csvString.Append("Modification date:;");
+                    foreach (var item in HistoryCollection)
+                    {
+                        csvString.Append(item.EditionData.ToString() + ";");
 
-                    //wb.SaveAs("D:\\vitoshacademy.xlsx");
+                        var doc = JsonConvert.DeserializeObject<Document>(item.ObjectJson);
+                        serlColl.Add(doc);
+                    }
+                    csvString.Append("\n");
+
+                    csvString.Append("Modificated by: ;");
+                    foreach (var item in HistoryCollection)
+                    {
+                        csvString.Append(item.WhoEdited.ToString() + ";");
+                    }
+                    csvString.Append("\n");
+
+                    csvString.Append("Document date: ;");
+                    foreach (var item in serlColl)
+                    {
+                        csvString.Append(item.DocDate.ToString() + ";");
+                    }
+                    csvString.Append("\n");
+
+                    csvString.Append("Company: ;");
+                    foreach (var item in serlColl)
+                    {
+                        csvString.Append(item.Company.CompanyName + ";");
+                    }
+                    csvString.Append("\n");
+
+                    csvString.Append("Document type: ;");
+                    foreach (var item in serlColl)
+                    {
+                        csvString.Append(item.DocumentType.DocTypeName + ";");
+                    }
+                    csvString.AppendLine("\n");
+
+                    csvString.Append("Document state: ;");
+                    foreach (var item in serlColl)
+                    {
+                        csvString.Append(item.DocumentType.DocTypeName + ";");
+                    }
+                    csvString.AppendLine("\n");
+
+                    csvString.Append("Organization: ;");
+                    foreach (var item in serlColl)
+                    {
+                        csvString.Append(item.Organization.OrganizationName + ";");
+                    }
+                    csvString.AppendLine("\n");
+
+                    csvString.Append("Info contact: ;");
+                    foreach (var item in serlColl)
+                    {
+                        csvString.Append(item.InfoContact.ToString() + ";");
+                    }
+                    csvString.Append("\n");
+
+                    csvString.Append("Sum: ;");
+                    foreach (var item in serlColl)
+                    {
+                        csvString.Append(item.DocSum.ToString() + ";");
+                    }
+                    csvString.Append("\n");
+
+                    csvString.Append("Currency: ;");
+                    foreach (var item in serlColl)
+                    {
+                        csvString.Append(item.DocCurrency.CurrancyCode + ";");
+                    }
+                    csvString.Append("\n");
+
+                    csvString.Append("Comment: ;");
+                    foreach (var item in serlColl)
+                    {
+                        csvString.Append(item.Comment + ";");
+                    }
+                    csvString.AppendLine("\n\n");
+
+                    csvString.Append("FILES;\n");
+
+
+                    var maxFileCount = serlColl.Max(x => x.myFiles.Count);
+
+                    for (int i = 0; i < maxFileCount; i++)
+                    {
+                        csvString.Append(" ;");
+                        foreach (var item in serlColl)
+                        {
+                            if (item.myFiles.Count >= i + 1)
+                            {
+                                var file = item.myFiles.ToList()[i];
+                                csvString.Append(file.FileName + " # " + file.FileComment + ";");
+                            }
+                            else
+                            {
+                                csvString.Append(" ;");
+                            }
+                        }
+                        csvString.Append("\n");
+                    }
+                    csvString.Append("\n\n");
+
+
+
+                    csvString.Append("PROCESSES;\n");
+
+
+                    var maxProcCount = serlColl.Max(x => x.myProcesses.Count);
+
+                    for (int i = 0; i < maxProcCount; i++)
+                    {
+                        csvString.Append(" ;");
+                        foreach (var item in serlColl)
+                        {
+                            if (item.myProcesses.Count >= i + 1)
+                            {
+                                var proc = item.myProcesses.ToList()[i];
+
+                                csvString.Append(proc.StartDate.ToShortDateString() + " # " + proc.StartUser.GoogleAccount +
+                                    " # " + proc.State.DocStateName + " # " + proc.StateDate?.ToShortDateString() +
+                                    " # " + proc.TaskUser?.Name + " " + proc.TaskUser?.Surname + ";");
+                            }
+                            else
+                            {
+                                csvString.Append(" ;");
+                            }
+                        }
+                        csvString.Append("\n");
+                    }
+                    csvString.Append("\n");
+
+
+
+                    string filename = "";
+                    Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog
+                    {
+                        InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments),
+                        FileName = "Report",
+                        DefaultExt = ".csv",
+                        Filter = "Comma-Separated Values (.csv)|*.csv"
+                    };
+
+                    bool? result = dlg.ShowDialog();
+
+                    if (result == true)
+                    {
+                        filename = dlg.FileName;
+                        File.WriteAllText(filename, csvString.ToString());
+                    }
 
                 }
                  ));

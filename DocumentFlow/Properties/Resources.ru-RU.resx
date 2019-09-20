@@ -464,7 +464,7 @@
     <value>Сделать фото</value>
   </data>
   <data name="Soon" xml:space="preserve">
-    <value>Will be added soon...</value>
+    <value>В ближайшее время ...</value>
   </data>
   <data name="State" xml:space="preserve">
     <value>Состояние</value>
@@ -576,5 +576,35 @@
   </data>
   <data name="EditFileComment" xml:space="preserve">
     <value>Изменить комментарий файла</value>
+  </data>
+  <data name="CreateNewContact" xml:space="preserve">
+    <value>Создать новый контакт</value>
+  </data>
+  <data name="EditContact" xml:space="preserve">
+    <value>Редактировать контакт</value>
+  </data>
+  <data name="ReadMail" xml:space="preserve">
+    <value>Прочитать письмо</value>
+  </data>
+  <data name="AddEditEvents" xml:space="preserve">
+    <value>Добавление или редактирование события</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Вы уверены</value>
+  </data>
+  <data name="ChangePasswordFor" xml:space="preserve">
+    <value>Изменение пароля для пользоватя </value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="WantToQuit" xml:space="preserve">
+    <value>Вы уверены, что хотите выйти</value>
+  </data>
+  <data name="willDelete" xml:space="preserve">
+    <value>будет удалён</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
   </data>
 </root>

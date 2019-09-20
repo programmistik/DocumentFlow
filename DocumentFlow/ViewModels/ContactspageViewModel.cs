@@ -132,7 +132,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand<Contact> DeleteContactCommand => deleteContactCommand ?? (deleteContactCommand = new RelayCommand<Contact>(
                 async param =>
                 {
-                    var answer = messageService.ShowYesNo($"Are you sure?\nContact {param.ToString()} will delete.");
+                    var answer = messageService.ShowYesNo($"{Properties.Resources.AreYouSure}?\n{Properties.Resources.Contact} {param.ToString()} {Properties.Resources.willDelete}.");
                     if (answer)
                     {
                         ContactsList.Remove(param);

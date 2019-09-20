@@ -577,4 +577,34 @@
   <data name="EditFileComment" xml:space="preserve">
     <value>Edit file's comment</value>
   </data>
+  <data name="CreateNewContact" xml:space="preserve">
+    <value>Create new contact</value>
+  </data>
+  <data name="EditContact" xml:space="preserve">
+    <value>Edit contact</value>
+  </data>
+  <data name="ReadMail" xml:space="preserve">
+    <value>Read mail</value>
+  </data>
+  <data name="AddEditEvents" xml:space="preserve">
+    <value>Add or Edit events</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Are you sure</value>
+  </data>
+  <data name="ChangePasswordFor" xml:space="preserve">
+    <value>Change password for</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="WantToQuit" xml:space="preserve">
+    <value>Are you sure you want to quit</value>
+  </data>
+  <data name="willDelete" xml:space="preserve">
+    <value>will delete</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

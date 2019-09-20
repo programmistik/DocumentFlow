@@ -72,6 +72,12 @@
                     Background="BlueViolet"
                     BorderBrush="DarkViolet"
                     Command="{Binding ShowCommand}" />
+            <Button Content="CSV"
+                    Margin="5"
+                    Width="150"
+                    Background="BlueViolet"
+                    BorderBrush="DarkViolet"
+                    Command="{Binding ShowCSV}" />
         </StackPanel>
     </StackPanel>
 </UserControl>

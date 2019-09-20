@@ -34,10 +34,10 @@ namespace DocumentFlow.Views
         {
                 var msg = new CustomMaterialMessageBox
                 {
-                    TxtMessage = { Text = "Are you sure you want to quit?", Foreground = Brushes.Black },
-                    TxtTitle = { Text = "Exit", Foreground = Brushes.White },
-                    BtnOk = { Content = "Yes" },
-                    BtnCancel = { Content = "No" },
+                    TxtMessage = { Text = Properties.Resources.WantToQuit + "?", Foreground = Brushes.Black },
+                    TxtTitle = { Text = Properties.Resources.Exit, Foreground = Brushes.White },
+                    BtnOk = { Content = Properties.Resources.Yes },
+                    BtnCancel = { Content = Properties.Resources.No },
                     MainContentControl = { Background = Brushes.White },
                     TitleBackgroundPanel = { Background = Brushes.BlueViolet },
 

@@ -34,13 +34,13 @@ namespace DocumentFlow.ViewModels
                 if (viewModel is LogInPageViewModel)
                     ApplicationTitle = Properties.Resources.LogIn;
                 else if (viewModel is AddEditEventPageViewModel)
-                    ApplicationTitle = "Add or Edit events";
+                    ApplicationTitle = Properties.Resources.AddEditEvents; //"Add or Edit events";
                 else if (viewModel is AddNewsPageViewModel)
                     ApplicationTitle = "Add or Edit News";
                 else if (viewModel is AddNewUserPageViewModel)
                 {
                     var vm = viewModel as AddNewUserPageViewModel;
-                    if (vm.ButtonOkContent == "Create")
+                    if (vm.ButtonOkContent == Properties.Resources.Create)
                         ApplicationTitle = Properties.Resources.AddNewUser; //"Add new user";
                     else
                         ApplicationTitle = Properties.Resources.EditUser; //"Edit user";
@@ -52,7 +52,7 @@ namespace DocumentFlow.ViewModels
                 else if (viewModel is ChangeMyPassPageViewModel)
                 {
                     var vm = viewModel as ChangeMyPassPageViewModel;
-                    ApplicationTitle = "Change password for " + vm.CurrentUser.Login;
+                    ApplicationTitle = Properties.Resources.ChangePasswordFor + " " + vm.CurrentUser.Login;
                 }
                 else if (viewModel is ComposeNewMailPageViewModel)
                     ApplicationTitle = Properties.Resources.NewMail; //"New Mail";
@@ -63,15 +63,15 @@ namespace DocumentFlow.ViewModels
                 else if (viewModel is CreateNewContactPageViewModel)
                 {
                     var vm = viewModel as CreateNewContactPageViewModel;
-                    if (vm.ButtonOkContent == "Create")
-                        ApplicationTitle = "Create new contact";
+                    if (vm.ButtonOkContent == Properties.Resources.Create)
+                        ApplicationTitle = Properties.Resources.CreateNewContact; //"Create new contact";
                     else
-                        ApplicationTitle = "Edit contact";
+                        ApplicationTitle = Properties.Resources.EditContact; //"Edit contact";
                 }
                 else if (viewModel is DocPageViewModel)
-                    ApplicationTitle = "Documents";
+                    ApplicationTitle = Properties.Resources.Documents; //"Documents";
                 else if (viewModel is DocumentsPageViewModel)
-                    ApplicationTitle = "Documents";
+                    ApplicationTitle = Properties.Resources.Documents; //"Documents";
                 else if (viewModel is GMailPageViewModel)
                     ApplicationTitle = Properties.Resources.Mail; //"Mail";
                 else if (viewModel is MainDesktopPageViewModel)
@@ -83,9 +83,9 @@ namespace DocumentFlow.ViewModels
                 else if (viewModel is NormativeInfoPageViewModel)
                     ApplicationTitle = "Normative information";
                 else if (viewModel is ReadMailPageViewModel)
-                    ApplicationTitle = "Read Mail";
+                    ApplicationTitle = Properties.Resources.ReadMail; //"Read Mail";
                 else if (viewModel is SchedulePageViewModel)
-                    ApplicationTitle = "Schedule";
+                    ApplicationTitle = Properties.Resources.Schedule; //"Schedule";
                 else if (viewModel is SettingsPageViewModel)
                     ApplicationTitle = Properties.Resources.Settings; //"Settings";
             }
