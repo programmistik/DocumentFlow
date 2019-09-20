@@ -53,7 +53,10 @@ namespace DocumentFlow.ViewModels
                             HistoryCollection = new ObservableCollection<History>(col);
                         }
                         else
+                        {
                             messageService.ShowError("Wrong number!");
+                            HistoryCollection.Clear();
+                        }
                     }
 
                 }

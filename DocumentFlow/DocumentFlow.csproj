@@ -35,6 +35,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
       <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
@@ -670,6 +674,7 @@
     <Resource Include="Resources\RibonImages\view.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="TextTemplate.ico" />
     <Resource Include="Resources\Images\Newspaper-Feed-add-icon.png" />
     <Resource Include="Resources\Images\Cancel.png" />
     <Resource Include="Resources\Images\location.png" />
@@ -684,7 +689,7 @@
     <Resource Include="Resources\Images\TasksWhite.png" />
     <Resource Include="Resources\Images\DFIcon.png" />
     <Resource Include="Resources\Images\DFLogo.png" />
-    <Resource Include="Resources\Images\D_icon.png" />
+    <Resource Include="Resources\Images\d_icon.png" />
     <Content Include="Resources\New.html" />
     <Resource Include="Resources\RibonImages\folder-icon.png" />
     <Resource Include="Resources\RibonImages\closeLarge.png" />
