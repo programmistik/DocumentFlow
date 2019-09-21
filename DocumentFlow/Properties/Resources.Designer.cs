@@ -691,6 +691,15 @@ namespace DocumentFlow.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         public static string Exit {
@@ -840,6 +849,15 @@ namespace DocumentFlow.Properties {
         public static string HistoryOfChanges {
             get {
                 return ResourceManager.GetString("HistoryOfChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        public static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
             }
         }
         
@@ -1543,6 +1561,15 @@ namespace DocumentFlow.Properties {
         public static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your answer.
+        /// </summary>
+        public static string YourAnswer {
+            get {
+                return ResourceManager.GetString("YourAnswer", resourceCulture);
             }
         }
     }

@@ -43,15 +43,17 @@
                     <Button  Grid.Column="1"
                              Margin="1"
                              Command="{Binding DataContext.DeleteInfoCommand, ElementName=This}"
-                             CommandParameter="{Binding}">
-                        Delete
+                             CommandParameter="{Binding}"
+                             Content="{x:Static p:Resources.Delete}">
+                        
                     </Button>
 
                     <Button Grid.Column="2"
                             Margin="1"
                             Command="{Binding DataContext.EditInfoCommand, ElementName=This}"
-                            CommandParameter="{Binding}">
-                        Edit
+                            CommandParameter="{Binding}"
+                            Content="{x:Static p:Resources.Edit}">
+                        
                     </Button>
 
 

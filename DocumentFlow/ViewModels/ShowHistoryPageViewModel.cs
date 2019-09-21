@@ -138,6 +138,7 @@ namespace DocumentFlow.ViewModels
                         {
                             count = count + i;
                             ws.Range[letter + count.ToString()].Value = fileItem.FileComment + " / " + fileItem.FileName;
+                            i++;
                         }
 
 
@@ -149,6 +150,7 @@ namespace DocumentFlow.ViewModels
                             count = count + i;
                             ws.Range[letter + count.ToString()].Value = procItem.StartDate.ToShortDateString() + " / " + procItem.StartUser
                             + " / " + procItem.State + " / " + procItem.StateDate + " / " + procItem.TaskUser;
+                            i++;
                         }
 
 

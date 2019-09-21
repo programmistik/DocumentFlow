@@ -416,7 +416,7 @@ namespace DocumentFlow.ViewModels
         public RelayCommand<ContactInformation> DeleteInfoCommand => deleteInfoCommand ?? (deleteInfoCommand = new RelayCommand<ContactInformation>(
                 param =>
                 {
-                    var answer = messageService.ShowYesNo(Properties.Resources.AreYouSure + "?");
+                    var answer = messageService.ShowYesNo(Properties.Resources.AreYouSure + "?", Properties.Resources.YourAnswer);
                     if (answer)
                     {
                         InfoList.Remove(param);
